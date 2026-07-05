@@ -10,7 +10,8 @@ title: "Puerto Umbral: Simulador de Geotensores y Física Intrínseca del Territ
 version: "1.0.0"
 date-released: "2026-07-05"
 license: "CC-BY-4.0"
-repository-code: "https://github.com/john-treimun/puerto-umbral"
+doi: "10.5281/zenodo.21207952"
+repository-code: "https://github.com/ontologiaterritorial/puerto_umbral"
 abstract: >-
   Puerto Umbral es una plataforma computacional serverless (compilada en WebAssembly
   vía Shinylive) diseñada para simular, visualizar y auditar las operaciones de la
