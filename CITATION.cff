@@ -1,0 +1,27 @@
+cff-version: 1.2.0
+message: "Si utiliza este software en su investigación o planificación territorial, por favor cítelo como se detalla a continuación."
+authors:
+  - family-names: "Treimun Ríos"
+    given-names: "John"
+    email: "john.treimun.r@uai.cl"
+    affiliation: "Universidad Adolfo Ibáñez"
+    orcid: "https://orcid.org/0009-0000-5982-8863" 
+title: "Puerto Umbral: Simulador de Geotensores y Física Intrínseca del Territorio"
+version: "1.0.0"
+date-released: "2026-07-05"
+license: "CC-BY-4.0"
+repository-code: "https://github.com/john-treimun/puerto-umbral"
+abstract: >-
+  Puerto Umbral es una plataforma computacional serverless (compilada en WebAssembly
+  vía Shinylive) diseñada para simular, visualizar y auditar las operaciones de la
+  Física Intrínseca del Territorio del Tomo II. Implementa solvers geodésicos bajo
+  potenciales de Robin, difusión de Langevin en variedades Riemannianas con Christoffels
+  locales, anonimización por Donut Jittering y persistencia de memoria de Caputo.
+keywords:
+  - "Física Intrínseca Territorial"
+  - "Geotensores"
+  - "Variedad Riemanniana"
+  - "Caputo"
+  - "Shiny"
+  - "WebAssembly"
+  - "Shinylive"

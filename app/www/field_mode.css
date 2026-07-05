@@ -1,0 +1,18 @@
+body { background: #f8fafc !important; color: #0f172a !important; }
+        .panel-glass, .sidebar-glass, .maps-glass, .hud-glass {
+          background: #ffffff !important; color: #0f172a !important;
+          border: 1px solid #cbd5e1 !important;
+          box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1) !important;
+          backdrop-filter: none !important;
+        }
+        .navbar { background: #0f172a !important; border-bottom: 2px solid #0284c7 !important; }
+        .navbar-brand {
+          background: linear-gradient(135deg, #0284c7 0%, #0f172a 100%) !important;
+          -webkit-background-clip: text !important; -webkit-text-fill-color: transparent !important;
+        }
+        .navbar-default .navbar-nav > li > a { color: #64748b !important; }
+        .navbar-default .navbar-nav > .active > a { color: #ffffff !important; background-color: #0284c7 !important; }
+        h1, h2, h3, h4, h5, h6, p, li, span, label, input, select { color: #0f172a !important; }
+        .semantic-banner { background: #f1f5f9 !important; color: #0f172a !important; border: 1px solid #cbd5e1 !important; }
+        .pedagogy-card { background: #ffffff !important; border: 1px solid #cbd5e1 !important; color: #0f172a !important; }
+        .hud-label, .hud-val { color: #0f172a !important; }
