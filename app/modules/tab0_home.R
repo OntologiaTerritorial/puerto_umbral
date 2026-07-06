@@ -49,7 +49,7 @@ tab0_server <- function(input, output, session, lang) {
             ),
             div(style = "margin-top: 20px;",
               tags$a(
-                href = "media/docs/tomo_i.pdf",
+                href = "../media/docs/tomo_i.pdf",
                 download = "Puerto_Umbral_Tomo_I.pdf",
                 class = "btn btn-success btn-lg",
                 style = "width: 100%; font-weight: bold; display: block; text-align: center;",
@@ -63,7 +63,7 @@ tab0_server <- function(input, output, session, lang) {
             div(
               h4(style = "color: #0f766e; font-weight: 700; margin-bottom: 15px;", 
                  trans("Tomo II: Geotensores e Instrumentaci\u00f3n", "Volume II: Geotensors & Instrumentation")),
-              p(style = "color: #334155; font-size: 1.05rem; line-height: 1.6;",
+               p(style = "color: #334155; font-size: 1.05rem; line-height: 1.6;",
                 trans(
                   "Formaliza matem\u00e1ticamente la ontolog\u00eda pedestre a contracorriente a trav\u00e9s de la m\u00e9trica de Riemann, resolvedores num\u00e9ricos de contorno (BVP), la deformaci\u00f3n lineal de Weyl y el conmutador algebraico de Lie para medir las asimetr\u00edas de poder territorial.",
                   "Mathematically formalizes the pedestrian ontology through Riemannian metrics, boundary value solvers (BVP), Weyl linear deformation, and the Lie algebraic commutator to measure territorial power asymmetries."
@@ -71,7 +71,7 @@ tab0_server <- function(input, output, session, lang) {
             ),
             div(style = "margin-top: 20px;",
               tags$a(
-                href = "media/docs/tomo_ii.pdf",
+                href = "../media/docs/tomo_ii.pdf",
                 download = "Puerto_Umbral_Tomo_II.pdf",
                 class = "btn btn-success btn-lg",
                 style = "width: 100%; font-weight: bold; display: block; text-align: center;",
