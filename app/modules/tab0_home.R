@@ -48,12 +48,11 @@ tab0_server <- function(input, output, session, lang) {
                 ))
             ),
             div(style = "margin-top: 20px;",
-              tags$a(
-                href = "docs/tomo_i.pdf",
-                download = "Puerto_Umbral_Tomo_I.pdf",
-                class = "btn btn-success btn-lg",
-                style = "width: 100%; font-weight: bold; display: block; text-align: center;",
-                trans("Descargar Tomo I (PDF)", "Download Volume I (PDF)")
+              downloadButton(
+                "download_tomo1_home",
+                trans("Descargar Tomo I (PDF)", "Download Volume I (PDF)"),
+                class = "btn-success btn-lg",
+                style = "width: 100%; font-weight: bold; display: block; text-align: center;"
               )
             )
           )
@@ -70,12 +69,11 @@ tab0_server <- function(input, output, session, lang) {
                 ))
             ),
             div(style = "margin-top: 20px;",
-              tags$a(
-                href = "docs/tomo_ii.pdf",
-                download = "Puerto_Umbral_Tomo_II.pdf",
-                class = "btn btn-success btn-lg",
-                style = "width: 100%; font-weight: bold; display: block; text-align: center;",
-                trans("Descargar Tomo II (PDF)", "Download Volume II (PDF)")
+              downloadButton(
+                "download_tomo2_home",
+                trans("Descargar Tomo II (PDF)", "Download Volume II (PDF)"),
+                class = "btn-success btn-lg",
+                style = "width: 100%; font-weight: bold; display: block; text-align: center;"
               )
             )
           )
