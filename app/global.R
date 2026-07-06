@@ -33,7 +33,6 @@ UTM_CRS <- 32719 # Proyecci\u00f3n UTM por defecto (Santiago UTM 19S)
   library(shinyjs)
   library(DBI)
   library(shinythemes)
-  library(fields)
 })
 
 # Opciones de depuraci\u00f3n (Sanitizar en produccion, mostrar trazas si PUERTO_DEBUG=TRUE)
