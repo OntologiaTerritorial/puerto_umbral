@@ -60,13 +60,25 @@ tab5_server <- function(input, output, session, chat_messages, lang, tomo1_db, t
                  div(style = "margin-bottom:15px;",
                      h4(style = "color:#b45309; font-size:1.0rem;", trans("Tomo I: Fundamentaciones", "Volume I: Foundations")),
                      tags$p(style = "font-size:0.85rem; color:#475569;", trans("Ontolog\u00eda Territorial y la matem\u00e1tica de la variedad.", "Territorial Ontology and the mathematics of space.")),
-                     downloadButton("download_pdf_i", trans("Descargar Tomo I (PDF)", "Download Tomo I (PDF)"), class = "btn-info btn-sm w-100")
+                     tags$a(
+      href = "docs/tomo_i.pdf",
+      download = "Puerto_Umbral_Tomo_I.pdf",
+      class = "btn btn-info btn-sm w-100",
+      style = "display: block; text-align: center;",
+      trans("Descargar Tomo I (PDF)", "Download Tomo I (PDF)")
+    )
                  ),
                  
                  div(style = "margin-bottom:15px;",
                      h4(style = "color:#b45309; font-size:1.0rem;", trans("Tomo II: Geotensores", "Volume II: Geotensors")),
                      tags$p(style = "font-size:0.85rem; color:#475569;", trans("M\u00e9trica de cuidados y resolvedor de f\u00edsica intr\u00ednseca.", "Metrics of care and intrinsic physics solvers.")),
-                     downloadButton("download_pdf_ii", trans("Descargar Tomo II (PDF)", "Download Tomo II (PDF)"), class = "btn-info btn-sm w-100")
+                     tags$a(
+      href = "docs/tomo_ii.pdf",
+      download = "Puerto_Umbral_Tomo_II.pdf",
+      class = "btn btn-info btn-sm w-100",
+      style = "display: block; text-align: center;",
+      trans("Descargar Tomo II (PDF)", "Download Tomo II (PDF)")
+    )
                  ),
                  
                  tags$hr(style = "border-top:1px solid rgba(255,255,255,0.08);"),
