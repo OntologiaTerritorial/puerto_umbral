@@ -10,7 +10,12 @@ if (dir.exists("puerto_umbral_zenodo_bundle/app")) {
 } else if (basename(getwd()) != "app" && dir.exists("app")) {
   setwd("app")
 }
-
+# Workaround para problemas de descarga en Chromium (Shinylive)
+downloadButton <- function(...) {
+  tag <- shiny::downloadButton(...)
+  tag$attribs$download <- NULL
+  tag
+}
 
 suppressPackageStartupMessages({
   library(shiny)
@@ -20,7 +25,6 @@ UTM_CRS <- 32719 # Proyecci\u00f3n UTM por defecto (Santiago UTM 19S)
   library(jsonlite)
   library(dplyr)
   library(deSolve)
-  library(akima)
   library(RColorBrewer)
   library(scales)
   library(sf)
@@ -674,31 +678,16 @@ precompute_eqt_base <- function(manzanas, t_idx = 0) {
   jx <- manzanas$x + runif(length(manzanas$x), -0.1, 0.1)
   jy <- manzanas$y + runif(length(manzanas$y), -0.1, 0.1)
   
-  # Interpolar Altitud F\u00edsica (Topograf\u00eda) con tryCatch y fallback IDW
-  ir_alt <- tryCatch({
-    akima::interp(jx, jy, manzanas$altitud, xo = xo, yo = yo, linear = TRUE)
-  }, error = function(e) {
-    tryCatch({
-      akima::interp(jx, jy, manzanas$altitud, xo = xo, yo = yo, linear = FALSE)
-    }, error = function(e2) {
-      NULL
-    })
-  })
-  
-  if (is.null(ir_alt) || is.null(ir_alt$z)) {
-    # Fallback robusto por distancia inversa ponderada (IDW)
-    nx <- length(xo)
-    ny <- length(yo)
-    Z_alt <- matrix(0, ny, nx)
-    for (i in 1:ny) {
-      for (j in 1:nx) {
-        dists <- sqrt((manzanas$x - xo[j])^2 + (manzanas$y - yo[i])^2)
-        weights <- 1 / (dists^2 + 1e-5)
-        Z_alt[i, j] <- sum(manzanas$altitud * weights) / sum(weights)
-      }
+  # Interpolar Altitud Física (Topografía) mediante IDW (distancia inversa ponderada) robusto en R puro
+  nx <- length(xo)
+  ny <- length(yo)
+  Z_alt <- matrix(0, ny, nx)
+  for (i in 1:ny) {
+    for (j in 1:nx) {
+      dists <- sqrt((manzanas$x - xo[j])^2 + (manzanas$y - yo[i])^2)
+      weights <- 1 / (dists^2 + 1e-5)
+      Z_alt[i, j] <- sum(manzanas$altitud * weights) / sum(weights)
     }
-  } else {
-    Z_alt <- t(ir_alt$z) # Transponer para alinear con ny x nx
   }
   
   Z_alt[is.na(Z_alt)] <- mean(Z_alt, na.rm = TRUE)
