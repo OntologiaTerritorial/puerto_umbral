@@ -280,7 +280,7 @@ sim_server <- function(input, output, session, lang, run_sim_trigger) {
     )
   })
   
-  # Función de interpolación espacial robusta con fallback IDW nativo en R puro para Shinylive (WebAssembly)
+  # Función de interpolación espacial robusta con IDW nativo en R puro para Shinylive (WebAssembly)
   safe_interpolate_grid <- function(x_points, y_points, values, xo, yo, linear_mode = TRUE) {
     # Sanitizar NAs en los valores
     values[is.na(values)] <- mean(values, na.rm = TRUE)
@@ -296,33 +296,15 @@ sim_server <- function(input, output, session, lang, run_sim_trigger) {
       return(matrix(0, nrow = length(yo), ncol = length(xo)))
     }
     
-    # Agregar pequeño jitter para evitar puntos colineales y duplicados exactos en akima
-    jx <- x_p + runif(length(x_p), -0.2, 0.2)
-    jy <- y_p + runif(length(y_p), -0.2, 0.2)
-    
-    ir <- tryCatch({
-      akima::interp(jx, jy, val_p, xo = xo, yo = yo, linear = linear_mode, duplicate = "mean")
-    }, error = function(e) {
-      tryCatch({
-        akima::interp(jx, jy, val_p, xo = xo, yo = yo, linear = FALSE, duplicate = "mean")
-      }, error = function(e2) {
-        NULL
-      })
-    })
-    
-    if (!is.null(ir) && !is.null(ir$z)) {
-      Z <- t(ir$z)
-    } else {
-      # Fallback IDW robusto en R puro (garantizado para WebAssembly / Shinylive)
-      nx <- length(xo)
-      ny <- length(yo)
-      Z <- matrix(0, ny, nx)
-      for (i in 1:ny) {
-        for (j in 1:nx) {
-          dists <- sqrt((x_p - xo[j])^2 + (y_p - yo[i])^2)
-          weights <- 1 / (dists^2 + 1e-5)
-          Z[i, j] <- sum(val_p * weights) / sum(weights)
-        }
+    # Interpolación IDW robusta en R puro (garantizado para WebAssembly / Shinylive)
+    nx <- length(xo)
+    ny <- length(yo)
+    Z <- matrix(0, ny, nx)
+    for (i in 1:ny) {
+      for (j in 1:nx) {
+        dists <- sqrt((x_p - xo[j])^2 + (y_p - yo[i])^2)
+        weights <- 1 / (dists^2 + 1e-5)
+        Z[i, j] <- sum(val_p * weights) / sum(weights)
       }
     }
     
