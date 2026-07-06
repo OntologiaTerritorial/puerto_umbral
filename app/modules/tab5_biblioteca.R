@@ -1078,9 +1078,9 @@ tab5_server <- function(input, output, session, chat_messages, lang, tomo1_db, t
       
       HTML('
         <video id="tutorial_video" width="100%" controls preload="auto" style="border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); background:#000;">
-          <source src="video/tutorial_limpio.mp4" type="video/mp4">
-          <track src="video/tutorial_es.vtt" kind="subtitles" srclang="es" label="Español" default>
-          <track src="video/tutorial_en.vtt" kind="subtitles" srclang="en" label="English">
+          <source src="media/video/tutorial_limpio.mp4" type="video/mp4">
+          <track src="media/video/tutorial_es.vtt" kind="subtitles" srclang="es" label="Español" default>
+          <track src="media/video/tutorial_en.vtt" kind="subtitles" srclang="en" label="English">
           Su navegador no soporta video HTML5.
         </video>
       ')
