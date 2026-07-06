@@ -7,7 +7,13 @@ on:
       - master
 
 permissions:
-  contents: write
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
 
 jobs:
   build-and-deploy:
@@ -40,9 +46,11 @@ jobs:
         run: |
           touch docs/.nojekyll
 
-      - name: Desplegar a GitHub Pages
-        uses: JamesIves/github-pages-deploy-action@v4
+      - name: Subir artefacto para GitHub Pages
+        uses: actions/upload-pages-artifact@v3
         with:
-          folder: docs # Carpeta donde se guardó la compilación estática
-          branch: gh-pages # Rama de destino para GitHub Pages
-          clean: true
+          path: docs
+
+      - name: Desplegar a GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
