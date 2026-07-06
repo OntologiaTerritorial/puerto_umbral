@@ -280,6 +280,56 @@ sim_server <- function(input, output, session, lang, run_sim_trigger) {
     )
   })
   
+  # Función de interpolación espacial robusta con fallback IDW nativo en R puro para Shinylive (WebAssembly)
+  safe_interpolate_grid <- function(x_points, y_points, values, xo, yo, linear_mode = TRUE) {
+    # Sanitizar NAs en los valores
+    values[is.na(values)] <- mean(values, na.rm = TRUE)
+    if (all(is.na(values))) values <- rep(0.0, length(values))
+    
+    # Remover registros con coordenadas nulas
+    valid_indices <- !is.na(x_points) & !is.na(y_points)
+    x_p <- x_points[valid_indices]
+    y_p <- y_points[valid_indices]
+    val_p <- values[valid_indices]
+    
+    if (length(x_p) == 0) {
+      return(matrix(0, nrow = length(yo), ncol = length(xo)))
+    }
+    
+    # Agregar pequeño jitter para evitar puntos colineales y duplicados exactos en akima
+    jx <- x_p + runif(length(x_p), -0.2, 0.2)
+    jy <- y_p + runif(length(y_p), -0.2, 0.2)
+    
+    ir <- tryCatch({
+      akima::interp(jx, jy, val_p, xo = xo, yo = yo, linear = linear_mode, duplicate = "mean")
+    }, error = function(e) {
+      tryCatch({
+        akima::interp(jx, jy, val_p, xo = xo, yo = yo, linear = FALSE, duplicate = "mean")
+      }, error = function(e2) {
+        NULL
+      })
+    })
+    
+    if (!is.null(ir) && !is.null(ir$z)) {
+      Z <- t(ir$z)
+    } else {
+      # Fallback IDW robusto en R puro (garantizado para WebAssembly / Shinylive)
+      nx <- length(xo)
+      ny <- length(yo)
+      Z <- matrix(0, ny, nx)
+      for (i in 1:ny) {
+        for (j in 1:nx) {
+          dists <- sqrt((x_p - xo[j])^2 + (y_p - yo[i])^2)
+          weights <- 1 / (dists^2 + 1e-5)
+          Z[i, j] <- sum(val_p * weights) / sum(weights)
+        }
+      }
+    }
+    
+    Z[is.na(Z)] <- mean(Z, na.rm = TRUE)
+    return(Z)
+  }
+
   # Auxiliar de interpolación para escenarios personalizados (grilla 30x30)
   interpolate_column_30x30 <- function(df, col_name, xo, yo) {
     if (col_name %in% colnames(df)) {
@@ -287,28 +337,7 @@ sim_server <- function(input, output, session, lang, run_sim_trigger) {
     } else {
       val <- rep(100.0, nrow(df))
     }
-    # Sanitizar NAs en la variable de valor
-    val[is.na(val)] <- mean(val, na.rm = TRUE)
-    if (all(is.na(val))) val <- rep(100.0, length(val))
-    
-    # Evitar puntos colineales o duplicados exactos usando un jitter aleatorio sutil
-    jx <- df$x + runif(length(df$x), -0.2, 0.2)
-    jy <- df$y + runif(length(df$y), -0.2, 0.2)
-    
-    ir <- tryCatch({
-      akima::interp(jx, jy, val, xo = xo, yo = yo, linear = TRUE, duplicate = "mean")
-    }, error = function(e) {
-      tryCatch({
-        akima::interp(jx, jy, val, xo = xo, yo = yo, linear = FALSE, duplicate = "mean")
-      }, error = function(e2) {
-        # Fallback a matriz de valor constante si todo colapsa
-        list(x = xo, y = yo, z = matrix(mean(val), nrow = length(yo), ncol = length(xo)))
-      })
-    })
-    
-    Z <- t(ir$z)
-    Z[is.na(Z)] <- mean(Z, na.rm = TRUE)
-    Z
+    safe_interpolate_grid(df$x, df$y, val, xo = xo, yo = yo, linear_mode = TRUE)
   }
   
   # Reactive for demographic calibration (IPF)
@@ -489,18 +518,7 @@ sim_server <- function(input, output, session, lang, run_sim_trigger) {
                         xg_vec <- base_data$Xg
                         yg_vec <- base_data$Yg
                         if (!is.null(m_tens) && nrow(m_tens) > 0) {
-                          # Sanitizar NAs en el tensor
-                          m_tens$nti_val[is.na(m_tens$nti_val)] <- 0
-                          # Evitar puntos colineales o duplicados exactos usando un jitter aleatorio sutil
-                          jx <- m_tens$x + runif(length(m_tens$x), -0.2, 0.2)
-                          jy <- m_tens$y + runif(length(m_tens$y), -0.2, 0.2)
-                          ir_interp <- tryCatch({
-                            akima::interp(jx, jy, m_tens$nti_val, xo = xg_vec, yo = yg_vec, linear = TRUE, duplicate = "mean")
-                          }, error = function(e) {
-                            akima::interp(jx, jy, m_tens$nti_val, xo = xg_vec, yo = yg_vec, linear = FALSE, duplicate = "mean")
-                          })
-                          # Escalar e interpolar el NTI a relieve en 3D
-                          t(ir_interp$z) * 450.0
+                          safe_interpolate_grid(m_tens$x, m_tens$y, m_tens$nti_val, xo = xg_vec, yo = yg_vec, linear_mode = TRUE) * 450.0
                         } else {
                           matrix(0, nrow = length(yg_vec), ncol = length(xg_vec))
                         }
@@ -510,17 +528,7 @@ sim_server <- function(input, output, session, lang, run_sim_trigger) {
                         xg_vec <- base_data$Xg
                         yg_vec <- base_data$Yg
                         if (!is.null(m_tens) && nrow(m_tens) > 0) {
-                          # Sanitizar NAs en el tensor
-                          m_tens$ricci_val[is.na(m_tens$ricci_val)] <- 0
-                          # Evitar puntos colineales o duplicados exactos usando un jitter aleatorio sutil
-                          jx <- m_tens$x + runif(length(m_tens$x), -0.2, 0.2)
-                          jy <- m_tens$y + runif(length(m_tens$y), -0.2, 0.2)
-                          ir_interp <- tryCatch({
-                            akima::interp(jx, jy, m_tens$ricci_val, xo = xg_vec, yo = yg_vec, linear = TRUE, duplicate = "mean")
-                          }, error = function(e) {
-                            akima::interp(jx, jy, m_tens$ricci_val, xo = xg_vec, yo = yg_vec, linear = FALSE, duplicate = "mean")
-                          })
-                          t(ir_interp$z) * 450.0
+                          safe_interpolate_grid(m_tens$x, m_tens$y, m_tens$ricci_val, xo = xg_vec, yo = yg_vec, linear_mode = TRUE) * 450.0
                         } else {
                           matrix(0, nrow = length(yg_vec), ncol = length(xg_vec))
                         }
