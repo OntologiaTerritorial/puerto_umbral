@@ -46,6 +46,10 @@ jobs:
         run: |
           touch docs/.nojekyll
 
+      - name: Copiar recursos multimedia fuera del bundle de R
+        run: |
+          cp -r media docs/media
+
       - name: Subir artefacto para GitHub Pages
         uses: actions/upload-pages-artifact@v3
         with:
