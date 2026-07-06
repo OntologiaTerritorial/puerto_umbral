@@ -7,10 +7,10 @@ authors:
     affiliation: "Universidad Adolfo Ibáñez"
     orcid: "https://orcid.org/0009-0000-5982-8863" 
 title: "Puerto Umbral: Simulador de Geotensores y Física Intrínseca del Territorio"
-version: "1.0.0"
-date-released: "2026-07-05"
+version: "1.0.2"
+date-released: "2026-07-06"
 license: "CC-BY-4.0"
-doi: "10.5281/zenodo.21207952"
+doi: "10.5281/zenodo.21212574"
 repository-code: "https://github.com/ontologiaterritorial/puerto_umbral"
 abstract: >-
   Puerto Umbral es una plataforma computacional serverless (compilada en WebAssembly
