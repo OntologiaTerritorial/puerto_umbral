@@ -46,6 +46,10 @@ jobs:
         run: |
           touch docs/.nojekyll
 
+      - name: Habilitar caching en el Service Worker de Shinylive
+        run: |
+          sed -i 's/var useCaching = false;/var useCaching = true;/g' docs/shinylive-sw.js
+
       - name: Copiar recursos multimedia fuera del bundle de R
         run: |
           cp -r media docs/media
