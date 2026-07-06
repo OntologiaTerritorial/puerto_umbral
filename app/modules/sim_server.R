@@ -287,7 +287,25 @@ sim_server <- function(input, output, session, lang, run_sim_trigger) {
     } else {
       val <- rep(100.0, nrow(df))
     }
-    ir <- akima::interp(df$x, df$y, val, xo = xo, yo = yo, linear = TRUE)
+    # Sanitizar NAs en la variable de valor
+    val[is.na(val)] <- mean(val, na.rm = TRUE)
+    if (all(is.na(val))) val <- rep(100.0, length(val))
+    
+    # Evitar puntos colineales o duplicados exactos usando un jitter aleatorio sutil
+    jx <- df$x + runif(length(df$x), -0.2, 0.2)
+    jy <- df$y + runif(length(df$y), -0.2, 0.2)
+    
+    ir <- tryCatch({
+      akima::interp(jx, jy, val, xo = xo, yo = yo, linear = TRUE, duplicate = "mean")
+    }, error = function(e) {
+      tryCatch({
+        akima::interp(jx, jy, val, xo = xo, yo = yo, linear = FALSE, duplicate = "mean")
+      }, error = function(e2) {
+        # Fallback a matriz de valor constante si todo colapsa
+        list(x = xo, y = yo, z = matrix(mean(val), nrow = length(yo), ncol = length(xo)))
+      })
+    })
+    
     Z <- t(ir$z)
     Z[is.na(Z)] <- mean(Z, na.rm = TRUE)
     Z
@@ -467,36 +485,46 @@ sim_server <- function(input, output, session, lang, run_sim_trigger) {
                        }
                      },
                      "nti" = {
-                       m_tens <- manzanas_con_tensores()
-                       xg_vec <- base_data$Xg
-                       yg_vec <- base_data$Yg
-                       if (!is.null(m_tens) && nrow(m_tens) > 0) {
-                         ir_interp <- tryCatch({
-                           akima::interp(m_tens$x, m_tens$y, m_tens$nti_val, xo = xg_vec, yo = yg_vec, linear = TRUE)
-                         }, error = function(e) {
-                           akima::interp(m_tens$x, m_tens$y, m_tens$nti_val, xo = xg_vec, yo = yg_vec, linear = FALSE)
-                         })
-                         # Escalar e interpolar el NTI a relieve en 3D
-                         t(ir_interp$z) * 450.0
-                       } else {
-                         matrix(0, nrow = length(yg_vec), ncol = length(xg_vec))
-                       }
-                     },
-                     "ricci" = {
-                       m_tens <- manzanas_con_tensores()
-                       xg_vec <- base_data$Xg
-                       yg_vec <- base_data$Yg
-                       if (!is.null(m_tens) && nrow(m_tens) > 0) {
-                         ir_interp <- tryCatch({
-                           akima::interp(m_tens$x, m_tens$y, m_tens$ricci_val, xo = xg_vec, yo = yg_vec, linear = TRUE)
-                         }, error = function(e) {
-                           akima::interp(m_tens$x, m_tens$y, m_tens$ricci_val, xo = xg_vec, yo = yg_vec, linear = FALSE)
-                         })
-                         t(ir_interp$z) * 450.0
-                       } else {
-                         matrix(0, nrow = length(yg_vec), ncol = length(xg_vec))
-                       }
-                     },
+                        m_tens <- manzanas_con_tensores()
+                        xg_vec <- base_data$Xg
+                        yg_vec <- base_data$Yg
+                        if (!is.null(m_tens) && nrow(m_tens) > 0) {
+                          # Sanitizar NAs en el tensor
+                          m_tens$nti_val[is.na(m_tens$nti_val)] <- 0
+                          # Evitar puntos colineales o duplicados exactos usando un jitter aleatorio sutil
+                          jx <- m_tens$x + runif(length(m_tens$x), -0.2, 0.2)
+                          jy <- m_tens$y + runif(length(m_tens$y), -0.2, 0.2)
+                          ir_interp <- tryCatch({
+                            akima::interp(jx, jy, m_tens$nti_val, xo = xg_vec, yo = yg_vec, linear = TRUE, duplicate = "mean")
+                          }, error = function(e) {
+                            akima::interp(jx, jy, m_tens$nti_val, xo = xg_vec, yo = yg_vec, linear = FALSE, duplicate = "mean")
+                          })
+                          # Escalar e interpolar el NTI a relieve en 3D
+                          t(ir_interp$z) * 450.0
+                        } else {
+                          matrix(0, nrow = length(yg_vec), ncol = length(xg_vec))
+                        }
+                      },
+                      "ricci" = {
+                        m_tens <- manzanas_con_tensores()
+                        xg_vec <- base_data$Xg
+                        yg_vec <- base_data$Yg
+                        if (!is.null(m_tens) && nrow(m_tens) > 0) {
+                          # Sanitizar NAs en el tensor
+                          m_tens$ricci_val[is.na(m_tens$ricci_val)] <- 0
+                          # Evitar puntos colineales o duplicados exactos usando un jitter aleatorio sutil
+                          jx <- m_tens$x + runif(length(m_tens$x), -0.2, 0.2)
+                          jy <- m_tens$y + runif(length(m_tens$y), -0.2, 0.2)
+                          ir_interp <- tryCatch({
+                            akima::interp(jx, jy, m_tens$ricci_val, xo = xg_vec, yo = yg_vec, linear = TRUE, duplicate = "mean")
+                          }, error = function(e) {
+                            akima::interp(jx, jy, m_tens$ricci_val, xo = xg_vec, yo = yg_vec, linear = FALSE, duplicate = "mean")
+                          })
+                          t(ir_interp$z) * 450.0
+                        } else {
+                          matrix(0, nrow = length(yg_vec), ncol = length(xg_vec))
+                        }
+                      },
                      as.matrix(esc$superficie)) # friccion (defecto)
     
     Z_base[is.na(Z_base)] <- mean(Z_base, na.rm = TRUE)
