@@ -1193,6 +1193,86 @@ sim_server <- function(input, output, session, lang, run_sim_trigger) {
                            "Collective memory reset to zero and cleared on disk."), type = "message")
   })
   
+  observeEvent(input$btn_show_collective_memory_modal, {
+    is_en <- identical(lang(), "EN")
+    
+    title_text <- if (is_en) {
+      HTML("<span style='color:#0d9488; font-weight:bold;'><i class='fa fa-brain'></i> Collective Memory: Trauma Hotspots Donation</span>")
+    } else {
+      HTML("<span style='color:#0d9488; font-weight:bold;'><i class='fa fa-brain'></i> Memoria Colectiva: Donaci&oacute;n de Hotspots de Trauma</span>")
+    }
+    
+    # URL de GitHub para crear un nuevo Issue con la plantilla de donación
+    issue_title <- if (is_en) "Trauma Hotspots Collective Memory Donation" else "Donacion de Memoria Colectiva de Trauma"
+    issue_body <- if (is_en) {
+      paste0(
+        "### Collective Memory: Trauma Hotspots Donation\n\n",
+        "Hello. I want to donate my simulation collective memory (pre_trained_memory.json) to enrich the baseline trauma hotspots of the Puerto Umbral platform.\n\n",
+        "**Instructions:**\n",
+        "1. Open the downloaded `pre_trained_memory.json` file in your computer.\n",
+        "2. Copy the entire contents and paste it below, replacing the placeholder:\n\n",
+        "```json\n",
+        "[Paste JSON content here]\n",
+        "```"
+      )
+    } else {
+      paste0(
+        "### Memoria Colectiva: Donacion de Hotspots de Trauma\n\n",
+        "Hola. Deseo donar la memoria colectiva resultante de mi simulacion (pre_trained_memory.json) para enriquecer el mapa base de trauma de la plataforma Puerto Umbral.\n\n",
+        "**Instrucciones:**\n",
+        "1. Abra el archivo `pre_trained_memory.json` descargado en su computador.\n",
+        "2. Copie todo el contenido y peguelo abajo reemplazando la linea de marcador:\n\n",
+        "```json\n",
+        "[Pegue el contenido del JSON aqui]\n",
+        "```"
+      )
+    }
+    github_url <- paste0(
+      "https://github.com/OntologiaTerritorial/puerto_umbral/issues/new?",
+      "title=", URLencode(issue_title, reserved = TRUE),
+      "&body=", URLencode(issue_body, reserved = TRUE)
+    )
+    
+    body_ui <- if (is_en) {
+      tagList(
+        tags$p(tags$b("What is this?"), " By exporting this collective memory, you download the evolved 30x30 trauma matrix containing all pedestrian friction points learned during your active simulation runs."),
+        tags$p(tags$b("Privacy & Sovereignty (CARE):"), " These hotspots are generated in-memory in your browser. No personal details are included. Overwriting the base file allows future users to see these collective barriers immediately."),
+        tags$p(tags$b("How to share?"), " If you want to contribute to the baseline manifold geometry:"),
+        tags$ol(
+          tags$li("Download your collective memory matrix below."),
+          tags$li("Click the ", tags$b("Donate on GitHub"), " button to open the submission form in a new tab."),
+          tags$li("Copy your JSON content and paste it in the designated section of the GitHub issue.")
+        ),
+        tags$p("The administrator will compile the community matrices into the project's default baseline.")
+      )
+    } else {
+      tagList(
+        tags$p(tags$b("\u00bfQu\u00e9 es esto?"), " Al exportar esta memoria, descargas la matriz de trauma evolucionada de 30x30 que registra los puntos de fricci\u00f3n experimentados por los peatones durante tus simulaciones."),
+        tags$p(tags$b("Privacidad y Soberan\u00eda (CARE):"), " Estos hotspots se generan en la memoria local de tu navegador y no incluyen ning\u00fan dato personal. Al integrarlos, deseas cooperar con la deformaci\u00f3n inicial del espacio urbano."),
+        tags$p(tags$b("\u00bfC\u00f3mo compartir?"), " Si deseas colaborar con la geometr\u00eda de la plataforma:"),
+        tags$ul(
+          tags$li("Descarga tu archivo de memoria en el bot\u00f3n verde."),
+          tags$li("Haz clic en el bot\u00f3n azul ", tags$b("Donar en GitHub"), " para abrir el formulario de entrega en otra pesta\u00f1a."),
+          tags$li("Copia el contenido del JSON descargado y p\u00e9galo en el espacio indicado en GitHub.")
+        ),
+        tags$p("El administrador consolidar\u00e1 estas matrices en la geometr\u00eda por defecto del proyecto.")
+      )
+    }
+    
+    showModal(modalDialog(
+      title = title_text,
+      body_ui,
+      footer = tagList(
+        downloadButton("download_collective_memory", if (is_en) "1. Download Memory (JSON)" else "1. Descargar Memoria (JSON)", class = "btn-success"),
+        tags$a(href = github_url, target = "_blank", class = "btn btn-primary", style = "font-weight: bold; padding: 6px 12px; font-size: 0.9rem;",
+               if (is_en) "2. Donate on GitHub" else "2. Donar en GitHub"),
+        modalButton(if (is_en) "Close" else "Cerrar")
+      ),
+      easyClose = TRUE,
+      size = "m"
+    ))
+  })
+  
   output$collective_memory_status_ui <- renderUI({
     m <- matriz_memoria_trauma()
     total_trauma <- if (!is.null(m)) sum(m > 10) else 0
@@ -3389,6 +3469,18 @@ sim_server <- function(input, output, session, lang, run_sim_trigger) {
       m_sf <- st_as_sf(m_df, coords = c("x", "y"), crs = UTM_CRS) %>%
         st_transform(4326)
       sf::st_write(m_sf, file, driver = "GeoJSON", delete_dsn = TRUE, quiet = TRUE)
+    }
+  )
+  
+  # ---- DESCARGA DE LA MATRIZ DE MEMORIA COLECTIVA EVOLUCIONADA ----
+  output$download_collective_memory <- downloadHandler(
+    filename = function() {
+      "pre_trained_memory.json"
+    },
+    content = function(file) {
+      m <- matriz_memoria_trauma()
+      if (is.null(m)) m <- matrix(0, 30, 30)
+      writeLines(jsonlite::toJSON(m, pretty = TRUE), file, useBytes = TRUE)
     }
   )
   # ---- TAB 3: CONTENEDOR DE KPIS DEL SOLUCIONADOR ----
