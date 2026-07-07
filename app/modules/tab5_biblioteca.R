@@ -119,13 +119,14 @@ tab5_server <- function(input, output, session, chat_messages, lang, tomo1_db, t
                                                       ),
                                                       selected = "geoia", width = "100%")
                                       ),
-                                      div(style = "display:flex; gap:10px; align-items:center; margin-top:10px; margin-bottom:5px;",
-                                          textInput("chat_query", NULL, placeholder = trans("Pregunte algo sobre el libro (ej. conmutador de Lie, memoria Caputo, Ledoit-Wolf)...", "Ask a question about the book (e.g. Lie commutator, Caputo memory, Ledoit-Wolf)..."), width = "50%"),
-                                          actionButton("chat_send", trans("Enviar", "Send"), class = "btn-success", style = "margin-top:-15px; height:36px; padding:0 15px;"),
-                                          actionButton("chat_voice", trans("Voz", "Voice"), class = "btn-warning", style = "margin-top:-15px; height:36px; padding:0 15px;", icon = icon("microphone")),
-                                          actionButton("chat_tts_toggle", trans("Audio ON", "Audio ON"), class = "btn-info", style = "margin-top:-15px; height:36px; padding:0 15px;", icon = icon("volume-up")),
-                                          actionButton("chat_clear", trans("Limpiar", "Clear"), class = "btn-danger", style = "margin-top:-15px; height:36px; padding:0 15px;")
-                                      ),
+                                      div(style = "display:flex; gap:8px; align-items:center; margin-top:10px; margin-bottom:5px; flex-wrap: wrap;",
+                                           textInput("chat_query", NULL, placeholder = trans("Pregunte algo sobre el libro (ej. conmutador de Lie, memoria Caputo, Ledoit-Wolf)...", "Ask a question about the book (e.g. Lie commutator, Caputo memory, Ledoit-Wolf)..."), width = "42%"),
+                                           actionButton("chat_send", trans("Enviar", "Send"), class = "btn-success", style = "margin-top:-15px; height:36px; padding:0 12px; font-weight:bold;"),
+                                           actionButton("chat_voice", trans("Voz", "Voice"), class = "btn-warning", style = "margin-top:-15px; height:36px; padding:0 12px; font-weight:bold;", icon = icon("microphone")),
+                                           actionButton("chat_tts_toggle", trans("Audio ON", "Audio ON"), class = "btn-info", style = "margin-top:-15px; height:36px; padding:0 12px; font-weight:bold;", icon = icon("volume-up")),
+                                           actionButton("chat_clear", trans("Limpiar", "Clear"), class = "btn-danger", style = "margin-top:-15px; height:36px; padding:0 12px; font-weight:bold;"),
+                                           downloadButton("download_chat_memory", trans("C\u00e1psula de Memoria (JSON)", "Memory Capsule (JSON)"), class = "btn-primary", style = "margin-top:-15px; height:36px; padding:6px 12px; font-weight:bold; font-size:0.85rem;")
+                                       ),
                                       # Sugerencias rápidas (Quick Suggestions)
                                       div(style = "margin-bottom: 15px; display: flex; gap: 8px; flex-wrap: wrap; align-items: center;",
                                           tags$span(style = "color:#64748b; font-size:0.8rem; font-weight:600;", 
@@ -951,6 +952,22 @@ tab5_server <- function(input, output, session, chat_messages, lang, tomo1_db, t
   output$download_pdf_ii <- downloadHandler(
     filename = function() { "Ontologia_Territorial_Tomo_II_v1.pdf" },
     content = function(file) { file.copy("www/docs/tomo_ii.pdf", file) }
+  )
+  
+  output$download_chat_memory <- downloadHandler(
+    filename = function() {
+      paste0("puerto_umbral_capsula_memoria_", Sys.Date(), ".json")
+    },
+    content = function(file) {
+      curr <- chat_messages()
+      clean_messages <- lapply(curr, function(msg) {
+        list(
+          role = msg$role,
+          text = as.character(msg$text)
+        )
+      })
+      writeLines(jsonlite::toJSON(clean_messages, auto_unbox = TRUE, pretty = TRUE), file, useBytes = TRUE)
+    }
   )
   
   output$glossary_list_ui <- renderUI({
