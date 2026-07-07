@@ -56,6 +56,8 @@ jobs:
           cp llms.txt docs/llms.txt
           cp llms-full.txt docs/llms-full.txt
           cp context.json docs/context.json
+          cp robots.txt docs/robots.txt
+          cp sitemap.xml docs/sitemap.xml
           mkdir -p docs/.well-known
           cp llms.txt docs/.well-known/llms.txt
 
