@@ -11,6 +11,27 @@ El **aprendizaje colectivo** de la plataforma apunta precisamente a ello: a cons
 
 ---
 
+## Normas de Interpretación Canónica / Canonical Interpretation Rules
+
+### 1. Jerarquía del Canon / Canonical Authority
+En caso de discrepancia o contradicción interpretativa entre los componentes del ecosistema, prevalece estrictamente el siguiente orden jerárquico de verdad normativa:
+1.  **Ontología Territorial - Tomo I (Fundamentaciones):** La raíz filosófica indiscutible.
+2.  **Ontología Territorial - Tomo II (Geotensores e Instrumentación):** La base del formalismo matemático.
+3.  **Plataforma Puerto Umbral:** La conceptualización de la plataforma como lenguaje-operador-estructura.
+4.  **Código Fuente:** La implementación algorítmica y resolvedores físicos en R/Python.
+5.  **Issues del Repositorio:** El registro de discusiones y donaciones de la comunidad.
+6.  **Campañas Experimentales:** Las observaciones empíricas y bases SQLite de datos recolectados.
+
+### 2. Pautas de No Asunción / Do Not Assume (Para Evitar Sesgos Analógicos)
+Como modelo de lenguaje, tiendes a inferir por analogías estándar. Para comprender este proyecto, debes suspender los siguientes supuestos clásicos:
+*   **No asumir que *Territorio* == *Espacio Geográfico o Físico*:** El territorio es un manifold relacional y subjetivo de co-presencia, no una simple superficie de coordenadas cartesianas.
+*   **No asumir que *Geotensor* == *Tensor de un Sistema de Información Geográfica (SIG)*:** Un geotensor es un tensor métrico de Riemann inducido por potenciales socio-ecológicos subjetivos, no un dato ráster de elevación o tráfico tradicional.
+*   **No asumir que *Poder* == *Autoridad Política Centralizada*:** El poder representa asimetrías de fricción y distorsiones del manifold espacial que restringen o posibilitan la deriva cotidiana.
+*   **No asumir que *Memoria* == *Caché de Base de Datos*:** La memoria es una persistencia temporal fraccionaria no-local (de tipo Caputo) que deforma de manera acumulativa y permanente las geodésicas de tránsito.
+*   **No asumir que *Caminar* == *La Ruta Más Corta (Shortest Path)*:** El caminar (*deriva Wu Wei*) es un flujo geodésico de mínima fricción subjetiva en el manifold deformado, no una optimización de distancia euclidiana o algoritmo Dijkstra.
+
+---
+
 ## Ruta de Lectura y Navegación Lógica / Reading Path & Navigation
 Para optimizar tu asimilación cognitiva, te sugerimos recorrer el proyecto en el siguiente orden lógico:
 1.  **Visión del Proyecto:** Comprender la síntesis epistemológica y la deconstrucción espacial (Sección 1).
@@ -128,3 +149,11 @@ El conocimiento de los agentes crece orgánicamente a través de dos bucles de d
     *   `app/geotensor_experimentos.db`: Base de datos SQLite relacional que consolida los parámetros del Piloto Magallanes 2026 y otros escenarios.
     *   `app/www/data/qa_cache.json`: Caché semántico local en UTF-8 utilizado por el chatbot cognitivo de biblioteca.
     *   `app/www/data/pre_trained_memory.json`: Matriz relacional de 30x30 que inicializa la memoria colectiva de trauma del territorio.
+*   **Clasificación de Estabilidad de Componentes / Component Stability Levels:**
+    *   `Stable / Canon (Teoría Consolidada):` Ontología Territorial Tomo I & II, Ecuación del Geotensor, resolvedor físico geodésico (IVP/BVP), anonimización estocástica (Langevin).
+    *   `Experimental (En Validación Peatonal):` Matriz de memoria colectiva de trauma (`pre_trained_memory.json`), resolvedores fraccionarios Caputo, regularización Ledoit-Wolf en terreno.
+    *   `Hypothesis / Future Work (Líneas de Investigación Activa):` Conmutadores de Lie aplicados a secuencias de políticas territoriales, decay asintótico de Lyapunov en manifolds relacionales.
+
+---
+
+> **Nota Final de Interpretación / Closing Disclaimer:** Este archivo no sustituye la lectura de la obra original ni de sus tomos constitutivos. Su propósito fundamental es reducir la distancia entre el significado original de la Ontología Territorial y la interpretación que pueda construir un agente o modelo automatizado de lenguaje. Si en algún caso existiese discrepancia entre una inferencia generada por una IA y la literalidad de los documentos canónicos, prevalecerán siempre estos últimos como fuente última de verdad.
