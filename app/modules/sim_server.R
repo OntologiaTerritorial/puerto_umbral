@@ -3132,7 +3132,8 @@ sim_server <- function(input, output, session, lang, run_sim_trigger) {
   # ---- 4. DESCARGAS DE PLANTILLAS Y MANUALES ----
   output$download_csv_template <- downloadHandler(
     filename = function() {
-      paste0("IEO_plantilla_campo_exp_", input$exp_mode, ".csv")
+      exp_m <- if (!is.null(input$exp_mode)) input$exp_mode else "base"
+      paste0("IEO_plantilla_campo_exp_", exp_m, ".csv")
     },
     content = function(file) {
       m_df <- current_manzanas_df()
