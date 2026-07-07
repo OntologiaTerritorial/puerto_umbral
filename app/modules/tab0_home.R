@@ -198,35 +198,35 @@ tab0_server <- function(input, output, session, lang) {
   
   # 2. Page routing handlers (interacting with parent navbar)
   observeEvent(input$go_to_refraction, {
-    updateNavbarPage(session = session, "nav_active", selected = trans("L\u00edneas de Trabajo", "Experiment Lines"))
+    updateNavbarPage(session = session, "nav_active", selected = "L\u00edneas de Trabajo")
     updateSelectInput(session = session, "exp_choice", selected = "exp7")
   })
   
   observeEvent(input$go_to_hessian, {
-    updateNavbarPage(session = session, "nav_active", selected = trans("L\u00edneas de Trabajo", "Experiment Lines"))
+    updateNavbarPage(session = session, "nav_active", selected = "L\u00edneas de Trabajo")
     updateSelectInput(session = session, "exp_choice", selected = "exp3")
   })
   
   observeEvent(input$go_to_regularization, {
-    updateNavbarPage(session = session, "nav_active", selected = trans("L\u00edneas de Trabajo", "Experiment Lines"))
+    updateNavbarPage(session = session, "nav_active", selected = "L\u00edneas de Trabajo")
     updateSelectInput(session = session, "exp_choice", selected = "exp5")
   })
   
   observeEvent(input$go_to_memory, {
-    updateNavbarPage(session = session, "nav_active", selected = trans("L\u00edneas de Trabajo", "Experiment Lines"))
+    updateNavbarPage(session = session, "nav_active", selected = "L\u00edneas de Trabajo")
     updateSelectInput(session = session, "exp_choice", selected = "exp4")
   })
   
   observeEvent(input$go_to_sim_panel, {
-    updateNavbarPage(session = session, "nav_active", selected = trans("Centro de Simulaci\u00f3n", "Simulation Center"))
+    updateNavbarPage(session = session, "nav_active", selected = "Centro de Simulaci\u00f3n")
   })
   
   observeEvent(input$go_to_math_panel, {
-    updateNavbarPage(session = session, "nav_active", selected = trans("An\u00e1lisis Matem\u00e1tico", "Mathematical Analysis"))
+    updateNavbarPage(session = session, "nav_active", selected = "An\u00e1lisis Matem\u00e1tico")
   })
   
   observeEvent(input$go_to_agent_panel, {
-    updateNavbarPage(session = session, "nav_active", selected = trans("Biblioteca y Agente", "Library & QA Agent"))
+    updateNavbarPage(session = session, "nav_active", selected = "Biblioteca y Agente")
   })
   
 
