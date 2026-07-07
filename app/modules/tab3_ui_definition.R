@@ -162,7 +162,8 @@ get_tab3_ui <- function(input, output, session, lang) {
         tags$hr(style = "border-top: 1px solid rgba(255,255,255,0.05); margin: 8px 0;"),
         checkboxInput("use_collective_memory", trans("Activar Memoria Colectiva (Hotspots)", "Activate Collective Memory (Hotspots)"), value = TRUE),
         uiOutput("collective_memory_status_ui"),
-        actionButton("clear_collective_memory", trans("Olvidar Memoria Colectiva", "Forget Collective Memory"), class = "btn-warning btn-xs w-100", style = "margin-top: 5px; font-weight: 500;")
+        actionButton("clear_collective_memory", trans("Olvidar Memoria Colectiva", "Forget Collective Memory"), class = "btn-warning btn-xs w-100", style = "margin-top: 5px; font-weight: 500;"),
+        actionButton("btn_show_collective_memory_modal", trans("Exportar Memoria Colectiva (JSON)", "Export Collective Memory (JSON)"), class = "btn-success btn-xs w-100", style = "margin-top: 5px; font-weight: 500;")
       ),
       
       # SECTION 5: INTRINSIC VISION FILTERS
