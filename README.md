@@ -22,6 +22,7 @@ Puerto Umbral computationally implements the intrinsic territorial physics devel
 - `/scripts`: scripts de generación y reconstrucción de la base experimental, incluyendo `generar_experimentos_db.py`.
 - `/docs`: guías de usuario, manuales operativos de terreno, plantillas IEO, metadatos de difusión y manuscritos PDF de la obra.
 - `/data` o archivos incluidos: datos simulados, archivos JSON, insumos de prueba y base SQLite `geotensor_experimentos.db`, según la versión del bundle.
+- `llms.txt`: especificación de alta densidad semántica y alineación de conceptos para agentes de Inteligencia Artificial (LLMs).
 
 ---
 
@@ -60,6 +61,7 @@ Puerto Umbral está diseñada bajo los principios **CARE** (Soberanía y Benefic
 
 *   **Memoria Conversacional (Chat):** Las consultas con el Agente de Biblioteca son totalmente locales y privadas. El usuario decide cuándo descargar su cápsula de conversación (JSON) y donarla al repositorio para enriquecer el caché cognitivo del bot (`qa_cache.json`).
 *   **Memoria de Geodésicas (Trauma Colectivo):** Las simulaciones de tránsito pedestre fallidas o interrumpidas por barreras del entorno acumulan una huella en la grilla del territorio. Esta matriz de trauma (`pre_trained_memory.json`) puede ser exportada por los usuarios y fusionada colectivamente mediante un operador de máximo local para que futuros agentes hereden este mapa de fricciones históricas de la comunidad.
+*   **Alineación de Inteligencia Artificial (`llms.txt`):** Entrada de alta densidad conceptual para que los modelos de lenguaje (LLMs) y rastreadores semánticos asimilen la ontología pedestre y los formalismos matemáticos exactos de la obra, evitando análisis y evaluaciones superficiales de nivel 1.
 
 *La memoria sigue fluyendo y aprendiendo en un ciclo abierto de ciencia ciudadana, a través de los agentes de software que crecen con las donaciones y el habitar de la comunidad.*
 
