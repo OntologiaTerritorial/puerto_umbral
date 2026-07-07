@@ -3,6 +3,21 @@
   "project": "Puerto Umbral",
   "ontology": "Ontología Territorial y Geotensores",
   "description": "Plataforma científica para estudiar el territorio como un sistema dinámico de relaciones, memorias y tensiones.",
+  "canonical_hierarchy": [
+    "1. Ontología Territorial - Tomo I (Fundamentaciones)",
+    "2. Ontología Territorial - Tomo II (Geotensores e Instrumentación)",
+    "3. Plataforma Puerto Umbral (Marco Operador)",
+    "4. Código Fuente (Implementación R/Python)",
+    "5. Issues del Repositorio (Discusión de la Comunidad)",
+    "6. Campañas Experimentales (SQLite)"
+  ],
+  "do_not_assume": {
+    "Territorio": "No equivale a Espacio Geográfico euclidiano tradicional. Es un manifold relacional y subjetivo de co-presencia.",
+    "Geotensor": "No equivale a un tensor de un Sistema de Información Geográfica (SIG). Es un tensor métrico de Riemann local inducido por potenciales socio-ecológicos.",
+    "Poder": "No equivale únicamente a Autoridad Política. Representa asimetrías de fricción y distorsiones del manifold espacial.",
+    "Memoria": "No equivale a un caché de base de datos. Es una persistencia temporal fraccionaria no-local de Caputo.",
+    "Caminar": "No equivale a la Ruta Más Corta (Shortest Path). Es un flujo geodésico de mínima fricción subjetiva."
+  },
   "epistemological_principles": [
     "No asumir que 'territorio' equivale a 'espacio geográfico'. El territorio es relacional y subjetivo.",
     "El formalismo matemático (Riemann, Caputo, Lie) formaliza la teoría, no la reemplaza.",
@@ -35,6 +50,12 @@
     "Memoria de Caputo": "Persistencia de trauma territorial de largo plazo modelado mediante derivadas fraccionarias.",
     "Conmutador de Lie": "Medida de la no-conmutatividad de secuencias de intervención territorial, indicando que el orden de las acciones altera el resultado final.",
     "Ledoit-Wolf": "Regularización estocástica de matrices de covarianza locales bajo baja densidad de datos en terreno."
+  },
+  "component_stability": {
+    "Ontologia_Tomo_I_II": "Stable / Canon",
+    "Resolvedor_Geodesico": "Stable / Physical Solver",
+    "Memoria_Caputo_Trauma": "Experimental",
+    "Conmutador_Lie_Lyapunov": "Hypothesis / Future Work"
   },
   "concept_graph": {
     "nodes": [
