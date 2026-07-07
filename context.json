@@ -1,0 +1,56 @@
+{
+  "version": "5.4",
+  "project": "Puerto Umbral",
+  "ontology": "Ontología Territorial y Geotensores",
+  "description": "Plataforma científica para estudiar el territorio como un sistema dinámico de relaciones, memorias y tensiones.",
+  "epistemological_principles": [
+    "No asumir que 'territorio' equivale a 'espacio geográfico'. El territorio es relacional y subjetivo.",
+    "El formalismo matemático (Riemann, Caputo, Lie) formaliza la teoría, no la reemplaza.",
+    "Los algoritmos implementan hipótesis y aproximaciones conceptuales, no verdades absolutas.",
+    "El significado de cada variable depende del dominio ontológico descrito en los tomos publicados."
+  ],
+  "canonical_documents": [
+    {
+      "title": "Tomo I: Fundamentaciones",
+      "abstract": "Establece los fundamentos filosóficos de la co-presencia, las derivas Wu Wei y las redes de cuidado espontáneas.",
+      "url": "media/docs/tomo_i.pdf"
+    },
+    {
+      "title": "Tomo II: Geotensores e Instrumentación",
+      "abstract": "Formaliza matemáticamente la ontología pedestre a contracorriente a través de la métrica de Riemann, resolvedores BVP, deformación de Weyl y el conmutador de Lie.",
+      "url": "media/docs/tomo_ii.pdf"
+    }
+  ],
+  "reading_order": [
+    "1. Visión del Proyecto (Sección 1 de llms.txt)",
+    "2. Ontología Territorial (Eje Trascendental)",
+    "3. Tomo II (Formalización Matemática y Geotensores)",
+    "4. Arquitectura de Puerto Umbral (app.R, global.R, módulos)",
+    "5. Convenciones Semánticas y Éticas (CARE/FAIR)",
+    "6. Estado de Desarrollo y Componentes Experimentales"
+  ],
+  "glossary": {
+    "Geotensor": "Tensor métrico de Riemann local ($g_{ij}$) que mide las distancias subjetivas e intensidades de fricción en el territorio.",
+    "Wu Wei": "Deriva peatonal natural que sigue las geodésicas de mínima fricción del manifold deformado.",
+    "Memoria de Caputo": "Persistencia de trauma territorial de largo plazo modelado mediante derivadas fraccionarias.",
+    "Conmutador de Lie": "Medida de la no-conmutatividad de secuencias de intervención territorial, indicando que el orden de las acciones altera el resultado final.",
+    "Ledoit-Wolf": "Regularización estocástica de matrices de covarianza locales bajo baja densidad de datos en terreno."
+  },
+  "concept_graph": {
+    "nodes": [
+      {"id": "Voluntad", "type": "Transcendental", "model": "Vector v0 / Energía Vital"},
+      {"id": "Poder", "type": "Transcendental", "model": "Geotensor g_ij / Potenciales V"},
+      {"id": "Sentido", "type": "Transcendental", "model": "Atractores V_sense"},
+      {"id": "Delimitación", "type": "Transcendental", "model": "Condiciones de Robin / Fronteras"},
+      {"id": "Territorio", "type": "Emergente", "model": "Variedad Diferenciable de Riemann (M, g)"},
+      {"id": "Cuidado", "type": "Ético", "model": "Métrica regularizada / Lyapunov"}
+    ],
+    "relations": [
+      {"source": "Voluntad", "target": "Territorio", "type": "recorre"},
+      {"source": "Poder", "target": "Territorio", "type": "deforma"},
+      {"source": "Sentido", "target": "Territorio", "type": "orienta"},
+      {"source": "Delimitación", "target": "Territorio", "type": "refracta"},
+      {"source": "Cuidado", "target": "Territorio", "type": "estabiliza"}
+    ]
+  }
+}
