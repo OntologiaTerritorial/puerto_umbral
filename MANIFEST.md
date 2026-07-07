@@ -44,4 +44,6 @@ This file describes the directory structure and main components provided in the 
 *   `llms-full.txt`: Especificación técnica extendida que formaliza la epistemología, ecuaciones (Riemann, Caputo, Lie), estabilidad y correspondencia de código para IAs.
 *   `context.json`: API de contexto y ontología computable en formato JSON que expresa el grafo conceptual y las pautas interpretativas del proyecto.
 *   `MANUAL_CONSOLIDACION_MEMORIAS.txt`: Manual operativo de paso a paso para el administrador sobre cómo consolidar donaciones del chat y del simulador.
+*   `robots.txt`: Archivo de enrutamiento y permisos para crawlers y agentes rastreadores web.
+*   `sitemap.xml`: Mapa de indexación automatizada para motores de búsqueda semántica y científica.
 
