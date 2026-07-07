@@ -35,7 +35,12 @@ ui <- tagList(
   useShinyjs(),
   tags$head(
     uiOutput("field_mode_css"),
-    # Carga del CSS principal est\u00e1tico y cacheable
+    # AI Agents Metadata & Discoverability Links (Semantic Governance)
+    tags$link(rel = "llms", href = "llms.txt"),
+    tags$link(rel = "llms-full", href = "llms-full.txt"),
+    tags$link(rel = "context", href = "context.json"),
+    tags$meta(name = "ai-discoverability", content = "llms.txt"),
+    # Carga del CSS principal estático y cacheable
     tags$link(rel = "stylesheet", type = "text/css", href = "styles.css"),
     # Script para traducciones autom\u00e1ticas en el cliente y adici\u00f3n de tooltips (popups flotantes)
     tags$script(HTML("
