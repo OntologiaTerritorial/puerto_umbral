@@ -17,9 +17,17 @@ downloadButton <- function(...) {
   tag$attribs$download <- NULL
   tag
 }
-
 suppressPackageStartupMessages({
   library(shiny)
+  
+  # Registrar ruta de recursos para la carpeta media (PDFs y Videos)
+  media_dir <- "../media"
+  if (!dir.exists(media_dir)) media_dir <- "media"
+  if (!dir.exists(media_dir)) media_dir <- "puerto_umbral_zenodo_bundle/media"
+  if (dir.exists(media_dir)) {
+    addResourcePath("media", media_dir)
+  }
+  
 UTM_CRS <- 32719 # Proyecci\u00f3n UTM por defecto (Santiago UTM 19S)
   library(leaflet)
   library(plotly)
