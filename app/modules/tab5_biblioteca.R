@@ -61,7 +61,7 @@ tab5_server <- function(input, output, session, chat_messages, lang, tomo1_db, t
                      h4(style = "color:#b45309; font-size:1.0rem;", trans("Tomo I: Fundamentaciones", "Volume I: Foundations")),
                      tags$p(style = "font-size:0.85rem; color:#475569;", trans("Ontolog\u00eda Territorial y la matem\u00e1tica de la variedad.", "Territorial Ontology and the mathematics of space.")),
                      tags$a(
-      href = "docs/tomo_i.pdf",
+      href = "media/docs/tomo_i.pdf",
       download = "Puerto_Umbral_Tomo_I.pdf",
       class = "btn btn-info btn-sm w-100",
       style = "display: block; text-align: center;",
@@ -73,11 +73,11 @@ tab5_server <- function(input, output, session, chat_messages, lang, tomo1_db, t
                      h4(style = "color:#b45309; font-size:1.0rem;", trans("Tomo II: Geotensores", "Volume II: Geotensors")),
                      tags$p(style = "font-size:0.85rem; color:#475569;", trans("M\u00e9trica de cuidados y resolvedor de f\u00edsica intr\u00ednseca.", "Metrics of care and intrinsic physics solvers.")),
                      tags$a(
-      href = "docs/tomo_ii.pdf",
+      href = "media/docs/tomo_ii.pdf",
       download = "Puerto_Umbral_Tomo_II.pdf",
       class = "btn btn-info btn-sm w-100",
       style = "display: block; text-align: center;",
-      trans("Descargar Tomo II (PDF)", "Download Tomo II (PDF)")
+      trans("Descargar Tomo II (PDF)", "Download Volume II (PDF)")
     )
                  ),
                  
@@ -125,7 +125,7 @@ tab5_server <- function(input, output, session, chat_messages, lang, tomo1_db, t
                                            actionButton("chat_voice", trans("Voz", "Voice"), class = "btn-warning", style = "margin-top:-15px; height:36px; padding:0 12px; font-weight:bold;", icon = icon("microphone")),
                                            actionButton("chat_tts_toggle", trans("Audio ON", "Audio ON"), class = "btn-info", style = "margin-top:-15px; height:36px; padding:0 12px; font-weight:bold;", icon = icon("volume-up")),
                                            actionButton("chat_clear", trans("Limpiar", "Clear"), class = "btn-danger", style = "margin-top:-15px; height:36px; padding:0 12px; font-weight:bold;"),
-                                           downloadButton("download_chat_memory", trans("C\u00e1psula de Memoria (JSON)", "Memory Capsule (JSON)"), class = "btn-primary", style = "margin-top:-15px; height:36px; padding:6px 12px; font-weight:bold; font-size:0.85rem;")
+                                           actionButton("btn_show_memory_modal", trans("C\u00e1psula de Memoria (JSON)", "Memory Capsule (JSON)"), class = "btn-primary", style = "margin-top:-15px; height:36px; padding:0 12px; font-weight:bold; font-size:0.85rem;")
                                        ),
                                       # Sugerencias rápidas (Quick Suggestions)
                                       div(style = "margin-bottom: 15px; display: flex; gap: 8px; flex-wrap: wrap; align-items: center;",
@@ -916,6 +916,86 @@ tab5_server <- function(input, output, session, chat_messages, lang, tomo1_db, t
     chat_messages(list())
   })
   
+  observeEvent(input$btn_show_memory_modal, {
+    is_en <- identical(lang(), "EN")
+    
+    title_text <- if (is_en) {
+      HTML("<span style='color:#0d9488; font-weight:bold;'><i class='fa fa-shield-alt'></i> Cohesion Capsule: Collective Memory Donation</span>")
+    } else {
+      HTML("<span style='color:#0d9488; font-weight:bold;'><i class='fa fa-shield-alt'></i> C&aacute;psula de Cohesi&oacute;n: Donaci&oacute;n de Memoria Colectiva</span>")
+    }
+    
+    # URL de GitHub para crear un nuevo Issue con la plantilla de donación
+    issue_title <- if (is_en) "Conversational Memory Donation" else "Donacion de Memoria Conversacional"
+    issue_body <- if (is_en) {
+      paste0(
+        "### Cohesion Capsule: Conversational Memory Donation\n\n",
+        "Hello. I want to donate my conversational memory capsule to enrich the collective memory of the Puerto Umbral platform.\n\n",
+        "**Instructions:**\n",
+        "1. Open the downloaded JSON file in your computer.\n",
+        "2. Copy the entire contents and paste it below, replacing the placeholder:\n\n",
+        "```json\n",
+        "[Paste JSON content here]\n",
+        "```"
+      )
+    } else {
+      paste0(
+        "### Capsula de Cohesion: Donacion de Memoria Conversacional\n\n",
+        "Hola. Deseo donar mi capsula de memoria conversacional para enriquecer el repositorio colectivo de la plataforma Puerto Umbral.\n\n",
+        "**Instrucciones:**\n",
+        "1. Abra el archivo JSON descargado en su computador.\n",
+        "2. Copie todo el contenido y peguelo abajo reemplazando la linea de marcador:\n\n",
+        "```json\n",
+        "[Pegue el contenido del JSON aqui]\n",
+        "```"
+      )
+    }
+    github_url <- paste0(
+      "https://github.com/OntologiaTerritorial/puerto_umbral/issues/new?",
+      "title=", URLencode(issue_title, reserved = TRUE),
+      "&body=", URLencode(issue_body, reserved = TRUE)
+    )
+    
+    body_ui <- if (is_en) {
+      tagList(
+        tags$p(tags$b("What is this?"), " By exporting this capsule, you will download a JSON file containing the dialogue history of your current session with the Local Knowledge Agent."),
+        tags$p(tags$b("Sovereignty & Privacy (CARE Principles):"), " We do not automatically track or store your queries on any external server. You hold absolute authority and control over your conversations."),
+        tags$p(tags$b("How to share & enrich?"), " If you want to contribute to the collective memory of the platform, you can:"),
+        tags$ol(
+          tags$li("Download your JSON capsule below."),
+          tags$li("Click the ", tags$b("Donate on GitHub"), " button to open the submission form in a new tab."),
+          tags$li("Copy your JSON content and paste it in the designated section of the GitHub issue.")
+        ),
+        tags$p("The administrator will consolidate these capsules to make the agent smarter in future editions of Volume II.")
+      )
+    } else {
+      tagList(
+        tags$p(tags$b("\u00bfQu\u00e9 es esto?"), " Al exportar esta c\u00e1psula, descargar\u00e1s un archivo JSON que contiene el historial de di\u00e1logos de tu sesi\u00f3n actual con el Agente de Conocimiento Local."),
+        tags$p(tags$b("Soberan\u00eda y Privacidad (Principios CARE):"), " No registramos ni almacenamos tus consultas de forma autom\u00e1tica en ning\u00fan servidor externo. T\u00fa tienes el control y la autoridad absoluta sobre tus conversaciones."),
+        tags$p(tags$b("\u00bfC\u00f3mo compartir y colaborar?"), " Si deseas contribuir al enriquecimiento de la memoria colectiva de la plataforma, puedes:"),
+        tags$ul(
+          tags$li("Descargar tu archivo JSON de cápsula en el botón verde."),
+          tags$li("Hacer clic en el botón azul ", tags$b("Donar en GitHub"), " para abrir el formulario de entrega en otra pestaña."),
+          tags$li("Copiar el contenido del JSON descargado y pegarlo en el espacio indicado en GitHub.")
+        ),
+        tags$p("El administrador consolidar\u00e1 peri\u00f3dicamente las c\u00e1psulas recibidas para que el agente local aprenda y responda mejor en futuras ediciones.")
+      )
+    }
+    
+    showModal(modalDialog(
+      title = title_text,
+      body_ui,
+      footer = tagList(
+        downloadButton("download_chat_memory", if (is_en) "1. Download Capsule (JSON)" else "1. Descargar C\u00e1psula (JSON)", class = "btn-success"),
+        tags$a(href = github_url, target = "_blank", class = "btn btn-primary", style = "font-weight: bold; padding: 6px 12px; font-size: 0.9rem;",
+               if (is_en) "2. Donate on GitHub" else "2. Donar en GitHub"),
+        modalButton(if (is_en) "Close" else "Cerrar")
+      ),
+      easyClose = TRUE,
+      size = "m"
+    ))
+  })
+  
   output$chat_history_ui <- renderUI({
     curr <- chat_messages()
     is_en <- identical(lang(), "EN")
@@ -1095,9 +1175,9 @@ tab5_server <- function(input, output, session, chat_messages, lang, tomo1_db, t
       
       HTML('
         <video id="tutorial_video" width="100%" controls preload="auto" style="border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); background:#000;">
-          <source src="../media/video/tutorial_limpio.mp4" type="video/mp4">
-          <track src="../media/video/tutorial_es.vtt" kind="subtitles" srclang="es" label="Español" default>
-          <track src="../media/video/tutorial_en.vtt" kind="subtitles" srclang="en" label="English">
+          <source src="media/video/tutorial_limpio.mp4" type="video/mp4">
+          <track src="media/video/tutorial_es.vtt" kind="subtitles" srclang="es" label="Español" default>
+          <track src="media/video/tutorial_en.vtt" kind="subtitles" srclang="en" label="English">
           Su navegador no soporta video HTML5.
         </video>
       ')
