@@ -35,6 +35,8 @@ ui <- tagList(
   useShinyjs(),
   tags$head(
     uiOutput("field_mode_css"),
+    # Bing Webmaster Site Verification Meta Tag
+    tags$meta(name = "msvalidate.01", content = "0DD7C9BCF5A3FF8BBD5D64A773EA8D71"),
     # AI Agents Metadata & Discoverability Links (Semantic Governance)
     tags$link(rel = "llms", href = "llms.txt"),
     tags$link(rel = "llms-full", href = "llms-full.txt"),
