@@ -110,11 +110,8 @@ sim_server <- function(input, output, session, lang, run_sim_trigger) {
     }
   })
 
-  # Reactivo para cargar el experimento activo desde la base de datos SQLite
   active_experiment_data <- reactive({
-    req(input$exp_mode)
-    
-    exp_mode_val <- input$exp_mode
+    exp_mode_val <- if (!is.null(input$exp_mode)) input$exp_mode else "base"
     exp_id <- switch(exp_mode_val,
                      "exp1" = 1,
                      "exp2" = 2,
