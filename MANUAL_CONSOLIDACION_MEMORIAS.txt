@@ -1,0 +1,64 @@
+================================================================================
+ MANUAL DE CONSOLIDACIÓN DE MEMORIAS PEATONALES Y CONVERSACIONALES
+                   PLATAFORMA PUERTO UMBRAL (TOMO II)
+================================================================================
+
+Este manual describe el procedimiento para que el administrador de la plataforma
+(tú) recopile, fusione e integre las donaciones de conocimiento y simulaciones 
+hechas por la comunidad, tanto en el chat como en el mapa de trayectorias.
+
+Existen DOS tipos de memorias que se pueden consolidar en el sistema:
+1. MEMORIA CONVERSACIONAL (Preguntas y respuestas del Chat de Biblioteca)
+2. MEMORIA DE TRAYECTORIAS (Hotspots de trauma y fricción peatonal del mapa)
+
+--------------------------------------------------------------------------------
+CASO 1: CONSOLIDAR MEMORIA CONVERSACIONAL (CHAT)
+--------------------------------------------------------------------------------
+Este flujo toma las cápsulas JSON del chat de los usuarios, limpia los formatos
+HTML de presentación, e integra las nuevas preguntas y respuestas en el cerebro
+offline del Agente de Consulta local (qa_cache.json).
+
+Paso a paso para integrar donaciones (desde GitHub Issues o Archivos JSON):
+1. Obtén el archivo JSON donado:
+   - Si te lo enviaron por correo: Guarda el archivo descargado.
+   - Si lo donaron en GitHub Issues: Abre el issue, copia todo el texto del bloque 
+     JSON y guárdalo como un archivo de texto con extensión ".json" en tu computador.
+2. Mueve ese archivo JSON a la siguiente carpeta local de tu repositorio:
+   👉 puerto_umbral_zenodo_bundle/memorias_recibidas/
+3. Abre una terminal en la raíz del proyecto y ejecuta el script de consolidación:
+   > python puerto_umbral_zenodo_bundle/scripts/consolidar_memorias.py
+4. El script limpiará el código, indexará palabras clave, actualizará el archivo 
+   "app/www/data/qa_cache.json" y archivará la cápsula en la subcarpeta "procesadas/".
+5. Abre GitHub Desktop, verás los cambios en "qa_cache.json". Haz commit y Push.
+6. Cierra el issue en GitHub agradeciendo la donación.
+
+--------------------------------------------------------------------------------
+CASO 2: CONSOLIDAR MEMORIA DE TRAYECTORIAS / GEODÉSICAS (TRAUMA)
+--------------------------------------------------------------------------------
+Este flujo recopila las matrices 30x30 de trauma geodésico y las fusiona usando la 
+operación MÁXIMO (celda por celda) con tu matriz base (pre_trained_memory.json). 
+Esto asegura que las barreras territoriales de todos los usuarios se sumen.
+
+Paso a paso AUTOMÁTICO (para donaciones en GitHub Issues):
+1. Asegúrate de tener la terminal abierta en la raíz de tu proyecto.
+2. Ejecuta el script automático de consolidación:
+   > python puerto_umbral_zenodo_bundle/scripts/consolidar_trauma.py
+   *(El script se conectará por API a tu repositorio, buscará los issues abiertos 
+   de donación de trauma, extraerá el JSON, lo validará, lo fusionará con tu 
+   matriz local y guardará los cambios en "app/www/data/pre_trained_memory.json").*
+3. Abre GitHub Desktop. Verás modificado el archivo "pre_trained_memory.json".
+4. Haz commit y Push.
+5. Cierra los issues consolidados de GitHub agradeciendo la donación.
+
+Paso a paso MANUAL (si te envían el archivo "pre_trained_memory.json" directo):
+1. Toma el archivo descargado "pre_trained_memory.json".
+2. Sobrescribe el archivo local ubicado en:
+   👉 puerto_umbral_zenodo_bundle/app/www/data/pre_trained_memory.json
+3. Abre GitHub Desktop, haz commit y Push.
+
+--------------------------------------------------------------------------------
+RESUMEN DE COMANDOS DE CONSOLIDACIÓN DESDE LA RAÍZ
+--------------------------------------------------------------------------------
+* Consolidar Chat:   python puerto_umbral_zenodo_bundle/scripts/consolidar_memorias.py
+* Consolidar Trauma: python puerto_umbral_zenodo_bundle/scripts/consolidar_trauma.py
+================================================================================
