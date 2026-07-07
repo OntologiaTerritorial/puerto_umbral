@@ -33,6 +33,7 @@ This file describes the directory structure and main components provided in the 
 
 ### `/scripts`
 *   `generar_experimentos_db.py`: Script en Python para inicializar y poblar la base SQLite `geotensor_experimentos.db` con datos simulados y coeficientes base.
+*   `consolidar_memorias.py`: Script en Python para consolidar las Cápsulas de Memoria (JSON) exportadas en el chat y enriquecer el caché local de preguntas y respuestas (`qa_cache.json`).
 
 ### `/docs`
 *   `manual_usuario_puerto_umbral.md` & `manual_usuario_puerto_umbral.docx`: Manual de usuario paso a paso y guía de operación en formatos Markdown y Word.
