@@ -10,12 +10,6 @@ if (dir.exists("puerto_umbral_zenodo_bundle/app")) {
 } else if (basename(getwd()) != "app" && dir.exists("app")) {
   setwd("app")
 }
-# Workaround para problemas de descarga en Chromium (Shinylive)
-downloadButton <- function(...) {
-  tag <- shiny::downloadButton(...)
-  tag$attribs$download <- NULL
-  tag
-}
 
 suppressPackageStartupMessages({
   library(shiny)
