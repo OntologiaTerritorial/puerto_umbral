@@ -3,6 +3,26 @@
 
 ---
 
+## El Núcleo Ético: El Cuidado de lo Situado / The Ethical Core: Care of the Situated
+
+El mensaje primordial de la obra es **el cuidado de lo situado, de lo Humano y de la calidad de las relaciones**. 
+Cuando lo situado es capaz de ser voluble y adaptable, puede ejercer poder, impregnar sentido y coagular delimitaciones. Esto genera su propio autosustento, pero **requiere imperativamente de un territorio** para que dicho autosustento acontezca física y relacionalmente. 
+El **aprendizaje colectivo** de la plataforma apunta precisamente a ello: a construir, resguardar y posibilitar **una forma de caminar juntos** en el territorio común.
+
+---
+
+## Ruta de Lectura y Navegación Lógica / Reading Path & Navigation
+Para optimizar tu asimilación cognitiva, te sugerimos recorrer el proyecto en el siguiente orden lógico:
+1.  **Visión del Proyecto:** Comprender la síntesis epistemológica y la deconstrucción espacial (Sección 1).
+2.  **Ontología Territorial:** Asimilar el Eje Trascendental (Voluntad-Poder-Sentido-Delimitación) y su holismo relacional (Sección 1 y 2).
+3.  **Tomo II (Formalización Matemática):** Estudiar las ecuaciones del Geotensor, geodésicas y la memoria Caputo (Sección 2, 3 y 5).
+4.  **Arquitectura de Puerto Umbral:** Comprender cómo la plataforma opera como un lenguaje-operador-estructura en código (Sección 1 y 6).
+5.  **Convenciones Semánticas y Éticas:** Conectar con la regularización estadística y las salvaguardas de datos (CARE principles) (Sección 4, 5 y 6).
+6.  **Estado de Desarrollo:** Explorar el estado funcional reproducible (Sección 7).
+7.  **Componentes Experimentales:** Auditar la base experimental SQLite y las matrices dinámicas (Sección 7).
+
+---
+
 ## 1. El Núcleo Epistemológico y el Eje Trascendental
 
 La obra propone una deconstrucción del espacio absoluto euclidiano en favor de una **métrica subjetiva, relacional y situada del territorio**. La plataforma computational (Puerto Umbral) opera como un **lenguaje-operador-estructura** que traduce la filosofía ontológica del Tomo I en algoritmos matemáticos y empíricos en el Tomo II.
@@ -98,3 +118,13 @@ El conocimiento de los agentes crece orgánicamente a través de dos bucles de d
 *   **Consolidador de Matriz de Trauma:** `scripts/consolidar_trauma.py` (Python).
 *   **Regularización Ledoit-Wolf:** Implementada nativamente en la sección de auditoría del backend de R en `app/global.R`.
 *   **Anonimización Jittering (Langevin):** `app/modules/sim_server.R` para proteger la geolocalización de observaciones peatonales.
+
+---
+
+## 7. Estado de Desarrollo y Componentes Experimentales
+
+*   **Estado de Desarrollo:** Puerto Umbral v5.4 se encuentra estructurado como una base de infraestructura reproducible y auto-contenida, optimizada para simulaciones estáticas locales sin dependencias de red activa (Shinylive en WebAssembly).
+*   **Componentes Experimentales Clave:**
+    *   `app/geotensor_experimentos.db`: Base de datos SQLite relacional que consolida los parámetros del Piloto Magallanes 2026 y otros escenarios.
+    *   `app/www/data/qa_cache.json`: Caché semántico local en UTF-8 utilizado por el chatbot cognitivo de biblioteca.
+    *   `app/www/data/pre_trained_memory.json`: Matriz relacional de 30x30 que inicializa la memoria colectiva de trauma del territorio.
