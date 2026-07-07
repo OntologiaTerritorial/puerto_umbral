@@ -50,9 +50,12 @@ jobs:
         run: |
           sed -i 's/var useCaching = false;/var useCaching = true;/g' docs/shinylive-sw.js
 
-      - name: Copiar recursos multimedia fuera del bundle de R
+      - name: Copiar recursos multimedia y llms.txt fuera del bundle de R
         run: |
           cp -r media docs/media
+          cp llms.txt docs/llms.txt
+          mkdir -p docs/.well-known
+          cp llms.txt docs/.well-known/llms.txt
 
       - name: Subir artefacto para GitHub Pages
         uses: actions/upload-pages-artifact@v3
