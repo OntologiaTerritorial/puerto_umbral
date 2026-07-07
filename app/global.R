@@ -11,6 +11,13 @@ if (dir.exists("puerto_umbral_zenodo_bundle/app")) {
   setwd("app")
 }
 
+# Workaround para problemas de descarga en Chromium bajo Shinylive
+downloadButton <- function(...) {
+  tag <- shiny::downloadButton(...)
+  tag$attribs$download <- NULL
+  tag
+}
+
 suppressPackageStartupMessages({
   library(shiny)
 UTM_CRS <- 32719 # Proyecci\u00f3n UTM por defecto (Santiago UTM 19S)
