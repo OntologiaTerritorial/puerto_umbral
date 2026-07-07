@@ -1,6 +1,8 @@
 # Puerto Umbral: Zenodo Scientific Bundle  
 ## Plataforma base de Ontología Territorial y Geotensores — Tomo II
 
+🌐 **Plataforma en vivo / Live App:** [https://ontologiaterritorial.github.io/puerto_umbral/](https://ontologiaterritorial.github.io/puerto_umbral/)
+
 **Versión de la app:** Puerto Umbral v5.4  
 **Versión del bundle Zenodo:** v1.0  
 
@@ -51,6 +53,15 @@ Puerto Umbral traduce a componentes computacionales las principales estructuras 
 7. **Carga, videos y materiales complementarios:** espacio para integrar insumos audiovisuales, materiales pedagógicos y archivos de apoyo.
 8. **Carga y regeneración de datos:** base SQLite incluida, scripts de generación y soporte para insumos simulados.
 9. **Material pedagógico y documental:** acceso integrado a tomos, guías, plantillas y material de apoyo.
+
+## Aprendizaje Colectivo y Memoria Fluyente / Collective Learning & Flowing Memory
+
+Puerto Umbral está diseñada bajo los principios **CARE** (Soberanía y Beneficio Colectivo de Datos) para garantizar el respeto de los saberes locales. La memoria de la plataforma no se recopila de forma centralizada ni invasiva; sigue fluyendo libremente a través de las donaciones soberanas y el uso de los agentes de software, los cuales crecen con cada ciclo de aporte comunitario:
+
+*   **Memoria Conversacional (Chat):** Las consultas con el Agente de Biblioteca son totalmente locales y privadas. El usuario decide cuándo descargar su cápsula de conversación (JSON) y donarla al repositorio para enriquecer el caché cognitivo del bot (`qa_cache.json`).
+*   **Memoria de Geodésicas (Trauma Colectivo):** Las simulaciones de tránsito pedestre fallidas o interrumpidas por barreras del entorno acumulan una huella en la grilla del territorio. Esta matriz de trauma (`pre_trained_memory.json`) puede ser exportada por los usuarios y fusionada colectivamente mediante un operador de máximo local para que futuros agentes hereden este mapa de fricciones históricas de la comunidad.
+
+*La memoria sigue fluyendo y aprendiendo en un ciclo abierto de ciencia ciudadana, a través de los agentes de software que crecen con las donaciones y el habitar de la comunidad.*
 
 ---
 
