@@ -474,7 +474,7 @@ sim_server <- function(input, output, session, lang, run_sim_trigger) {
   active_surface <- reactive({
     esc <- escenario_actual()
     base_data <- base_manifold_data()
-    dim_sel <- input$dim_3d
+    dim_sel <- if (!is.null(input$dim_3d)) input$dim_3d else "friccion"
     
     # Seleccionar la base de la superficie
     Z_base <- switch(dim_sel,
@@ -2110,7 +2110,7 @@ sim_server <- function(input, output, session, lang, run_sim_trigger) {
     # Graficar la superficie reactiva deformada
     fig <- plot_ly(x = ~xg_vec, y = ~yg_vec, z = ~Z_mesh) %>%
       add_surface(
-        colorscale = switch(input$dim_3d,
+        colorscale = switch(if (!is.null(input$dim_3d)) input$dim_3d else "friccion",
                             "bienestar" = "Plasma",
                             "nti" = "Plasma", # magma/plasma
                             "ricci" = "RdBu",
@@ -2245,7 +2245,7 @@ sim_server <- function(input, output, session, lang, run_sim_trigger) {
               dist_len <- sqrt(dx_dist^2 + dy_dist^2)
               if (dist_len > 0) {
                 # Estimar NTI local en (cx, cy)
-                nti_val_loc <- if (input$dim_3d == "nti") {
+                nti_val_loc <- if (identical(input$dim_3d, "nti")) {
                   cz / 450.0
                 } else {
                   exp(- dist_len / 350) * 1.5
