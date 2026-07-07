@@ -18,6 +18,9 @@ abstract: >-
   Física Intrínseca del Territorio del Tomo II. Implementa solvers geodésicos bajo
   potenciales de Robin, difusión de Langevin en variedades Riemannianas con Christoffels
   locales, anonimización por Donut Jittering y persistencia de memoria de Caputo.
+  Para su indexación y alineación semántica por asistentes de Inteligencia Artificial
+  (LLMs), el repositorio incluye una ontología computable y guías detalladas en
+  llms.txt, llms-full.txt y context.json.
 keywords:
   - "Física Intrínseca Territorial"
   - "Geotensores"
