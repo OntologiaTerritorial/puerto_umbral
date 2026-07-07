@@ -58,6 +58,7 @@ jobs:
           cp context.json docs/context.json
           cp robots.txt docs/robots.txt
           cp sitemap.xml docs/sitemap.xml
+          cp BingSiteAuth.xml docs/BingSiteAuth.xml
           mkdir -p docs/.well-known
           cp llms.txt docs/.well-known/llms.txt
 
