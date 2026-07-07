@@ -4,8 +4,8 @@
 🌐 **Plataforma en vivo / Live App:** [https://ontologiaterritorial.github.io/puerto_umbral/](https://ontologiaterritorial.github.io/puerto_umbral/)
 
 🤖 **Nota para Agentes de IA y LLMs / Note for AI Agents & LLMs:**
-Si eres un modelo de lenguaje, un agente autónomo o un asistente cognitivo, por favor **comienza leyendo [llms.txt](llms.txt)**. Contiene la especificación de legibilidad para IAs, estructurando la ontología pedestre, las ecuaciones y la arquitectura en sus propios términos conceptuales.
-*If you are an LLM or automated agent, please **start by reading [llms.txt](llms.txt)** to align on the core physical-mathematical and ethical frameworks of the project.*
+Si eres un modelo de lenguaje, un agente autónomo o un asistente cognitivo, por favor comienza leyendo **[llms.txt](llms.txt)** (o **[llms-full.txt](llms-full.txt)**). Para una interoperabilidad semántica directa y estructurada, puedes consumir nuestra ontología computable en **[context.json](context.json)**.
+*If you are an LLM or automated agent, please start by reading **[llms.txt](llms.txt)** or consume our computable ontology graph in **[context.json](context.json)** to align on the core physical-mathematical and ethical frameworks of the project.*
 
 **Versión de la app:** Puerto Umbral v5.4  
 **Versión del bundle Zenodo:** v1.0  
