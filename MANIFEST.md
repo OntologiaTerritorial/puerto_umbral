@@ -39,3 +39,9 @@ This file describes the directory structure and main components provided in the 
 *   `manual_usuario_puerto_umbral.md` & `manual_usuario_puerto_umbral.docx`: Manual de usuario paso a paso y guía de operación en formatos Markdown y Word.
 *   `video_podcast_metadata.md`: Guión, notas y metadatos asociados al video demostrativo y podcast de la obra.
 
+### Archivos de Alineación de IA y Gobernanza Semántica / AI Alignment & Semantic Governance
+*   `llms.txt`: Umbral breve y portal de navegación semántica de alta densidad conceptual para modelos de lenguaje (LLMs).
+*   `llms-full.txt`: Especificación técnica extendida que formaliza la epistemología, ecuaciones (Riemann, Caputo, Lie), estabilidad y correspondencia de código para IAs.
+*   `context.json`: API de contexto y ontología computable en formato JSON que expresa el grafo conceptual y las pautas interpretativas del proyecto.
+*   `MANUAL_CONSOLIDACION_MEMORIAS.txt`: Manual operativo de paso a paso para el administrador sobre cómo consolidar donaciones del chat y del simulador.
+
