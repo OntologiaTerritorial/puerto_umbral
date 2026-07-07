@@ -5909,5 +5909,20 @@
       "es": "La fórmula fundamental de la métrica territorial (geotensor) en el Tomo II se define como:<br><br>$$g_{ij} = \\eta_{ij} + \\lambda \\cdot \\partial_i V \\partial_j V$$<br>Donde cada símbolo representa:<br><ul>  <li><b>$g_{ij}$:</b> El <b>geotensor</b> resultante (tensor métrico de Riemann local) que mide las distancias relativas y rige el caminar peatonal.</li>  <li><b>$\\eta_{ij}$:</b> La <b>métrica base</b> (euclidiana plana, representada por la matriz identidad $\\text{diag}(1,1)$).</li>  <li><b>$\\lambda$:</b> La <b>rigidez del manifold</b>, que regula la sensibilidad del habitante ante los potenciales de fricción.</li>  <li><b>$V$:</b> El <b>campo de potencial socio-ecológico</b> acumulado, que concentra las distorsiones del territorio (delito, barreras, amparo).</li>  <li><b>$\\partial_i V \\text{ y } \\partial_j V$:</b> Los <b>gradientes espaciales</b> del potencial en las direcciones $i$ y $j$, que indican hacia dónde cambia más rápido la fricción.</li>  <li><b>$\\partial_i V \\partial_j V$:</b> El <b>producto exterior de gradientes</b>, que introduce la anisotropía, es decir, que la dificultad para caminar dependa de la dirección del movimiento.</li></ul>",
       "en": "The fundamental formula of the territorial metric (geotensor) in Volume II is defined as:<br><br>$$g_{ij} = \\eta_{ij} + \\lambda \\cdot \\partial_i V \\partial_j V$$<br>Where each symbol represents:<br><ul>  <li><b>$g_{ij}$:</b> The resulting <b>geotensor</b> (local Riemann metric tensor) that measures relative distances and governs pedestrian walking.</li>  <li><b>$\\eta_{ij}$:</b> The <b>baseline metric</b> (flat Euclidean space, represented by the identity matrix $\\text{diag}(1,1)$).</li>  <li><b>$\\lambda$:</b> The <b>manifold stiffness</b>, regulating the walker's sensitivity to friction potentials.</li>  <li><b>$V$:</b> The accumulated <b>socio-ecological potential field</b> containing territorial distortions (crime, barriers, shelter).</li>  <li><b>$\\partial_i V \\text{ and } \\partial_j V$:</b> The <b>spatial gradients</b> of the potential in directions $i$ and $j$, indicating where friction changes fastest.</li>  <li><b>$\\partial_i V \\partial_j V$:</b> The <b>gradient outer product</b>, introducing anisotropy (making walking difficulty direction-dependent).</li></ul>"
     }
+  },
+  "capsula_20260707_095129_0": {
+    "keywords": [
+      "qué",
+      "deriva",
+      "wei"
+    ],
+    "title": {
+      "es": "¿Qué es la deriva Wu-Wei?",
+      "en": "¿Qué es la deriva Wu-Wei?"
+    },
+    "answer": {
+      "es": "Es la trayectoria peatonal caracterizada por el no-forzar, desplazándose de forma natural a lo largo de las geodésicas determinadas por el geotensor del territorio, lo que minimiza el consumo de energía vital frente a las fricciones del entorno.Citas exactas complementarias de la obra:",
+      "en": "Es la trayectoria peatonal caracterizada por el no-forzar, desplazándose de forma natural a lo largo de las geodésicas determinadas por el geotensor del territorio, lo que minimiza el consumo de energía vital frente a las fricciones del entorno.Citas exactas complementarias de la obra:"
+    }
   }
 }
