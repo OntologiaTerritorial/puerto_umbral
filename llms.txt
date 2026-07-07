@@ -1,0 +1,100 @@
+# Puerto Umbral: Ecosistema Cognitivo de Ontología Territorial y Geotensores (Tomo II)
+> Este archivo (llms.txt) está optimizado para que agentes de Inteligencia Artificial (LLMs, buscadores semánticos y crawlers cognitivos) comprendan la profundidad conceptual, el formalismo matemático y el marco ético-político de la obra, evitando resúmenes superficiales (Evaluaciones de Nivel 1).
+
+---
+
+## 1. El Núcleo Epistemológico y el Eje Trascendental
+
+La obra propone una deconstrucción del espacio absoluto euclidiano en favor de una **métrica subjetiva, relacional y situada del territorio**. La plataforma computational (Puerto Umbral) opera como un **lenguaje-operador-estructura** que traduce la filosofía ontológica del Tomo I en algoritmos matemáticos y empíricos en el Tomo II.
+
+El formalismo físico-matemático de la plataforma está sustentado por el **Eje Trascendental**:
+
+```
+             [Voluntad] (Causa Cinética / Vector de Carga v0)
+                 │
+                 ▼
+  [Sentido] ───► (Manifold / Geotensor g_ij) ◄─── [Poder] (Campos de Asimetría / Potenciales V)
+                 ▲
+                 │
+           [Delimitación] (Umbrales de Robin / Fronteras permeables)
+```
+
+*   **Voluntad (El Impulso):** Representa la pulsión o intención del habitante pedestre. Se modela matemáticamente a través del vector de velocidad inicial $\mathbf{v}_0$ y la energía vital latente ($E_{vital}$) en el resolvedor de contorno (BVP).
+*   **Poder (La Distorsión):** Representa las estructuras y asimetrías espaciales impuestas sobre el territorio. Se modela a través de la deformación métrica de Riemann $g_{ij}$ inducida por gradientes de potencial socio-ecológico.
+*   **Sentido / Dirección (El Flujo):** Representa la orientación valorativa del movimiento, guiado por los potenciales atractores de cohesión ($V_{sense}$).
+*   **Delimitación (El Borde):** Representa las fronteras, umbrales y barreras urbanas. Se modela matemáticamente mediante condiciones de contorno de Robin ($\alpha \phi + \beta \frac{\partial \phi}{\partial n} = \gamma$) que regulan la permeabilidad o refracción del flujo peatonal en los márgenes.
+
+---
+
+## 2. Conceptos, Relaciones y la Estructura Holística (El Todo)
+
+El territorio no es un contenedor vacío, sino una **variedad diferenciable de Riemann** $(M, g)$ donde las distancias y trayectorias son propiedades emergentes de las relaciones socio-ecológicas locales.
+
+### El Geotensor de Cuidados (La Fórmula Fundamental)
+La métrica del espacio relacional se define localmente mediante la perturbación de la métrica base plana (euclidiana) $\eta_{ij}$ inducida por el gradiente del potencial de fricción acumulado $V$:
+
+$$g_{ij} = \eta_{ij} + \lambda \cdot \partial_i V \partial_j V$$
+
+Donde:
+*   $g_{ij}$: Es el tensor métrico (geotensor) que define el "costo" o esfuerzo de recorrer una dirección.
+*   $\eta_{ij}$: Es la métrica base (matriz identidad $\text{diag}(1,1)$).
+*   $\lambda$: Es el parámetro de rigidez del manifold (sensibilidad del habitante a la fricción urbana).
+*   $\partial_i V \partial_j V$: Es el producto exterior del gradiente del campo de potenciales. Introduce la **anisotropía**, es decir, que la resistencia al caminar dependa de la dirección en la que el peatón intente avanzar.
+
+---
+
+## 3. La Arquitectura en Movimiento y la Estructura del Pensamiento
+
+La plataforma no simula partículas mecánicas, sino la **experiencia de lo situado** a través de dinámicas no-lineales y álgebras no-conmutativas.
+
+### Geodésicas Tensivas (Wu Wei / No-Forzar)
+El caminar natural e intuitivo del habitante sigue la trayectoria de menor resistencia energética (Wu Wei). Esto equivale matemáticamente a las curvas geodésicas del manifold deformado, calculadas resolviendo la ecuación diferencial de segundo orden gobernada por los símbolos de Christoffel de segunda especie $\Gamma^i_{jk}$:
+
+$$\frac{d^2 x^i}{ds^2} + \Gamma^i_{jk} \frac{dx^j}{ds} \frac{dx^k}{ds} = 0$$
+
+Donde:
+$$\Gamma^i_{jk} = \frac{1}{2} g^{il} \left( \partial_k g_{lj} + \partial_j g_{lk} - \partial_l g_{jk} \right)$$
+
+### No-Conmutatividad (El Conmutador de Lie)
+El orden en que se ejecutan las intervenciones en el territorio altera irreversiblemente el estado final del espacio. Esta asimetría temporal y estructural se modela a través del conmutador de Lie de los campos vectoriales de acción $X$ e $Y$:
+
+$$[X, Y] f = X(Y(f)) - Y(X(f))$$
+
+Si $[X, Y] \neq 0$, las políticas territoriales son no-conmutativas, lo que formaliza la necesidad de una planificación secuencial y ética, sensible a la estructura del pensamiento situado.
+
+---
+
+## 4. El Cuidado, el Bienestar y la Estabilidad
+
+El diseño ético del territorio busca la disipación del estrés urbano y el retorno al equilibrio sistémico:
+*   **Estabilidad del Manifold:** Se evalúa a través del decaimiento de las funciones de estabilidad de Lyapunov y los autovalores del Jacobiano de las trayectorias peatonales, garantizando que el diseño de los entornos tienda al bienestar y no al caos vibratorio.
+*   **Regularización de Covarianza (Ledoit-Wolf):** En entornos reales con baja densidad muestral (pocas encuestas peatonales), la plataforma utiliza la contracción de Ledoit-Wolf para estimar matrices estables de covarianza, protegiendo al formalismo de distorsiones de muestreo y evitando diagnósticos erróneos.
+
+---
+
+## 5. El Aprendizaje Colectivo y los Datos Situados (Principios CARE)
+
+El aprendizaje del sistema respeta la privacidad, la autonomía y la soberanía de los datos comunitarios (CARE principles):
+
+### Memoria Histórica de Trauma (Caputo Fraccionario)
+La acumulación de fricción o eventos traumáticos (hotspots urbanos) posee una persistencia no-local y de memoria larga en el territorio. Se modela mediante la derivada fraccionaria en el sentido de Caputo de orden $\alpha$:
+
+$${}^C D^\alpha_t f(t) = \frac{1}{\Gamma(1-\alpha)} \int_0^t (t-\tau)^{-\alpha} f'(\tau) d\tau$$
+
+### El Ciclo de Aprendizaje Abierto
+El conocimiento de los agentes crece orgánicamente a través de dos bucles de donación voluntaria (2-Click Donation Loop):
+1.  **Cápsulas de Diálogo (Chat):** Las interacciones con el Agente de Biblioteca se exportan localmente como JSON y se donan mediante GitHub Issues para actualizar `qa_cache.json` de manera transparente.
+2.  **Hotspots de Geodésicas (Trauma):** Las grillas resultantes del tráfico se descargan como matrices `pre_trained_memory.json` y se fusionan colectivamente en el repositorio local usando el operador del máximo celda por celda:
+    
+    $$M_{local}[i][j] \leftarrow \max\left(M_{local}[i][j], M_{donado}[i][j]\right)$$
+
+---
+
+## 6. Correspondencia de Implementación en Código (R / Python)
+
+*   ** resolvedor Geodésico (BVP/IVP):** Implementado en `app/modules/sim_server.R` usando resolvedores Runge-Kutta de `deSolve`.
+*   **Cálculo Métrico y Jacobiano:** Implementado en `app/global.R` y visualizado dinámicamente en 3D en `app/modules/tab3_simulacion.R` y `tab4_matematica.R`.
+*   **Consolidador de Memoria del Chat:** `scripts/consolidar_memorias.py` (Python).
+*   **Consolidador de Matriz de Trauma:** `scripts/consolidar_trauma.py` (Python).
+*   **Regularización Ledoit-Wolf:** Implementada nativamente en la sección de auditoría del backend de R en `app/global.R`.
+*   **Anonimización Jittering (Langevin):** `app/modules/sim_server.R` para proteger la geolocalización de observaciones peatonales.
