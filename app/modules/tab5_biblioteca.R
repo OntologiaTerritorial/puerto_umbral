@@ -1184,7 +1184,10 @@ tab5_server <- function(input, output, session, chat_messages, lang, tomo1_db, t
             const video = document.getElementById("tutorial_video");
             const trackEs = document.getElementById("track_es");
             const trackEn = document.getElementById("track_en");
-            const base = window.location.href.split("?")[0].split("#")[0].replace(/\/$/, "");
+            let base = window.location.href.split("?")[0].split("#")[0];
+            if (base.endsWith("/")) {
+              base = base.slice(0, -1);
+            }
             
             video.src = base + "/media/video/tutorial_limpio.mp4?v=2";
             trackEs.src = base + "/media/video/tutorial_es.vtt?v=2";
