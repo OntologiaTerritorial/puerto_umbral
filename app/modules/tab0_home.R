@@ -220,7 +220,7 @@ tab0_server <- function(input, output, session, lang) {
             target = "_blank",
             class = "btn btn-default",
             style = "border-radius: 8px; font-weight: 600; background: #024b30; color: #fff; padding: 8px 16px; border: none; display: inline-flex; align-items: center; gap: 8px; transition: transform 0.2s;",
-            tagList(icon("archive"), "Zenodo (Code Bundle)")
+            tagList(icon("archive"), trans("Puerto Umbral: Simulador (Zenodo)", "Puerto Umbral: Simulator (Zenodo)"))
           ),
           # Tomo I Link
           tags$a(
