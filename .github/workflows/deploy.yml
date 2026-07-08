@@ -56,15 +56,16 @@ jobs:
           import re
           with open('docs/shinylive-sw.js', 'r', encoding='utf-8') as f:
               code = f.read()
-          pattern = r'self\.addEventListener\(\s*[\"\']fetch[\"\']\s*,\s*(?:function\s*\(event\)\s*\{|\(event\)\s*=>\s*\{)'
+          pattern = r'addEventListener\(\s*[\"\']fetch[\"\']\s*,\s*(?:function\s*\(\s*(\w+)\s*\)|\(\s*(\w+)\s*\)|(\w+))\s*=>?\s*\s*\{'
           match = re.search(pattern, code)
           if match:
+              var_name = next(g for g in match.groups() if g is not None)
               start_idx = match.end()
-              bypass_code = '\n  if (event.request.url.includes(\"/media/\") || event.request.headers.has(\"range\")) {\n    return;\n  }\n'
+              bypass_code = f'\n  if ({var_name}.request.url.includes(\"/media/\") || {var_name}.request.headers.has(\"range\")) {{\n    return;\n  }}\n'
               code = code[:start_idx] + bypass_code + code[start_idx:]
               with open('docs/shinylive-sw.js', 'w', encoding='utf-8') as f:
                   f.write(code)
-              print('Bypass de media/range inyectado con éxito en shinylive-sw.js')
+              print(f'Bypass de media/range inyectado con éxito en shinylive-sw.js usando variable: {var_name}')
           else:
               print('ADVERTENCIA: No se encontró el listener de fetch en shinylive-sw.js')
           "
