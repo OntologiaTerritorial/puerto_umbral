@@ -35,10 +35,18 @@ tab0_server <- function(input, output, session, lang) {
       # AI AGENTS NOTICE PANEL (REDUNDANCY)
       div(class = "panel-glass", style = "padding: 15px; margin-top: 20px; margin-bottom: 30px; border-left: 5px solid #6366f1; border-radius: 8px; background-color: #f8fafc; font-size: 0.95rem; line-height: 1.5; color: #475569;",
         p(style = "margin-bottom: 0;",
-          HTML(trans(
-            "🤖 <strong>Gobernanza Semántica de IA:</strong> Esta plataforma cuenta con especificaciones de alineación conceptual para asistentes de Inteligencia Artificial. Puedes leer las directrices de interpretación y el canon en <a href='llms.txt' target='_blank'><strong>llms.txt</strong></a> o consumir la ontología computable en <a href='context.json' target='_blank'><strong>context.json</strong></a>.",
-            "🤖 <strong>AI Semantic Governance:</strong> This platform features conceptual alignment specifications for AI assistants. You can read the interpretation guidelines and canon in <a href='llms.txt' target='_blank'><strong>llms.txt</strong></a> or consume the computable ontology at <a href='context.json' target='_blank'><strong>context.json</strong></a>."
-          ))
+          tags$span(style = "font-weight: bold; color: #1e293b;", "🤖 ", trans("Gobernanza Semántica de IA:", "AI Semantic Governance:")),
+          trans(
+            " Esta plataforma cuenta con especificaciones de alineación conceptual para asistentes de Inteligencia Artificial. Puedes leer las directrices de interpretación y el canon descargando ",
+            " This platform features conceptual alignment specifications for AI assistants. You can read the interpretation guidelines and canon by downloading "
+          ),
+          downloadLink("download_llms_txt", "llms.txt", style = "font-weight: bold; color: #4f46e5; text-decoration: underline;"),
+          trans(
+            " o consumir la ontología computable en ",
+            " or consume the computable ontology at "
+          ),
+          downloadLink("download_context_json", "context.json", style = "font-weight: bold; color: #4f46e5; text-decoration: underline;"),
+          "."
         )
       ),
       
@@ -192,6 +200,20 @@ tab0_server <- function(input, output, session, lang) {
   })
   
   # 1. Download handlers
+  output$download_llms_txt <- downloadHandler(
+    filename = function() { "llms.txt" },
+    content = function(file) {
+      file.copy("www/llms.txt", file)
+    }
+  )
+  
+  output$download_context_json <- downloadHandler(
+    filename = function() { "context.json" },
+    content = function(file) {
+      file.copy("www/context.json", file)
+    }
+  )
+  
   output$download_tomo1_home <- downloadHandler(
     filename = function() { "Puerto_Umbral_Tomo_I.pdf" },
     content = function(file) {
