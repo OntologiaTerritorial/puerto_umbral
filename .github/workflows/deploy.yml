@@ -61,7 +61,7 @@ jobs:
           if match:
               var_name = next(g for g in match.groups() if g is not None)
               start_idx = match.end()
-              bypass_code = f'\n  if ({var_name}.request.url.includes(\"/media/\") || {var_name}.request.headers.has(\"range\") || {var_name}.request.destination === \"video\" || {var_name}.request.destination === \"audio\" || {var_name}.request.url.includes(\".mp4\") || {var_name}.request.url.includes(\".vtt\")) {{\n    return;\n  }}\n'
+              bypass_code = f'\n  if ({var_name}.request.url.includes(\"/media/\")) {{\n    return;\n  }}\n'
               code = code[:start_idx] + bypass_code + code[start_idx:]
               with open('docs/shinylive-sw.js', 'w', encoding='utf-8') as f:
                   f.write(code)
