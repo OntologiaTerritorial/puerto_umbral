@@ -1175,11 +1175,26 @@ tab5_server <- function(input, output, session, chat_messages, lang, tomo1_db, t
       
       HTML('
         <video id="tutorial_video" width="100%" controls preload="metadata" style="border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); background:#000;">
-          <source src="media/video/tutorial_limpio.mp4?v=2" type="video/mp4">
-          <track src="media/video/tutorial_es.vtt?v=2" kind="subtitles" srclang="es" label="Español">
-          <track src="media/video/tutorial_en.vtt?v=2" kind="subtitles" srclang="en" label="English">
+          <source id="tutorial_video_src" type="video/mp4">
+          <track id="track_es" kind="subtitles" srclang="es" label="Español">
+          <track id="track_en" kind="subtitles" srclang="en" label="English">
           Su navegador no soporta video HTML5.
         </video>
+        <script>
+          (function() {
+            const video = document.getElementById("tutorial_video");
+            const source = document.getElementById("tutorial_video_src");
+            const trackEs = document.getElementById("track_es");
+            const trackEn = document.getElementById("track_en");
+            const base = window.location.href.split("?")[0].split("#")[0].replace(/\/$/, "");
+            
+            source.src = base + "/media/video/tutorial_limpio.mp4?v=2";
+            trackEs.src = base + "/media/video/tutorial_es.vtt?v=2";
+            trackEn.src = base + "/media/video/tutorial_en.vtt?v=2";
+            
+            video.load();
+          })();
+        </script>
       ')
     ))
   })
