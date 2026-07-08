@@ -34,6 +34,27 @@ tomo2_db <- tryCatch({
 ui <- tagList(
   useShinyjs(),
   tags$head(
+    # Service Worker Version Purge & Update Enforcement
+    tags$script(HTML("
+      (function() {
+        var CURRENT_VERSION = 'v10';
+        if (localStorage.getItem('app_sw_version') !== CURRENT_VERSION) {
+          if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.getRegistrations().then(function(registrations) {
+              var promises = registrations.map(function(r) { return r.unregister(); });
+              Promise.all(promises).then(function() {
+                localStorage.setItem('app_sw_version', CURRENT_VERSION);
+                window.location.reload();
+              });
+            }).catch(function() {
+              localStorage.setItem('app_sw_version', CURRENT_VERSION);
+            });
+          } else {
+            localStorage.setItem('app_sw_version', CURRENT_VERSION);
+          }
+        }
+      })();
+    ")),
     uiOutput("field_mode_css"),
     # Bing Webmaster Site Verification Meta Tag
     tags$meta(name = "msvalidate.01", content = "0DD7C9BCF5A3FF8BBD5D64A773EA8D71"),
