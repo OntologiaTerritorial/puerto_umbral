@@ -38,7 +38,6 @@ UTM_CRS <- 32719 # Proyecci\u00f3n UTM por defecto (Santiago UTM 19S)
   library(plotly)
   library(jsonlite)
   library(dplyr)
-  library(deSolve)
   library(RColorBrewer)
   library(scales)
   library(sf)
@@ -838,6 +837,53 @@ compute_manifold_geometry <- function(Xg, Yg, Z_active, Z_alt, dx, dy, lambda_va
 #    con hilos de ejecución concurrentes usando OpenMP (#pragma omp parallel for).
 # 2. Utilizar métodos de disparo BVP vectorizados o aproximaciones por Hamilton-Jacobi-Bellman (HJB)
 #    mediante métodos de barrido rápido (Fast Marching Methods) para resolver múltiples destinos de forma simultánea.
+# Custom Runge-Kutta 4th order solver to avoid deSolve package dependency in WebAssembly
+rk4_solver <- function(y, times, func, parms = NULL) {
+  n_steps <- length(times)
+  n_vars <- length(y)
+  
+  out <- matrix(0, nrow = n_steps, ncol = n_vars + 1)
+  colnames(out) <- c("time", names(y))
+  out[1, 1] <- times[1]
+  out[1, 2:(n_vars + 1)] <- y
+  
+  curr_y <- y
+  for (i in 2:n_steps) {
+    t_prev <- times[i - 1]
+    t_curr <- times[i]
+    dt <- t_curr - t_prev
+    
+    res1 <- func(t_prev, curr_y, parms)
+    k1 <- res1[[1]]
+    if (all(k1 == 0)) {
+      out[i:n_steps, 1] <- times[i:n_steps]
+      for (j in i:n_steps) {
+        out[j, 2:(n_vars + 1)] <- curr_y
+      }
+      break
+    }
+    
+    y2 <- curr_y + 0.5 * dt * k1
+    res2 <- func(t_prev + 0.5 * dt, y2, parms)
+    k2 <- res2[[1]]
+    
+    y3 <- curr_y + 0.5 * dt * k2
+    res3 <- func(t_prev + 0.5 * dt, y3, parms)
+    k3 <- res3[[1]]
+    
+    y4 <- curr_y + dt * k3
+    res4 <- func(t_curr, y4, parms)
+    k4 <- res4[[1]]
+    
+    curr_y <- curr_y + (dt / 6) * (k1 + 2 * k2 + 2 * k3 + k4)
+    
+    out[i, 1] <- t_curr
+    out[i, 2:(n_vars + 1)] <- curr_y
+  }
+  
+  as.data.frame(out)
+}
+
 solve_geodesic <- function(pre, x0, y0, theta, v0, dest_x = NULL, dest_y = NULL, 
                            use_V = TRUE, A_wall = 12000, A_dest = 15000, 
                            distorsiones = NULL, profile = "cuidado", A_slope = 15000,
@@ -1039,8 +1085,7 @@ solve_geodesic <- function(pre, x0, y0, theta, v0, dest_x = NULL, dest_y = NULL,
   vx0 <- v0 * cos(theta); vy0 <- v0 * sin(theta)
   state0 <- c(x = x0, y = y0, vx = vx0, vy = vy0)
   times <- seq(0, Tmax, by = dt)
-  out <- deSolve::ode(y = state0, times = times, func = rhs, parms = NULL, method = "rk4")
-  out <- as.data.frame(out)
+  out <- rk4_solver(y = state0, times = times, func = rhs, parms = NULL)
   
   out
 }
