@@ -91,8 +91,15 @@ tab5_server <- function(input, output, session, chat_messages, lang, tomo1_db, t
                                    "Click below to open the explanatory video tutorial of the platform in a new tab.")),
                       
                       tags$a(
-                        href = "media/video/tutorial_limpio.mp4",
-                        target = "_blank",
+                        href = "#",
+                        onclick = "
+                          var base = window.location.href.split('?')[0].split('#')[0];
+                          if (!base.endsWith('/')) {
+                            base = base + '/';
+                          }
+                          window.open(base + 'media/video/tutorial_limpio.mp4', '_blank');
+                          return false;
+                        ",
                         class = "btn",
                         style = "display:block; width:100%; border-radius:10px; font-weight:600; background:#fff3cd; color:#664d03; border:1px solid #ffe69c; padding:10px; margin-bottom:8px; text-align:center; text-decoration:none;",
                         tagList(icon("play-circle"), trans("Ver Video Tutorial", "Watch Video Tutorial"))
