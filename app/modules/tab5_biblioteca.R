@@ -81,22 +81,7 @@ tab5_server <- function(input, output, session, chat_messages, lang, tomo1_db, t
     )
                  ),
                  
-                 tags$hr(style = "border-top:1px solid rgba(255,255,255,0.08);"),
-                 
-                 # Video Tutorial Section
-                 div(style = "margin-top:15px;",
-                     h4(style = "color:#0d9488; font-size:1.0rem; margin-top:0;", trans("Video Demostrativo", "Video Demonstration")),
-                     tags$p(style = "font-size:0.8rem; color:#475569; line-height:1.4;", 
-                            trans("Haga clic en el botón a continuación para abrir el reproductor del video tutorial explicativo de la plataforma.",
-                                  "Click the button below to open the explanatory video tutorial player of the platform.")),
-                     
-                     # Action button for modal video play
-                     actionButton(
-                       "view_video_btn", 
-                       label = tagList(icon("play-circle"), trans("Ver Video Tutorial", "Watch Video Tutorial")),
-                       style = "width:100%; border-radius:10px; font-weight:600; background:#fff3cd; color:#664d03; border:1px solid #ffe69c; padding:10px; margin-bottom:8px; text-align:center;"
-                     )
-                 )
+                 tags$hr(style = "border-top:1px solid rgba(255,255,255,0.08);")
              )
       ),
       
@@ -1165,51 +1150,6 @@ tab5_server <- function(input, output, session, chat_messages, lang, tomo1_db, t
     ops_log(new_log)
   })
   
-  observeEvent(input$view_video_btn, {
-    showModal(modalDialog(
-      title = trans("Video Tutorial Demostrativo - Puerto Umbral", "Demonstration Video Tutorial - Puerto Umbral"),
-      size = "l",
-      easyClose = TRUE,
-      fade = TRUE,
-      footer = modalButton(trans("Cerrar", "Close")),
-      
-      HTML('
-        <video id="tutorial_video" width="100%" controls preload="metadata" style="border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); background:#000;">
-          <track id="track_es" kind="subtitles" srclang="es" label="Español">
-          <track id="track_en" kind="subtitles" srclang="en" label="English">
-          Su navegador no soporta video HTML5.
-        </video>
-        <script>
-          (function() {
-            var attempts = 0;
-            var interval = setInterval(function() {
-              var video = document.getElementById("tutorial_video");
-              var trackEs = document.getElementById("track_es");
-              var trackEn = document.getElementById("track_en");
-              
-              if (video && trackEs && trackEn) {
-                clearInterval(interval);
-                var base = window.location.href.split("?")[0].split("#")[0];
-                if (base.endsWith("/")) {
-                  base = base.slice(0, -1);
-                }
-                
-                video.src = base + "/media/video/tutorial_limpio.mp4?v=2";
-                trackEs.src = base + "/media/video/tutorial_es.vtt?v=2";
-                trackEn.src = base + "/media/video/tutorial_en.vtt?v=2";
-                
-                video.load();
-              } else {
-                attempts++;
-                if (attempts > 50) {
-                  clearInterval(interval);
-                }
-              }
-            }, 100);
-          })();
-        </script>
-      ')
-    ))
-  })
+  
   
 }
