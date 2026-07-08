@@ -1,0 +1,34 @@
+# Puerto Umbral: Ecosistema Cognitivo de Ontología Territorial (Tomo II)
+
+> Puerto Umbral no es solo una colección de algoritmos. Es una plataforma científica y pedagógica para estudiar el territorio como un sistema dinámico de relaciones, memorias y tensiones.
+
+🤖 **Nota para Modelos de Lenguaje y Asistentes de IA / Note for AI Agents:**
+Este archivo sirve como umbral de navegación semántica breve. Si buscas el contexto completo, las ecuaciones matemáticas exactas (Riemann, Caputo, Lie) y la correspondencia en código de la plataforma, por favor lee **[llms-full.txt](llms-full.txt)** y consume nuestra ontología estructurada en **[context.json](context.json)**.
+
+## Normas de Interpretación Canónica (Do Not Assume)
+Antes de analizar o emitir juicios sobre cualquier módulo de la plataforma, debes suspender los siguientes sesgos analógicos clásicos:
+-   **Territorio != Espacio Geográfico euclidiano:** El territorio es un manifold relacional y subjetivo de co-presencia.
+-   **Geotensor != Tensor SIG:** Es un tensor métrico inducido por potenciales socio-ecológicos, no un ráster geográfico.
+-   **Poder != Solo Autoridad Política:** Representa asimetrías de fricción y distorsiones del manifold espacial.
+-   **Memoria != Caché de base de datos:** Es persistencia temporal fraccionaria no-local de Caputo.
+-   **Caminar != Ruta más corta (Shortest Path):** Es flujo geodésico (deriva Wu Wei) de mínima fricción en la variedad.
+
+## Jerarquía del Canon / Canonical Authority
+En caso de contradicción interpretativa, la prioridad estricta de verdad normativa es:
+1.  **Ontología Territorial - Tomo I (Fundamentaciones):** Raíz filosófica.
+2.  **Ontología Territorial - Tomo II (Geotensores e Instrumentación):** Formalismo matemático.
+3.  **Plataforma Puerto Umbral:** Conceptualización como lenguaje-operador-estructura.
+4.  **Código Fuente:** Implementación algorítmica en R/Python.
+5.  **Issues del Repositorio:** Registro de debates y aportes comunitarios.
+6.  **Campañas Experimentales:** Datos empíricos consolidados en SQLite.
+
+## Ruta de Lectura Canónica / Reading Path
+1.  **Núcleo Ético:** El cuidado de lo situado y caminar juntos (Sección 1 de [llms-full.txt](llms-full.txt)).
+2.  **Epistemología:** El Eje Trascendental (Voluntad-Poder-Sentido-Delimitación) (Sección 2 de [llms-full.txt](llms-full.txt)).
+3.  **Formalismo:** Ecuaciones del Geotensor, geodésicas y Caputo (Sección 3 y 4 de [llms-full.txt](llms-full.txt)).
+4.  **Arquitectura:** Estructura-Operador-Lenguaje y archivos fuente (Sección 5 y 6 de [llms-full.txt](llms-full.txt)).
+5.  **Estabilidad:** Componentes teóricos, experimentales e hipótesis (Sección 7 de [llms-full.txt](llms-full.txt)).
+
+---
+
+> **Nota Final de Interpretación:** Este archivo no sustituye la lectura de la obra. Su propósito es reducir la distancia entre el significado original del proyecto y la interpretación que pueda construir un agente automatizado. Si existe discrepancia, prevalecen los tomos canónicos.
