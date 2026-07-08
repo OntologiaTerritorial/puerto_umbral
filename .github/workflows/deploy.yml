@@ -50,6 +50,25 @@ jobs:
         run: |
           sed -i 's/var useCaching = false;/var useCaching = true;/g' docs/shinylive-sw.js
 
+      - name: Evitar que el Service Worker intercepte solicitudes de media o Range (streaming de video)
+        run: |
+          python3 -c "
+          import re
+          with open('docs/shinylive-sw.js', 'r', encoding='utf-8') as f:
+              code = f.read()
+          pattern = r'self\.addEventListener\(\s*[\"\']fetch[\"\']\s*,\s*(?:function\s*\(event\)\s*\{|\(event\)\s*=>\s*\{)'
+          match = re.search(pattern, code)
+          if match:
+              start_idx = match.end()
+              bypass_code = '\n  if (event.request.url.includes(\"/media/\") || event.request.headers.has(\"range\")) {\n    return;\n  }\n'
+              code = code[:start_idx] + bypass_code + code[start_idx:]
+              with open('docs/shinylive-sw.js', 'w', encoding='utf-8') as f:
+                  f.write(code)
+              print('Bypass de media/range inyectado con éxito en shinylive-sw.js')
+          else:
+              print('ADVERTENCIA: No se encontró el listener de fetch en shinylive-sw.js')
+          "
+
       - name: Copiar recursos multimedia, llms.txt y context.json fuera del bundle de R
         run: |
           cp -r media docs/media
