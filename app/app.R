@@ -63,6 +63,42 @@ ui <- tagList(
     tags$link(rel = "llms-full", href = "llms-full.txt"),
     tags$link(rel = "context", href = "context.json"),
     tags$meta(name = "ai-discoverability", content = "llms.txt"),
+    # Scroll to Top Styles and Script
+    tags$style(HTML("
+      .scroll-top-btn {
+        position: fixed;
+        bottom: 25px;
+        right: 25px;
+        z-index: 9999;
+        background-color: #0d9488 !important;
+        color: white !important;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        transition: background-color 0.3s, transform 0.2s;
+        display: none; /* Controlled by jQuery */
+        align-items: center;
+        justify-content: center;
+      }
+      .scroll-top-btn:hover {
+        background-color: #0f766e !important;
+        transform: scale(1.1);
+      }
+    ")),
+    tags$script(HTML("
+      $(window).scroll(function() {
+        var btn = $('#scroll_top_btn');
+        if ($(window).scrollTop() > 300) {
+          btn.css('display', 'flex');
+        } else {
+          btn.css('display', 'none');
+        }
+      });
+    ")),
     # Carga del CSS principal estático y cacheable
     tags$link(rel = "stylesheet", type = "text/css", href = "styles.css"),
     # Script para traducciones autom\u00e1ticas en el cliente y adici\u00f3n de tooltips (popups flotantes)
@@ -139,7 +175,15 @@ ui <- tagList(
     )
   ),
   
-  ergo_drawer_ui()
+  ergo_drawer_ui(),
+  
+  # Floating Scroll to Top Button
+  tags$button(
+    id = "scroll_top_btn",
+    class = "scroll-top-btn",
+    onclick = "window.scrollTo({top: 0, behavior: 'smooth'});",
+    tags$i(class = "fa fa-chevron-up")
+  )
 )
 
 # ---- L\u00d3GICA DEL SERVIDOR (SERVER) ----
