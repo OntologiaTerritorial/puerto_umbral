@@ -1181,19 +1181,31 @@ tab5_server <- function(input, output, session, chat_messages, lang, tomo1_db, t
         </video>
         <script>
           (function() {
-            const video = document.getElementById("tutorial_video");
-            const trackEs = document.getElementById("track_es");
-            const trackEn = document.getElementById("track_en");
-            let base = window.location.href.split("?")[0].split("#")[0];
-            if (base.endsWith("/")) {
-              base = base.slice(0, -1);
-            }
-            
-            video.src = base + "/media/video/tutorial_limpio.mp4?v=2";
-            trackEs.src = base + "/media/video/tutorial_es.vtt?v=2";
-            trackEn.src = base + "/media/video/tutorial_en.vtt?v=2";
-            
-            video.load();
+            var attempts = 0;
+            var interval = setInterval(function() {
+              var video = document.getElementById("tutorial_video");
+              var trackEs = document.getElementById("track_es");
+              var trackEn = document.getElementById("track_en");
+              
+              if (video && trackEs && trackEn) {
+                clearInterval(interval);
+                var base = window.location.href.split("?")[0].split("#")[0];
+                if (base.endsWith("/")) {
+                  base = base.slice(0, -1);
+                }
+                
+                video.src = base + "/media/video/tutorial_limpio.mp4?v=2";
+                trackEs.src = base + "/media/video/tutorial_es.vtt?v=2";
+                trackEn.src = base + "/media/video/tutorial_en.vtt?v=2";
+                
+                video.load();
+              } else {
+                attempts++;
+                if (attempts > 50) {
+                  clearInterval(interval);
+                }
+              }
+            }, 100);
           })();
         </script>
       ')
