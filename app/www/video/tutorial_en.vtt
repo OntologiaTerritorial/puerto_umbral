@@ -1,0 +1,42 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:35.129
+Welcome to Puerto Umbral! This is an interactive platform designed to simulate and validate the care metrics of our urban territory. Upon entering the portal, you can directly download the complete work in PDF format, which includes Volume One of Fundamentations and Volume Two of Geotensors. On the right, the Ergonomics panel allows you to adjust the campaign weather and activate the high-contrast Field Mode for mobile devices. Additionally, in the upper right bar you can change the language from Spanish to English instantly.
+
+2
+00:00:35.229 --> 00:00:55.429
+In the Pedagogy tab, we explore the theoretical matrix of the work. Here we describe the work of the three ecosystem agents: the Pedestrian Agent, which calculates geodesic paths of care; the Neighborhood Auditor Agent, which validates the data; and the Librarian Agent, which assists in offline consultation.
+
+3
+00:00:55.530 --> 00:01:10.900
+The Lines of Work tab allows us to model the capital refraction in Puerto Umbral. In this section, the Neighborhood Auditor Agent is in charge of auditing the statistical quality of the field campaigns and safeguarding families' privacy.
+
+4
+00:01:11.000 --> 00:01:27.930
+Upon entering the Simulation Center, the two-dimensional map allows you to trace the geodesics of collective walking in Puerto Umbral. On the right, the interactive three-dimensional manifold illustrates in real time how the geographic relief and the territory's tensions deform the care space.
+
+5
+00:01:28.030 --> 00:01:46.800
+From the ingestion section, it is possible to load attributes in CSV format and GeoJSON meshes directly from Zenodo repositories, reminding you to always remove sensitive metadata from your positioning traces for community safety.
+
+6
+00:01:46.900 --> 00:02:07.200
+We suggest you interact with the three-dimensional mesh by rotating its perspective with the cursor. When clicking on any point, detailed altitude tooltips will display and the ontological pixel HUD located at the bottom will update.
+
+7
+00:02:07.300 --> 00:02:29.400
+In the Mathematical Analysis tab, you can calibrate the soil memory parameters using the Caputo controls, and study how the temporal order of public and private interventions permanently alters the territory through the Lie commutator.
+
+8
+00:02:29.500 --> 00:02:46.000
+In the Library and Agent tab, you will have access to download the work and converse offline with our conversational agent. This cognitive assistant scans the manuscript to answer your theoretical questions.
+
+9
+00:02:46.099 --> 00:03:08.629
+Simule advanced mass transit scenarios like Metro Case F, viewing interactively on the map how the urban infrastructure attracts and modifies the community's spontaneous pedestrian trajectories.
+
+10
+00:03:08.729 --> 00:03:40.710
+Finally, remember that you can teach new concepts to the agent by entering the Learn command. The system will search for exact quotes from the manuscript pages, guiding you step by step in discovering. We invite you to explore and inhabit Puerto Umbral freely, discovering the paths and flows that intertwine our territory. We trust that this platform will be a fertile tool for your research and for the collective care of the relational space. Thank you very much for joining us.
+
