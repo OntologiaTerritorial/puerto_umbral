@@ -81,9 +81,25 @@ tab5_server <- function(input, output, session, chat_messages, lang, tomo1_db, t
     )
                  ),
                  
-                 tags$hr(style = "border-top:1px solid rgba(255,255,255,0.08);")
-             )
-      ),
+                  tags$hr(style = "border-top:1px solid rgba(255,255,255,0.08);"),
+                  
+                  # Video Tutorial Section (Option B: Pestaña Nueva)
+                  div(style = "margin-top:15px;",
+                      h4(style = "color:#0d9488; font-size:1.0rem; margin-top:0;", trans("Video Demostrativo", "Video Demonstration")),
+                      tags$p(style = "font-size:0.8rem; color:#475569; line-height:1.4;", 
+                             trans("Haga clic a continuación para abrir el video tutorial explicativo de la plataforma en una pestaña nueva.",
+                                   "Click below to open the explanatory video tutorial of the platform in a new tab.")),
+                      
+                      tags$a(
+                        href = "media/video/tutorial_limpio.mp4",
+                        target = "_blank",
+                        class = "btn",
+                        style = "display:block; width:100%; border-radius:10px; font-weight:600; background:#fff3cd; color:#664d03; border:1px solid #ffe69c; padding:10px; margin-bottom:8px; text-align:center; text-decoration:none;",
+                        tagList(icon("play-circle"), trans("Ver Video Tutorial", "Watch Video Tutorial"))
+                      )
+                  )
+              )
+       ),
       
       # Right column: Local Conversational Agent & Glossary Tabset
       column(8,
