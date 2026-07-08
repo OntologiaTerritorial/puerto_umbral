@@ -192,6 +192,61 @@ tab0_server <- function(input, output, session, lang) {
           actionButton("go_to_math_panel", trans("An\u00e1lisis de Estabilidad", "Stability Analysis"), class = "btn-warning btn-lg", style = "padding: 12px 25px; font-weight: bold;"),
           actionButton("go_to_agent_panel", trans("Agente de Consultas", "QA Inquiry Agent"), class = "btn-info btn-lg", style = "padding: 12px 25px; font-weight: bold;")
         )
+      ),
+      
+      # ACADEMIC LINKS & REPOSITORIES (ZENODO & GITHUB FOOTER)
+      div(class = "panel-glass text-center", style = "margin-top: 40px; padding: 25px; border-top: 3px solid #0d9488; border-radius: 12px; background: rgba(15, 23, 42, 0.02);",
+        h4(style = "color: #0369a1; font-weight: 700; margin-bottom: 15px;", 
+           trans("Repositorios Académicos y Código Fuente", "Academic Repositories & Source Code")),
+        p(style = "color: #475569; font-size: 0.9rem; margin-bottom: 20px; line-height: 1.5;",
+          trans(
+            "Consulte el código fuente de la plataforma en GitHub y acceda a los registros permanentes de preservación científica y metadatos de DOI indexados en Zenodo.",
+            "Consult the platform's source code on GitHub and access the permanent scientific preservation records and indexed DOI metadata on Zenodo."
+          )),
+        
+        # Grid of Links/Buttons
+        div(style = "display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-bottom: 10px;",
+          # GitHub Link
+          tags$a(
+            href = "https://github.com/OntologiaTerritorial/puerto_umbral",
+            target = "_blank",
+            class = "btn btn-default",
+            style = "border-radius: 8px; font-weight: 600; background: #181717; color: #fff; padding: 8px 16px; border: none; display: inline-flex; align-items: center; gap: 8px; transition: transform 0.2s;",
+            tagList(icon("github"), "GitHub (Code)")
+          ),
+          # Zenodo Bundle Link
+          tags$a(
+            href = "https://zenodo.org/records/21212574",
+            target = "_blank",
+            class = "btn btn-default",
+            style = "border-radius: 8px; font-weight: 600; background: #024b30; color: #fff; padding: 8px 16px; border: none; display: inline-flex; align-items: center; gap: 8px; transition: transform 0.2s;",
+            tagList(icon("archive"), "Zenodo (Code Bundle)")
+          ),
+          # Tomo I Link
+          tags$a(
+            href = "https://zenodo.org/records/17444604",
+            target = "_blank",
+            class = "btn btn-default",
+            style = "border-radius: 8px; font-weight: 600; background: #0284c7; color: #fff; padding: 8px 16px; border: none; display: inline-flex; align-items: center; gap: 8px; transition: transform 0.2s;",
+            tagList(icon("book"), "Tomo I (Zenodo)")
+          ),
+          # Tomo II ES Link
+          tags$a(
+            href = "https://zenodo.org/records/21208216",
+            target = "_blank",
+            class = "btn btn-default",
+            style = "border-radius: 8px; font-weight: 600; background: #0d9488; color: #fff; padding: 8px 16px; border: none; display: inline-flex; align-items: center; gap: 8px; transition: transform 0.2s;",
+            tagList(icon("book-open"), "Tomo II [ES] (Zenodo)")
+          ),
+          # Tomo II EN Link
+          tags$a(
+            href = "https://zenodo.org/records/21207952",
+            target = "_blank",
+            class = "btn btn-default",
+            style = "border-radius: 8px; font-weight: 600; background: #0d9488; color: #fff; padding: 8px 16px; border: none; display: inline-flex; align-items: center; gap: 8px; transition: transform 0.2s;",
+            tagList(icon("book-open"), "Tomo II [EN] (Zenodo)")
+          )
+        )
       )
         ),
         column(2)
