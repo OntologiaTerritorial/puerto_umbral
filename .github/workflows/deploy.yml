@@ -42,6 +42,21 @@ jobs:
           }
         shell: Rscript {0}
 
+      - name: Inyectar etiqueta de verificación de Google en index.html
+        run: |
+          python3 -c "
+          with open('docs/index.html', 'r', encoding='utf-8') as f:
+              html = f.read()
+          verification_tag = '<meta name=\"google-site-verification\" content=\"2n2kCsOuT24KBkiYLQUUDWmx8JTAdssHeRcJNmswQNE\" />'
+          if '</head>' in html:
+              html = html.replace('</head>', f'{verification_tag}\n</head>')
+              with open('docs/index.html', 'w', encoding='utf-8') as f:
+                  f.write(html)
+              print('Etiqueta de verificación de Google inyectada en docs/index.html')
+          else:
+              print('ADVERTENCIA: No se encontró la etiqueta </head> en docs/index.html')
+          "
+
       - name: Evitar Jekyll en GitHub Pages
         run: |
           touch docs/.nojekyll
