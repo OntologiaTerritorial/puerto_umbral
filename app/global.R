@@ -17,6 +17,11 @@ downloadButton <- function(...) {
   tag$attribs$download <- NULL
   tag
 }
+downloadLink <- function(...) {
+  tag <- shiny::downloadLink(...)
+  tag$attribs$download <- NULL
+  tag
+}
 suppressPackageStartupMessages({
   library(shiny)
   
