@@ -189,7 +189,7 @@ jobs:
           if match:
               var_name = next(g for g in match.groups() if g is not None)
               start_idx = match.end()
-              bypass_code = f'\n  if ({var_name}.request.url.includes(\"/media/\")) {{\n    return;\n  }}\n'
+              bypass_code = f'\n  if ({var_name}.request.url.includes(\"/media/\") || {var_name}.request.url.includes(\".mp3\")) {{\n    return;\n  }}\n'
               code = code[:start_idx] + bypass_code + code[start_idx:]
               with open('docs/shinylive-sw.js', 'w', encoding='utf-8') as f:
                   f.write(code)
@@ -201,6 +201,7 @@ jobs:
       - name: Copiar recursos multimedia, llms.txt y context.json fuera del bundle de R
         run: |
           cp -r media docs/media
+          cp -r app/www docs/www
           cp llms.txt docs/llms.txt
           cp llms-full.txt docs/llms-full.txt
           cp context.json docs/context.json
