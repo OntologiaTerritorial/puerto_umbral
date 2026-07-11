@@ -19,6 +19,7 @@
       justify-content: flex-start;
       box-sizing: border-box;
       padding: 15px;
+      padding-bottom: 80px;
     }
     .container {
       max-width: 480px;
@@ -322,8 +323,8 @@
         </div>
 
         <div class="form-group">
-          <label for="ieo_pixel">ID del Píxel o Manzana (pixel_id)</label>
-          <input type="number" id="ieo_pixel" placeholder="Ej: 145" required>
+          <label for="ieo_pixel">ID del Píxel o Manzana (Solo Números)</label>
+          <input type="number" id="ieo_pixel" inputmode="numeric" pattern="[0-9]*" placeholder="Ej: 145" required>
         </div>
 
         <div class="form-group">
@@ -474,7 +475,7 @@
           <div id="now_playing" style="font-size:0.75rem; color:#38bdf8; font-weight:600; text-align:center;">
             Reproduciendo: Episodio 1
           </div>
-          <audio id="audio_player" controls style="width: 100%; height: 32px;" src="podcast1_trauma.mp3"></audio>
+          <audio id="audio_player" controls style="width: 100%; height: 32px;" src="podcast1_trauma.mp3" onerror="if(!this.src.includes('/www/')){ this.src='www/podcast1_trauma.mp3'; }"></audio>
         </div>
 
         <a href="media/docs/tomo_ii.pdf" class="btn btn-primary" style="background:#a855f7; margin-bottom: 8px;" target="_blank">
@@ -533,16 +534,27 @@
       var pixelInput = document.getElementById('ieo_pixel');
       var notesInput = document.getElementById('ieo_notes');
       
-      if (!pixelInput.value) {
-        alert("Por favor ingrese un ID de píxel o manzana válido.");
+      // Sanitización estricta: remover espacios y caracteres no numéricos
+      var cleanPixelStr = pixelInput.value.replace(/\D/g, '');
+      if (!cleanPixelStr) {
+        alert("⚠️ Error: El ID de la Manzana debe contener únicamente números enteros (ej: 145).");
         return;
       }
       
+      var pixelId = parseInt(cleanPixelStr, 10);
+      if (isNaN(pixelId) || pixelId <= 0) {
+        alert("⚠️ Error: Por favor ingrese un ID de manzana válido mayor que cero.");
+        return;
+      }
+      
+      // Limpiar notas de saltos de línea molestos para que no rompa el CSV
+      var cleanNotes = notesInput.value.replace(/\r?\n|\r/g, ' ').trim();
+      
       var ficha = {
-        pixel_id: parseInt(pixelInput.value),
+        pixel_id: pixelId,
         friccion: selectedFriccion,
         cohesion: selectedCohesion,
-        notas: notesInput.value,
+        notas: cleanNotes,
         date: new Date().toISOString()
       };
       
@@ -580,10 +592,30 @@
       
       watchId = navigator.geolocation.watchPosition(
         function(position) {
+          var accuracy = position.coords.accuracy;
+          
+          // Semáforo de precisión para el operador en terreno
+          var accText = "±" + Math.round(accuracy) + " m";
+          var accStatusEl = document.getElementById("gps_accuracy");
+          
+          if (accuracy < 10) {
+            accStatusEl.innerHTML = `<span style="color: #10b981; font-weight: bold;">🟢 Buena (${accText})</span>`;
+          } else if (accuracy <= 30) {
+            accStatusEl.innerHTML = `<span style="color: #f59e0b; font-weight: bold;">🟡 Regular (${accText})</span>`;
+          } else {
+            accStatusEl.innerHTML = `<span style="color: #ef4444; font-weight: bold;">🔴 Mala (${accText})</span>`;
+          }
+
+          // Filtrado de puntos: descartar rebotes con precisión pésima (>50 metros)
+          if (accuracy > 50) {
+            console.warn("Punto GPS descartado por baja precisión: " + accuracy + "m");
+            return; 
+          }
+          
           var pt = {
             lat: position.coords.latitude,
             lng: position.coords.longitude,
-            acc: position.coords.accuracy,
+            acc: accuracy,
             time: new Date(position.timestamp).toISOString()
           };
           gpsPoints.push(pt);
@@ -593,7 +625,6 @@
           
           document.getElementById("gps_points_count").innerText = gpsPoints.length;
           document.getElementById("gps_coords").innerText = pt.lat.toFixed(6) + ", " + pt.lng.toFixed(6);
-          document.getElementById("gps_accuracy").innerText = "±" + Math.round(pt.acc) + " metros";
         },
         function(error) {
           document.getElementById("gps_status_txt").innerText = "Error: " + error.message;
@@ -739,7 +770,18 @@
       
       var player = document.getElementById('audio_player');
       player.src = src;
-      player.play();
+      
+      player.onerror = function() {
+        if (!player.src.includes('/www/') && !src.startsWith('www/')) {
+          console.log("Audio failed locally, falling back to www/ folder...");
+          player.src = "www/" + src;
+          player.play().catch(e => console.warn("Fallback play block:", e));
+        }
+      };
+      
+      player.play().catch(e => {
+        console.warn("Play block or autoplay restrict:", e);
+      });
     }
   </script>
 
