@@ -75,32 +75,33 @@ jobs:
               display: none !important;
             }
             .loading-card {
-              background: rgba(30, 41, 59, 0.75);
+              background: rgba(30, 41, 59, 0.8);
               border: 1px solid rgba(255, 255, 255, 0.08);
               border-top: 4px solid #0d9488;
-              padding: 25px;
-              border-radius: 16px;
-              max-width: 480px;
+              padding: 20px;
+              border-radius: 12px;
+              max-width: 320px;
               width: 90%;
               box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
-              backdrop-filter: blur(12px);
-              text-align: left;
+              backdrop-filter: blur(8px);
+              text-align: center;
               font-family: 'Inter', system-ui, -apple-system, sans-serif;
               color: #f8fafc;
             }
             .loading-title {
-              font-size: 1.3rem;
+              font-size: 1.15rem;
               font-weight: 700;
               color: #0d9488;
               margin-top: 0;
-              margin-bottom: 12px;
+              margin-bottom: 8px;
               display: flex;
               align-items: center;
-              gap: 10px;
+              justify-content: center;
+              gap: 8px;
             }
             .loading-title-pulse {
-              width: 12px;
-              height: 12px;
+              width: 10px;
+              height: 10px;
               background-color: #0d9488;
               border-radius: 50%;
               display: inline-block;
@@ -111,65 +112,19 @@ jobs:
               50% { transform: scale(1.3); opacity: 0.5; }
               100% { transform: scale(0.9); opacity: 1; }
             }
-            .loading-text {
-              font-size: 0.88rem;
-              line-height: 1.5;
-              color: #cbd5e1;
-              margin-bottom: 18px;
-            }
-            .loading-btn {
-              padding: 10px 16px;
-              border-radius: 8px;
-              font-weight: 600;
-              text-align: center;
-              cursor: pointer;
-              transition: all 0.2s ease;
-              text-decoration: none;
-              display: block;
-              font-size: 0.85rem;
-            }
-            .loading-btn-secondary {
-              background: transparent;
-              color: #94a3b8;
-              border: 1px solid #475569;
-            }
-            .loading-btn-secondary:hover {
-              color: #f8fafc;
-              border-color: #94a3b8;
-            }
           </style>
 
-          <div class=\"loading-card\" id=\"custom-loading-card\">
+          <div class=\"loading-card\">
             <div class=\"loading-title\">
               <span class=\"loading-title-pulse\"></span>
-              <span id=\"loading-header\">Cargando resolvedores...</span>
+              <span>Puerto Umbral</span>
             </div>
-            <div class=\"loading-text\" id=\"loading-body\">
-              Cargando motor matemático R-WebAssembly y mallas de simulación. 
-              Este proceso de compilación toma unos segundos. Mientras tanto, le invitamos a escuchar los podcasts del Tomo II:
-            </div>
-            
-            <!-- In-Loading Podcast Player -->
-            <div style=\"margin-top: 5px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 12px; margin-bottom: 15px;\">
-              <div style=\"font-size:0.82rem; font-weight: 600; color: #38bdf8; margin-bottom: 6px; display: flex; align-items: center; gap: 6px;\">
-                <span>🎧</span> Podcasts: Diálogos del Manifold
-              </div>
-              <select id=\"loading_podcast_select\" style=\"width: 100%; padding: 8px; border-radius: 6px; background: #1e293b; color: white; border: 1px solid #475569; font-size: 0.8rem; margin-bottom: 8px; outline: none;\" onchange=\"document.getElementById('loading_audio_player').src = this.value; document.getElementById('loading_audio_player').play();\">
-                <option value=\"podcast1_trauma.mp3\">Episodio 1: Física del Trauma (18:57)</option>
-                <option value=\"podcast2_cuidado.mp3\">Episodio 2: Geometría del Cuidado (15:22)</option>
-                <option value=\"podcast3_terreno.mp3\">Episodio 3: Medir la Fricción (23:32)</option>
-              </select>
-              <audio id=\"loading_audio_player\" controls style=\"width: 100%; height: 32px;\" src=\"podcast1_trauma.mp3\"></audio>
-            </div>
-
-            <div style=\"display: flex; flex-direction: column; gap: 8px;\">
-              <a href=\"media/docs/tomo_ii.pdf\" class=\"loading-btn loading-btn-secondary\" target=\"_blank\">
-                📖 Leer Tomo II (PDF)
-              </a>
+            <div style=\"font-size: 0.8rem; color: #cbd5e1;\">
+              Inicializando resolvedor geodésico y mallas de simulación...
             </div>
           </div>
 
-          <div style=\"margin-top: 40px; font-size: 0.75rem; color: #64748b; text-align: center; line-height: 1.5; font-family: 'Inter', sans-serif;\">
+          <div style=\"margin-top: 40px; font-size: 0.72rem; color: #64748b; text-align: center; line-height: 1.5; font-family: 'Inter', sans-serif;\">
             Ontología Territorial — Puerto Umbral<br>
             Centro de Investigación Territorio y Cuidado
           </div>
