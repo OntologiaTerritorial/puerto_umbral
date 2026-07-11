@@ -63,6 +63,12 @@ jobs:
           with open('docs/index.html', 'r', encoding='utf-8') as f:
               html = f.read()
           
+          # Inject direct mobile redirect in <head>
+          redirect_script = '<script>if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) { window.location.href = "mobile.html"; }</script>'
+          if '<head>' in html:
+              html = html.replace('<head>', f'<head>\n{redirect_script}')
+              print('Redirect móvil inyectado en <head>')
+
           custom_loading_html = """
           <style>
             #shinylive-loading {
@@ -85,23 +91,30 @@ jobs:
             .loading-card {
               background: rgba(30, 41, 59, 0.75);
               border: 1px solid rgba(255, 255, 255, 0.08);
+              border-top: 4px solid #0d9488;
+              padding: 20px;
               border-radius: 12px;
+              max-width: 320px;
+              width: 100%;
               box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
               backdrop-filter: blur(12px);
-              text-align: left;
+              text-align: center;
             }
             .loading-title {
-              font-size: 1.25rem;
+              font-size: 1.15rem;
               font-weight: 700;
               margin-top: 0;
-              margin-bottom: 10px;
+              margin-bottom: 8px;
               display: flex;
               align-items: center;
+              justify-content: center;
               gap: 8px;
+              color: #0d9488;
             }
             .loading-title-pulse {
               width: 10px;
               height: 10px;
+              background-color: #0d9488;
               border-radius: 50%;
               display: inline-block;
               animation: pulse-loading 1.5s infinite;
@@ -111,23 +124,18 @@ jobs:
               50% { transform: scale(1.3); opacity: 0.5; }
               100% { transform: scale(0.9); opacity: 1; }
             }
-            .loading-btn {
-              padding: 10px 16px;
-              border-radius: 8px;
-              font-weight: 600;
-              text-align: center;
-              cursor: pointer;
-              transition: all 0.2s ease;
-              text-decoration: none;
-              display: block;
-              font-size: 0.85rem;
-              width: 100%;
-              box-sizing: border-box;
-            }
           </style>
 
           <div class="loading-container" id="custom-loading-container">
-            <div id="loading-content-mount"></div>
+            <div class="loading-card">
+              <div class="loading-title">
+                <span class="loading-title-pulse"></span>
+                <span>Puerto Umbral</span>
+              </div>
+              <div style="font-size: 0.8rem; color: #cbd5e1;">
+                Inicializando resolvedor geodésico y mallas de simulación...
+              </div>
+            </div>
             
             <div style="margin-top: 40px; font-size: 0.72rem; color: #64748b; text-align: center; line-height: 1.5; font-family: 'Inter', sans-serif;">
               Ontología Territorial — Puerto Umbral<br>
@@ -137,57 +145,14 @@ jobs:
 
           <script>
             (function() {
-              var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-              var mount = document.getElementById("loading-content-mount");
-              if (isMobile) {
-                // Render Mobile Disclaimer Card
-                mount.innerHTML = `
-                  <div class="loading-card" style="border-top: 4px solid #b45309; padding: 25px; max-width: 440px; width: 100%;">
-                    <div class="loading-title" style="color: #f59e0b;">
-                      <span class="loading-title-pulse" style="background-color: #f59e0b;"></span>
-                      <span>⚠️ Dispositivo Móvil Detectado</span>
-                    </div>
-                    <div style="font-size: 0.85rem; line-height: 1.5; color: #cbd5e1; margin-bottom: 20px;">
-                      La versión completa con el simulador 3D y resolvedor de física requiere una computadora de escritorio.<br><br>
-                      Para su dispositivo móvil, le ofrecemos la <b>Versión Terreno</b> para recolectar datos en terreno o descargar el Tomo II:
-                    </div>
-                    
-                    <div style="display: flex; flex-direction: column; gap: 8px;">
-                      <a href="mobile.html" class="loading-btn" style="background: #0ea5e9; color: white; border: none;">
-                        📝 Abrir Herramienta de Campo (Ficha IEO y GPS)
-                      </a>
-                      <a href="media/docs/tomo_ii.pdf" class="loading-btn" style="background: #a855f7; color: white; border: none;" target="_blank">
-                        📖 Descargar Tomo II (PDF)
-                      </a>
-                      <button onclick="document.getElementById('custom-loading-container').remove();" class="loading-btn" style="background: transparent; color: #94a3b8; border: 1px solid #475569;">
-                        Forzar carga de versión de escritorio
-                      </button>
-                    </div>
-                  </div>
-                `;
-              } else {
-                // Render Desktop Minimalist Loader
-                mount.innerHTML = `
-                  <div class="loading-card" style="border-top: 4px solid #0d9488; padding: 20px; max-width: 320px; width: 100%; text-align: center;">
-                    <div class="loading-title" style="color: #0d9488; justify-content: center;">
-                      <span class="loading-title-pulse" style="background-color: #0d9488;"></span>
-                      <span>Puerto Umbral</span>
-                    </div>
-                    <div style="font-size: 0.8rem; color: #cbd5e1;">
-                      Inicializando resolvedor geodésico y mallas de simulación...
-                    </div>
-                  </div>
-                `;
-                
-                // On desktop, auto-remove this overlay once Shiny loads
-                var checkShiny = setInterval(function() {
-                  if (window.Shiny && window.Shiny.shinyapp && window.Shiny.shinyapp.isConnected()) {
-                    var el = document.getElementById("custom-loading-container");
-                    if (el) el.remove();
-                    clearInterval(checkShiny);
-                  }
-                }, 100);
-              }
+              // On desktop, auto-remove this overlay once Shiny loads
+              var checkShiny = setInterval(function() {
+                if (window.Shiny && window.Shiny.shinyapp && window.Shiny.shinyapp.isConnected()) {
+                  var el = document.getElementById("custom-loading-container");
+                  if (el) el.remove();
+                  clearInterval(checkShiny);
+                }
+              }, 100);
             })();
           </script>
           """
