@@ -59,11 +59,11 @@ jobs:
 
       - name: Personalizar Pantalla de Carga y Reproductor de Podcasts en index.html
         run: |
-          python3 -c "
+          cat << 'EOF' > customize_index.py
           with open('docs/index.html', 'r', encoding='utf-8') as f:
               html = f.read()
           
-          custom_loading_html = '''
+          custom_loading_html = """
           <style>
             #shinylive-loading {
               display: none !important;
@@ -198,11 +198,11 @@ jobs:
               }
             })();
           </script>
-          '''
+          """
           
-          root_tag = '<div style=\"height: 100vh; width: 100vw\" id=\"root\"></div>'
+          root_tag = '<div style="height: 100vh; width: 100vw" id="root"></div>'
           if root_tag in html:
-              new_root = f'<div style=\"height: 100vh; width: 100vw; display: flex; flex-direction: column; align-items: center; justify-content: center; background: linear-gradient(135deg, #0f172a 0%, #020617 100%);\" id=\"root\">{custom_loading_html}</div>'
+              new_root = f'<div style="height: 100vh; width: 100vw; display: flex; flex-direction: column; align-items: center; justify-content: center; background: linear-gradient(135deg, #0f172a 0%, #020617 100%);" id="root">{custom_loading_html}</div>'
               html = html.replace(root_tag, new_root)
               print('Pantalla de carga inyectada dentro de #root')
           else:
@@ -210,7 +210,8 @@ jobs:
           
           with open('docs/index.html', 'w', encoding='utf-8') as f:
               f.write(html)
-          "
+          EOF
+          python3 customize_index.py
 
       - name: Evitar Jekyll en GitHub Pages
         run: |
