@@ -63,6 +63,11 @@ jobs:
           with open('docs/index.html', 'r', encoding='utf-8') as f:
               html = f.read()
           
+          # Inject direct mobile redirect in <head>
+          redirect_script = '<script>if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) { window.location.href = \"mobile.html\"; }</script>'
+          if '<head>' in html:
+              html = html.replace('<head>', f'<head>\\n{redirect_script}')
+          
           custom_loading_html = '''
           <style>
             #shinylive-loading {
@@ -177,38 +182,13 @@ jobs:
               <a href=\"media/docs/tomo_ii.pdf\" class=\"loading-btn loading-btn-secondary\" target=\"_blank\">
                 📖 Leer Tomo II (PDF)
               </a>
-              <div id=\"mobile-only-warning\" style=\"display:none; font-size:0.75rem; color:#f59e0b; text-align:center; margin-top:5px;\">
-                ⚠️ Celulares y tablets no soportan la simulación interactiva.
-              </div>
             </div>
           </div>
 
-          <script>
-            (function() {
-              var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-              if (isMobile) {
-                // Customize card for mobile layout (disclaimer mode)
-                document.getElementById(\"loading-header\").innerText = \"Dispositivo Móvil Detectado\";
-                document.getElementById(\"loading-header\").style.color = \"#f59e0b\";
-                document.querySelector(\".loading-title-pulse\").style.backgroundColor = \"#f59e0b\";
-                document.getElementById(\"custom-loading-card\").style.borderTopColor = \"#f59e0b\";
-                document.getElementById(\"loading-body\").innerHTML = \"Esta plataforma utiliza resolvedores geodésicos en WebAssembly <strong>no diseñados para celulares o tablets</strong>.<br><br>Le invitamos a leer la obra o escuchar los podcasts conceptuales desde su dispositivo móvil:\";
-                document.getElementById(\"mobile-only-warning\").style.display = \"block\";
-                
-                // Force overlay to remain visible on mobile even if Shiny loads
-                var observer = new MutationObserver(function(mutations) {
-                  mutations.forEach(function(mutation) {
-                    var el = document.getElementById(\"shinylive-loading\");
-                    if (!el) {
-                      // Re-create loading overlay if removed
-                      location.reload();
-                    }
-                  });
-                });
-                observer.observe(document.body, { childList: true });
-              }
-            })();
-          </script>
+          <div style=\"margin-top: 40px; font-size: 0.75rem; color: #64748b; text-align: center; line-height: 1.5;\">
+            Ontología Territorial — Puerto Umbral<br>
+            Centro de Investigación Territorio y Cuidado
+          </div>
           '''
           
           if '<div id=\"shinylive-loading\">' in html:
@@ -259,6 +239,7 @@ jobs:
           cp BingSiteAuth.xml docs/BingSiteAuth.xml
           mkdir -p docs/.well-known
           cp llms.txt docs/.well-known/llms.txt
+          cp app/mobile.html docs/mobile.html
 
       - name: Subir artefacto para GitHub Pages
         uses: actions/upload-pages-artifact@v3
