@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Puerto Umbral - Versión Móvil</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #0f172a 0%, #020617 100%);
+      color: #f8fafc;
+      font-family: 'Inter', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      box-sizing: border-box;
+      padding: 20px;
+    }
+    .card {
+      background: rgba(30, 41, 59, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-top: 4px solid #b45309;
+      padding: 30px;
+      border-radius: 16px;
+      max-width: 480px;
+      width: 100%;
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(12px);
+    }
+    .title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #f59e0b;
+      margin-top: 0;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .text {
+      font-size: 0.9rem;
+      line-height: 1.6;
+      color: #cbd5e1;
+      margin-bottom: 20px;
+    }
+    .section-title {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #38bdf8;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    select {
+      width: 100%;
+      padding: 10px;
+      border-radius: 8px;
+      background: #1e293b;
+      color: white;
+      border: 1px solid #475569;
+      font-size: 0.85rem;
+      margin-bottom: 12px;
+      outline: none;
+    }
+    audio {
+      width: 100%;
+      height: 36px;
+      margin-bottom: 20px;
+    }
+    .btn {
+      padding: 12px 20px;
+      border-radius: 8px;
+      font-weight: 600;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-decoration: none;
+      display: block;
+      font-size: 0.9rem;
+      margin-bottom: 10px;
+    }
+    .btn-primary {
+      background: #b45309;
+      color: white;
+      border: none;
+    }
+    .btn-primary:hover {
+      background: #d97706;
+    }
+    .btn-secondary {
+      background: transparent;
+      color: #94a3b8;
+      border: 1px solid #475569;
+    }
+    .btn-secondary:hover {
+      color: #f8fafc;
+      border-color: #94a3b8;
+    }
+    .footer {
+      margin-top: 40px;
+      font-size: 0.75rem;
+      color: #64748b;
+      text-align: center;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <div class="title">
+      <span>⚠️</span> Dispositivo Móvil
+    </div>
+    <div class="text">
+      Esta plataforma científica utiliza WebAssembly para compilar simulaciones geodésicas en tiempo real. 
+      El motor matemático es de alta exigencia y no está diseñado para ejecutarse en navegadores móviles o tablets.
+      <br><br>
+      Desde su dispositivo móvil, le invitamos a escuchar los podcasts conceptuales o leer el Tomo II:
+    </div>
+
+    <div class="section-title">
+      <span>🎧</span> Podcasts: Diálogos del Manifold
+    </div>
+    <select id="podcast_select" onchange="document.getElementById('audio_player').src = this.value; document.getElementById('audio_player').play();">
+      <option value="podcast1_trauma.mp3">Episodio 1: Física del Trauma (18:57)</option>
+      <option value="podcast2_cuidado.mp3">Episodio 2: Geometría del Cuidado (15:22)</option>
+      <option value="podcast3_terreno.mp3">Episodio 3: Medir la Fricción (23:32)</option>
+    </select>
+    <audio id="audio_player" controls src="podcast1_trauma.mp3"></audio>
+
+    <a href="media/docs/tomo_ii.pdf" class="btn btn-primary" onclick="window.location.href='media/docs/tomo_ii.pdf'; return false;">
+      📖 Leer Tomo II (PDF)
+    </a>
+    
+    <a href="https://github.com/OntologiaTerritorial/puerto_umbral" class="btn btn-secondary" target="_blank">
+      Ver Código en GitHub
+    </a>
+  </div>
+
+  <div class="footer">
+    Ontología Territorial — Puerto Umbral<br>
+    Centro de Investigación Territorio y Cuidado
+  </div>
+
+</body>
+</html>
