@@ -95,9 +95,34 @@ tab5_server <- function(input, output, session, chat_messages, lang, tomo1_db, t
                         label = tagList(icon("play-circle"), trans("Ver Video Tutorial", "Watch Video Tutorial")),
                         style = "width:100%; border-radius:10px; font-weight:600; background:#fff3cd; color:#664d03; border:1px solid #ffe69c; padding:10px; margin-bottom:8px; text-align:center;"
                       )
+                  ),
+                  
+                  tags$hr(style = "border-top:1px solid rgba(255,255,255,0.08);"),
+                  
+                  # Podcast Section
+                  div(style = "margin-top:15px;",
+                      h4(style = "color:#b45309; font-size:1.0rem; margin-top:0;", trans("Podcasts Conceptuales", "Conceptual Podcasts")),
+                      tags$p(style = "font-size:0.8rem; color:#475569; line-height:1.4; margin-bottom:10px;", 
+                             trans("Escuche los episodios de 'Diálogos del Manifold' mientras explora la plataforma.",
+                                   "Listen to 'Manifold Dialogues' episodes while exploring the platform.")),
+                      
+                      selectInput(
+                        "podcast_select", 
+                        label = trans("Seleccionar Episodio:", "Select Episode:"),
+                        choices = c(
+                          "Episodio 1: Física del Trauma (18:57)" = "podcast1_trauma.mp3",
+                          "Episodio 2: Geometría del Cuidado (15:22)" = "podcast2_cuidado.mp3",
+                          "Episodio 3: Experiencia de Terreno" = "podcast3_terreno.mp3"
+                        ),
+                        selected = "podcast1_trauma.mp3",
+                        width = "100%"
+                      ),
+                      
+                      # Custom inline HTML5 Audio Player
+                      uiOutput("podcast_player_ui")
                   )
               )
-       ),
+        ),
       
       # Right column: Local Conversational Agent & Glossary Tabset
       column(8,
@@ -1197,6 +1222,16 @@ tab5_server <- function(input, output, session, chat_messages, lang, tomo1_db, t
         </script>
       ')
     ))
+  })
+  
+  output$podcast_player_ui <- renderUI({
+    req(input$podcast_select)
+    tags$audio(
+      src = input$podcast_select,
+      type = "audio/mpeg",
+      controls = NA,
+      style = "width:100%; margin-top:5px; border-radius:8px;"
+    )
   })
   
 }
