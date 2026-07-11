@@ -33,11 +33,6 @@ suppressPackageStartupMessages({
     addResourcePath("media", media_dir)
   }
   
-  # Registrar ruta de recursos para la carpeta www (compatibilidad Shinylive y R-Shiny local)
-  if (dir.exists("www")) {
-    addResourcePath("www", "www")
-  }
-  
 UTM_CRS <- 32719 # Proyecci\u00f3n UTM por defecto (Santiago UTM 19S)
   library(leaflet)
   library(plotly)
