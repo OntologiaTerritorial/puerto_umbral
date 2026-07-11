@@ -447,7 +447,7 @@
           Escuche los podcasts oficiales del Tomo II ("Diálogos del Manifold") o revise el texto completo mientras realiza sus pausas de campo.
         </div>
 
-        <div class="episode-card active" onclick="playEpisode('podcast1_trauma.mp3', this)">
+        <div class="episode-card active" onclick="playEpisode('www/podcast1_trauma.mp3', this)">
           <div class="play-icon">▶</div>
           <div class="episode-info">
             <div class="episode-title">Episodio 1: La Física del Trauma en los Barrios</div>
@@ -455,7 +455,7 @@
           </div>
         </div>
 
-        <div class="episode-card" onclick="playEpisode('podcast2_cuidado.mp3', this)">
+        <div class="episode-card" onclick="playEpisode('www/podcast2_cuidado.mp3', this)">
           <div class="play-icon">▶</div>
           <div class="episode-info">
             <div class="episode-title">Episodio 2: Geotensores y la Geometría del Cuidado</div>
@@ -463,7 +463,7 @@
           </div>
         </div>
 
-        <div class="episode-card" onclick="playEpisode('podcast3_terreno.mp3', this)">
+        <div class="episode-card" onclick="playEpisode('www/podcast3_terreno.mp3', this)">
           <div class="play-icon">▶</div>
           <div class="episode-info">
             <div class="episode-title">Episodio 3: Medir la Fricción Territorial</div>
@@ -475,7 +475,7 @@
           <div id="now_playing" style="font-size:0.75rem; color:#38bdf8; font-weight:600; text-align:center;">
             Reproduciendo: Episodio 1
           </div>
-          <audio id="audio_player" controls style="width: 100%; height: 32px;"></audio>
+          <audio id="audio_player" controls style="width: 100%; height: 32px;" src="www/podcast1_trauma.mp3"></audio>
         </div>
 
         <a href="media/docs/tomo_ii.pdf" class="btn btn-primary" style="background:#a855f7; margin-bottom: 8px;" target="_blank">
@@ -499,26 +499,9 @@
     var watchId = null;
     var gpsPoints = [];
 
-    // Helper to dynamically resolve audio paths locally vs deployed
-    function getAudioPath(filename) {
-      var loc = window.location;
-      var isLocal = loc.protocol === 'file:' || 
-                    loc.hostname === 'localhost' || 
-                    loc.hostname === '127.0.0.1' || 
-                    loc.hostname === '';
-      if (isLocal) {
-        return "www/" + filename;
-      } else {
-        return filename;
-      }
-    }
-
     // Initialize counts on load
     window.onload = function() {
       updateDataCounts();
-      var player = document.getElementById('audio_player');
-      player.src = getAudioPath('podcast1_trauma.mp3');
-      player.load();
     };
 
     // Tab Switching
@@ -787,10 +770,9 @@
       document.getElementById('now_playing').innerText = "Reproduciendo: " + titleText;
       
       var player = document.getElementById('audio_player');
-      var realPath = getAudioPath(src);
-      console.log("Playing audio from:", realPath);
+      console.log("Playing audio from:", src);
       
-      player.src = realPath;
+      player.src = src;
       player.load();
       player.play().catch(e => {
         console.warn("Play block or autoplay restrict:", e);
