@@ -475,7 +475,7 @@
           <div id="now_playing" style="font-size:0.75rem; color:#38bdf8; font-weight:600; text-align:center;">
             Reproduciendo: Episodio 1
           </div>
-          <audio id="audio_player" controls style="width: 100%; height: 32px;" src="podcast1_trauma.mp3" onerror="if(!this.src.includes('/www/')){ this.src='www/podcast1_trauma.mp3'; }"></audio>
+          <audio id="audio_player" controls style="width: 100%; height: 32px;"></audio>
         </div>
 
         <a href="media/docs/tomo_ii.pdf" class="btn btn-primary" style="background:#a855f7; margin-bottom: 8px;" target="_blank">
@@ -499,9 +499,26 @@
     var watchId = null;
     var gpsPoints = [];
 
+    // Helper to dynamically resolve audio paths locally vs deployed
+    function getAudioPath(filename) {
+      var loc = window.location;
+      var isLocal = loc.protocol === 'file:' || 
+                    loc.hostname === 'localhost' || 
+                    loc.hostname === '127.0.0.1' || 
+                    loc.hostname === '';
+      if (isLocal) {
+        return "www/" + filename;
+      } else {
+        return filename;
+      }
+    }
+
     // Initialize counts on load
     window.onload = function() {
       updateDataCounts();
+      var player = document.getElementById('audio_player');
+      player.src = getAudioPath('podcast1_trauma.mp3');
+      player.load();
     };
 
     // Tab Switching
@@ -528,6 +545,7 @@
         }
       });
     }
+
 
     // Save IEO Ficha to LocalStorage
     function saveIeoFicha() {
@@ -769,16 +787,11 @@
       document.getElementById('now_playing').innerText = "Reproduciendo: " + titleText;
       
       var player = document.getElementById('audio_player');
-      player.src = src;
+      var realPath = getAudioPath(src);
+      console.log("Playing audio from:", realPath);
       
-      player.onerror = function() {
-        if (!player.src.includes('/www/') && !src.startsWith('www/')) {
-          console.log("Audio failed locally, falling back to www/ folder...");
-          player.src = "www/" + src;
-          player.play().catch(e => console.warn("Fallback play block:", e));
-        }
-      };
-      
+      player.src = realPath;
+      player.load();
       player.play().catch(e => {
         console.warn("Play block or autoplay restrict:", e);
       });
