@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Puerto Umbral - Versión Móvil</title>
+  <title>Puerto Umbral - Versión Terreno</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
     body {
@@ -18,132 +18,172 @@
       align-items: center;
       justify-content: flex-start;
       box-sizing: border-box;
-      padding: 20px;
+      padding: 15px;
     }
     .container {
       max-width: 480px;
       width: 100%;
       display: flex;
       flex-direction: column;
-      gap: 15px;
+      gap: 12px;
     }
-    .header-card {
-      background: rgba(30, 41, 59, 0.7);
+    /* Tabs Navigation */
+    .tabs-header {
+      display: flex;
+      width: 100%;
+      background: rgba(30, 41, 59, 0.8);
       border: 1px solid rgba(255, 255, 255, 0.08);
-      border-top: 4px solid #b45309;
+      border-radius: 12px;
+      margin-bottom: 8px;
+      overflow: hidden;
+    }
+    .tab-btn {
+      flex: 1;
+      padding: 12px 4px;
+      text-align: center;
+      font-size: 0.78rem;
+      font-weight: 600;
+      cursor: pointer;
+      color: #94a3b8;
+      transition: all 0.2s ease;
+      border-bottom: 3px solid transparent;
+    }
+    .tab-btn.active {
+      color: #f8fafc;
+      background: rgba(255, 255, 255, 0.05);
+      border-bottom-color: #0ea5e9;
+    }
+    .tab-content {
+      display: none;
+      width: 100%;
+    }
+    .tab-content.active {
+      display: block;
+    }
+    /* Cards and Glassmorphism */
+    .card {
+      background: rgba(30, 41, 59, 0.75);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-top: 4px solid #0ea5e9;
       padding: 20px;
       border-radius: 16px;
       backdrop-filter: blur(12px);
       box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+      box-sizing: border-box;
+      width: 100%;
     }
     .title {
-      font-size: 1.25rem;
+      font-size: 1.2rem;
       font-weight: 700;
-      color: #f59e0b;
+      color: #38bdf8;
       margin-top: 0;
-      margin-bottom: 8px;
+      margin-bottom: 12px;
       display: flex;
       align-items: center;
       gap: 8px;
     }
     .text {
-      font-size: 0.85rem;
+      font-size: 0.82rem;
       line-height: 1.5;
       color: #cbd5e1;
+      margin-bottom: 15px;
     }
-    .section-header {
-      font-size: 0.9rem;
-      font-weight: 600;
-      color: #38bdf8;
-      margin-top: 10px;
-      margin-bottom: 5px;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-    .episode-card {
-      background: rgba(30, 41, 59, 0.5);
-      border: 1px solid rgba(255, 255, 255, 0.05);
-      border-radius: 12px;
-      padding: 15px;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-    .episode-card:hover, .episode-card.active {
-      background: rgba(30, 41, 59, 0.85);
-      border-color: #38bdf8;
-      box-shadow: 0 4px 6px -1px rgba(56, 189, 248, 0.1);
-    }
-    .play-icon {
-      width: 36px;
-      height: 36px;
-      background: #38bdf8;
-      color: #0f172a;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: bold;
-      flex-shrink: 0;
-      font-size: 1.1rem;
-    }
-    .episode-card.active .play-icon {
-      background: #f59e0b;
-      animation: heartbeat 1.5s infinite;
-    }
-    @keyframes heartbeat {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.08); }
-      100% { transform: scale(1); }
-    }
-    .episode-info {
+    /* Forms styling */
+    .form-group {
+      margin-bottom: 14px;
       display: flex;
       flex-direction: column;
-      gap: 3px;
+      gap: 5px;
     }
-    .episode-title {
-      font-size: 0.85rem;
+    label {
+      font-size: 0.82rem;
       font-weight: 600;
-      color: #f8fafc;
-    }
-    .episode-meta {
-      font-size: 0.75rem;
       color: #94a3b8;
     }
-    .player-card {
-      background: rgba(15, 23, 42, 0.9);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 12px;
-      padding: 12px;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-    audio {
+    input[type="text"], input[type="number"], textarea, select {
       width: 100%;
-      height: 32px;
+      padding: 10px;
+      border-radius: 8px;
+      background: #1e293b;
+      color: white;
+      border: 1px solid #475569;
+      font-size: 0.85rem;
+      outline: none;
+      box-sizing: border-box;
     }
+    input[type="text"]:focus, input[type="number"]:focus, textarea:focus, select:focus {
+      border-color: #38bdf8;
+    }
+    /* Star Rating Selector or Number button group */
+    .score-group {
+      display: flex;
+      gap: 8px;
+      width: 100%;
+      margin-top: 3px;
+    }
+    .score-btn {
+      flex: 1;
+      padding: 10px 0;
+      background: #1e293b;
+      border: 1px solid #475569;
+      color: #94a3b8;
+      border-radius: 8px;
+      text-align: center;
+      font-weight: 700;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: all 0.15s ease;
+    }
+    .score-btn:hover {
+      border-color: #38bdf8;
+      color: white;
+    }
+    .score-btn.active {
+      background: #0ea5e9;
+      color: white;
+      border-color: #0ea5e9;
+      box-shadow: 0 0 10px rgba(14, 165, 233, 0.4);
+    }
+    .score-btn.active.cohesion {
+      background: #0d9488;
+      border-color: #0d9488;
+      box-shadow: 0 0 10px rgba(13, 148, 136, 0.4);
+    }
+    /* Buttons */
     .btn {
       padding: 12px 20px;
       border-radius: 8px;
-      font-weight: 600;
+      font-weight: 700;
       text-align: center;
       cursor: pointer;
       transition: all 0.2s ease;
       text-decoration: none;
       display: block;
       font-size: 0.85rem;
-    }
-    .btn-primary {
-      background: #b45309;
-      color: white;
+      width: 100%;
+      box-sizing: border-box;
       border: none;
     }
+    .btn-primary {
+      background: #0ea5e9;
+      color: white;
+    }
     .btn-primary:hover {
-      background: #d97706;
+      background: #0284c7;
+    }
+    .btn-success {
+      background: #0d9488;
+      color: white;
+    }
+    .btn-success:hover {
+      background: #0f766e;
+    }
+    .btn-danger {
+      background: #b91c1c;
+      color: white;
+    }
+    .btn-danger:hover {
+      background: #991b1b;
     }
     .btn-secondary {
       background: transparent;
@@ -154,10 +194,103 @@
       color: #f8fafc;
       border-color: #94a3b8;
     }
-    .footer {
-      margin-top: 40px;
-      margin-bottom: 20px;
+    /* Geolocation status block */
+    .gps-panel {
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 12px;
+      padding: 15px;
+      margin-bottom: 12px;
+    }
+    .gps-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+      font-size: 0.82rem;
+    }
+    .gps-val {
+      font-weight: 600;
+      color: #f8fafc;
+      font-family: monospace;
+    }
+    .gps-dot {
+      width: 10px;
+      height: 10px;
+      background-color: #ef4444;
+      border-radius: 50%;
+      display: inline-block;
+      animation: blink 1.2s infinite;
+      margin-right: 5px;
+    }
+    @keyframes blink {
+      0% { opacity: 0.3; }
+      50% { opacity: 1; }
+      100% { opacity: 0.3; }
+    }
+    /* Episode cards for podcasts */
+    .episode-card {
+      background: rgba(30, 41, 59, 0.5);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 12px;
+      padding: 12px 15px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+    .episode-card:hover, .episode-card.active {
+      background: rgba(30, 41, 59, 0.85);
+      border-color: #38bdf8;
+    }
+    .play-icon {
+      width: 32px;
+      height: 32px;
+      background: #38bdf8;
+      color: #0f172a;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      flex-shrink: 0;
+      font-size: 1rem;
+    }
+    .episode-card.active .play-icon {
+      background: #f59e0b;
+    }
+    .episode-info {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .episode-title {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: #f8fafc;
+    }
+    .episode-meta {
       font-size: 0.72rem;
+      color: #94a3b8;
+    }
+    /* Toast success */
+    .toast-success {
+      background: #0f766e;
+      color: white;
+      padding: 10px;
+      border-radius: 8px;
+      font-size: 0.82rem;
+      text-align: center;
+      display: none;
+      margin-bottom: 10px;
+      font-weight: 600;
+    }
+    /* Footer */
+    .footer {
+      margin-top: 30px;
+      margin-bottom: 20px;
+      font-size: 0.7rem;
       color: #64748b;
       text-align: center;
       line-height: 1.5;
@@ -167,58 +300,189 @@
 <body>
 
   <div class="container">
-    <div class="header-card">
-      <div class="title">
-        <span>⚠️</span> Dispositivo Móvil
-      </div>
-      <div class="text">
-        El resolvedor de física de la plataforma requiere un computador de escritorio.
-        Desde su dispositivo, le invitamos a escuchar la trilogía de podcasts o leer la obra:
-      </div>
-    </div>
-
-    <div class="section-header">
-      <span>🎧</span> Podcasts: Diálogos del Manifold
-    </div>
-
-    <div class="episode-card active" onclick="playEpisode('podcast1_trauma.mp3', this)">
-      <div class="play-icon">▶</div>
-      <div class="episode-info">
-        <div class="episode-title">Episodio 1: La Física del Trauma en los Barrios</div>
-        <div class="episode-meta">Duración: 18:57</div>
-      </div>
-    </div>
-
-    <div class="episode-card" onclick="playEpisode('podcast2_cuidado.mp3', this)">
-      <div class="play-icon">▶</div>
-      <div class="episode-info">
-        <div class="episode-title">Episodio 2: Geotensores y la Geometría del Cuidado</div>
-        <div class="episode-meta">Duración: 15:22</div>
-      </div>
-    </div>
-
-    <div class="episode-card" onclick="playEpisode('podcast3_terreno.mp3', this)">
-      <div class="play-icon">▶</div>
-      <div class="episode-info">
-        <div class="episode-title">Episodio 3: Medir la Fricción Territorial</div>
-        <div class="episode-meta">Duración: 23:32</div>
-      </div>
-    </div>
-
-    <div class="player-card">
-      <div id="now_playing" style="font-size:0.75rem; color:#38bdf8; font-weight:600; text-align:center;">
-        Reproduciendo: Episodio 1
-      </div>
-      <audio id="audio_player" controls src="podcast1_trauma.mp3"></audio>
-    </div>
-
-    <a href="media/docs/tomo_ii.pdf" class="btn btn-primary" onclick="window.location.href='media/docs/tomo_ii.pdf'; return false;">
-      📖 Leer Tomo II (PDF)
-    </a>
     
-    <a href="https://github.com/OntologiaTerritorial/puerto_umbral" class="btn btn-secondary" target="_blank">
-      Ver Código en GitHub
-    </a>
+    <!-- Tab navigation bar -->
+    <div class="tabs-header">
+      <div class="tab-btn active" id="tab-btn-ieo" onclick="switchTab('ieo')">📝 Ficha IEO</div>
+      <div class="tab-btn" id="tab-btn-gps" onclick="switchTab('gps')">🛰️ GPS Wu Wei</div>
+      <div class="tab-btn" id="tab-btn-datos" onclick="switchTab('datos')">💾 Datos</div>
+      <div class="tab-btn" id="tab-btn-podcasts" onclick="switchTab('podcasts')">🎧 Biblioteca</div>
+    </div>
+
+    <div class="toast-success" id="toast">¡Guardado con éxito!</div>
+
+    <!-- TAB 1: IEO SURVEY FORM -->
+    <div class="tab-content active" id="content-ieo">
+      <div class="card">
+        <div class="title">
+          <span>📝</span> Levantamiento de Ficha IEO
+        </div>
+        <div class="text">
+          Complete la ficha del píxel o manzana para la calibración. Guarde los registros de forma local para exportarlos al terminar su campaña.
+        </div>
+
+        <div class="form-group">
+          <label for="ieo_pixel">ID del Píxel o Manzana (pixel_id)</label>
+          <input type="number" id="ieo_pixel" placeholder="Ej: 145" required>
+        </div>
+
+        <div class="form-group">
+          <label>Fricción Territorial Observada (1-5)</label>
+          <div class="score-group" id="friccion-group">
+            <div class="score-btn" onclick="setScore('friccion', 1)">1</div>
+            <div class="score-btn" onclick="setScore('friccion', 2)">2</div>
+            <div class="score-btn active" onclick="setScore('friccion', 3)">3</div>
+            <div class="score-btn" onclick="setScore('friccion', 4)">4</div>
+            <div class="score-btn" onclick="setScore('friccion', 5)">5</div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Cohesión / Cuidado Observado (1-5)</label>
+          <div class="score-group" id="cohesion-group">
+            <div class="score-btn" onclick="setScore('cohesion', 1)">1</div>
+            <div class="score-btn" onclick="setScore('cohesion', 2)">2</div>
+            <div class="score-btn active cohesion" onclick="setScore('cohesion', 3)">3</div>
+            <div class="score-btn" onclick="setScore('cohesion', 4)">4</div>
+            <div class="score-btn" onclick="setScore('cohesion', 5)">5</div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="ieo_notas">Notas y Observaciones de Terreno</label>
+          <textarea id="ieo_notas" rows="3" placeholder="Anotaciones opcionales del entorno o barreras..."></textarea>
+        </div>
+
+        <button class="btn btn-primary" onclick="saveIeoFicha()" style="margin-top: 5px;">
+          💾 Guardar Ficha Localmente
+        </button>
+      </div>
+    </div>
+
+    <!-- TAB 2: GPS PATH TRACKER -->
+    <div class="tab-content" id="content-gps">
+      <div class="card" style="border-top-color: #0d9488;">
+        <div class="title" style="color: #0d9488;">
+          <span>🛰️</span> Trazador de Recorridos GPS
+        </div>
+        <div class="text">
+          Habilite el trazador para grabar su trayectoria Wu Wei de forma autónoma mientras camina en terreno.
+        </div>
+
+        <div class="gps-panel">
+          <div class="gps-row">
+            <span>Estado del GPS:</span>
+            <span class="gps-val" id="gps_status_txt"><span class="gps-dot" id="gps_dot" style="display:none;"></span>Inactivo</span>
+          </div>
+          <div class="gps-row">
+            <span>Puntos Grabados:</span>
+            <span class="gps-val" id="gps_points_count">0</span>
+          </div>
+          <div class="gps-row">
+            <span>Última Coordenada:</span>
+            <span class="gps-val" id="gps_coords">Ninguna</span>
+          </div>
+          <div class="gps-row">
+            <span>Precisión Estimada:</span>
+            <span class="gps-val" id="gps_accuracy">--</span>
+          </div>
+        </div>
+
+        <button class="btn btn-success" id="btn_start_gps" onclick="startGpsTracking()">
+          ▶ Iniciar Grabación de Recorrido
+        </button>
+        <button class="btn btn-danger" id="btn_stop_gps" onclick="stopGpsTracking()" style="display: none;">
+          ⏹ Detener y Guardar Trayecto
+        </button>
+      </div>
+    </div>
+
+    <!-- TAB 3: DATA EXPORT AND CLEAR -->
+    <div class="tab-content" id="content-datos">
+      <div class="card" style="border-top-color: #f59e0b;">
+        <div class="title" style="color: #f59e0b;">
+          <span>💾</span> Exportar Datos de Campaña
+        </div>
+        <div class="text">
+          Descargue los archivos de su levantamiento para importarlos en la plataforma Puerto Umbral de su computador de escritorio.
+        </div>
+
+        <div style="background: rgba(15, 23, 42, 0.4); border-radius: 12px; padding: 15px; display: flex; flex-direction: column; gap: 12px; border: 1px solid rgba(255, 255, 255, 0.05); margin-bottom: 15px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 8px;">
+            <span style="font-size: 0.85rem; font-weight: 600; color: #cbd5e1;">📋 Fichas IEO Guardadas:</span>
+            <span style="font-family: monospace; font-weight: 700; color: #38bdf8; font-size: 0.95rem;" id="count_fichas">0</span>
+          </div>
+          <button class="btn btn-primary" onclick="downloadIeoCsv()">
+            📥 Descargar Fichas IEO (CSV)
+          </button>
+        </div>
+
+        <div style="background: rgba(15, 23, 42, 0.4); border-radius: 12px; padding: 15px; display: flex; flex-direction: column; gap: 12px; border: 1px solid rgba(255, 255, 255, 0.05); margin-bottom: 15px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 8px;">
+            <span style="font-size: 0.85rem; font-weight: 600; color: #cbd5e1;">🛰️ Trayectos Grabados:</span>
+            <span style="font-family: monospace; font-weight: 700; color: #0d9488; font-size: 0.95rem;" id="count_tracks">0</span>
+          </div>
+          <button class="btn btn-success" onclick="downloadGpsGeoJson()" style="margin-bottom: 5px;">
+            📥 Descargar Trayectos (GeoJSON)
+          </button>
+          <button class="btn btn-secondary" onclick="downloadGpsCsv()">
+            📥 Descargar Trayectos (CSV)
+          </button>
+        </div>
+
+        <button class="btn btn-danger" onclick="clearLocalMemory()" style="margin-top: 15px; font-size: 0.8rem; padding: 8px;">
+          🗑️ Borrar Toda la Memoria Local
+        </button>
+      </div>
+    </div>
+
+    <!-- TAB 4: PODCASTS & LIBRARY -->
+    <div class="tab-content" id="content-podcasts">
+      <div class="card" style="border-top-color: #a855f7;">
+        <div class="title" style="color: #c084fc;">
+          <span>🎧</span> Biblioteca y Podcasts
+        </div>
+        <div class="text">
+          Escuche los podcasts oficiales del Tomo II ("Diálogos del Manifold") o revise el texto completo mientras realiza sus pausas de campo.
+        </div>
+
+        <div class="episode-card active" onclick="playEpisode('podcast1_trauma.mp3', this)">
+          <div class="play-icon">▶</div>
+          <div class="episode-info">
+            <div class="episode-title">Episodio 1: La Física del Trauma en los Barrios</div>
+            <div class="episode-meta">Duración: 18:57</div>
+          </div>
+        </div>
+
+        <div class="episode-card" onclick="playEpisode('podcast2_cuidado.mp3', this)">
+          <div class="play-icon">▶</div>
+          <div class="episode-info">
+            <div class="episode-title">Episodio 2: Geotensores y la Geometría del Cuidado</div>
+            <div class="episode-meta">Duración: 15:22</div>
+          </div>
+        </div>
+
+        <div class="episode-card" onclick="playEpisode('podcast3_terreno.mp3', this)">
+          <div class="play-icon">▶</div>
+          <div class="episode-info">
+            <div class="episode-title">Episodio 3: Medir la Fricción Territorial</div>
+            <div class="episode-meta">Duración: 23:32</div>
+          </div>
+        </div>
+
+        <div style="background: rgba(15, 23, 42, 0.9); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 12px; display: flex; flex-direction: column; gap: 8px; margin-top: 10px; margin-bottom: 12px;">
+          <div id="now_playing" style="font-size:0.75rem; color:#38bdf8; font-weight:600; text-align:center;">
+            Reproduciendo: Episodio 1
+          </div>
+          <audio id="audio_player" controls style="width: 100%; height: 32px;" src="podcast1_trauma.mp3"></audio>
+        </div>
+
+        <a href="media/docs/tomo_ii.pdf" class="btn btn-primary" style="background:#a855f7; margin-bottom: 8px;" target="_blank">
+          📖 Leer Tomo II (PDF)
+        </a>
+      </div>
+    </div>
+
   </div>
 
   <div class="footer">
@@ -227,16 +491,252 @@
   </div>
 
   <script>
+    var selectedFriccion = 3;
+    var selectedCohesion = 3;
+    
+    // GPS State
+    var watchId = null;
+    var gpsPoints = [];
+
+    // Initialize counts on load
+    window.onload = function() {
+      updateDataCounts();
+    };
+
+    // Tab Switching
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+      document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+      
+      document.getElementById('tab-btn-' + tabId).classList.add('active');
+      document.getElementById('content-' + tabId).classList.add('active');
+    }
+
+    // Set Fricción/Cohesión scores
+    function setScore(type, score) {
+      selectedFriccion = (type === 'friccion') ? score : selectedFriccion;
+      selectedCohesion = (type === 'cohesion') ? score : selectedCohesion;
+      
+      var parent = document.getElementById(type + '-group');
+      parent.querySelectorAll('.score-btn').forEach(btn => {
+        btn.classList.remove('active');
+        btn.classList.remove('cohesion');
+        if (parseInt(btn.innerText) === score) {
+          btn.classList.add('active');
+          if (type === 'cohesion') btn.classList.add('cohesion');
+        }
+      });
+    }
+
+    // Save IEO Ficha to LocalStorage
+    function saveIeoFicha() {
+      var pixelInput = document.getElementById('ieo_pixel');
+      var notesInput = document.getElementById('ieo_notes');
+      
+      if (!pixelInput.value) {
+        alert("Por favor ingrese un ID de píxel o manzana válido.");
+        return;
+      }
+      
+      var ficha = {
+        pixel_id: parseInt(pixelInput.value),
+        friccion: selectedFriccion,
+        cohesion: selectedCohesion,
+        notas: notesInput.value,
+        date: new Date().toISOString()
+      };
+      
+      var fichas = JSON.parse(localStorage.getItem("ieo_fichas") || "[]");
+      fichas.push(ficha);
+      localStorage.setItem("ieo_fichas", JSON.stringify(fichas));
+      
+      // Clean only specific fields
+      pixelInput.value = '';
+      notesInput.value = '';
+      
+      // Success toast
+      var toast = document.getElementById('toast');
+      toast.style.display = 'block';
+      setTimeout(() => { toast.style.display = 'none'; }, 2000);
+      
+      updateDataCounts();
+    }
+
+    // GPS Tracking
+    function startGpsTracking() {
+      if (!navigator.geolocation) {
+        alert("Geolocalización no soportada en su celular.");
+        return;
+      }
+      gpsPoints = [];
+      
+      var options = {
+        enableHighAccuracy: true,
+        timeout: 15000,
+        maximumAge: 0
+      };
+      
+      document.getElementById("gps_status_txt").innerHTML = `<span class="gps-dot"></span>Grabando Recorrido...`;
+      
+      watchId = navigator.geolocation.watchPosition(
+        function(position) {
+          var pt = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude,
+            acc: position.coords.accuracy,
+            time: new Date(position.timestamp).toISOString()
+          };
+          gpsPoints.push(pt);
+          
+          // Save active points trace
+          localStorage.setItem("active_gps_trace", JSON.stringify(gpsPoints));
+          
+          document.getElementById("gps_points_count").innerText = gpsPoints.length;
+          document.getElementById("gps_coords").innerText = pt.lat.toFixed(6) + ", " + pt.lng.toFixed(6);
+          document.getElementById("gps_accuracy").innerText = "±" + Math.round(pt.acc) + " metros";
+        },
+        function(error) {
+          document.getElementById("gps_status_txt").innerText = "Error: " + error.message;
+        },
+        options
+      );
+      
+      document.getElementById("btn_start_gps").style.display = "none";
+      document.getElementById("btn_stop_gps").style.display = "block";
+    }
+
+    function stopGpsTracking() {
+      if (watchId) {
+        navigator.geolocation.clearWatch(watchId);
+        watchId = null;
+      }
+      
+      if (gpsPoints.length > 0) {
+        var tracks = JSON.parse(localStorage.getItem("saved_gps_tracks") || "[]");
+        tracks.push({
+          date: new Date().toISOString(),
+          points: gpsPoints
+        });
+        localStorage.setItem("saved_gps_tracks", JSON.stringify(tracks));
+        localStorage.removeItem("active_gps_trace");
+      }
+      
+      document.getElementById("btn_start_gps").style.display = "block";
+      document.getElementById("btn_stop_gps").style.display = "none";
+      document.getElementById("gps_status_txt").innerText = "Inactivo";
+      document.getElementById("gps_coords").innerText = "Ninguna";
+      document.getElementById("gps_accuracy").innerText = "--";
+      document.getElementById("gps_points_count").innerText = "0";
+      
+      gpsPoints = [];
+      updateDataCounts();
+    }
+
+    // Data Export CSV and GeoJSON
+    function downloadIeoCsv() {
+      var fichas = JSON.parse(localStorage.getItem("ieo_fichas") || "[]");
+      if (fichas.length === 0) {
+        alert("No hay fichas registradas para descargar.");
+        return;
+      }
+      
+      // Standard CSV format for Shiny input
+      var csvContent = "pixel_id,friccion_observada,cohesion_observada,notas,fecha\n";
+      fichas.forEach(f => {
+        var escapedNotes = (f.notas || "").replace(/"/g, '""');
+        csvContent += `${f.pixel_id},${f.friccion},${f.cohesion},"${escapedNotes}",${f.date}\n`;
+      });
+      
+      triggerDownload(csvContent, "campana_terreno_ieo.csv", "text/csv;charset=utf-8;");
+    }
+
+    function downloadGpsCsv() {
+      var tracks = JSON.parse(localStorage.getItem("saved_gps_tracks") || "[]");
+      if (tracks.length === 0) {
+        alert("No hay trayectos GPS grabados para descargar.");
+        return;
+      }
+      
+      var csvContent = "latitude,longitude,accuracy,timestamp,trayecto_id\n";
+      tracks.forEach((track, trackIdx) => {
+        track.points.forEach(p => {
+          csvContent += `${p.lat},${p.lng},${p.acc},${p.time},${trackIdx + 1}\n`;
+        });
+      });
+      
+      triggerDownload(csvContent, "trayectos_terreno_gps.csv", "text/csv;charset=utf-8;");
+    }
+
+    function downloadGpsGeoJson() {
+      var tracks = JSON.parse(localStorage.getItem("saved_gps_tracks") || "[]");
+      if (tracks.length === 0) {
+        alert("No hay trayectos GPS grabados para descargar.");
+        return;
+      }
+      
+      var features = tracks.map((t, idx) => {
+        var coords = t.points.map(p => [p.lng, p.lat]);
+        return {
+          type: "Feature",
+          properties: {
+            id: idx + 1,
+            fecha: t.date,
+            total_puntos: t.points.length
+          },
+          geometry: {
+            type: "LineString",
+            coordinates: coords
+          }
+        };
+      });
+      
+      var geojson = {
+        type: "FeatureCollection",
+        features: features
+      };
+      
+      triggerDownload(JSON.stringify(geojson, null, 2), "trayectos_terreno_gps.geojson", "application/json;charset=utf-8;");
+    }
+
+    function triggerDownload(content, filename, contentType) {
+      var blob = new Blob([content], { type: contentType });
+      var url = URL.createObjectURL(blob);
+      var link = document.createElement("a");
+      link.setAttribute("href", url);
+      link.setAttribute("download", filename);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+
+    function clearLocalMemory() {
+      if (confirm("¿Está seguro que desea borrar TODA la memoria local de terreno? Esta acción no se puede deshacer y perderá todos los datos no descargados.")) {
+        if (confirm("Por favor confirme una vez más que realmente desea vaciar los registros.")) {
+          localStorage.removeItem("ieo_fichas");
+          localStorage.removeItem("saved_gps_tracks");
+          localStorage.removeItem("active_gps_trace");
+          updateDataCounts();
+          alert("Memoria de terreno restablecida con éxito.");
+        }
+      }
+    }
+
+    function updateDataCounts() {
+      var fichas = JSON.parse(localStorage.getItem("ieo_fichas") || "[]");
+      var tracks = JSON.parse(localStorage.getItem("saved_gps_tracks") || "[]");
+      
+      document.getElementById("count_fichas").innerText = fichas.length;
+      document.getElementById("count_tracks").innerText = tracks.length;
+    }
+
+    // Podcasts Player Controller
     function playEpisode(src, cardEl) {
-      // Update active card
       document.querySelectorAll('.episode-card').forEach(card => card.classList.remove('active'));
       cardEl.classList.add('active');
       
-      // Update text
       var titleText = cardEl.querySelector('.episode-title').innerText;
       document.getElementById('now_playing').innerText = "Reproduciendo: " + titleText;
       
-      // Update audio
       var player = document.getElementById('audio_player');
       player.src = src;
       player.play();
