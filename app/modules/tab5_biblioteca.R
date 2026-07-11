@@ -1205,10 +1205,10 @@ tab5_server <- function(input, output, session, chat_messages, lang, tomo1_db, t
       fade = TRUE,
       footer = modalButton(trans("Cerrar", "Close")),
       
-      HTML(sprintf('
+      HTML(paste0('
         <video id="tutorial_video" width="100%" controls preload="auto" style="border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); background:#000;">
-          <track id="track_es" kind="subtitles" srclang="es" src="%s" label="Español">
-          <track id="track_en" kind="subtitles" srclang="en" src="%s" label="English">
+          <track id="track_es" kind="subtitles" srclang="es" src="', track_es, '" label="Español">
+          <track id="track_en" kind="subtitles" srclang="en" src="', track_en, '" label="English">
           Su navegador no soporta video HTML5.
         </video>
         <script>
@@ -1218,7 +1218,7 @@ tab5_server <- function(input, output, session, chat_messages, lang, tomo1_db, t
               var video = document.getElementById("tutorial_video");
               if (video) {
                 clearInterval(interval);
-                video.src = "%s";
+                video.src = "', video_src, '";
                 video.load();
               } else {
                 attempts++;
@@ -1229,7 +1229,7 @@ tab5_server <- function(input, output, session, chat_messages, lang, tomo1_db, t
             }, 100);
           })();
         </script>
-      ', track_es, track_en, video_src))
+      '))
     ))
   })
   
