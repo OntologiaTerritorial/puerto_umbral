@@ -110,11 +110,11 @@ tab5_server <- function(input, output, session, chat_messages, lang, tomo1_db, t
                         "podcast_select", 
                         label = trans("Seleccionar Episodio:", "Select Episode:"),
                         choices = c(
-                          "Episodio 1: Física del Trauma (18:57)" = "podcast1_trauma.mp3",
-                          "Episodio 2: Geometría del Cuidado (15:22)" = "podcast2_cuidado.mp3",
-                          "Episodio 3: Experiencia de Terreno" = "podcast3_terreno.mp3"
+                          "Episodio 1: Física del Trauma (18:57)" = "www/podcast1_trauma.mp3",
+                          "Episodio 2: Geometría del Cuidado (15:22)" = "www/podcast2_cuidado.mp3",
+                          "Episodio 3: Experiencia de Terreno" = "www/podcast3_terreno.mp3"
                         ),
-                        selected = "podcast1_trauma.mp3",
+                        selected = "www/podcast1_trauma.mp3",
                         width = "100%"
                       ),
                       
@@ -1229,17 +1229,8 @@ tab5_server <- function(input, output, session, chat_messages, lang, tomo1_db, t
     tags$audio(
       src = input$podcast_select,
       type = "audio/mpeg",
-      controls = NA,
-      style = "width:100%; margin-top:5px; border-radius:8px;",
-      onerror = "
-        var player = this;
-        var originalSrc = player.getAttribute('src');
-        if (originalSrc && !player.src.includes('/www/') && !originalSrc.startsWith('www/')) {
-          console.log('Desktop audio failed locally, falling back to www/ path...');
-          player.src = 'www/' + originalSrc;
-          player.load();
-        }
-      "
+      controls = "controls",
+      style = "width:100%; margin-top:5px; border-radius:8px;"
     )
   })
   
