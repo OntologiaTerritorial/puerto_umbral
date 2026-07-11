@@ -145,26 +145,12 @@ jobs:
 
           <script>
             (function() {
-              var maxWait = 80; // 8 seconds max wait
+              // On desktop, auto-remove this overlay once Shiny loads
               var checkShiny = setInterval(function() {
-                try {
-                  var isLoaded = false;
-                  maxWait--;
-                  if (maxWait <= 0) {
-                    isLoaded = true; // Safe fallback timeout
-                  } else if (document.querySelector('.shiny-bound-output') || document.querySelector('.shiny-output-error')) {
-                    isLoaded = true;
-                  } else if (window.Shiny && window.Shiny.shinyapp) {
-                    isLoaded = true;
-                  }
-                  
-                  if (isLoaded) {
-                    var el = document.getElementById("custom-loading-container");
-                    if (el) el.remove();
-                    clearInterval(checkShiny);
-                  }
-                } catch(e) {
-                  // Ignore errors during loading phase
+                if (window.Shiny && window.Shiny.shinyapp && window.Shiny.shinyapp.isConnected()) {
+                  var el = document.getElementById("custom-loading-container");
+                  if (el) el.remove();
+                  clearInterval(checkShiny);
                 }
               }, 100);
             })();
