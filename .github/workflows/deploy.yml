@@ -55,7 +55,9 @@ jobs:
               print('Etiqueta de verificación de Google inyectada en docs/index.html')
           else:
               print('ADVERTENCIA: No se encontró la etiqueta </head> en docs/index.html')
-             - name: Personalizar Pantalla de Carga y Reproductor de Podcasts en index.html
+          "
+
+      - name: Personalizar Pantalla de Carga y Reproductor de Podcasts en index.html
         run: |
           python3 -c "
           with open('docs/index.html', 'r', encoding='utf-8') as f:
