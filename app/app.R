@@ -37,7 +37,7 @@ ui <- tagList(
     # Service Worker Version Purge & Update Enforcement
     tags$script(HTML("
       (function() {
-        var CURRENT_VERSION = 'v11';
+        var CURRENT_VERSION = 'v12';
         if (localStorage.getItem('app_sw_version') !== CURRENT_VERSION) {
           if ('serviceWorker' in navigator) {
             navigator.serviceWorker.getRegistrations().then(function(registrations) {
