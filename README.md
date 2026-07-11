@@ -46,6 +46,29 @@ For structured, automated recovery, use any of these redundant paths depending o
 **Versión de la app:** Puerto Umbral v5.4  
 **Versión del bundle Zenodo:** v1.0  
 
+## Versiones Disponibles / Available Versions
+
+La plataforma está diseñada bajo una arquitectura híbrida optimizada para dos flujos de trabajo científicos complementarios:
+
+### 🖥️ 1. Versión de Escritorio (Simulación y Modelamiento en R-WebAssembly)
+* **Propósito:** Trabajo analítico de gabinete, formulación de escenarios y experimentos territoriales complejos.
+* **Características principales:**
+  * Resolvedor de física geodésica Wu Wei en 2D y 3D.
+  * Análisis dinámico de estabilidad de Lyapunov y conmutadores de Lie.
+  * Carga y calibración de mallas espaciales GeoJSON y atributos socio-demográficos.
+  * Visualización cartográfica interactiva e interfaz integral de control de parámetros.
+* **Nota de Ejecución:** Requiere una computadora portátil o de escritorio para compilar las librerías WebAssembly pesadas en el navegador.
+
+### 📱 2. Versión Terreno (Levantamiento y Captura de Datos Móvil)
+* **Propósito:** Trabajo de campo autónomo y levantamiento empírico de datos espaciales sin conexión a internet.
+* **Acceso:** Se despliega automáticamente al ingresar desde cualquier dispositivo móvil (celular o tablet).
+* **Características principales:**
+  * **Rúbrica IEO Digital:** Formulario optimizado para registrar la fricción y cohesión territorial manzana por manzana con teclado numérico defensivo que previene errores tipográficos.
+  * **Trazador GPS Wu Wei:** Grabador autónomo de trayectorias peatonales con filtro inteligente de ruido de señal (ignora desviaciones >50m) y semáforo visual de precisión (🟢/🟡/🔴).
+  * **Persistencia Local (Zero-Server):** Guarda todos los registros de forma segura en la memoria del navegador (`localStorage`) de manera offline.
+  * **Exportación Directa:** Descarga instantánea de las Fichas IEO en formato CSV (directamente compatibles con la ingesta en R-Shiny del computador) y los trayectos en formatos CSV y GeoJSON.
+  * **Biblioteca Integrada:** Acceso de lectura al Tomo II (PDF) y reproductor del podcast *Diálogos del Manifold* adaptado para reproducir en local y en la web.
+
 Este repositorio auto-contenido alberga la aplicación interactiva, el motor de simulación, la base SQLite de experimentos, los scripts de generación de datos y el material pedagógico-divulgativo correspondiente al **Tomo II de *Ontología Territorial***.
 
 Puerto Umbral implementa computacionalmente la física intrínseca territorial desarrollada en la obra, articulando simulación geodésica, análisis matemático, pedagogía territorial, consulta documental, carga de materiales audiovisuales y protocolos de validación empírica.
