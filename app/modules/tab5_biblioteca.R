@@ -1230,7 +1230,16 @@ tab5_server <- function(input, output, session, chat_messages, lang, tomo1_db, t
       src = input$podcast_select,
       type = "audio/mpeg",
       controls = NA,
-      style = "width:100%; margin-top:5px; border-radius:8px;"
+      style = "width:100%; margin-top:5px; border-radius:8px;",
+      onerror = "
+        var player = this;
+        var originalSrc = player.getAttribute('src');
+        if (originalSrc && !player.src.includes('/www/') && !originalSrc.startsWith('www/')) {
+          console.log('Desktop audio failed locally, falling back to www/ path...');
+          player.src = 'www/' + originalSrc;
+          player.load();
+        }
+      "
     )
   })
   
