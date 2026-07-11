@@ -1191,6 +1191,13 @@ tab5_server <- function(input, output, session, chat_messages, lang, tomo1_db, t
     ops_log(new_log)
   })
   observeEvent(input$view_video_btn, {
+    is_wasm <- identical(Sys.info()[["sysname"]], "Emscripten")
+    prefix <- if (is_wasm) "../www/" else ""
+    
+    video_src <- paste0(prefix, "video/tutorial_limpio.mp4")
+    track_es <- paste0(prefix, "video/tutorial_es.vtt")
+    track_en <- paste0(prefix, "video/tutorial_en.vtt")
+    
     showModal(modalDialog(
       title = trans("Video Tutorial Demostrativo - Puerto Umbral", "Demonstration Video Tutorial - Puerto Umbral"),
       size = "l",
@@ -1198,10 +1205,10 @@ tab5_server <- function(input, output, session, chat_messages, lang, tomo1_db, t
       fade = TRUE,
       footer = modalButton(trans("Cerrar", "Close")),
       
-      HTML('
+      HTML(sprintf('
         <video id="tutorial_video" width="100%" controls preload="auto" style="border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); background:#000;">
-          <track id="track_es" kind="subtitles" srclang="es" src="video/tutorial_es.vtt" label="Español">
-          <track id="track_en" kind="subtitles" srclang="en" src="video/tutorial_en.vtt" label="English">
+          <track id="track_es" kind="subtitles" srclang="es" src="%s" label="Español">
+          <track id="track_en" kind="subtitles" srclang="en" src="%s" label="English">
           Su navegador no soporta video HTML5.
         </video>
         <script>
@@ -1211,7 +1218,7 @@ tab5_server <- function(input, output, session, chat_messages, lang, tomo1_db, t
               var video = document.getElementById("tutorial_video");
               if (video) {
                 clearInterval(interval);
-                video.src = "video/tutorial_limpio.mp4";
+                video.src = "%s";
                 video.load();
               } else {
                 attempts++;
@@ -1222,7 +1229,7 @@ tab5_server <- function(input, output, session, chat_messages, lang, tomo1_db, t
             }, 100);
           })();
         </script>
-      ')
+      ', track_es, track_en, video_src))
     ))
   })
   
