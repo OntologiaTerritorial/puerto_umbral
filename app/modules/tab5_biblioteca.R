@@ -45,6 +45,8 @@ tab5_server <- function(input, output, session, chat_messages, lang, tomo1_db, t
   
   output$tab5_ui <- renderUI({
     is_en <- identical(lang(), "EN")
+    is_wasm <- identical(Sys.info()[["sysname"]], "Emscripten")
+    prefix <- if (is_wasm) "../www/" else ""
     
     fluidRow(
       # Left column: Downloads and Video Tutorial
@@ -110,11 +112,11 @@ tab5_server <- function(input, output, session, chat_messages, lang, tomo1_db, t
                         "podcast_select", 
                         label = trans("Seleccionar Episodio:", "Select Episode:"),
                         choices = c(
-                          "Episodio 1: Física del Trauma (18:57)" = "www/podcast1_trauma.mp3",
-                          "Episodio 2: Geometría del Cuidado (15:22)" = "www/podcast2_cuidado.mp3",
-                          "Episodio 3: Experiencia de Terreno" = "www/podcast3_terreno.mp3"
+                          "Episodio 1: Física del Trauma (18:57)" = paste0(prefix, "podcast1_trauma.mp3"),
+                          "Episodio 2: Geometría del Cuidado (15:22)" = paste0(prefix, "podcast2_cuidado.mp3"),
+                          "Episodio 3: Experiencia de Terreno" = paste0(prefix, "podcast3_terreno.mp3")
                         ),
-                        selected = "www/podcast1_trauma.mp3",
+                        selected = paste0(prefix, "podcast1_trauma.mp3"),
                         width = "100%"
                       ),
                       
