@@ -368,9 +368,9 @@ sim_server <- function(input, output, session, lang, run_sim_trigger) {
   
   # Data Ingestion Observer
   observeEvent(input$ingest_data, {
-    req(input$uploaded_csv, input$uploaded_geojson)
-    csv_file <- input$uploaded_csv$datapath
-    geojson_file <- input$uploaded_geojson$datapath
+    req(input$custom_csv, input$custom_geojson)
+    csv_file <- input$custom_csv$datapath
+    geojson_file <- input$custom_geojson$datapath
     
     tryCatch({
       sf_data <- sf::st_read(geojson_file, quiet = TRUE)
