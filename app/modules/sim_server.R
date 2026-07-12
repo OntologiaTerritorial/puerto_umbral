@@ -3216,8 +3216,13 @@ sim_server <- function(input, output, session, lang, run_sim_trigger) {
       m_df <- current_manzanas_df()
       template <- data.frame(
         pixel_id = m_df$id,
-        friccion_observada = round(m_df$altitud * (1.0 - m_df$ndvi) * 0.8 + rnorm(nrow(m_df), 0, 10), 1),
-        cohesion_observada = round((1.0 - m_df$ndvi) * 100 + rnorm(nrow(m_df), 0, 5), 1),
+        friccion_observada = rep("", nrow(m_df)),
+        cohesion_observada = rep("", nrow(m_df)),
+        perfil_habitante = rep("General", nrow(m_df)),
+        tipo_friccion_predominante = rep("Ninguna", nrow(m_df)),
+        iluminacion_dia = rep("Dia", nrow(m_df)),
+        notas = rep("", nrow(m_df)),
+        fecha = rep(as.character(Sys.Date()), nrow(m_df)),
         stringsAsFactors = FALSE
       )
       write.csv(template, file, row.names = FALSE)
@@ -3231,23 +3236,63 @@ sim_server <- function(input, output, session, lang, run_sim_trigger) {
     content = function(file) {
       text_content <- c(
         "==========================================================================",
-        "INFORME T\u00c9CNICO, METODOL\u00d3GICO Y LOG\u00cdSTICO DE TERRENO (R\u00daBRICA DE CAMPO IEO)",
+        "MANUAL T\u00c1CTICO Y PROTOCOLO DE CAMPO: R\u00daBRICA DE ESFUERZO ONTOL\u00d3GICO (IEO)",
         "==========================================================================",
-        "DOCUMENTO DE APOYO LOG\u00cdSTICO Y PROTOCOLO DE CAMPO (MAGALLANES SPIRIT)",
+        "Plataforma Puerto Umbral - Ecosistema de Geotensores (Tomo II)",
+        "Investigador Principal: John Treimun R\u00edos (john.treimun.r@uai.cl)",
+        "--------------------------------------------------------------------------",
         "",
-        "1. DISE\u00d1O EXPERIMENTAL (DOBLE CIEGO)",
-        "- Observador de terreno (ciego al modelo): Aplica la r\u00fabrica IEO in situ.",
-        "- Operador de datos y dron (no ciego): Pilota el dron y registra metadata.",
-        "- Conductor log\u00edstico (no ciego): Controla tiempos de traslado y rutas.",
+        "\"Habitar antes que medir, relaci\u00f3n antes que objeto, trayectoria antes que estado.\"",
         "",
-        "2. R\u00daBRICA DEL \u00cdNDICE DE ESTADO OBSERVADO (IEO)",
-        "Para cada p\u00edxel ontol\u00f3gico, eval\u00fae en escala de 1 a 10:",
-        "- FRICCI\u00d3N OBSERVADA (Obst\u00e1culos f\u00edsicos, pendiente, deterioro, delincuencia).",
-        "- COHESI\u00d3N OBSERVADA (Redes de apoyo mutuo, vecindarios solidarios, huertos).",
+        "Este manual establece la directriz metodol\u00f3gica para levantar datos emp\u00edricos",
+        "de fricci\u00f3n y cohesi\u00f3n en terreno, con el fin de calibrar el resolvedor de",
+        "geotensores de la versi\u00f3n de escritorio.",
         "",
-        "3. PROTOCOLO DE CONTINGENCIA",
-        "- En fr\u00edo extremo (sensaci\u00f3n < 0\u00b0C), guarde bater\u00edas en bolsillos interiores.",
-        "- Realice muestreos adaptativos intensificando en zonas de borde o transici\u00f3n.",
+        "1. DISE\u00d1O METODOL\u00d3GICO (Ceguera y Roles de Campa\u00f1a)",
+        "--------------------------------------------------------------------------",
+        "   * Observador Peatonal (Ciego al Modelo): Recorre el espacio f\u00edsico y registra",
+        "     las fichas in situ usando la aplicaci\u00f3n celular sin visualizar las capas de",
+        "     geod\u00e9sicas te\u00f3ricas en la pantalla para evitar sesgos cognitivos.",
+        "   * Operador de Datos y Gabinete: Ingesta las fichas descargadas en la versi\u00f3n",
+        "     de escritorio y analiza el contraste estad\u00edstico de Pearson y Lyapunov.",
+        "",
+        "2. R\u00daBRICA DEL \u00cdNDICE DE ESFUERZO ONTOL\u00d3GICO (IEO)",
+        "--------------------------------------------------------------------------",
+        "   Para cada manzana o p\u00edxel territorial, eval\u00fae de 1 a 5:",
+        "",
+        "   A. FRICCI\u00d3N TERRITORIAL (Esfuerzo / Desgaste del habitar)",
+        "      - Nivel 1 (Fluidez): Entorno seguro, accesible, con vegetaci\u00f3n y sin barreras.",
+        "      - Nivel 3 (Fricci\u00f3n Moderada): Aceras en mal estado, cruces peligrosos, falta",
+        "        de rampas, percepci\u00f3n de inseguridad en ciertos horarios.",
+        "      - Nivel 5 (Fricci\u00f3n Hostil): Presencia de delincuencia cr\u00edtica, despojo,",
+        "        barreras f\u00edsicas insalvables (autopistas sin cruce, rejas de exclusi\u00f3n).",
+        "",
+        "   B. COHESI\u00d3N Y CUIDADO (Fuerza antientr\u00f3pica / Apoyo vecinal)",
+        "      - Nivel 1 (Aislamiento): Sin interacci\u00f3n vecinal, desconfianza generalizada,",
+        "        ausencia total de espacios p\u00fablicos de co-presencia.",
+        "      - Nivel 3 (Cohesi\u00f3n Latente): Saludos cordiales, uso espor\u00e1dico del espacio,",
+        "        organizaci\u00f3n informal básica.",
+        "      - Nivel 5 (Autopoiesis Colectiva): Organizaci\u00f3n comunitaria activa, ollas",
+        "        comunes, huertos comunitarios, redes s\u00f3lidas de cuidado de ni\u00f1os y ancianos.",
+        "",
+        "3. ANTECEDENTES Y METADATOS METODOL\u00d3GICOS",
+        "--------------------------------------------------------------------------",
+        "   Para enriquecer el an\u00e1lisis, la ficha celular y la plantilla CSV incluyen:",
+        "   * Perfil del Habitante: Identifique si el caminante es de categor\u00eda General,",
+        "     Ni\u00f1ez, Adulto Mayor o presenta Movilidad Reducida.",
+        "   * Tipo de Fricci\u00f3n Predominante: Clasifique si la barrera principal es F\u00edsica,",
+        "     de Seguridad, Clim\u00e1tica (p. ej., isla de calor) o de car\u00e1cter Social.",
+        "   * Iluminaci\u00f3n Ambiental: Registre si la medici\u00f3n se efect\u00faa de D\u00eda, Crep\u00fasculo",
+        "     o durante la Noche.",
+        "",
+        "4. PROTOCOLO DE LOG\u00cdSTICA EN CLIMAS EXTREMOS (Magallanes Spirit)",
+        "--------------------------------------------------------------------------",
+        "   * Autonom\u00eda T\u00e9rmica: Las temperaturas extremas degradan r\u00e1pidamente las bater\u00edas",
+        "     de tel\u00e9fonos y GPS. Mantenga los dispositivos en bolsillos interiores de la ropa",
+        "     de abrigo mientras no se est\u00e9 registrando.",
+        "   * Enmascaramiento de Langevin: Al grabar trayectorias GPS, recuerde que el sistema",
+        "     integra un enmascaramiento stoc\u00e1stico para proteger la privacidad vecinal,",
+        "     inyectando fluctuaciones t\u00e9rmicas locales que anonimizan la traza individual.",
         "=========================================================================="
       )
       writeLines(text_content, file)
@@ -3328,6 +3373,10 @@ sim_server <- function(input, output, session, lang, run_sim_trigger) {
     
     df_sim <- current_manzanas_df()
     req(df_sim)
+    
+    # Asegurar coincidencia de tipos para evitar fallos en el merge
+    df_sim$id <- as.character(df_sim$id)
+    df_field$pixel_id <- as.character(df_field$pixel_id)
     
     merged <- merge(df_sim, df_field, by.x = "id", by.y = "pixel_id")
     if (nrow(merged) < 3) return(NULL)
