@@ -197,7 +197,7 @@ get_tab3_ui <- function(input, output, session, lang) {
         tags$p(style = "font-size:0.75rem; color:#f43f5e; font-weight:600; margin-top:-5px; margin-bottom:10px;",
                trans("ADVERTENCIA DE SEGURIDAD: Remueva metadatos e identidades de las trazas GPS antes de subir archivos para proteger la seguridad comunitaria en terreno.",
                      "SECURITY WARNING: Remove metadata and personal identities from GPS tracks before uploading to protect local community safety in the field.")),
-        fileInput("custom_geojson", trans("Cargar Malla (GeoJSON):", "Upload Mesh (GeoJSON):"), accept = c(".geojson")),
+        fileInput("custom_geojson", trans("Cargar Malla (GeoJSON):", "Upload Mesh (GeoJSON):"), accept = c(".geojson", ".json")),
         actionButton("ingest_data", trans("Ingestar e Iniciar Resolvedor", "Ingest & Start Solver"), class = "btn-primary w-100", style = "font-weight:600;"),
         downloadButton("download_geojson", trans("Exportar Malla Activa (GeoJSON)", "Export Active Mesh (GeoJSON)"), class = "btn-info w-100", style = "margin-top: 10px; font-weight:600;"),
 
