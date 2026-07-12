@@ -350,6 +350,36 @@
         </div>
 
         <div class="form-group">
+          <label for="ieo_perfil">Perfil del Habitante Observado</label>
+          <select id="ieo_perfil">
+            <option value="General">General / Promedio</option>
+            <option value="Ninez">Niñez / Infancia</option>
+            <option value="AdultoMayor">Persona Mayor</option>
+            <option value="MovilidadReducida">Movilidad Reducida</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="ieo_friccion_tipo">Tipo de Fricción Predominante</label>
+          <select id="ieo_friccion_tipo">
+            <option value="Ninguna">Ninguna / Baja Fricción</option>
+            <option value="Fisica">Infraestructura / Barrera Física</option>
+            <option value="Seguridad">Seguridad / Delincuencia</option>
+            <option value="Climatica">Isla de Calor / Climática</option>
+            <option value="Social">Fricción Social / Segregación</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="ieo_iluminacion">Periodo del Día / Iluminación</label>
+          <select id="ieo_iluminacion">
+            <option value="Dia">Día (Luz Natural)</option>
+            <option value="Crepusculo">Tarde / Crepúsculo</option>
+            <option value="Noche">Noche (Luz Artificial)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
           <label for="ieo_notas">Notas y Observaciones de Terreno</label>
           <textarea id="ieo_notas" rows="3" placeholder="Anotaciones opcionales del entorno o barreras..."></textarea>
         </div>
@@ -550,11 +580,17 @@
       
       // Limpiar notas de saltos de línea molestos para que no rompa el CSV
       var cleanNotes = notesInput.value.replace(/\r?\n|\r/g, ' ').trim();
+      var perfil = document.getElementById('ieo_perfil').value;
+      var tipoFriccion = document.getElementById('ieo_friccion_tipo').value;
+      var iluminacion = document.getElementById('ieo_iluminacion').value;
       
       var ficha = {
         pixel_id: pixelId,
         friccion: selectedFriccion,
         cohesion: selectedCohesion,
+        perfil: perfil,
+        tipo_friccion: tipoFriccion,
+        iluminacion: iluminacion,
         notas: cleanNotes,
         date: new Date().toISOString()
       };
@@ -672,11 +708,14 @@
         return;
       }
       
-      // Standard CSV format for Shiny input
-      var csvContent = "pixel_id,friccion_observada,cohesion_observada,notas,fecha\n";
+      // Standard CSV format for Shiny input (enriquecido con de talles cualitativos)
+      var csvContent = "pixel_id,friccion_observada,cohesion_observada,perfil_habitante,tipo_friccion_predominante,iluminacion_dia,notas,fecha\n";
       fichas.forEach(f => {
         var escapedNotes = (f.notas || "").replace(/"/g, '""');
-        csvContent += `${f.pixel_id},${f.friccion},${f.cohesion},"${escapedNotes}",${f.date}\n`;
+        var fPerfil = f.perfil || "General";
+        var fTipo = f.tipo_friccion || "Ninguna";
+        var fIlum = f.iluminacion || "Dia";
+        csvContent += `${f.pixel_id},${f.friccion},${f.cohesion},"${fPerfil}","${fTipo}","${fIlum}","${escapedNotes}",${f.date}\n`;
       });
       
       triggerDownload(csvContent, "campana_terreno_ieo.csv", "text/csv;charset=utf-8;");
