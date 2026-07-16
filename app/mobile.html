@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Puerto Umbral - Versión Terreno</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <style>
     body {
       margin: 0;
@@ -381,7 +383,7 @@
 
         <div class="form-group">
           <label for="ieo_notas">Notas y Observaciones de Terreno</label>
-          <textarea id="ieo_notas" rows="3" placeholder="Anotaciones opcionales del entorno o barreras..."></textarea>
+          <textarea id="ieo_notas" rows="6" style="min-height: 120px; font-family: inherit; font-size: 0.9rem;" placeholder="Anotaciones detalladas del entorno, barreras, arbolado o dinámicas..."></textarea>
         </div>
 
         <!-- Bloque de Georreferenciación Obligatorio -->
@@ -395,6 +397,9 @@
           <div id="gps_status_ficha" style="font-size: 0.75rem; color: #94a3b8; line-height: 1.4; margin-bottom: 8px;">
             Iniciando búsqueda de satélites...
           </div>
+
+          <!-- Contenedor del Mapa Ficha Leaflet -->
+          <div id="mapa_ficha" style="height: 160px; border-radius: 6px; margin-bottom: 8px; border: 1px solid rgba(255,255,255,0.25); background: rgba(0,0,0,0.4); display: none; position: relative; overflow: hidden; z-index: 10;"></div>
           
           <!-- Inputs de Coordenadas (Lectura) -->
           <div style="display: flex; gap: 8px; margin-bottom: 8px;">
@@ -568,6 +573,10 @@
     var watchId = null;
     var gpsPoints = [];
     var currentFichaCoords = null; // Almacenará la ubicación actual capturada para la ficha IEO
+    
+    // Leaflet Map para la Ficha
+    var fichaMap = null;
+    var fichaMarker = null;
 
     // Initialize counts on load
     window.onload = function() {
@@ -593,12 +602,14 @@
       var statusDiv = document.getElementById('gps_status_ficha');
       var latInput = document.getElementById('ieo_lat');
       var lngInput = document.getElementById('ieo_lng');
+      var mapDiv = document.getElementById('mapa_ficha');
       
       statusDiv.innerHTML = "🛰️ Buscando satélites y calculando posición...";
       statusDiv.style.color = "#94a3b8";
       latInput.value = "";
       lngInput.value = "";
       currentFichaCoords = null;
+      mapDiv.style.display = 'none'; // Ocultar mapa por defecto hasta enganchar coordenadas
       
       if (!navigator.geolocation) {
         statusDiv.innerHTML = "❌ Geolocalización no soportada por su celular.";
@@ -608,20 +619,71 @@
       
       navigator.geolocation.getCurrentPosition(
         function(position) {
+          var lat = position.coords.latitude;
+          var lng = position.coords.longitude;
+          
           currentFichaCoords = {
-            lat: position.coords.latitude,
-            lng: position.coords.longitude,
+            lat: lat,
+            lng: lng,
             acc: position.coords.accuracy
           };
-          latInput.value = position.coords.latitude.toFixed(6);
-          lngInput.value = position.coords.longitude.toFixed(6);
+          latInput.value = lat.toFixed(6);
+          lngInput.value = lng.toFixed(6);
           
           statusDiv.innerHTML = "✅ Ubicación capturada (Precisión: ±" + Math.round(position.coords.accuracy) + " metros)";
           statusDiv.style.color = "#4ade80";
+          
+          // Inicialización segura y offline del mapa de Leaflet
+          try {
+            if (typeof L !== 'undefined' && L.map) {
+              mapDiv.style.display = 'block';
+              
+              if (!fichaMap) {
+                // Crear el mapa Leaflet centrado en la ubicación
+                fichaMap = L.map('mapa_ficha', {
+                  zoomControl: false,
+                  attributionControl: false
+                }).setView([lat, lng], 16);
+                
+                // Usar teselas CartoDB Dark Matter coherentes con la estética premium oscura de Puerto Umbral
+                L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+                  maxZoom: 19
+                }).addTo(fichaMap);
+                
+                // Marcador arrastrable (draggable)
+                fichaMarker = L.marker([lat, lng], { draggable: true }).addTo(fichaMap);
+                
+                // Escuchar el arrastre de pin para actualizar coordenadas
+                fichaMarker.on('dragend', function() {
+                  var pos = fichaMarker.getLatLng();
+                  currentFichaCoords.lat = pos.lat;
+                  currentFichaCoords.lng = pos.lng;
+                  latInput.value = pos.lat.toFixed(6);
+                  lngInput.value = pos.lng.toFixed(6);
+                  statusDiv.innerHTML = "📍 Ubicación ajustada manualmente sobre el mapa";
+                  statusDiv.style.color = "#38bdf8";
+                });
+              } else {
+                // Si ya existe el mapa, re-centrar y mover marcador
+                fichaMap.setView([lat, lng], 16);
+                fichaMarker.setLatLng([lat, lng]);
+              }
+              
+              // Refrescar tamaño del mapa para evitar renderizados parciales en dispositivos móviles
+              setTimeout(() => {
+                fichaMap.invalidateSize();
+              }, 200);
+            }
+          } catch (mapError) {
+            console.log("Leaflet offline o bloqueado: " + mapError.message);
+            // El mapa se oculta pero el flujo GPS continúa de forma segura
+            mapDiv.style.display = 'none';
+          }
         },
         function(error) {
           statusDiv.innerHTML = "❌ GPS no disponible: " + error.message + ". Ingrese Referencia de Respaldo.";
           statusDiv.style.color = "#f87171";
+          mapDiv.style.display = 'none';
         },
         {
           enableHighAccuracy: true,
@@ -705,6 +767,7 @@
       notesInput.value = '';
       refInput.value = '';
       currentFichaCoords = null;
+      document.getElementById('mapa_ficha').style.display = 'none';
       document.getElementById('ieo_lat').value = '';
       document.getElementById('ieo_lng').value = '';
       document.getElementById('gps_status_ficha').innerHTML = "Buscando satélites...";
