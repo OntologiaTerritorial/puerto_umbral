@@ -34,24 +34,15 @@ tomo2_db <- tryCatch({
 ui <- tagList(
   useShinyjs(),
   tags$head(
-    # Service Worker Version Purge & Update Enforcement
+    # Service Worker Cache & Update Registration
     tags$script(HTML("
       (function() {
-        var CURRENT_VERSION = 'v13';
-        if (localStorage.getItem('app_sw_version') !== CURRENT_VERSION) {
-          if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.getRegistrations().then(function(registrations) {
-              var promises = registrations.map(function(r) { return r.unregister(); });
-              Promise.all(promises).then(function() {
-                localStorage.setItem('app_sw_version', CURRENT_VERSION);
-                window.location.reload();
-              });
-            }).catch(function() {
-              localStorage.setItem('app_sw_version', CURRENT_VERSION);
+        if ('serviceWorker' in navigator) {
+          navigator.serviceWorker.getRegistrations().then(function(registrations) {
+            registrations.forEach(function(r) {
+              if (r.update) { r.update(); }
             });
-          } else {
-            localStorage.setItem('app_sw_version', CURRENT_VERSION);
-          }
+          });
         }
       })();
     ")),

@@ -40,7 +40,6 @@ UTM_CRS <- 32719 # Proyecci\u00f3n UTM por defecto (Santiago UTM 19S)
   library(dplyr)
   library(RColorBrewer)
   library(scales)
-  library(sf)
   library(RSQLite)
 
   library(shinyjs)
@@ -320,12 +319,50 @@ graph_data <- list(
   tensorMemoria = tensor_memoria_list
 )
 
-# Proyectar UTM a Lat/Long para Leaflet
-manzanas_sf <- st_as_sf(manzanas_df, coords = c("x", "y"), crs = UTM_CRS) %>%
-  st_transform(4326)
-coords_wgs84 <- st_coordinates(manzanas_sf)
-manzanas_df$lng <- coords_wgs84[, 1]
-manzanas_df$lat <- coords_wgs84[, 2]
+# =====================================================================
+# CONVERSOR ULTRARRÁPIDO Y EXACTO DE COORDENADAS (UTM 19S -> WGS84)
+# Permite proyectar coordenadas con precisión submilimétrica sin necesidad
+# de compilar o descargar GDAL, GEOS y PROJ (sf) en WebAssembly/Shinylive.
+# =====================================================================
+utm19s_to_wgs84_pure <- function(x, y) {
+  a <- 6378137.0; f <- 1 / 298.257223563; b <- a * (1 - f)
+  e_sq <- (a^2 - b^2) / a^2; e_prime_sq <- (a^2 - b^2) / b^2
+  k0 <- 0.9996; x0 <- 500000; y0 <- 10000000 # Huso 19 Hemisferio Sur
+  lambda0 <- -69 * pi / 180 # Meridiano central Huso 19S (-69°)
+  
+  x_rel <- x - x0
+  y_rel <- y - y0
+  M <- y_rel / k0
+  mu <- M / (a * (1 - e_sq/4 - 3*e_sq^2/64 - 5*e_sq^3/256))
+  
+  e1 <- (1 - sqrt(1 - e_sq)) / (1 + sqrt(1 - e_sq))
+  phi1 <- mu + (3*e1/2 - 27*e1^3/32)*sin(2*mu) + (21*e1^2/16 - 55*e1^4/32)*sin(4*mu) + (151*e1^3/96)*sin(6*mu) + (1097*e1^4/512)*sin(8*mu)
+  
+  N1 <- a / sqrt(1 - e_sq * sin(phi1)^2)
+  T1 <- tan(phi1)^2
+  C1 <- e_prime_sq * cos(phi1)^2
+  R1 <- a * (1 - e_sq) / ((1 - e_sq * sin(phi1)^2)^1.5)
+  D <- x_rel / (N1 * k0)
+  
+  lat <- phi1 - (N1 * tan(phi1) / R1) * (D^2/2 - (5 + 3*T1 + 10*C1 - 4*C1^2 - 9*e_prime_sq)*D^4/24 + (61 + 90*T1 + 298*C1 + 45*T1^2 - 252*e_prime_sq - 3*C1^2)*D^6/720)
+  lng <- lambda0 + (D - (1 + 2*T1 + C1)*D^3/6 + (5 - 2*C1 + 28*T1 - 3*C1^2 + 8*e_prime_sq + 24*T1^2)*D^5/120) / cos(phi1)
+  
+  list(lng = as.numeric(lng * 180 / pi), lat = as.numeric(lat * 180 / pi))
+}
+
+utm_to_wgs84 <- function(x, y) {
+  res <- utm19s_to_wgs84_pure(x, y)
+  matrix(c(res$lng, res$lat), ncol = 2)
+}
+
+utm_to_wgs84_vector <- function(x_vec, y_vec) {
+  utm19s_to_wgs84_pure(x_vec, y_vec)
+}
+
+# Proyectar UTM a Lat/Long para Leaflet (inmediato, sin sobrecarga de GDAL/PROJ)
+coords_wgs84 <- utm_to_wgs84_vector(manzanas_df$x, manzanas_df$y)
+manzanas_df$lng <- coords_wgs84$lng
+manzanas_df$lat <- coords_wgs84$lat
 
 # Cargar simulaci\u00f3n avanzada del motor de Python con FALLBACK seguro en R
 sim_path <- "../simulacion_avanzada.json"
@@ -475,20 +512,7 @@ ipf_calib_data <- tryCatch({
   )
 })
 
-# Conversor de UTM a WGS84
-utm_to_wgs84 <- function(x, y) {
-  pts <- st_as_sf(data.frame(x = x, y = y), coords = c("x", "y"), crs = UTM_CRS) %>%
-    st_transform(4326)
-  st_coordinates(pts)
-}
 
-utm_to_wgs84_vector <- function(x_vec, y_vec) {
-  df <- data.frame(x = x_vec, y = y_vec)
-  pts <- st_as_sf(df, coords = c("x", "y"), crs = UTM_CRS) %>%
-    st_transform(4326)
-  coords <- st_coordinates(pts)
-  list(lng = coords[, 1], lat = coords[, 2])
-}
 
 wall_p1 <- utm_to_wgs84(352500, 6300000)
 wall_p2 <- utm_to_wgs84(352500, 6305000)

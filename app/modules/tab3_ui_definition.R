@@ -8,13 +8,42 @@ get_tab3_ui <- function(input, output, session, lang) {
     if (is_en) en_txt else es_txt
   }
   
-  sidebarLayout(
-    sidebarPanel(
-      class = "panel-glass sidebar-glass",
-      width = 3,
-      h3(style = "color:#0284c7; font-weight:600; margin-top:0;", 
-         trans("Control del Territorio", "Territory Control")),
-      tags$hr(style = "border-top: 1px solid rgba(255,255,255,0.08);"),
+  tagList(
+    tags$style(HTML("
+      #sim_sidebar_col {
+        transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      #sim_main_col {
+        transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      .sidebar-collapsed #sim_sidebar_col {
+        display: none !important;
+      }
+      .sidebar-collapsed #sim_main_col {
+        width: 100% !important;
+        flex: 0 0 100% !important;
+        max-width: 100% !important;
+      }
+      .map-view-btn.active {
+        background-color: #0284c7 !important;
+        color: white !important;
+        font-weight: 700 !important;
+      }
+    ")),
+    div(id = "sim_wrapper", class = "container-fluid", style = "padding: 0 5px;",
+      div(class = "row", id = "sim_layout_row",
+        # Panel Lateral de Control
+        div(id = "sim_sidebar_col", class = "col-md-3 col-sm-4",
+          div(class = "panel-glass sidebar-glass", style = "padding: 16px; margin-bottom: 20px;",
+            div(style = "display: flex; justify-content: space-between; align-items: center;",
+              h3(style = "color:#0284c7; font-weight:600; margin:0;", 
+                 trans("Control del Territorio", "Territory Control")),
+              actionButton("btn_collapse_sidebar", HTML("<i class='fa fa-angle-double-left'></i>"), 
+                           class = "btn-default btn-xs",
+                           style = "font-weight:bold; border-radius:4px; padding:2px 8px;",
+                           title = trans("Ocultar controles", "Collapse controls"))
+            ),
+            tags$hr(style = "border-top: 1px solid rgba(255,255,255,0.08); margin: 10px 0;"),
       
       # SECTION 1: SCENARIO CONFIGURATION
       tags$details(open = "open", style = "margin-bottom: 10px; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 5px;",
@@ -65,8 +94,14 @@ get_tab3_ui <- function(input, output, session, lang) {
         selectInput("exp_mode", trans("Modo Experimento (Tomo II):", "Experiment Mode (Volume II):"),
                     choices = list(
                       "Ninguno (Simulaci\u00f3n Base)" = "base",
+                      "Experimento 1: Refracci\u00f3n de Snell" = "exp1",
+                      "Experimento 2: Desviaci\u00f3n Geod\u00e9sica" = "exp2",
+                      "Experimento 3: Autopoiesis Territorial" = "exp3",
+                      "Experimento 4: Memoria de Caputo" = "exp4",
+                      "Experimento 5: M\u00e9trica de Moran" = "exp5",
                       "Experimento 6: Santuario Natural" = "exp6",
-                      "Experimento 7: Refracci\u00f3n de Capital" = "exp7"
+                      "Experimento 7: Refracci\u00f3n de Capital" = "exp7",
+                      "Experimento 8: MBHT 4D (SUBDERE)" = "exp8"
                     ), selected = "base"),
         
         conditionalPanel("input.exp_mode == 'exp6'",
@@ -80,6 +115,14 @@ get_tab3_ui <- function(input, output, session, lang) {
           selectInput("capital_flow_direction", trans("Direcci\u00f3n de Inversi\u00f3n:", "Investment Direction:"), 
                       choices = list("De Rural a Urbano" = "rural_to_urban", "De Urbano a Rural" = "urban_to_rural"), 
                       selected = "rural_to_urban")
+        ),
+        
+        conditionalPanel("input.exp_mode == 'exp8'",
+          sliderInput("mbht_alpha_coupling", trans("Acoplamiento Tensorial (\u03b1):", "Tensorial Coupling (\u03b1):"), min = 0.5, max = 5.0, value = 2.0, step = 0.1),
+          tags$a(href = "https://OntologiaTerritorial.github.io/ontologia-territorial-mbht/", target = "_blank",
+                 class = "btn btn-info btn-xs w-100", style = "margin-top: 5px; font-weight:600; display:block; text-align:center;",
+                 tagList(icon("external-link-alt"), trans(" Abrir Visualizador 3D MBHT", " Open 3D MBHT Viewer"))
+          )
         ),
         
         fluidRow(
@@ -254,72 +297,148 @@ get_tab3_ui <- function(input, output, session, lang) {
       # ACTION BUTTON TRIGGER
       tags$hr(style = "border-top: 1px solid rgba(255,255,255,0.08);"),
       actionButton("btn_geodesica", trans("Disparar Geod\u00e9sica Wu Wei", "Trigger Wu Wei Geodesic"), class = "btn-success w-100", style = "font-weight:700; padding:12px; font-size:1.0rem;")
+    )
+  ),
+  
+  # Main Dashboard Visualizers
+  div(id = "sim_main_col", class = "col-md-9 col-sm-8",
+    # Top Toolbar: Sidebar Toggle & Map Display View Modes
+    div(class = "panel-glass", style = "padding: 10px 16px; margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;",
+      div(style = "display: flex; align-items: center; gap: 10px;",
+        actionButton("btn_toggle_sidebar", HTML("<i class='fa fa-columns'></i> <span id='txt_toggle_sidebar'>" ~ trans("Ocultar Controles", "Hide Controls") ~ "</span>"), 
+                     class = "btn-info btn-sm", style = "font-weight: 700; padding: 6px 14px;"),
+        tags$span(style = "font-weight: 700; color: #0f766e; font-size: 0.92rem; margin-left: 5px;", trans("Disposición:", "Layout:"))
+      ),
+      div(class = "btn-group", role = "group",
+        actionButton("btn_view_dual", HTML("<i class='fa fa-th-large'></i> " ~ trans("Dual 2D + 3D", "Dual 2D + 3D")), 
+                     class = "btn btn-sm btn-info map-view-btn active", style = "font-weight: 600;"),
+        actionButton("btn_view_2d_only", HTML("<i class='fa fa-map'></i> " ~ trans("Solo 2D Gigante", "2D Giant Only")), 
+                     class = "btn btn-sm btn-default map-view-btn", style = "font-weight: 600;"),
+        actionButton("btn_view_3d_only", HTML("<i class='fa fa-cube'></i> " ~ trans("Solo 3D Gigante", "3D Giant Only")), 
+                     class = "btn btn-sm btn-default map-view-btn", style = "font-weight: 600;")
+      )
     ),
     
-    # Main Dashboard Visualizers
-    mainPanel(
-      width = 9,
-      
-      # Semantic layer descriptions
-      div(class = "panel-glass", style = "padding:15px; margin-bottom:20px; border-left:4px solid #0f766e;",
-        tags$span(style = "font-weight: 700; color: #0f766e; font-size:0.95rem; display:block; margin-bottom:4px;", 
-                  trans("Capa Sem\u00e1ntica Activa:", "Active Semantic Layer:")),
-        uiOutput("active_case_details_ui")
-      ),
-      
-      # Maps layout
-      fluidRow(
-        column(6,
-          div(class = "panel-glass", style = "padding:20px; min-height:500px;",
-            div(style = "display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;",
-              h4(style = "color:#1e293b; margin:0; font-weight:600;", 
-                 trans("Mapa 2D: Geod\u00e9sicas e Interacci\u00f3n", "2D Map: Geodesics & Interaction")),
-              actionButton("toggle_2d_fullscreen", trans("Pantalla Completa", "Fullscreen"), class = "btn-info btn-xs", icon = icon("expand"), style = "padding:6px 12px; font-size:0.95rem; font-weight:600;")
-            ),
-            leafletOutput("leaflet_map", height = "430px")
-          )
-        ),
-        column(6,
-          div(class = "panel-glass", style = "padding:20px; min-height:500px;",
-            div(style = "display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;",
-              h4(style = "color:#1e293b; margin:0; font-weight:600;", 
-                 trans("Malla 3D: Variedad Deformada (Manifold)", "3D Mesh: Deformed Manifold")),
-              actionButton("toggle_3d_fullscreen", trans("Pantalla Completa", "Fullscreen"), class = "btn-info btn-xs", icon = icon("expand"), style = "padding:6px 12px; font-size:0.95rem; font-weight:600;")
-            ),
-            plotlyOutput("plotly_mesh", height = "430px")
-          )
+    # Semantic layer descriptions
+    div(class = "panel-glass", style = "padding:15px; margin-bottom:20px; border-left:4px solid #0f766e;",
+      tags$span(style = "font-weight: 700; color: #0f766e; font-size:0.95rem; display:block; margin-bottom:4px;", 
+                trans("Capa Sem\u00e1ntica Activa:", "Active Semantic Layer:")),
+      uiOutput("active_case_details_ui")
+    ),
+    
+    # Maps layout (Responsive 2D and 3D with mode switching)
+    div(id = "maps_row_container", class = "row",
+      div(id = "col_map_2d", class = "col-md-6 col-sm-12",
+        div(class = "panel-glass map-panel", style = "padding:18px; margin-bottom:20px;",
+          div(style = "display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;",
+            h4(style = "color:#1e293b; margin:0; font-weight:600;", 
+               trans("Mapa 2D: Geod\u00e9sicas e Interacci\u00f3n", "2D Map: Geodesics & Interaction")),
+            actionButton("toggle_2d_fullscreen", trans("Pantalla Completa", "Fullscreen"), class = "btn-info btn-xs", icon = icon("expand"), style = "padding:4px 10px; font-weight:600;")
+          ),
+          leafletOutput("leaflet_map", height = "520px")
         )
       ),
-      
-      # HUD and KPIs Panels
-      fluidRow(style = "margin-top:20px;",
-        column(5,
-          div(class = "panel-glass", style = "padding:15px; min-height:220px;",
-            h4(style = "color:#0284c7; margin-top:0; font-weight:600;", 
-               trans("HUD de P\u00edxel Ontol\u00f3gico", "Ontological Pixel HUD")),
-            uiOutput("pixel_fiche_ui")
-          )
-        ),
-        column(7,
-          div(class = "panel-glass", style = "padding:15px; min-height:220px;",
-            h4(style = "color:#0f766e; margin-top:0; font-weight:600;", 
-               trans("Estado del Solucionador y KPIs", "Solver Status & KPIs")),
-            uiOutput("solver_kpis_ui")
-          )
+      div(id = "col_map_3d", class = "col-md-6 col-sm-12",
+        div(class = "panel-glass map-panel", style = "padding:18px; margin-bottom:20px;",
+          div(style = "display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;",
+            h4(style = "color:#1e293b; margin:0; font-weight:600;", 
+               trans("Malla 3D: Variedad Deformada (Manifold)", "3D Mesh: Deformed Manifold")),
+            actionButton("toggle_3d_fullscreen", trans("Pantalla Completa", "Fullscreen"), class = "btn-info btn-xs", icon = icon("expand"), style = "padding:4px 10px; font-weight:600;")
+          ),
+          plotlyOutput("plotly_mesh", height = "520px")
+        )
+      )
+    ),
+    
+    # HUD and KPIs Panels
+    fluidRow(style = "margin-top:10px;",
+      column(5,
+        div(class = "panel-glass", style = "padding:15px; min-height:220px;",
+          h4(style = "color:#0284c7; margin-top:0; font-weight:600;", 
+             trans("HUD de P\u00edxel Ontol\u00f3gico", "Ontological Pixel HUD")),
+          uiOutput("pixel_fiche_ui")
         )
       ),
-      
-      # Live Feed Console Panel
-      fluidRow(style = "margin-top:20px;",
-        column(12,
-          div(class = "panel-glass", style = "padding:15px; min-height:140px; background: #0f172a; border: 1px solid #334155; border-radius: 8px;",
-            h4(style = "color:#10b981; margin-top:0; font-family: monospace; font-weight:600;", 
-               trans("Consola de Eventos Tensivos en Vivo (Live Feed)", "Live Tensive Event Console (Live Feed)")),
-            div(style = "font-family: monospace; color: #34d399; font-size: 0.85rem; max-height: 90px; overflow-y: auto; padding: 5px; line-height: 1.4;",
-                htmlOutput("live_feed_ui"))
-          )
+      column(7,
+        div(class = "panel-glass", style = "padding:15px; min-height:220px;",
+          h4(style = "color:#0f766e; margin-top:0; font-weight:600;", 
+             trans("Estado del Solucionador y KPIs", "Solver Status & KPIs")),
+          uiOutput("solver_kpis_ui")
+        )
+      )
+    ),
+    
+    # Live Feed Console Panel
+    fluidRow(style = "margin-top:20px;",
+      column(12,
+        div(class = "panel-glass", style = "padding:15px; min-height:140px; background: #0f172a; border: 1px solid #334155; border-radius: 8px;",
+          h4(style = "color:#10b981; margin-top:0; font-family: monospace; font-weight:600;", 
+             trans("Consola de Eventos Tensivos en Vivo (Live Feed)", "Live Tensive Event Console (Live Feed)")),
+          div(style = "font-family: monospace; color: #34d399; font-size: 0.85rem; max-height: 90px; overflow-y: auto; padding: 5px; line-height: 1.4;",
+              htmlOutput("live_feed_ui"))
         )
       )
     )
-  )
+  ),
+    )
+  ),
+  tags$script(HTML("
+  $(document).on('click', '#btn_collapse_sidebar, #btn_toggle_sidebar', function() {
+    var wrapper = $('#sim_wrapper');
+    wrapper.toggleClass('sidebar-collapsed');
+    var isCollapsed = wrapper.hasClass('sidebar-collapsed');
+    var isEn = $('#chat_query').attr('placeholder') && $('#chat_query').attr('placeholder').indexOf('Ask') !== -1;
+    var label = isCollapsed ? (isEn ? 'Show Controls' : 'Mostrar Controles') : (isEn ? 'Hide Controls' : 'Ocultar Controles');
+    var icon = isCollapsed ? '<i class=\"fa fa-sliders\"></i> ' : '<i class=\"fa fa-columns\"></i> ';
+    $('#txt_toggle_sidebar').html(label);
+    $('#btn_toggle_sidebar').find('i').attr('class', isCollapsed ? 'fa fa-sliders' : 'fa fa-columns');
+    
+    setTimeout(function() {
+      if (window.HTMLWidgets && HTMLWidgets.find('#leaflet_map')) {
+        HTMLWidgets.find('#leaflet_map').getMap().invalidateSize();
+      }
+      window.dispatchEvent(new Event('resize'));
+    }, 300);
+  });
+
+  $(document).on('click', '#btn_view_dual', function() {
+    $('.map-view-btn').removeClass('active btn-info').addClass('btn-default');
+    $(this).addClass('active btn-info').removeClass('btn-default');
+    $('#col_map_2d').show().attr('class', 'col-md-6 col-sm-12');
+    $('#col_map_3d').show().attr('class', 'col-md-6 col-sm-12');
+    $('#leaflet_map').css('height', '520px');
+    $('#plotly_mesh').css('height', '520px');
+    setTimeout(function() {
+      if (window.HTMLWidgets && HTMLWidgets.find('#leaflet_map')) {
+        HTMLWidgets.find('#leaflet_map').getMap().invalidateSize();
+      }
+      window.dispatchEvent(new Event('resize'));
+    }, 300);
+  });
+
+  $(document).on('click', '#btn_view_2d_only', function() {
+    $('.map-view-btn').removeClass('active btn-info').addClass('btn-default');
+    $(this).addClass('active btn-info').removeClass('btn-default');
+    $('#col_map_3d').hide();
+    $('#col_map_2d').show().attr('class', 'col-md-12 col-sm-12');
+    $('#leaflet_map').css('height', '680px');
+    setTimeout(function() {
+      if (window.HTMLWidgets && HTMLWidgets.find('#leaflet_map')) {
+        HTMLWidgets.find('#leaflet_map').getMap().invalidateSize();
+      }
+    }, 300);
+  });
+
+  $(document).on('click', '#btn_view_3d_only', function() {
+    $('.map-view-btn').removeClass('active btn-info').addClass('btn-default');
+    $(this).addClass('active btn-info').removeClass('btn-default');
+    $('#col_map_2d').hide();
+    $('#col_map_3d').show().attr('class', 'col-md-12 col-sm-12');
+    $('#plotly_mesh').css('height', '680px');
+    setTimeout(function() {
+      window.dispatchEvent(new Event('resize'));
+    }, 300);
+  });
+"))
+)
 }

@@ -43,7 +43,7 @@ tab2_server <- function(input, output, session, active_exp_line, lang, run_sim_t
     is_en <- identical(lang(), "EN")
     sel_line <- as.character(active_exp_line())
     
-    # 7 Experiments Configuration
+    # 8 Experiments Configuration
     titles <- list(
       "1" = trans("1. Refracci\u00f3n de Borde (Snell)", "1. Edge Refraction (Snell)"),
       "2" = trans("2. Desviaci\u00f3n Geod\u00e9sica (Exclusi\u00f3n)", "2. Geodesic Deviation (Exclusion)"),
@@ -51,14 +51,15 @@ tab2_server <- function(input, output, session, active_exp_line, lang, run_sim_t
       "4" = trans("4. Memoria del Trauma (Caputo)", "4. Trauma Memory (Caputo)"),
       "5" = trans("5. Regularizaci\u00f3n de Moran (Ledoit-Wolf)", "5. Moran Regularization (Ledoit-Wolf)"),
       "6" = trans("6. Fronteras Ecol\u00f3gicas (Robin)", "6. Ecological Boundaries (Robin)"),
-      "7" = trans("7. Refracci\u00f3n de Capital (Harvey)", "7. Capital Refraction (Harvey)")
+      "7" = trans("7. Refracci\u00f3n de Capital (Harvey)", "7. Capital Refraction (Harvey)"),
+      "8" = trans("8. Deformaci\u00f3n MBHT 4D (SUBDERE)", "8. MBHT 4D Deformation (SUBDERE)")
     )
     
-    # Create the horizontal selector cards
+    # Create the horizontal selector cards (4 columns per row for 8 items)
     selectors <- lapply(names(titles), function(num) {
       is_active <- (num == sel_line)
       card_class <- if (is_active) "experiment-card active" else "experiment-card"
-      column(4, style = "margin-bottom:10px;",
+      column(3, style = "margin-bottom:10px;",
         div(class = card_class,
             onclick = sprintf("Shiny.setInputValue('select_line', '%s');", num),
             tags$span(style = "color:#0284c7; font-weight:600; font-size:0.85rem; display:block;", 
@@ -125,6 +126,14 @@ tab2_server <- function(input, output, session, active_exp_line, lang, run_sim_t
         formula = "$$g_{ij} \\rightarrow R_{ratio} \\cdot g_{ij}$$",
         img = "images/refraction_didactic.png", # fallback
         exp_mode_val = "exp7"
+      ),
+      "8" = list(
+        title = titles[8],
+        desc = trans("Modela la deformaci\u00f3n tensorial a partir del Modelo de Bienestar Humano Territorial (SUBDERE). Un tensor 4D integra dimensiones: Ambiental, Seguridad, Social y Accesibilidad. La varianza entre dimensiones act\u00faa como curvatura geotensorial que distorsiona las geod\u00e9sicas de desplazamiento hacia cuencas de bienestar integral.",
+                     "Models tensorial deformation based on the Territorial Human Well-being Model (SUBDERE). A 4D tensor integrates dimensions: Environmental, Safety, Social, and Accessibility. Variance among dimensions acts as geotensorial curvature distorting geodesics toward integral wellbeing basins."),
+        formula = "$$T_{\\mu\\nu} = \\text{diag}(D_{\\text{amb}}, D_{\\text{seg}}, D_{\\text{soc}}, D_{\\text{acc}}), \\quad R \\propto \\text{Var}(D_i)$$",
+        img = "images/refraction_didactic.png",
+        exp_mode_val = "exp8"
       )
     )
     
@@ -339,7 +348,7 @@ tab2_server <- function(input, output, session, active_exp_line, lang, run_sim_t
     sel_line <- active_exp_line()
     exp_mode_val <- switch(sel_line,
       "1" = "exp1", "2" = "exp2", "3" = "exp3", "4" = "exp4",
-      "5" = "exp5", "6" = "exp6", "7" = "exp7"
+      "5" = "exp5", "6" = "exp6", "7" = "exp7", "8" = "exp8"
     )
     updateSelectInput(session, "exp_mode", selected = exp_mode_val)
     run_sim_trigger(run_sim_trigger() + 1)

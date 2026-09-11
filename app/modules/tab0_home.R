@@ -184,6 +184,35 @@ tab0_server <- function(input, output, session, lang) {
         )
       ),
       
+      # 5. MBHT 4D Geotensors (SUBDERE)
+      div(class = "panel-glass", style = "padding: 30px; margin-bottom: 30px; border-radius: 12px; border-left: 5px solid #6366f1;",
+        fluidRow(
+          column(5,
+            div(style = "text-align: center;",
+              tags$img(src = "images/refraction_didactic.png", style = "width: 100%; max-width: 560px; border-radius: 8px; border: 2px solid rgba(255,255,255,0.1); box-shadow: 0 4px 15px rgba(0,0,0,0.5);")
+            )
+          ),
+          column(7,
+            h4(style = "color: #4f46e5; font-weight: 700; font-size: 1.35rem;", trans("Deformación Geotensorial MBHT 4D (SUBDERE)", "MBHT 4D Geotensorial Deformation (SUBDERE)")),
+            p(style = "color: #334155; font-size: 1.1rem; line-height: 1.6; margin-top: 15px;",
+              trans(
+                "El Modelo de Bienestar Humano Territorial (SUBDERE) evalúa el hábitat a través de cuatro dimensiones irreductibles: Ambiental, Seguridad, Social y Accesibilidad. Formalizado como un tensor tetradimensional, la varianza interdimensional genera curvatura geotensorial intrínseca: las fracturas entre dimensiones deforman las trayectorias peatonales y revelan la necesidad de inversión focalizada.",
+                "The Territorial Human Well-being Model (SUBDERE) assesses habitat through four irreducible dimensions: Environmental, Safety, Social, and Accessibility. Formalized as a 4D tensor, interdimensional variance produces intrinsic geotensorial curvature: fractures among dimensions distort pedestrian geodesics, highlighting areas requiring prioritized public investment."
+              )),
+            div(style = "display: flex; gap: 10px; flex-wrap: wrap; margin-top: 15px;",
+              actionButton("go_to_mbht", trans("Simular MBHT 4D", "Simulate 4D MBHT"), class = "btn-primary", style = "font-weight: bold;"),
+              tags$a(
+                href = "https://OntologiaTerritorial.github.io/ontologia-territorial-mbht/",
+                target = "_blank",
+                class = "btn btn-info",
+                style = "font-weight: bold; display: inline-flex; align-items: center; gap: 6px;",
+                tagList(icon("cube"), trans("Explorar Modelo 3D (Pydeck) \u2192", "Explore 3D Model (Pydeck) \u2192"))
+              )
+            )
+          )
+        )
+      ),
+      
       # FOOTER ROUTING BUTTONS
       div(class = "text-center", style = "margin-top: 50px; padding: 20px;",
         h3(style = "color: #0369a1; margin-bottom: 25px; font-weight: 700;", trans("Navegaci\u00f3n del Ecosistema", "Ecosystem Navigation")),
@@ -221,6 +250,14 @@ tab0_server <- function(input, output, session, lang) {
             class = "btn btn-default",
             style = "border-radius: 8px; font-weight: 600; background: #024b30; color: #fff; padding: 8px 16px; border: none; display: inline-flex; align-items: center; gap: 8px; transition: transform 0.2s;",
             tagList(icon("archive"), trans("Puerto Umbral: Simulador (Zenodo)", "Puerto Umbral: Simulator (Zenodo)"))
+          ),
+          # MBHT 3D Dashboard Link
+          tags$a(
+            href = "https://OntologiaTerritorial.github.io/ontologia-territorial-mbht/",
+            target = "_blank",
+            class = "btn btn-default",
+            style = "border-radius: 8px; font-weight: 600; background: #4f46e5; color: #fff; padding: 8px 16px; border: none; display: inline-flex; align-items: center; gap: 8px; transition: transform 0.2s;",
+            tagList(icon("cube"), trans("Dashboard 3D MBHT (Pydeck)", "3D MBHT Dashboard (Pydeck)"))
           ),
           # Tomo I Link
           tags$a(
@@ -302,6 +339,11 @@ tab0_server <- function(input, output, session, lang) {
   observeEvent(input$go_to_memory, {
     updateNavbarPage(session = session, "nav_active", selected = "L\u00edneas de Trabajo")
     updateSelectInput(session = session, "exp_choice", selected = "exp4")
+  })
+  
+  observeEvent(input$go_to_mbht, {
+    updateNavbarPage(session = session, "nav_active", selected = "Centro de Simulaci\u00f3n")
+    updateSelectInput(session = session, "exp_mode", selected = "exp8")
   })
   
   observeEvent(input$go_to_sim_panel, {

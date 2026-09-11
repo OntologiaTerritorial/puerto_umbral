@@ -128,17 +128,17 @@ def main():
     );
     """)
     
-    # 2. Migrate existing Experiment 1 (Peñalolén) to Experiment 6 (Santuario)
-    print("Migrating original Peñalolén data from experiment_id = 1 to 6...")
-    cursor.execute("UPDATE pixeles SET experimento_id = 6 WHERE experimento_id = 1;")
-    cursor.execute("UPDATE geodesicas_registro SET experimento_id = 6 WHERE experimento_id = 1;")
+    # 2. Ensure real Peñalolén data has experiment_id = 6
+    print("Ensuring real Peñalolén data is assigned to experiment_id = 6...")
+    cursor.execute("UPDATE pixeles SET experimento_id = 6 WHERE id LIKE '13122%';")
+    cursor.execute("UPDATE geodesicas_registro SET experimento_id = 6 WHERE origen_id LIKE '13122%';")
     
     # 3. Clean up any existing data for synthetic experiments to ensure idempotency
     cursor.execute("DELETE FROM experimentos;")
-    cursor.execute("DELETE FROM pixeles WHERE experimento_id != 6;")
-    cursor.execute("DELETE FROM pixel_relaciones WHERE origen_id LIKE '%_synth_%';")
-    cursor.execute("DELETE FROM pixel_memorias WHERE pixel_id LIKE '%_synth_%';")
-    cursor.execute("DELETE FROM pixel_latencias WHERE pixel_id LIKE '%_synth_%';")
+    cursor.execute("DELETE FROM pixeles WHERE id NOT LIKE '13122%';")
+    cursor.execute("DELETE FROM pixel_relaciones WHERE origen_id NOT LIKE '13122%';")
+    cursor.execute("DELETE FROM pixel_memorias WHERE pixel_id NOT LIKE '13122%';")
+    cursor.execute("DELETE FROM pixel_latencias WHERE pixel_id NOT LIKE '13122%';")
     cursor.execute("DELETE FROM pixel_ieo_campo;")
     
     # 4. Insert descriptions in 'experimentos' table
@@ -149,18 +149,19 @@ def main():
         (4, "Memoria del Trauma (Caputo Fraccionario)", "Comuna de la Memoria", "Escenario con nodos históricos de trauma y decaimiento de memoria no markoviano de orden fraccionario.", "2026-06-26"),
         (5, "Métrica de Moran (Ledoit-Wolf)", "Comuna Geoestadística", "Malla con ruido espacial Gaussiano y matrices inestables listas para validación Moran y regularización Ledoit-Wolf.", "2026-06-26"),
         (6, "Santuario de Peñalolén (Robin Boundary)", "Peñalolén precordillera", "Caso real del Santuario Quebrada de Macul con límites ecológicos asimétricos y condiciones de Robin.", "2026-06-26"),
-        (7, "Refracción de Capital (Urbano-Rural)", "Borde Urbano-Rural", "Transición y salto de plusvalía y especulación inmobiliaria en el límite periurbano.", "2026-06-26")
+        (7, "Refracción de Capital (Urbano-Rural)", "Borde Urbano-Rural", "Transición y salto de plusvalía y especulación inmobiliaria en el límite periurbano.", "2026-06-26"),
+        (8, "Deformación MBHT 4D (SUBDERE)", "Gran Santiago / Nacional", "Modelo de Bienestar Humano Territorial (SUBDERE). Tensor 4D de dimensiones Ambiental, Seguridad, Social y Accesibilidad. La varianza multidimensional induce tensión geotensorial intrínseca.", "2026-09-11")
     ]
     cursor.executemany("INSERT INTO experimentos VALUES (?, ?, ?, ?, ?);", experimentos_list)
     
-    # 5. Populate Synthetic Experiments (1, 2, 3, 4, 5, 7)
+    # 5. Populate Synthetic Experiments (1, 2, 3, 4, 5, 7, 8)
     grid_size = 12
     # UTM center offset for Santiago scale
     x_base = 352000
     y_base = 6292000
     spacing = 200 # 200 meters between pixels
     
-    for exp_id in [1, 2, 3, 4, 5, 7]:
+    for exp_id in [1, 2, 3, 4, 5, 7, 8]:
         print(f"Generating synthetic grid for Experiment {exp_id}...")
         pixels_data = []
         relaciones_data = []
@@ -242,6 +243,32 @@ def main():
                         alt = 620.0
                         ndvi = 0.6
                         red_cuidado = "Media"
+                        
+                elif exp_id == 8:
+                    # MBHT 4D: Dimensional variation (Ambiental, Seguridad, Social, Accesibilidad)
+                    d_amb = 0.2 + 0.6 * (c / 11.0) * (r / 11.0)
+                    d_seg = 0.5 + 0.3 * math.sin(c * 0.8) * math.cos(r * 0.8)
+                    d_soc = 0.4 + 0.4 * math.exp(-0.1 * ((r - 6.0)**2 + (c - 5.0)**2))
+                    d_acc = max(0.1, 0.7 - 0.4 * (c / 11.0) + 0.1 * (r / 11.0))
+                    
+                    alt = 560.0 + 320.0 * (c / 11.0)
+                    ndvi = max(0.1, min(0.85, d_amb))
+                    
+                    mean_mbht = (d_amb + d_seg + d_soc + d_acc) / 4.0
+                    var_mbht = ((d_amb - mean_mbht)**2 + (d_seg - mean_mbht)**2 + (d_soc - mean_mbht)**2 + (d_acc - mean_mbht)**2) / 4.0
+                    
+                    if var_mbht < 0.02:
+                        cobertura = "MBHT Equilibrado"
+                        red_cuidado = "Alta"
+                    elif d_seg < 0.35:
+                        cobertura = "MBHT Deficit Seguridad"
+                        red_cuidado = "Baja"
+                    elif d_amb < 0.35:
+                        cobertura = "MBHT Deficit Ambiental"
+                        red_cuidado = "Media"
+                    else:
+                        cobertura = "MBHT Mixto Dinamico"
+                        red_cuidado = "Media"
                 
                 pixels_data.append((p_id, exp_id, None, x_coord, y_coord, alt, ndvi, cobertura, red_cuidado))
                 
@@ -280,6 +307,9 @@ def main():
                             # Boundary crossings show high speculative pressure
                             if (c == 5 and nc == 6) or (c == 6 and nc == 5):
                                 weight = 5.0
+                        elif exp_id == 8:
+                            # Relational flux correlates with multidimensional wellbeing
+                            weight = 1.0 + 2.5 * ((c + nc) / 22.0)
                                 
                         relaciones_data.append((p_id, n_id, "flujo_diario", weight))
                         
@@ -293,6 +323,9 @@ def main():
                         # Minor historical event
                         for year_offset, trauma_val in [(2021, 0.80), (2023, 0.60), (2025, 0.40)]:
                             memorias_data.append((p_id, year_offset, "nodo_resistencia", "Desalojo de huerto", trauma_val))
+                elif exp_id == 8:
+                    if r == 6 and c == 6:
+                        memorias_data.append((p_id, 2026.0, "nodo_resistencia", "Mesa Territorial de Bienestar SUBDERE", 0.9))
                 else:
                     # Generic placeholder memory for other experiments
                     if r == 5 and c == 5:
@@ -313,6 +346,16 @@ def main():
                     # Random noisy frictions for Moran calculations
                     f_noise = max(500.0, 5000.0 + random.normalvariate(0.0, 2000.0))
                     latencias_data.append((p_id, 2026.0, "conflicto_delito", f_noise))
+                elif exp_id == 8:
+                    # Friction driven by multidimensional variance (SUBDERE MBHT)
+                    d_amb_l = 0.2 + 0.6 * (c / 11.0) * (r / 11.0)
+                    d_seg_l = 0.5 + 0.3 * math.sin(c * 0.8) * math.cos(r * 0.8)
+                    d_soc_l = 0.4 + 0.4 * math.exp(-0.1 * ((r - 6.0)**2 + (c - 5.0)**2))
+                    d_acc_l = max(0.1, 0.7 - 0.4 * (c / 11.0) + 0.1 * (r / 11.0))
+                    m_mbht = (d_amb_l + d_seg_l + d_soc_l + d_acc_l) / 4.0
+                    v_mbht = ((d_amb_l - m_mbht)**2 + (d_seg_l - m_mbht)**2 + (d_soc_l - m_mbht)**2 + (d_acc_l - m_mbht)**2) / 4.0
+                    friction_val = 2000.0 + 35000.0 * v_mbht
+                    latencias_data.append((p_id, 2026.0, "gentrificacion_poder", friction_val))
                 else:
                     latencias_data.append((p_id, 2026.0, "barrera_limite", 1200.0))
         

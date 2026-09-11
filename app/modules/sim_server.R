@@ -120,6 +120,7 @@ sim_server <- function(input, output, session, lang, run_sim_trigger) {
                      "exp5" = 5,
                      "exp6" = 6,
                      "exp7" = 7,
+                     "exp8" = 8,
                      6) # Default to 6 (Pe\u00f1alol\u00e9n / base)
     
     conn_act <- dbConnect(SQLite(), dbname = db_path)
@@ -142,11 +143,9 @@ sim_server <- function(input, output, session, lang, run_sim_trigger) {
       stringsAsFactors = FALSE
     )
     
-    m_sf <- st_as_sf(m_df, coords = c("x", "y"), crs = UTM_CRS) %>%
-      st_transform(4326)
-    coords_wgs84 <- st_coordinates(m_sf)
-    m_df$lng <- coords_wgs84[, 1]
-    m_df$lat <- coords_wgs84[, 2]
+    coords_wgs84 <- utm_to_wgs84_vector(m_df$x, m_df$y)
+    m_df$lng <- coords_wgs84$lng
+    m_df$lat <- coords_wgs84$lat
     
     pix_ids_str <- paste(sprintf("'%s'", m_df$id), collapse = ",")
     mem_query <- sprintf("SELECT pixel_id, timestamp_simulado, atraccion_H_i FROM pixel_memorias WHERE pixel_id IN (%s)", pix_ids_str)
@@ -229,6 +228,7 @@ sim_server <- function(input, output, session, lang, run_sim_trigger) {
   observeEvent(input$load_exp_5, { updateSelectInput(session, "exp_mode", selected = "exp5"); updateNavbarPage(session, "nav_active", selected = "Centro de Simulaci\u00f3n") })
   observeEvent(input$load_exp_6, { updateSelectInput(session, "exp_mode", selected = "exp6"); updateNavbarPage(session, "nav_active", selected = "Centro de Simulaci\u00f3n") })
   observeEvent(input$load_exp_7, { updateSelectInput(session, "exp_mode", selected = "exp7"); updateNavbarPage(session, "nav_active", selected = "Centro de Simulaci\u00f3n") })
+  observeEvent(input$load_exp_8, { updateSelectInput(session, "exp_mode", selected = "exp8"); updateNavbarPage(session, "nav_active", selected = "Centro de Simulaci\u00f3n") })
 
   # Reactive value for custom uploaded data (Zenodo)
   # (Note: custom_data was L1322, we replace the definition below)
@@ -2831,6 +2831,11 @@ sim_server <- function(input, output, session, lang, run_sim_trigger) {
         "Experiment 7 (Capital Refraction): Real estate speculation distorts the Riemannian metric, creating a steep slope of capital plusval\u00eda that refracts low-income flows, pushing them to peripheral trajectories."
       } else {
         "Experimento 7 (Refracci\u00f3n de Capital): La especulaci\u00f3n inmobiliaria deforma la m\u00e9trica riemanniana, creando una pendiente pronunciada de plusval\u00eda que refracta los flujos peatonales, expuls\u00e1ndolos hacia trayectorias perif\u00e9ricas."
+      },
+      "exp8" = if (is_en) {
+        "Experiment 8 (MBHT 4D SUBDERE): The 4-dimensional territorial well-being tensor induces metric curvature from inter-dimensional variance, exposing structural inequity in everyday trajectories."
+      } else {
+        "Experimento 8 (MBHT 4D SUBDERE): El tensor tetradimensional de bienestar territorial induce curvatura m\u00e9trica a partir de la varianza interdimensional, exponiendo la desigualdad estructural en las trayectorias cotidianas."
       }
     )
     
@@ -3077,6 +3082,7 @@ sim_server <- function(input, output, session, lang, run_sim_trigger) {
       "exp5" = if (is_en) "Moran spatial autocorrelation and covariance validation active. In data-sparse field setups (N = 50), Ledoit-Wolf shrinkage is applied to stabilize the metric tensor g_ij against field noise." else "Validaci\u00f3n de covarianza y autocorrelaci\u00f3n de Moran activa. Ante la escasez de muestras en terreno (N = 50), se aplica la regularizaci\u00f3n de Ledoit-Wolf para estabilizar el tensor m\u00e9trico g_ij frente al ruido de campo.",
       "exp6" = if (is_en) "Pe\u00f1alol\u00e9n sanctuary active. The asymmetric boundary and Robin conditions channel the ecological walker's geodesic, protecting the natural corridor from slope erosion." else "Santuario de Pe\u00f1alol\u00e9n activo. La frontera asim\u00e9trica y las condiciones de Robin canalizan la geod\u00e9sica del peat\u00f3n ecol\u00f3gico, protegiendo el corredor natural del desgaste de la loma.",
       "exp7" = if (is_en) "Urban-rural limit and capital refraction active. The gradient of land rent and real estate speculation attracts or repels valuation paths, forcing phase transitions of financial flows." else "L\u00edmite urbano-rural y refracci\u00f3n de capital activa. El gradiente de plusval\u00eda y especulaci\u00f3n inmobiliaria atrae o repele las trayectorias de valorizaci\u00f3n, forzando transiciones de fase de flujo financiero.",
+      "exp8" = if (is_en) "MBHT 4D deformation active. The 4-dimensional tensor integrates Environmental, Safety, Social, and Accessibility indicators from SUBDERE. Multi-criteria variance generates intrinsic geotensorial tension, curving trajectories towards zones of integral human well-being." else "Deformaci\u00f3n MBHT 4D activa. El tensor tetradimensional integra indicadores Ambientales, Seguridad, Social y Accesibilidad de SUBDERE. La varianza multidimensional genera tensi\u00f3n geotensorial intr\u00ednseca, curvando trayectorias hacia cuencas de bienestar humano integral.",
       if (is_en) "Stable municipal communes and territorial manifolds. Geodesics track altitude contours and baseline friction in equilibrium." else "Comunas y variedades territoriales estables. Las geod\u00e9sicas siguen el contorno de la altitud y fricci\u00f3n base en equilibrio."
     )
     
@@ -3187,6 +3193,12 @@ sim_server <- function(input, output, session, lang, run_sim_trigger) {
         diag = "Salto de m\u00e9trica y plusval\u00eda especulativa en el l\u00edmite urbano-rural.",
         poet = "La refracci\u00f3n del capital deforma las geod\u00e9sicas inmobiliarias, succionando la plusval\u00eda de la periferia campesina.",
         policy = "Muestrear precios de suelo en el l\u00edmite. Aplicar un impuesto al mayor valor de suelo para financiar viviendas sociales locales."
+      ),
+      "exp8" = list(
+        name = "Consejero MBHT 4D (SUBDERE & Geotensores)",
+        diag = "Tensor tetradimensional (Ambiental, Seguridad, Social, Accesibilidad) con deformaci\u00f3n geod\u00e9sica multiescalar.",
+        poet = "El bienestar no es un promedio unidimensional; la tensi\u00f3n entre carencias deforma la geod\u00e9sica cotidiana, revelando las fracturas del suelo social.",
+        policy = "Focalizar inversiones SUBDERE reduciendo la varianza interdimensional en comunas prioritarias del Gran Santiago."
       ),
       list(
         name = "C\u00edrculo de Consejeros Territoriales (IA Local)",
