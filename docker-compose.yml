@@ -1,0 +1,28 @@
+# ==============================================================================
+# docker-compose.yml: Orquestador de Puerto Umbral Shiny Server
+# ==============================================================================
+
+services:
+  puerto_umbral_shiny:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: ontologiaterritorial/puerto_umbral:v5.4
+    container_name: puerto_umbral_server
+    restart: unless-stopped
+    ports:
+      - "3838:3838"
+    environment:
+      - PUERTO_DEBUG=FALSE
+      - TZ=America/Santiago
+    volumes:
+      # Montar carpeta app para edicion en vivo sin reconstruir el contenedor
+      - ./app:/srv/shiny-server/app
+      # Persistencia de logs de sesion
+      - ./logs:/var/log/shiny-server
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3838/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 20s

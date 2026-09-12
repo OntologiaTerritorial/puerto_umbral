@@ -1,0 +1,1537 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="theme-color" content="#0f172a">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="author" content="John Treimun, Centro de Inteligencia Territorial, Universidad Adolfo Ibáñez">
+  <title>FIBE Terreno - Catastro de Emergencia GRD</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: rgba(30, 41, 59, 0.95);
+      --border: rgba(255, 255, 255, 0.12);
+      --primary: #0ea5e9;
+      --primary-hover: #0284c7;
+      --danger: #ef4444;
+      --warning: #f59e0b;
+      --success: #10b981;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+    }
+
+    * {
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      background-color: #0f172a;
+      background: #0f172a linear-gradient(135deg, #0f172a 0%, #020617 100%);
+      color: #f8fafc;
+      color: var(--text);
+      -webkit-text-size-adjust: 100%;
+    }
+
+    body {
+      min-height: 100vh;
+      padding: 10px;
+      padding-bottom: 90px;
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+      -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+      flex-direction: column;
+      -webkit-box-align: center;
+      -webkit-align-items: center;
+      -ms-flex-align: center;
+      align-items: center;
+    }
+
+    .container {
+      max-width: 500px;
+      width: 100%;
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+      -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .header {
+      background: #1e293b;
+      background: rgba(239, 68, 68, 0.15);
+      border: 1px solid #ef4444;
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      padding: 12px 14px;
+      border-radius: 14px;
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-pack: justify;
+      -webkit-justify-content: space-between;
+      -ms-flex-pack: justify;
+      justify-content: space-between;
+      -webkit-box-align: center;
+      -webkit-align-items: center;
+      -ms-flex-align: center;
+      align-items: center;
+    }
+
+    .header-info h1 {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: #fca5a5;
+    }
+
+    .header-info p {
+      font-size: 0.72rem;
+      color: #f8fafc;
+      margin-top: 2px;
+      opacity: 0.85;
+    }
+
+    .badge-emergency {
+      background: #ef4444;
+      color: #ffffff;
+      font-size: 0.65rem;
+      font-weight: 700;
+      padding: 4px 8px;
+      border-radius: 20px;
+      text-transform: uppercase;
+    }
+
+    .tabs {
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 12px;
+      padding: 3px;
+      gap: 3px;
+    }
+
+    .tab-btn {
+      -webkit-box-flex: 1;
+      -webkit-flex: 1;
+      -ms-flex: 1;
+      flex: 1;
+      padding: 10px 2px;
+      border: none;
+      background: transparent;
+      color: #94a3b8;
+      font-weight: 600;
+      font-size: 0.75rem;
+      border-radius: 9px;
+      cursor: pointer;
+      text-align: center;
+    }
+
+    .tab-btn.active {
+      background: #0ea5e9;
+      color: #ffffff;
+    }
+
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+      -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .card {
+      background: #1e293b;
+      background: rgba(30, 41, 59, 0.95);
+      border: 1px solid #334155;
+      border-radius: 14px;
+      padding: 14px;
+    }
+
+    .card-title {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: #0ea5e9;
+      margin-bottom: 10px;
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-pack: justify;
+      -webkit-justify-content: space-between;
+      -ms-flex-pack: justify;
+      justify-content: space-between;
+      -webkit-box-align: center;
+      -webkit-align-items: center;
+      -ms-flex-align: center;
+      align-items: center;
+      text-transform: uppercase;
+    }
+
+    .form-group {
+      margin-bottom: 10px;
+    }
+
+    label {
+      display: block;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: #94a3b8;
+      margin-bottom: 4px;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    input[type="tel"],
+    select,
+    textarea {
+      width: 100%;
+      padding: 11px;
+      background: #0f172a;
+      border: 1px solid #334155;
+      border-radius: 8px;
+      color: #ffffff;
+      font-size: 0.88rem;
+      outline: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: #0ea5e9;
+    }
+
+    .grid-2 {
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+      gap: 8px;
+    }
+
+    .grid-2 > * {
+      -webkit-box-flex: 1;
+      -webkit-flex: 1;
+      -ms-flex: 1;
+      flex: 1;
+    }
+
+    .pill-selector {
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+      -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .pill-btn {
+      padding: 11px 12px;
+      background: #0f172a;
+      border: 1px solid #334155;
+      border-radius: 8px;
+      color: #94a3b8;
+      font-size: 0.82rem;
+      font-weight: 600;
+      text-align: left;
+      cursor: pointer;
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-pack: justify;
+      -webkit-justify-content: space-between;
+      -ms-flex-pack: justify;
+      justify-content: space-between;
+      -webkit-box-align: center;
+      -webkit-align-items: center;
+      -ms-flex-align: center;
+      align-items: center;
+    }
+
+    .pill-btn.selected {
+      background: #0ea5e9;
+      color: #ffffff;
+      border-color: #0ea5e9;
+    }
+
+    .pill-btn.danger.selected { background: #ef4444; color: #ffffff; border-color: #ef4444; }
+    .pill-btn.warning.selected { background: #f59e0b; color: #ffffff; border-color: #f59e0b; }
+    .pill-btn.success.selected { background: #10b981; color: #ffffff; border-color: #10b981; }
+
+    .checkbox-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+    }
+
+    .checkbox-item {
+      background: #0f172a;
+      border: 1px solid #334155;
+      padding: 9px;
+      border-radius: 8px;
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-align: center;
+      -webkit-align-items: center;
+      -ms-flex-align: center;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.78rem;
+      color: #94a3b8;
+      cursor: pointer;
+    }
+
+    .checkbox-item input[type="checkbox"] {
+      width: 16px;
+      height: 16px;
+    }
+
+    .checkbox-item.checked {
+      border-color: #0ea5e9;
+      color: #ffffff;
+      background: #1e293b;
+    }
+
+    .gps-panel {
+      background: #0f172a;
+      border: 1px solid #0ea5e9;
+      padding: 12px;
+      border-radius: 12px;
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+      -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .gps-header-row {
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-pack: justify;
+      -webkit-justify-content: space-between;
+      -ms-flex-pack: justify;
+      justify-content: space-between;
+      -webkit-box-align: center;
+      -webkit-align-items: center;
+      -ms-flex-align: center;
+      align-items: center;
+    }
+
+    .gps-coords {
+      font-family: monospace, Courier, sans-serif;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #38bdf8;
+    }
+
+    .gps-status-badge {
+      font-size: 0.68rem;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 12px;
+      background: #334155;
+      color: #cbd5e1;
+    }
+
+    .gps-status-badge.active {
+      background: #10b981;
+      color: #ffffff;
+    }
+
+    .gps-status-badge.error {
+      background: #ef4444;
+      color: #ffffff;
+    }
+
+    .btn-gps {
+      background: #0ea5e9;
+      color: #ffffff;
+      border: none;
+      padding: 10px;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      font-weight: 800;
+      cursor: pointer;
+      text-align: center;
+      width: 100%;
+    }
+
+    .manual-gps-box {
+      margin-top: 6px;
+      padding-top: 8px;
+      border-top: 1px dashed #334155;
+      display: none;
+    }
+
+    .photo-box {
+      border: 2px dashed #334155;
+      border-radius: 10px;
+      padding: 16px;
+      text-align: center;
+      cursor: pointer;
+      background: #0f172a;
+    }
+
+    .photo-status {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: #10b981;
+      margin-top: 4px;
+      display: none;
+    }
+
+    .photo-preview {
+      width: 100%;
+      max-height: 160px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-top: 8px;
+      display: none;
+    }
+
+    .btn-submit {
+      width: 100%;
+      padding: 15px;
+      background: #10b981;
+      color: #ffffff;
+      border: none;
+      border-radius: 12px;
+      font-size: 0.95rem;
+      font-weight: 800;
+      cursor: pointer;
+      text-align: center;
+    }
+
+    .record-card {
+      background: #0f172a;
+      border: 1px solid #334155;
+      padding: 12px;
+      border-radius: 10px;
+      margin-bottom: 8px;
+    }
+
+    .record-header {
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-pack: justify;
+      -webkit-justify-content: space-between;
+      -ms-flex-pack: justify;
+      justify-content: space-between;
+      font-weight: 700;
+      font-size: 0.85rem;
+      color: #0ea5e9;
+      margin-bottom: 4px;
+    }
+
+    .record-id {
+      font-family: monospace, sans-serif;
+      font-size: 0.75rem;
+      background: #1e293b;
+      color: #38bdf8;
+      padding: 2px 5px;
+      border-radius: 4px;
+    }
+
+    .record-sub {
+      font-size: 0.75rem;
+      color: #94a3b8;
+      margin-bottom: 6px;
+    }
+
+    .tag {
+      font-size: 0.68rem;
+      font-weight: 700;
+      padding: 2px 6px;
+      border-radius: 4px;
+      display: inline-block;
+    }
+
+    .tag-danger { background: #ef4444; color: #ffffff; }
+    .tag-warning { background: #f59e0b; color: #ffffff; }
+    .tag-success { background: #10b981; color: #ffffff; }
+
+    .btn-export {
+      width: 100%;
+      padding: 12px;
+      background: #0ea5e9;
+      color: #ffffff;
+      border: none;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 0.85rem;
+      cursor: pointer;
+      margin-bottom: 8px;
+    }
+
+    .btn-photo-dl {
+      background: #1e293b;
+      border: 1px solid #38bdf8;
+      color: #38bdf8;
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 4px 8px;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-top: 5px;
+      display: inline-block;
+    }
+
+    .counter-badge {
+      background: #0f172a;
+      border: 1px solid #0ea5e9;
+      padding: 2px 6px;
+      border-radius: 10px;
+      font-size: 0.7rem;
+      color: #38bdf8;
+    }
+
+    .toast {
+      position: fixed;
+      top: 15px;
+      left: 50%;
+      -webkit-transform: translateX(-50%);
+      transform: translateX(-50%);
+      background: #10b981;
+      color: #ffffff;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      display: none;
+      z-index: 9999;
+    }
+
+    .alert-box {
+      background: rgba(245, 158, 11, 0.15);
+      border: 1px solid #f59e0b;
+      color: #fef08a;
+      padding: 10px;
+      border-radius: 8px;
+      font-size: 0.75rem;
+      margin-top: 6px;
+      display: none;
+    }
+
+    #trail-canvas {
+      width: 100%;
+      height: 160px;
+      background: #090d16;
+      border-radius: 10px;
+      border: 1px solid #334155;
+      margin-top: 6px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="toast" id="toast">✅ Operación realizada con éxito</div>
+
+  <div class="container">
+    
+    <!-- Header -->
+    <div class="header">
+      <div class="header-info">
+        <h1>🌧️ FIBE Terreno GRD</h1>
+        <p>Catastro de Emergencia - Gestión de Riesgo de Desastres</p>
+      </div>
+      <div class="badge-emergency">Emergencia</div>
+    </div>
+
+    <!-- GPS Panel Avanzado con Diagnóstico y Fallback Manual -->
+    <div class="gps-panel">
+      <div class="gps-header-row">
+        <div>
+          <label style="margin-bottom:0;">📍 Estado del GPS Interno</label>
+          <div class="gps-coords" id="gps-coords">Sin señal GPS activa</div>
+        </div>
+        <span class="gps-status-badge" id="gps-status-badge">Esperando permiso</span>
+      </div>
+
+      <button class="btn-gps" id="btn-request-gps" onclick="requestGPSPermissions()">
+        📡 OPRIMIR AQUÍ PARA ACTIVAR GPS MÓVIL
+      </button>
+
+      <div class="alert-box" id="gps-alert-box"></div>
+
+      <div style="font-size: 0.72rem; color: #94a3b8; text-align: center; margin-top: 2px;">
+        <a href="#" onclick="toggleManualGPS(event)" style="color:#38bdf8; text-decoration:underline;">
+          ✍️ ¿El navegador bloqueó el GPS? Ingresar coordenadas manualmente
+        </a>
+      </div>
+
+      <div class="manual-gps-box" id="manual-gps-box">
+        <label>Coordenadas Manuales (Latitud, Longitud):</label>
+        <div class="grid-2">
+          <input type="text" id="manual_lat" placeholder="Ej: -35.123456" oninput="updateManualGPS()">
+          <input type="text" id="manual_lng" placeholder="Ej: -71.654321" oninput="updateManualGPS()">
+        </div>
+      </div>
+    </div>
+
+    <!-- Navigation Tabs -->
+    <div class="tabs">
+      <button class="tab-btn active" onclick="switchTab('form')">📋 Ficha</button>
+      <button class="tab-btn" onclick="switchTab('records')">
+        💾 Registros (<span id="record-count">0</span>)
+      </button>
+      <button class="tab-btn" onclick="switchTab('track')">
+        🧭 Ruta (<span id="track-count">0</span> km)
+      </button>
+    </div>
+
+    <!-- TAB 1: FORMULARIO -->
+    <div class="tab-content active" id="tab-form">
+      
+      <div class="card">
+        <div class="card-title"><span>📍 1. Ubicación del Evento</span></div>
+        <div class="grid-2">
+          <div class="form-group">
+            <label for="comuna">Comuna</label>
+            <input type="text" id="comuna" placeholder="Ej: Licantén, Coltauco...">
+          </div>
+          <div class="form-group">
+            <label for="sector">Sector / Río / Población</label>
+            <input type="text" id="sector" placeholder="Ej: Ribera del Río, Sector Sur">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="direccion">Dirección o Referencia</label>
+          <input type="text" id="direccion" placeholder="Calle, N° o punto de referencia">
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title"><span>👤 2. Datos del Hogar</span></div>
+        <div class="form-group">
+          <label for="nombre_jefe">Nombre Completo</label>
+          <input type="text" id="nombre_jefe" placeholder="Nombres y Apellidos">
+        </div>
+        <div class="grid-2">
+          <div class="form-group">
+            <label for="rut">RUT</label>
+            <input type="text" id="rut" placeholder="12.345.678-K">
+          </div>
+          <div class="form-group">
+            <label for="telefono">Teléfono de Contacto</label>
+            <input type="tel" id="telefono" placeholder="+56 9 ...">
+          </div>
+        </div>
+        <div class="grid-2">
+          <div class="form-group">
+            <label for="cant_personas">Total Integrantes</label>
+            <input type="number" id="cant_personas" value="1" min="1">
+          </div>
+          <div class="form-group">
+            <label for="vulnerables">Adultos Mayores / Niños / Discapacidad</label>
+            <input type="number" id="vulnerables" value="0" min="0">
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title"><span>🏠 3. Daño en la Vivienda (FIBE)</span></div>
+        <div class="pill-selector" id="dano-vivienda">
+          <div class="pill-btn success" onclick="selectPill('dano-vivienda', this, 'Habitable / Poco Daño')">
+            <span>Habitable / Sin daño estructural</span> 🟢
+          </div>
+          <div class="pill-btn warning" onclick="selectPill('dano-vivienda', this, 'Daño Menor (Habitable)')">
+            <span>Daño Menor (Anegamiento parcial / Habitable)</span> 🟡
+          </div>
+          <div class="pill-btn warning selected" onclick="selectPill('dano-vivienda', this, 'Daño Mayor (No Habitable)')">
+            <span>Daño Mayor (Inhabitable temporalmente)</span> 🟠
+          </div>
+          <div class="pill-btn danger" onclick="selectPill('dano-vivienda', this, 'Destrucción Total')">
+            <span>Destrucción Total / Colapso / Arrastrada</span> 🔴
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title"><span>🛋️ 4. Pérdida de Enseres</span></div>
+        <div class="pill-selector" id="dano-enseres">
+          <div class="pill-btn success" onclick="selectPill('dano-enseres', this, 'Sin Pérdida')">
+            <span>Sin Pérdida de Enseres</span> 🟢
+          </div>
+          <div class="pill-btn warning selected" onclick="selectPill('dano-enseres', this, 'Pérdida Parcial')">
+            <span>Pérdida Parcial de Enseres</span> 🟡
+          </div>
+          <div class="pill-btn danger" onclick="selectPill('dano-enseres', this, 'Pérdida Total')">
+            <span>Pérdida Total de Enseres</span> 🔴
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title"><span>⚡ 5. Servicios Básicos Interrumpidos</span></div>
+        <div class="checkbox-grid">
+          <label class="checkbox-item"><input type="checkbox" value="Agua Potable" class="svc-chk"> Agua Potable</label>
+          <label class="checkbox-item"><input type="checkbox" value="Electricidad" class="svc-chk"> Electricidad</label>
+          <label class="checkbox-item"><input type="checkbox" value="Alcantarillado/Fosa" class="svc-chk"> Alcantarillado</label>
+          <label class="checkbox-item"><input type="checkbox" value="Gas" class="svc-chk"> Gas</label>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title"><span>🚨 6. Necesidades Inmediatas Urgentes</span></div>
+        <div class="checkbox-grid">
+          <label class="checkbox-item"><input type="checkbox" value="Agua Potable" class="nec-chk"> Agua Potable</label>
+          <label class="checkbox-item"><input type="checkbox" value="Alimentos" class="nec-chk"> Alimentos</label>
+          <label class="checkbox-item"><input type="checkbox" value="Frazadas/Colchones" class="nec-chk"> Colchón/Frazadas</label>
+          <label class="checkbox-item"><input type="checkbox" value="Kit de Aseo" class="nec-chk"> Kit de Aseo</label>
+          <label class="checkbox-item"><input type="checkbox" value="Medicamentos" class="nec-chk"> Medicamentos</label>
+          <label class="checkbox-item"><input type="checkbox" value="Albergue" class="nec-chk"> Albergue</label>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title"><span>📷 7. Evidencia Fotográfica y Notas</span></div>
+        <div class="form-group">
+          <div class="photo-box" onclick="document.getElementById('photo-input').click()">
+            <span style="font-size: 1.4rem;">📸</span>
+            <div style="font-size: 0.78rem; font-weight: 600; color: #38bdf8; margin-top: 4px;">Capturar Foto del Daño</div>
+            <div class="photo-status" id="photo-status"></div>
+            <input type="file" id="photo-input" accept="image/*" capture="environment" style="display: none;" onchange="handlePhoto(this)">
+          </div>
+          <img id="photo-preview" class="photo-preview" alt="Vista previa">
+        </div>
+
+        <div class="form-group">
+          <label for="notas">Notas u Observaciones de Terreno</label>
+          <textarea id="notas" rows="3" placeholder="Detalles de la emergencia, nivel del agua, necesidades especiales..."></textarea>
+        </div>
+      </div>
+
+      <button class="btn-submit" onclick="saveRecord()">
+        <span>💾 GUARDAR FICHA FIBE</span>
+      </button>
+
+    </div>
+
+    <!-- TAB 2: REGISTROS -->
+    <div class="tab-content" id="tab-records">
+      <div class="card">
+        <div class="card-title">
+          <span>💾 Registros Terreno</span>
+          <span class="counter-badge">📋 <span id="rec-total">0</span> | 📸 <span id="photo-total">0</span></span>
+        </div>
+        <button class="btn-export" onclick="exportCSV()">📊 Exportar Fichas a CSV / Excel (con IDs)</button>
+        <button class="btn-export" style="background:#0284c7;" onclick="exportGeoJSON()">🗺️ Exportar Fichas a GeoJSON (Puntos SIG)</button>
+        <button class="btn-export" style="background:#475569;" onclick="exportJSON()">📄 Exportar a JSON</button>
+        <button class="btn-export" style="background:#b91c1c; margin-top:5px;" onclick="clearRecords()">🗑️ Borrar Registros Locales</button>
+      </div>
+
+      <div id="records-list"></div>
+    </div>
+
+    <!-- TAB 3: TRAZADOR DE RUTAS -->
+    <div class="tab-content" id="tab-track">
+      <div class="card">
+        <div class="card-title">
+          <span>🧭 Trazador de Rutas</span>
+          <span class="counter-badge" id="tracking-status-badge" style="border-color:#ef4444; color:#fca5a5;">Detenido</span>
+        </div>
+        <div style="font-size: 0.75rem; color: #94a3b8; margin-bottom: 10px;">
+          Registra automáticamente la trayectoria recorrida por el encuestador (>15m por punto).
+        </div>
+
+        <div class="grid-2">
+          <button class="btn-export" id="btn-toggle-track" style="background:#10b981;" onclick="toggleTracking()">
+            ▶️ Iniciar Trazado
+          </button>
+          <button class="btn-export" style="background:#0284c7;" onclick="exportTrackGeoJSON()">
+            🗺️ Exportar Ruta GeoJSON
+          </button>
+        </div>
+
+        <div class="grid-2" style="margin-top: 8px;">
+          <div style="background:#0f172a; padding:10px; border-radius:8px; text-align:center;">
+            <label style="margin-bottom:2px;">Distancia Recorrida</label>
+            <div style="font-size:1.2rem; font-weight:800; color:#38bdf8;" id="track-dist-val">0.00 km</div>
+          </div>
+          <div style="background:#0f172a; padding:10px; border-radius:8px; text-align:center;">
+            <label style="margin-bottom:2px;">Puntos Registrados</label>
+            <div style="font-size:1.2rem; font-weight:800; color:#38bdf8;" id="track-pts-val">0</div>
+          </div>
+        </div>
+
+        <div style="margin-top: 10px;">
+          <label style="margin-bottom: 4px;">Croquis de Trayectoria (Offline Canvas)</label>
+          <canvas id="trail-canvas" width="400" height="160"></canvas>
+        </div>
+
+        <button class="btn-export" style="background:#475569; margin-top:10px;" onclick="clearTrack()">
+          🗑️ Limpiar Trayectoria Guardada
+        </button>
+      </div>
+    </div>
+
+    <footer style="text-align: center; font-size: 0.68rem; color: #94a3b8; margin-top: 20px; padding: 10px 0; border-top: 1px solid rgba(255,255,255,0.08); width: 100%;">
+      <div>Sistema FIBE Terreno | Gestión del Riesgo de Desastres (GRD) | Operación 100% Offline</div>
+      <div style="margin-top: 4px; color: #64748b;">Desarrollado por <strong>John Treimun</strong> | Centro de Inteligencia Territorial (CIT), Universidad Adolfo Ibáñez</div>
+    </footer>
+
+  </div>
+
+  <script>
+    /* MOTOR DE GPS AVANZADO CON SOPORTE DE PROTOCOLO Y FALLBACK MANUAL */
+    var currentGPS = { lat: "N/A", lng: "N/A", acc: "N/A", fuente: "Ninguna" };
+    var photoBase64 = null;
+    var selectedDanoVivienda = "Daño Mayor (No Habitable)";
+    var selectedDanoEnseres = "Pérdida Parcial";
+
+    var isTracking = false;
+    var watchId = null;
+    var activeGpsWatch = null;
+
+    function getStorageItem(key, fallback) {
+      try {
+        var v = localStorage.getItem(key);
+        return v ? v : fallback;
+      } catch(e) {
+        return fallback;
+      }
+    }
+
+    function setStorageItem(key, val) {
+      try {
+        localStorage.setItem(key, val);
+      } catch(e) {}
+    }
+
+    var waypoints = JSON.parse(getStorageItem('fibe_route_track', '[]'));
+    var totalDistMeters = parseFloat(getStorageItem('fibe_route_dist', '0'));
+
+    function pad2(n) { return n < 10 ? '0' + n : '' + n; }
+
+    window.onload = function() {
+      checkProtocolAndGPS();
+      updateRecordCount();
+      setupCheckboxListeners();
+      updateTrackUI();
+      drawTrailCanvas();
+    };
+
+    function checkProtocolAndGPS() {
+      var isFileProtocol = window.location.protocol === 'file:';
+      var alertBox = document.getElementById('gps-alert-box');
+
+      if (isFileProtocol) {
+        if (alertBox) {
+          alertBox.innerHTML = "⚠️ <strong>Atención Protocolo Local:</strong> Al abrir como archivo local (file://), Android/iOS bloquean la solicitud automática de GPS por seguridad. Pulsa el botón azul para forzar la activación o ingresa las coordenadas manualmente.";
+          alertBox.style.display = 'block';
+        }
+      }
+      // Intentar iniciar escucha continua
+      requestGPSPermissions();
+    }
+
+    function requestGPSPermissions() {
+      var gpsLabel = document.getElementById('gps-coords');
+      var badge = document.getElementById('gps-status-badge');
+      var alertBox = document.getElementById('gps-alert-box');
+
+      if (!navigator.geolocation) {
+        if (gpsLabel) gpsLabel.innerText = "Geolocalización no soportada";
+        if (badge) { badge.innerText = "No soportado"; badge.className = "gps-status-badge error"; }
+        return;
+      }
+
+      if (gpsLabel) gpsLabel.innerText = "📡 Solicitando satélites GPS...";
+      if (badge) { badge.innerText = "Buscando..."; badge.className = "gps-status-badge"; }
+
+      // Limpiar escucha previa si existía
+      if (activeGpsWatch) navigator.geolocation.clearWatch(activeGpsWatch);
+
+      activeGpsWatch = navigator.geolocation.watchPosition(
+        function(pos) {
+          currentGPS.lat = pos.coords.latitude.toFixed(6);
+          currentGPS.lng = pos.coords.longitude.toFixed(6);
+          currentGPS.acc = pos.coords.accuracy.toFixed(0);
+          currentGPS.fuente = "GPS Interno Teléfono";
+
+          if (gpsLabel) gpsLabel.innerText = currentGPS.lat + ", " + currentGPS.lng + " (±" + currentGPS.acc + "m)";
+          if (badge) { badge.innerText = "🟢 GPS Activo"; badge.className = "gps-status-badge active"; }
+          if (alertBox) alertBox.style.display = 'none';
+
+          var btnReq = document.getElementById('btn-request-gps');
+          if (btnReq) {
+            btnReq.innerText = "✅ GPS INTERNO CONECTADO (" + currentGPS.lat + ", " + currentGPS.lng + ")";
+            btnReq.style.background = "#10b981";
+          }
+        },
+        function(err) {
+          var msg = "Error GPS: ";
+          if (err.code === 1) msg = "Permiso denegado por el usuario/navegador.";
+          else if (err.code === 2) msg = "Posición no disponible (Sin señal de satélites).";
+          else if (err.code === 3) msg = "Tiempo de espera agotado.";
+          else msg += err.message;
+
+          if (gpsLabel) gpsLabel.innerText = "GPS no activo";
+          if (badge) { badge.innerText = "Bloqueado"; badge.className = "gps-status-badge error"; }
+
+          if (alertBox) {
+            alertBox.innerHTML = "❌ <strong>" + msg + "</strong><br>Si abriste la app en Chrome/Safari desde archivos locales, activa la Ubicación en la barra de herramientas o usa la opción manual abajo.";
+            alertBox.style.display = 'block';
+          }
+        },
+        { enableHighAccuracy: true, timeout: 15000, maximumAge: 0 }
+      );
+    }
+
+    function toggleManualGPS(e) {
+      if (e) e.preventDefault();
+      var box = document.getElementById('manual-gps-box');
+      if (box) {
+        if (box.style.display === 'block') {
+          box.style.display = 'none';
+        } else {
+          box.style.display = 'block';
+        }
+      }
+    }
+
+    function updateManualGPS() {
+      var latVal = document.getElementById('manual_lat').value.trim();
+      var lngVal = document.getElementById('manual_lng').value.trim();
+      var gpsLabel = document.getElementById('gps-coords');
+      var badge = document.getElementById('gps-status-badge');
+
+      if (latVal && lngVal) {
+        currentGPS.lat = latVal;
+        currentGPS.lng = lngVal;
+        currentGPS.acc = "Manual";
+        currentGPS.fuente = "Ingreso Manual";
+
+        if (gpsLabel) gpsLabel.innerText = latVal + ", " + lngVal + " (Manual)";
+        if (badge) { badge.innerText = "✍️ Manual"; badge.className = "gps-status-badge active"; }
+      }
+    }
+
+    function switchTab(tabName) {
+      var btns = document.querySelectorAll('.tab-btn');
+      var contents = document.querySelectorAll('.tab-content');
+      for (var i = 0; i < btns.length; i++) btns[i].classList.remove('active');
+      for (var j = 0; j < contents.length; j++) contents[j].classList.remove('active');
+
+      if (tabName === 'form') {
+        if (btns[0]) btns[0].classList.add('active');
+        var tf = document.getElementById('tab-form');
+        if (tf) tf.classList.add('active');
+      } else if (tabName === 'records') {
+        if (btns[1]) btns[1].classList.add('active');
+        var tr = document.getElementById('tab-records');
+        if (tr) tr.classList.add('active');
+        loadRecordsList();
+      } else if (tabName === 'track') {
+        if (btns[2]) btns[2].classList.add('active');
+        var tt = document.getElementById('tab-track');
+        if (tt) tt.classList.add('active');
+        drawTrailCanvas();
+      }
+    }
+
+    function selectPill(groupId, element, val) {
+      var pbtns = document.querySelectorAll('#' + groupId + ' .pill-btn');
+      for (var i = 0; i < pbtns.length; i++) pbtns[i].classList.remove('selected');
+      if (element) element.classList.add('selected');
+      if (groupId === 'dano-vivienda') selectedDanoVivienda = val;
+      if (groupId === 'dano-enseres') selectedDanoEnseres = val;
+    }
+
+    function setupCheckboxListeners() {
+      var chks = document.querySelectorAll('.checkbox-item input');
+      for (var i = 0; i < chks.length; i++) {
+        chks[i].addEventListener('change', function() {
+          if (this.checked) {
+            if (this.parentElement) this.parentElement.classList.add('checked');
+          } else {
+            if (this.parentElement) this.parentElement.classList.remove('checked');
+          }
+        });
+      }
+    }
+
+    function handlePhoto(input) {
+      if (input.files && input.files[0]) {
+        var file = input.files[0];
+        var reader = new FileReader();
+
+        reader.onload = function(e) {
+          var img = new Image();
+          img.onload = function() {
+            var canvas = document.createElement('canvas');
+            var width = img.width;
+            var height = img.height;
+            var maxDim = 800;
+
+            if (width > height) {
+              if (width > maxDim) {
+                height = Math.round((height * maxDim) / width);
+                width = maxDim;
+              }
+            } else {
+              if (height > maxDim) {
+                width = Math.round((width * maxDim) / height);
+                height = maxDim;
+              }
+            }
+
+            canvas.width = width;
+            canvas.height = height;
+
+            var ctx = canvas.getContext('2d');
+            ctx.drawImage(img, 0, 0, width, height);
+
+            photoBase64 = canvas.toDataURL('image/jpeg', 0.65);
+            
+            var preview = document.getElementById('photo-preview');
+            if (preview) {
+              preview.src = photoBase64;
+              preview.style.display = 'block';
+            }
+
+            var sizeKb = Math.round((photoBase64.length * 0.75) / 1024);
+            var status = document.getElementById('photo-status');
+            if (status) {
+              status.innerText = "⚡ Foto comprimida (" + sizeKb + " KB)";
+              status.style.display = 'block';
+            }
+          };
+          img.src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+      }
+    }
+
+    function generateFibeID() {
+      var d = new Date();
+      var yr = d.getFullYear();
+      var mo = pad2(d.getMonth() + 1);
+      var dy = pad2(d.getDate());
+      var hr = pad2(d.getHours());
+      var mi = pad2(d.getMinutes());
+      var se = pad2(d.getSeconds());
+      return "FIBE-" + yr + mo + dy + "-" + hr + mi + se;
+    }
+
+    function saveRecord() {
+      var comuna = document.getElementById('comuna') ? document.getElementById('comuna').value.trim() : '';
+      var sector = document.getElementById('sector') ? document.getElementById('sector').value.trim() : '';
+      var direccion = document.getElementById('direccion') ? document.getElementById('direccion').value.trim() : '';
+      var nombre_jefe = document.getElementById('nombre_jefe') ? document.getElementById('nombre_jefe').value.trim() : '';
+      var rut = document.getElementById('rut') ? document.getElementById('rut').value.trim() : '';
+      var telefono = document.getElementById('telefono') ? document.getElementById('telefono').value.trim() : '';
+      var cant_personas = document.getElementById('cant_personas') ? document.getElementById('cant_personas').value : 1;
+      var vulnerables = document.getElementById('vulnerables') ? document.getElementById('vulnerables').value : 0;
+      var notas = document.getElementById('notas') ? document.getElementById('notas').value.trim() : '';
+
+      if (!nombre_jefe && !direccion) {
+        alert("Por favor ingrese al menos la dirección o el nombre del jefe/a de hogar.");
+        return;
+      }
+
+      var svcElem = document.querySelectorAll('.svc-chk');
+      var servicios = [];
+      for (var i = 0; i < svcElem.length; i++) {
+        if (svcElem[i].checked) servicios.push(svcElem[i].value);
+      }
+
+      var necElem = document.querySelectorAll('.nec-chk');
+      var necesidades = [];
+      for (var j = 0; j < necElem.length; j++) {
+        if (necElem[j].checked) necesidades.push(necElem[j].value);
+      }
+
+      var fibe_id = generateFibeID();
+      var foto_id = photoBase64 ? fibe_id + "_FOTO" : "SIN_FOTO";
+
+      var record = {
+        fibe_id: fibe_id,
+        foto_id: foto_id,
+        fecha: new Date().toLocaleDateString('es-CL'),
+        hora: new Date().toLocaleTimeString('es-CL', { hour: '2-digit', minute: '2-digit' }),
+        lat: currentGPS.lat || "N/A",
+        lng: currentGPS.lng || "N/A",
+        precision_m: currentGPS.acc || "N/A",
+        fuente_gps: currentGPS.fuente || "No especificada",
+        comuna: comuna,
+        sector: sector,
+        direccion: direccion,
+        nombre_jefe: nombre_jefe,
+        rut: rut,
+        telefono: telefono,
+        cant_personas: cant_personas,
+        vulnerables: vulnerables,
+        dano_vivienda: selectedDanoVivienda,
+        dano_enseres: selectedDanoEnseres,
+        servicios_afectados: servicios.join("; "),
+        necesidades_urgentes: necesidades.join("; "),
+        notas: notas,
+        foto_data: photoBase64 || null
+      };
+
+      var records = JSON.parse(getStorageItem('fibe_records', '[]'));
+      records.push(record);
+      setStorageItem('fibe_records', JSON.stringify(records));
+
+      if (document.getElementById('nombre_jefe')) document.getElementById('nombre_jefe').value = '';
+      if (document.getElementById('rut')) document.getElementById('rut').value = '';
+      if (document.getElementById('telefono')) document.getElementById('telefono').value = '';
+      if (document.getElementById('direccion')) document.getElementById('direccion').value = '';
+      if (document.getElementById('notas')) document.getElementById('notas').value = '';
+      if (document.getElementById('photo-preview')) document.getElementById('photo-preview').style.display = 'none';
+      if (document.getElementById('photo-status')) document.getElementById('photo-status').style.display = 'none';
+      photoBase64 = null;
+
+      showToast("✅ Ficha " + fibe_id + " guardada (" + record.lat + ", " + record.lng + ")");
+      updateRecordCount();
+    }
+
+    function updateRecordCount() {
+      var records = JSON.parse(getStorageItem('fibe_records', '[]'));
+      var withPhotos = 0;
+      for (var i = 0; i < records.length; i++) {
+        if (records[i].foto_data) withPhotos++;
+      }
+      
+      var rCount = document.getElementById('record-count');
+      if (rCount) rCount.innerText = records.length;
+
+      var pTotal = document.getElementById('photo-total');
+      if (pTotal) pTotal.innerText = withPhotos;
+      
+      var rTotal = document.getElementById('rec-total');
+      if (rTotal) rTotal.innerText = records.length;
+    }
+
+    function loadRecordsList() {
+      var container = document.getElementById('records-list');
+      if (!container) return;
+      var records = JSON.parse(getStorageItem('fibe_records', '[]'));
+
+      if (records.length === 0) {
+        container.innerHTML = '<div style="text-align:center; color:#94a3b8; padding:20px;">No hay fichas guardadas aún.</div>';
+        return;
+      }
+
+      var html = '';
+      for (var i = 0; i < records.length; i++) {
+        var r = records[i];
+        var isDanger = r.dano_vivienda.indexOf('Destrucción') !== -1;
+        html += '<div class="record-card">' +
+          '<div class="record-header">' +
+            '<span>' + (r.nombre_jefe || 'Sin Nombre') + '</span>' +
+            '<span class="record-id">🆔 ' + r.fibe_id + '</span>' +
+          '</div>' +
+          '<div class="record-sub">' +
+            '📍 ' + (r.direccion || 'Sin dirección') + ', ' + (r.comuna || '') + ' (' + r.fecha + ' ' + r.hora + ')<br>' +
+            '👥 ' + r.cant_personas + ' personas (' + r.vulnerables + ' vulnerables) | 📞 ' + (r.telefono || 'Sin tel') +
+          '</div>' +
+          '<div style="font-size:0.75rem; color:#cbd5e1;">' +
+            '<strong>Daño:</strong> <span class="tag ' + (isDanger ? 'tag-danger' : 'tag-warning') + '">' + r.dano_vivienda + '</span><br>' +
+            '<strong>GPS:</strong> ' + r.lat + ', ' + r.lng + ' (' + (r.fuente_gps || 'Interno') + ') | <strong>ID Foto:</strong> ' + r.foto_id + '<br>' +
+            (r.foto_data ? '<button class="btn-photo-dl" onclick="downloadPhoto(\'' + r.fibe_id + '\', \'' + r.foto_data + '\')">📸 Descargar Foto (' + r.fibe_id + '_FOTO.jpg)</button>' : '') +
+          '</div>' +
+        '</div>';
+      }
+      container.innerHTML = html;
+    }
+
+    function downloadPhoto(fibeId, base64Data) {
+      var link = document.createElement('a');
+      link.href = base64Data;
+      link.download = fibeId + "_FOTO.jpg";
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+
+    function exportCSV() {
+      var records = JSON.parse(getStorageItem('fibe_records', '[]'));
+      if (records.length === 0) {
+        alert("No hay registros para exportar.");
+        return;
+      }
+
+      var headers = ["FIBE_ID", "FOTO_ID", "Fecha", "Hora", "Latitud", "Longitud", "Fuente_GPS", "Comuna", "Sector", "Direccion", "Jefe Hogar", "RUT", "Telefono", "Cant Personas", "Vulnerables", "Dano Vivienda", "Dano Enseres", "Servicios Afectados", "Necesidades Urgentes", "Notas", "Tiene Foto"];
+      
+      var csvContent = "data:text/csv;charset=utf-8,\uFEFF";
+      csvContent += headers.join(",") + "\n";
+
+      for (var i = 0; i < records.length; i++) {
+        var r = records[i];
+        var row = [
+          '"' + r.fibe_id + '"',
+          '"' + r.foto_id + '"',
+          '"' + r.fecha + '"',
+          '"' + r.hora + '"',
+          r.lat,
+          r.lng,
+          '"' + (r.fuente_gps || 'Interno') + '"',
+          '"' + (r.comuna || '') + '"',
+          '"' + (r.sector || '') + '"',
+          '"' + (r.direccion || '') + '"',
+          '"' + (r.nombre_jefe || '') + '"',
+          '"' + (r.rut || '') + '"',
+          '"' + (r.telefono || '') + '"',
+          r.cant_personas,
+          r.vulnerables,
+          '"' + r.dano_vivienda + '"',
+          '"' + r.dano_enseres + '"',
+          '"' + (r.servicios_afectados || '') + '"',
+          '"' + (r.necesidades_urgentes || '') + '"',
+          '"' + (r.notas || '').replace(/"/g, '""') + '"',
+          '"' + (r.foto_data ? 'SI' : 'NO') + '"'
+        ];
+        csvContent += row.join(",") + "\n";
+      }
+
+      var encodedUri = encodeURI(csvContent);
+      var link = document.createElement("a");
+      link.setAttribute("href", encodedUri);
+      link.setAttribute("download", "FIBE_Terreno_Emergencia_" + new Date().toISOString().slice(0,10) + ".csv");
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+
+    function exportGeoJSON() {
+      var records = JSON.parse(getStorageItem('fibe_records', '[]'));
+      if (records.length === 0) {
+        alert("No hay registros para exportar.");
+        return;
+      }
+
+      var features = [];
+      for (var i = 0; i < records.length; i++) {
+        var r = records[i];
+        var lat = parseFloat(r.lat);
+        var lng = parseFloat(r.lng);
+        if (isNaN(lat) || isNaN(lng)) continue;
+
+        features.push({
+          "type": "Feature",
+          "geometry": {
+            "type": "Point",
+            "coordinates": [lng, lat]
+          },
+          "properties": {
+            "fibe_id": r.fibe_id,
+            "foto_id": r.foto_id,
+            "jefe_hogar": r.nombre_jefe,
+            "rut": r.rut,
+            "telefono": r.telefono,
+            "comuna": r.comuna,
+            "direccion": r.direccion,
+            "cant_personas": r.cant_personas,
+            "vulnerables": r.vulnerables,
+            "dano_vivienda": r.dano_vivienda,
+            "dano_enseres": r.dano_enseres,
+            "necesidades": r.necesidades_urgentes,
+            "fuente_gps": r.fuente_gps || "Interno",
+            "fecha": r.fecha,
+            "hora": r.hora
+          }
+        });
+      }
+
+      var geojson = {
+        "type": "FeatureCollection",
+        "name": "Fichas_FIBE_Puntos_SIG",
+        "features": features
+      };
+
+      var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(geojson, null, 2));
+      var downloadAnchor = document.createElement('a');
+      downloadAnchor.setAttribute("href", dataStr);
+      downloadAnchor.setAttribute("download", "FIBE_Puntos_SIG_" + new Date().toISOString().slice(0,10) + ".geojson");
+      document.body.appendChild(downloadAnchor);
+      downloadAnchor.click();
+      downloadAnchor.remove();
+    }
+
+    function exportJSON() {
+      var records = JSON.parse(getStorageItem('fibe_records', '[]'));
+      if (records.length === 0) {
+        alert("No hay registros para exportar.");
+        return;
+      }
+      var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(records, null, 2));
+      var downloadAnchor = document.createElement('a');
+      downloadAnchor.setAttribute("href", dataStr);
+      downloadAnchor.setAttribute("download", "FIBE_Terreno_" + new Date().toISOString().slice(0,10) + ".json");
+      document.body.appendChild(downloadAnchor);
+      downloadAnchor.click();
+      downloadAnchor.remove();
+    }
+
+    function clearRecords() {
+      if (confirm("¿Está seguro de eliminar todas las fichas guardadas localmente? Asegúrese de haberlas exportado primero.")) {
+        try { localStorage.removeItem('fibe_records'); } catch(e){}
+        updateRecordCount();
+        loadRecordsList();
+      }
+    }
+
+    function haversineDistance(lat1, lon1, lat2, lon2) {
+      var R = 6371000;
+      var dLat = (lat2 - lat1) * Math.PI / 180;
+      var dLon = (lon2 - lon1) * Math.PI / 180;
+      var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+                Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+                Math.sin(dLon/2) * Math.sin(dLon/2);
+      var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+      return R * c;
+    }
+
+    function toggleTracking() {
+      var btn = document.getElementById('btn-toggle-track');
+      var badge = document.getElementById('tracking-status-badge');
+
+      if (!isTracking) {
+        if (!navigator.geolocation) {
+          alert("GPS no soportado en este dispositivo.");
+          return;
+        }
+
+        isTracking = true;
+        if (btn) {
+          btn.innerText = "⏸️ Pausar Trazado";
+          btn.style.background = "#f59e0b";
+        }
+        if (badge) {
+          badge.innerText = "Grabando Ruta";
+          badge.style.borderColor = "#10b981";
+          badge.style.color = "#6ee7b7";
+        }
+
+        watchId = navigator.geolocation.watchPosition(
+          onTrackPosition,
+          function(err) { console.log("GPS Track err:", err); },
+          { enableHighAccuracy: true, maximumAge: 5000 }
+        );
+        showToast("▶️ Trazado de ruta iniciado");
+      } else {
+        isTracking = false;
+        if (watchId) navigator.geolocation.clearWatch(watchId);
+        if (btn) {
+          btn.innerText = "▶️ Reanudar Trazado";
+          btn.style.background = "#10b981";
+        }
+        if (badge) {
+          badge.innerText = "Pausado";
+          badge.style.borderColor = "#f59e0b";
+          badge.style.color = "#fcd34d";
+        }
+        showToast("⏸️ Trazado de ruta pausado");
+      }
+    }
+
+    function onTrackPosition(pos) {
+      var lat = parseFloat(pos.coords.latitude.toFixed(6));
+      var lng = parseFloat(pos.coords.longitude.toFixed(6));
+
+      if (waypoints.length > 0) {
+        var last = waypoints[waypoints.length - 1];
+        var distM = haversineDistance(last.lat, last.lng, lat, lng);
+        if (distM < 15) return; 
+        totalDistMeters += distM;
+      }
+
+      waypoints.push({ lat: lat, lng: lng, t: new Date().toLocaleTimeString('es-CL') });
+
+      setStorageItem('fibe_route_track', JSON.stringify(waypoints));
+      setStorageItem('fibe_route_dist', totalDistMeters.toString());
+
+      updateTrackUI();
+      drawTrailCanvas();
+    }
+
+    function updateTrackUI() {
+      var km = (totalDistMeters / 1000).toFixed(2);
+      var dVal = document.getElementById('track-dist-val');
+      if (dVal) dVal.innerText = km + " km";
+      var pVal = document.getElementById('track-pts-val');
+      if (pVal) pVal.innerText = waypoints.length;
+      var tCnt = document.getElementById('track-count');
+      if (tCnt) tCnt.innerText = km;
+    }
+
+    function clearTrack() {
+      if (confirm("¿Borrar la ruta guardada?")) {
+        waypoints = [];
+        totalDistMeters = 0;
+        try {
+          localStorage.removeItem('fibe_route_track');
+          localStorage.removeItem('fibe_route_dist');
+        } catch(e){}
+        updateTrackUI();
+        drawTrailCanvas();
+        showToast("🗑️ Ruta borrada");
+      }
+    }
+
+    function drawTrailCanvas() {
+      var canvas = document.getElementById('trail-canvas');
+      if (!canvas) return;
+      var ctx = canvas.getContext('2d');
+      var w = canvas.width;
+      var h = canvas.height;
+
+      ctx.clearRect(0, 0, w, h);
+      ctx.fillStyle = "#090d16";
+      ctx.fillRect(0, 0, w, h);
+
+      if (waypoints.length === 0) {
+        ctx.fillStyle = "#64748b";
+        ctx.font = "12px sans-serif";
+        ctx.textAlign = "center";
+        ctx.fillText("Sin datos de ruta. Inicie el trazado para ver la trayectoria.", w / 2, h / 2);
+        return;
+      }
+
+      var minLat = waypoints[0].lat, maxLat = waypoints[0].lat;
+      var minLng = waypoints[0].lng, maxLng = waypoints[0].lng;
+
+      for (var i = 0; i < waypoints.length; i++) {
+        var p = waypoints[i];
+        if (p.lat < minLat) minLat = p.lat;
+        if (p.lat > maxLat) maxLat = p.lat;
+        if (p.lng < minLng) minLng = p.lng;
+        if (p.lng > maxLng) maxLng = p.lng;
+      }
+
+      var pad = 20;
+      var spanLat = (maxLat - minLat) || 0.001;
+      var spanLng = (maxLng - minLng) || 0.001;
+
+      function toX(lng) { return pad + ((lng - minLng) / spanLng) * (w - 2 * pad); }
+      function toY(lat) { return h - (pad + ((lat - minLat) / spanLat) * (h - 2 * pad)); }
+
+      ctx.beginPath();
+      ctx.strokeStyle = "#38bdf8";
+      ctx.lineWidth = 3;
+      ctx.lineCap = "round";
+
+      for (var j = 0; j < waypoints.length; j++) {
+        var wp = waypoints[j];
+        var x = toX(wp.lng);
+        var y = toY(wp.lat);
+        if (j === 0) ctx.moveTo(x, y);
+        else ctx.lineTo(x, y);
+      }
+      ctx.stroke();
+
+      var pStart = waypoints[0];
+      var pEnd = waypoints[waypoints.length - 1];
+
+      ctx.fillStyle = "#10b981";
+      ctx.beginPath();
+      ctx.arc(toX(pStart.lng), toY(pStart.lat), 6, 0, 2 * Math.PI);
+      ctx.fill();
+
+      ctx.fillStyle = "#ef4444";
+      ctx.beginPath();
+      ctx.arc(toX(pEnd.lng), toY(pEnd.lat), 6, 0, 2 * Math.PI);
+      ctx.fill();
+    }
+
+    function exportTrackGeoJSON() {
+      if (waypoints.length === 0) {
+        alert("No hay ruta registrada para exportar.");
+        return;
+      }
+
+      var coordinates = [];
+      for (var i = 0; i < waypoints.length; i++) {
+        coordinates.push([waypoints[i].lng, waypoints[i].lat]);
+      }
+
+      var geojson = {
+        "type": "FeatureCollection",
+        "features": [
+          {
+            "type": "Feature",
+            "geometry": {
+              "type": "LineString",
+              "coordinates": coordinates
+            },
+            "properties": {
+              "nombre": "Trayectoria de Terreno FIBE",
+              "distancia_km": (totalDistMeters / 1000).toFixed(2),
+              "puntos": waypoints.length,
+              "fecha": new Date().toLocaleDateString('es-CL')
+            }
+          }
+        ]
+      };
+
+      var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(geojson, null, 2));
+      var downloadAnchor = document.createElement('a');
+      downloadAnchor.setAttribute("href", dataStr);
+      downloadAnchor.setAttribute("download", "Ruta_Terreno_FIBE_" + new Date().toISOString().slice(0,10) + ".geojson");
+      document.body.appendChild(downloadAnchor);
+      downloadAnchor.click();
+      downloadAnchor.remove();
+    }
+
+    function showToast(msg) {
+      var toast = document.getElementById('toast');
+      if (toast) {
+        toast.innerText = msg;
+        toast.style.display = 'block';
+        setTimeout(function() { toast.style.display = 'none'; }, 2500);
+      }
+    }
+  </script>
+</body>
+</html>

@@ -213,6 +213,96 @@ tab0_server <- function(input, output, session, lang) {
         )
       ),
       
+
+      # 6. Einstein Rings & Gravitational Lensing (Line 9)
+      div(class = "panel-glass", style = "padding: 30px; margin-bottom: 30px; border-radius: 12px; border-left: 5px solid #d97706;",
+        fluidRow(
+          column(5,
+            div(style = "text-align: center;",
+              tags$img(src = "images/hessian_didactic.png", style = "width: 100%; max-width: 560px; border-radius: 8px; border: 2px solid rgba(255,255,255,0.1); box-shadow: 0 4px 15px rgba(0,0,0,0.5);")
+            )
+          ),
+          column(7,
+            h4(style = "color: #b45309; font-weight: 700; font-size: 1.35rem;", 
+               trans("Anillos de Einstein y Curvatura Extrema RMS (Línea 9)", "Einstein Rings & RMS Extreme Curvature (Line 9)")),
+            p(style = "color: #334155; font-size: 1.1rem; line-height: 1.6; margin-top: 15px;",
+              trans(
+                "La autopista Américo Vespucio actúa como un colosal Macro-Anillo de Einstein territorial: su foso tarifario y barrera física desvían gravitacionalmente el flujo de microbuses y peatones, forzando trayectorias perimetrales y atrapando la vitalidad en singularidades locales (Plaza Maipú, La Cisterna, Conchalí).",
+                "The Américo Vespucio highway acts as a colossal territorial Einstein Macro-Ring: its toll barrier and physical severance gravitationally bend transit and pedestrian flows, locking vital energy into localized singularities."
+              )),
+            actionButton("go_to_einstein", trans("Simular Anillos de Einstein", "Simulate Einstein Rings"), class = "btn-warning", style = "margin-top: 15px; font-weight: bold;")
+          )
+        )
+      ),
+      
+      # 7. SUT-RMS 2050 & Territorial Latency (Line 10)
+      div(class = "panel-glass", style = "padding: 30px; margin-bottom: 30px; border-radius: 12px; border-left: 5px solid #dc2626;",
+        fluidRow(
+          column(5,
+            div(style = "text-align: center;",
+              tags$img(src = "images/memory_didactic.png", style = "width: 100%; max-width: 560px; border-radius: 8px; border: 2px solid rgba(255,255,255,0.1); box-shadow: 0 4px 15px rgba(0,0,0,0.5);")
+            )
+          ),
+          column(7,
+            h4(style = "color: #b91c1c; font-weight: 700; font-size: 1.35rem;", 
+               trans("Escenarios SUT-RMS 2050 y Latencia Territorial (Línea 10)", "SUT-RMS 2050 Scenarios & Territorial Latency (Line 10)")),
+            p(style = "color: #334155; font-size: 1.1rem; line-height: 1.6; margin-top: 15px;",
+              trans(
+                "Simulación prospectiva al año 2050 evaluando 4 escenarios de transición energética y climática. Mapea 97 zonas críticas de duelo territorial y latencia extrema donde la cicatriz comunitaria resiste a la especulación inmobiliaria y requiere reparación activa del Estado.",
+                "Prospective 2050 simulation evaluating 4 energy and climate transition scenarios. Maps 97 critical territorial mourning and latency hotspots where community memory resists speculative gentrification, demanding State reparative action."
+              )),
+            actionButton("go_to_sut2050", trans("Simular Escenarios 2050", "Simulate 2050 Scenarios"), class = "btn-danger", style = "margin-top: 15px; font-weight: bold;")
+          )
+        )
+      ),
+      
+      # OPERATIONAL FIELD & INTEROPERABILITY SECTION
+      div(class = "panel-glass", style = "padding: 30px; margin-top: 40px; margin-bottom: 35px; border-radius: 12px; border: 2px solid #0d9488; background: linear-gradient(135deg, rgba(13,148,136,0.05) 0%, rgba(2,132,199,0.05) 100%);",
+        h3(style = "color: #0f766e; font-weight: 800; margin-top: 0; margin-bottom: 10px;",
+           tagList(icon("satellite-dish"), trans(" Operatividad en Terreno e Interoperabilidad Estado de Chile", " Field Operability & State of Chile Interoperability"))),
+        p(style = "color: #475569; font-size: 1.05rem; line-height: 1.6; margin-bottom: 25px;",
+          trans(
+            "Puerto Umbral cuenta con herramientas desacopladas para levantamiento en catástrofes y servicios conformes a los estándares de la Infraestructura de Datos Espaciales de Chile (IDE Chile / SNIT / SEGPRES).",
+            "Puerto Umbral features decoupled tools for disaster field surveying and OGC services compliant with Chile's Spatial Data Infrastructure (IDE Chile / SNIT / SEGPRES)."
+          )),
+        
+        fluidRow(
+          column(6,
+            div(class = "panel-glass", style = "padding: 22px; height: 100%; border-radius: 10px; border-left: 4px solid #0284c7;",
+              h4(style = "color: #0369a1; font-weight: 700; margin-top: 0;",
+                 tagList(icon("mobile-alt"), trans(" Aplicaciones de Campo (PWA Offline)", " Field Mobile Apps (Offline PWA)"))),
+              p(style = "color: #334155; font-size: 0.95rem; line-height: 1.5;",
+                trans(
+                  "Funcionan 100% desconectadas en zonas rurales o de emergencia (FIBE / IEO) mediante almacenamiento local (localStorage) sin gastar cuota de servidor.",
+                  "Operates 100% offline in rural or disaster areas (FIBE / IEO) via local storage without consuming cloud server hours."
+                )),
+              div(style = "display: flex; gap: 10px; flex-wrap: wrap; margin-top: 15px;",
+                tags$a(href = "mobile.html", target = "_blank", class = "btn btn-primary btn-sm", style = "font-weight: bold;",
+                       tagList(icon("walking"), trans(" App Terreno Pedestre", " Field Pedestrian App"))),
+                tags$a(href = "fibe_terreno.html", target = "_blank", class = "btn btn-success btn-sm", style = "font-weight: bold;",
+                       tagList(icon("clipboard-check"), trans(" Ficha FIBE Terreno", " FIBE Emergency Sheet")))
+              )
+            )
+          ),
+          column(6,
+            div(class = "panel-glass", style = "padding: 22px; height: 100%; border-radius: 10px; border-left: 4px solid #0d9488;",
+              h4(style = "color: #0f766e; font-weight: 700; margin-top: 0;",
+                 tagList(icon("globe-americas"), trans(" Servicios OGC & IDE Chile (SNIT)", " OGC Services & IDE Chile (SNIT)"))),
+              p(style = "color: #334155; font-size: 0.95rem; line-height: 1.5;",
+                trans(
+                  "Consuma capas WMS 1.3.0, WFS 2.0 y API REST GeoJSON directamente desde QGIS, ArcGIS, Python o el visualizador ministerial de IDE Chile.",
+                  "Consume WMS 1.3.0, WFS 2.0, and REST GeoJSON layers directly from QGIS, ArcGIS, Python, or ministerial IDE Chile portals."
+                )),
+              div(style = "display: flex; gap: 10px; flex-wrap: wrap; margin-top: 15px;",
+                actionButton("go_to_interop_panel", trans("Explorar IDE Chile / OGC →", "Explore IDE Chile / OGC →"), class = "btn-info btn-sm", style = "font-weight: bold;"),
+                tags$a(href = "ogc/puerto_umbral_qgis.qlr", download = "puerto_umbral_qgis.qlr", class = "btn btn-default btn-sm", style = "font-weight: bold;",
+                       tagList(icon("download"), " QGIS QLR Layer"))
+              )
+            )
+          )
+        )
+      ),
+
       # FOOTER ROUTING BUTTONS
       div(class = "text-center", style = "margin-top: 50px; padding: 20px;",
         h3(style = "color: #0369a1; margin-bottom: 25px; font-weight: 700;", trans("Navegaci\u00f3n del Ecosistema", "Ecosystem Navigation")),
@@ -357,6 +447,21 @@ tab0_server <- function(input, output, session, lang) {
   observeEvent(input$go_to_agent_panel, {
     updateNavbarPage(session = session, "nav_active", selected = "Biblioteca y Agente")
   })
+
+  observeEvent(input$go_to_einstein, {
+    updateNavbarPage(session = session, "nav_active", selected = "Centro de Simulación")
+    updateSelectInput(session = session, "exp_mode", selected = "exp9")
+  })
+  
+  observeEvent(input$go_to_sut2050, {
+    updateNavbarPage(session = session, "nav_active", selected = "Centro de Simulación")
+    updateSelectInput(session = session, "exp_mode", selected = "exp10")
+  })
+  
+  observeEvent(input$go_to_interop_panel, {
+    updateNavbarPage(session = session, "nav_active", selected = "Interoperabilidad (IDE Chile)")
+  })
+
   
 
 }

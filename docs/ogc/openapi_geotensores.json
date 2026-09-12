@@ -1,0 +1,83 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "API de Geotensores y Ontología Territorial (Puerto Umbral)",
+    "description": "API REST Geoespacial interoperable conforme a los estándares de la Infraestructura de Datos Espaciales de Chile (IDE Chile) y la Guía de Interoperabilidad del Estado (Secretaría de Gobierno Digital, SEGPRES).",
+    "version": "5.4.0",
+    "contact": {
+      "name": "John Treimun Ríos",
+      "email": "john.treimun.r@uai.cl",
+      "url": "https://ontologiaterritorial.github.io/puerto_umbral/"
+    },
+    "license": {
+      "name": "Creative Commons Attribution 4.0 International (CC-BY 4.0)",
+      "url": "https://creativecommons.org/licenses/by/4.0/"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://ontologiaterritorial.github.io/puerto_umbral/api",
+      "description": "Servidor Público de Consulta"
+    },
+    {
+      "url": "http://localhost:3838/api",
+      "description": "Servidor Local Shiny / Docker"
+    }
+  ],
+  "paths": {
+    "/einstein_rings_rms.geojson": {
+      "get": {
+        "summary": "Obtener los Anillos de Einstein Territoriales (Lentes Gravitacionales RMS)",
+        "description": "Devuelve la colección de geometrías anulares críticas (Macro-Anillo de Américo Vespucio y los 6 anillos barriales) en formato estándar GeoJSON (EPSG:4326).",
+        "responses": {
+          "200": {
+            "description": "Colección de entidades GeoJSON",
+            "content": {
+              "application/geo+json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/hotspots_latencia_rms.geojson": {
+      "get": {
+        "summary": "Obtener los 97 Hotspots de Duelo y Latencia Territorial",
+        "description": "Devuelve los puntos críticos de duelo no resuelto (Lambda >= 0.70) según el operador no markoviano de Caputo.",
+        "responses": {
+          "200": {
+            "description": "Colección de entidades GeoJSON",
+            "content": {
+              "application/geo+json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/comunas_rms_perfiles.json": {
+      "get": {
+        "summary": "Resumen Estadístico y Geotensorial de las 52 Comunas de la RMS",
+        "description": "Devuelve el resumen agregado comunal con NTI media, fricción relacional, latencia histórica y coordenadas de centroide.",
+        "responses": {
+          "200": {
+            "description": "Lista de perfiles comunales",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

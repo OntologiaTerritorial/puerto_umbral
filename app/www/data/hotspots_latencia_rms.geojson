@@ -1,0 +1,372 @@
+{
+  "type": "FeatureCollection",
+  "name": "hotspots_latencia_rms",
+  "crs": {
+    "type": "name",
+    "properties": {
+      "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+    }
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.588967,
+          -33.499558
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp10_synth_1_2",
+        "cobertura": "Escenario SUT-2050 Transición",
+        "friccion_duelo": 8022.134312085321,
+        "latencia_lambda": 0.72,
+        "escenario": "SUT-RMS 2050 Tendencial Inercial",
+        "red_cuidado": "Media"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.586815,
+          -33.499585
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp10_synth_1_3",
+        "cobertura": "Escenario SUT-2050 Transición",
+        "friccion_duelo": 8022.134312085321,
+        "latencia_lambda": 0.72,
+        "escenario": "SUT-RMS 2050 Tendencial Inercial",
+        "red_cuidado": "Media"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.591086,
+          -33.497727
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp10_synth_2_1",
+        "cobertura": "Escenario SUT-2050 Transición",
+        "friccion_duelo": 8022.134312085321,
+        "latencia_lambda": 0.72,
+        "escenario": "SUT-RMS 2050 Tendencial Inercial",
+        "red_cuidado": "Media"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.588934,
+          -33.497755
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp10_synth_2_2",
+        "cobertura": "Hotspot Duelo Territorial San Ramón",
+        "friccion_duelo": 21806.421925999337,
+        "latencia_lambda": 0.85,
+        "escenario": "SUT-RMS 2050 Tendencial Inercial",
+        "red_cuidado": "Alta"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.586782,
+          -33.497782
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp10_synth_2_3",
+        "cobertura": "Hotspot Duelo Territorial San Ramón",
+        "friccion_duelo": 21806.421925999337,
+        "latencia_lambda": 0.85,
+        "escenario": "SUT-RMS 2050 Tendencial Inercial",
+        "red_cuidado": "Alta"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.584629,
+          -33.49781
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp10_synth_2_4",
+        "cobertura": "Escenario SUT-2050 Transición",
+        "friccion_duelo": 8022.134312085321,
+        "latencia_lambda": 0.72,
+        "escenario": "SUT-RMS 2050 Tendencial Inercial",
+        "red_cuidado": "Media"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.591053,
+          -33.495924
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp10_synth_3_1",
+        "cobertura": "Escenario SUT-2050 Transición",
+        "friccion_duelo": 8022.134312085321,
+        "latencia_lambda": 0.72,
+        "escenario": "SUT-RMS 2050 Tendencial Inercial",
+        "red_cuidado": "Media"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.588901,
+          -33.495951
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp10_synth_3_2",
+        "cobertura": "Hotspot Duelo Territorial San Ramón",
+        "friccion_duelo": 21806.421925999337,
+        "latencia_lambda": 0.85,
+        "escenario": "SUT-RMS 2050 Tendencial Inercial",
+        "red_cuidado": "Alta"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.586749,
+          -33.495979
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp10_synth_3_3",
+        "cobertura": "Hotspot Duelo Territorial San Ramón",
+        "friccion_duelo": 21806.421925999337,
+        "latencia_lambda": 0.85,
+        "escenario": "SUT-RMS 2050 Tendencial Inercial",
+        "red_cuidado": "Alta"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.584597,
+          -33.496007
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp10_synth_3_4",
+        "cobertura": "Escenario SUT-2050 Transición",
+        "friccion_duelo": 8022.134312085321,
+        "latencia_lambda": 0.72,
+        "escenario": "SUT-RMS 2050 Tendencial Inercial",
+        "red_cuidado": "Media"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.588868,
+          -33.494148
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp10_synth_4_2",
+        "cobertura": "Escenario SUT-2050 Transición",
+        "friccion_duelo": 8022.134312085321,
+        "latencia_lambda": 0.72,
+        "escenario": "SUT-RMS 2050 Tendencial Inercial",
+        "red_cuidado": "Media"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.586716,
+          -33.494176
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp10_synth_4_3",
+        "cobertura": "Escenario SUT-2050 Transición",
+        "friccion_duelo": 8022.134312085321,
+        "latencia_lambda": 0.72,
+        "escenario": "SUT-RMS 2050 Tendencial Inercial",
+        "red_cuidado": "Media"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.573705,
+          -33.488931
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp10_synth_7_9",
+        "cobertura": "Escenario SUT-2050 Transición",
+        "friccion_duelo": 7142.354281883694,
+        "latencia_lambda": 0.72,
+        "escenario": "SUT-RMS 2050 Tendencial Inercial",
+        "red_cuidado": "Media"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.575824,
+          -33.4871
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp10_synth_8_8",
+        "cobertura": "Hotspot Latencia Lampa/Quilicura",
+        "friccion_duelo": 11775.751427417783,
+        "latencia_lambda": 0.72,
+        "escenario": "SUT-RMS 2050 Tendencial Inercial",
+        "red_cuidado": "Media"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.573672,
+          -33.487127
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp10_synth_8_9",
+        "cobertura": "Hotspot Latencia Lampa/Quilicura",
+        "friccion_duelo": 19414.9318568611,
+        "latencia_lambda": 0.72,
+        "escenario": "SUT-RMS 2050 Tendencial Inercial",
+        "red_cuidado": "Media"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.57152,
+          -33.487155
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp10_synth_8_10",
+        "cobertura": "Hotspot Latencia Lampa/Quilicura",
+        "friccion_duelo": 11775.751427417783,
+        "latencia_lambda": 0.72,
+        "escenario": "SUT-RMS 2050 Tendencial Inercial",
+        "red_cuidado": "Media"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.575791,
+          -33.485297
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp10_synth_9_8",
+        "cobertura": "Hotspot Latencia Lampa/Quilicura",
+        "friccion_duelo": 11775.751427417783,
+        "latencia_lambda": 0.72,
+        "escenario": "SUT-RMS 2050 Tendencial Inercial",
+        "red_cuidado": "Media"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.573639,
+          -33.485324
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp10_synth_9_9",
+        "cobertura": "Hotspot Latencia Lampa/Quilicura",
+        "friccion_duelo": 19414.9318568611,
+        "latencia_lambda": 0.72,
+        "escenario": "SUT-RMS 2050 Tendencial Inercial",
+        "red_cuidado": "Media"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.571487,
+          -33.485352
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp10_synth_9_10",
+        "cobertura": "Hotspot Latencia Lampa/Quilicura",
+        "friccion_duelo": 11775.751427417783,
+        "latencia_lambda": 0.72,
+        "escenario": "SUT-RMS 2050 Tendencial Inercial",
+        "red_cuidado": "Media"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.573607,
+          -33.483521
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp10_synth_10_9",
+        "cobertura": "Escenario SUT-2050 Transición",
+        "friccion_duelo": 7142.354281883694,
+        "latencia_lambda": 0.72,
+        "escenario": "SUT-RMS 2050 Tendencial Inercial",
+        "red_cuidado": "Media"
+      }
+    }
+  ]
+}

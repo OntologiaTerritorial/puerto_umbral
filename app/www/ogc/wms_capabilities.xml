@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WMS_Capabilities version="1.3.0" 
+    xmlns="http://www.opengis.net/wms" 
+    xmlns:xlink="http://www.w3.org/1999/xlink" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xsi:schemaLocation="http://www.opengis.net/wms http://schemas.opengis.net/wms/1.3.0/capabilities_1_3_0.xsd">
+  <Service>
+    <Name>WMS</Name>
+    <Title>Servicio WMS de Geotensores y Ontologia Territorial (IDE Chile)</Title>
+    <Abstract>Servicio de Mapas Web (WMS 1.3.0) de la Plataforma Puerto Umbral para la Infraestructura de Datos Espaciales de Chile (IDE Chile / SNIT). Provee capas de deformacion metrica, lentes gravitacionales, anillos de Einstein y hotspots de duelo territorial de la Region Metropolitana de Santiago.</Abstract>
+    <KeywordList>
+      <Keyword>IDE Chile</Keyword>
+      <Keyword>SNIT</Keyword>
+      <Keyword>Geotensores</Keyword>
+      <Keyword>Ontologia Territorial</Keyword>
+      <Keyword>Norma Tensiva Intrinseca</Keyword>
+      <Keyword>Anillos de Einstein</Keyword>
+      <Keyword>Region Metropolitana</Keyword>
+      <Keyword>Santiago</Keyword>
+    </KeywordList>
+    <OnlineResource xlink:type="simple" xlink:href="https://ontologiaterritorial.github.io/puerto_umbral/"/>
+    <ContactInformation>
+      <ContactPersonPrimary>
+        <ContactPerson>John Treimun Rios</ContactPerson>
+        <ContactOrganization>Centro de Inteligencia Territorial (CIT), Universidad Adolfo Ibanez</ContactOrganization>
+      </ContactPersonPrimary>
+      <ContactPosition>Investigador Principal</ContactPosition>
+      <ContactElectronicMailAddress>john.treimun.r@uai.cl</ContactElectronicMailAddress>
+    </ContactInformation>
+    <Fees>NONE (Creative Commons CC-BY 4.0)</Fees>
+    <AccessConstraints>Acceso Abierto y Soberania Comunitaria bajo Principios CARE/FAIR.</AccessConstraints>
+  </Service>
+  <Capability>
+    <Request>
+      <GetCapabilities>
+        <Format>text/xml</Format>
+        <DCPType>
+          <HTTP>
+            <Get><OnlineResource xlink:type="simple" xlink:href="https://ontologiaterritorial.github.io/puerto_umbral/ogc/wms"/></Get>
+          </HTTP>
+        </DCPType>
+      </GetCapabilities>
+      <GetMap>
+        <Format>image/png</Format>
+        <Format>image/jpeg</Format>
+        <DCPType>
+          <HTTP>
+            <Get><OnlineResource xlink:type="simple" xlink:href="https://ontologiaterritorial.github.io/puerto_umbral/ogc/wms"/></Get>
+          </HTTP>
+        </DCPType>
+      </GetMap>
+    </Request>
+    <Exception>
+      <Format>XML</Format>
+      <Format>INIMAGE</Format>
+    </Exception>
+    <Layer>
+      <Title>Puerto Umbral: Geotensores y Fisica Intrinseca RMS</Title>
+      <CRS>EPSG:4326</CRS>
+      <CRS>EPSG:4674</CRS>
+      <CRS>EPSG:32719</CRS>
+      <EX_GeographicBoundingBox>
+        <westBoundLongitude>-71.50</westBoundLongitude>
+        <eastBoundLongitude>-70.00</eastBoundLongitude>
+        <southBoundLatitude>-34.20</southBoundLatitude>
+        <northBoundLatitude>-32.90</northBoundLatitude>
+      </EX_GeographicBoundingBox>
+      <BoundingBox CRS="EPSG:4326" minx="-34.20" miny="-71.50" maxx="-32.90" maxy="-70.00"/>
+      <BoundingBox CRS="EPSG:32719" minx="268000" miny="6210000" maxx="408000" maxy="6360000"/>
+
+      <!-- Capa 1: Anillos de Einstein -->
+      <Layer queryable="1" opaque="0">
+        <Name>puerto_umbral:einstein_rings</Name>
+        <Title>Anillos de Einstein y Lentes Gravitacionales Territoriales RMS</Title>
+        <Abstract>Macro-Anillo de Americo Vespucio y los 6 anillos barriales de curvatura extrema y deflexion geodesica.</Abstract>
+        <KeywordList><Keyword>Lentes Gravitacionales</Keyword><Keyword>Schwarzschild</Keyword></KeywordList>
+        <CRS>EPSG:4326</CRS>
+        <CRS>EPSG:32719</CRS>
+      </Layer>
+
+      <!-- Capa 2: Hotspots de Latencia Territorial -->
+      <Layer queryable="1" opaque="0">
+        <Name>puerto_umbral:hotspots_latencia</Name>
+        <Title>Hotspots de Latencia Territorial y Duelo No Resuelto (Caputo)</Title>
+        <Abstract>97 manzanas criticas en ebullicion de latencia historica (Lambda >= 0.70) en San Ramon, Puente Alto, Lampa y Cerro Navia.</Abstract>
+        <CRS>EPSG:4326</CRS>
+        <CRS>EPSG:32719</CRS>
+      </Layer>
+
+      <!-- Capa 3: Pixeles Ontologicos Principales (POP) -->
+      <Layer queryable="1" opaque="0">
+        <Name>puerto_umbral:pixeles_ontologicos_nti</Name>
+        <Title>Pixeles Ontologicos Principales y Norma Tensiva Intrinseca (NTI)</Title>
+        <Abstract>Malla territorial de 70.096 manzanas censales con tensor metrico de Riemann, NTI, vector de voluntad comunitaria y potencial neto.</Abstract>
+        <CRS>EPSG:4326</CRS>
+        <CRS>EPSG:32719</CRS>
+      </Layer>
+    </Layer>
+  </Capability>
+</WMS_Capabilities>

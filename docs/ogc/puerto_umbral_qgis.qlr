@@ -1,0 +1,31 @@
+<!DOCTYPE qgis-layer-definition>
+<qlr>
+  <maplayers>
+    <maplayer type="vector" name="Anillos de Einstein RMS (Puerto Umbral)" geometry="Polygon">
+      <datasource>./www/data/einstein_rings_rms.geojson</datasource>
+      <keywordList>
+        <value>IDE Chile</value>
+        <value>Geotensores</value>
+      </keywordList>
+      <srs>
+        <spatialrefsys>
+          <authid>EPSG:4326</authid>
+          <description>WGS 84</description>
+        </spatialrefsys>
+      </srs>
+    </maplayer>
+    <maplayer type="vector" name="Hotspots Latencia Territorial (Duelo)" geometry="Point">
+      <datasource>./www/data/hotspots_latencia_rms.geojson</datasource>
+      <keywordList>
+        <value>IDE Chile</value>
+        <value>Caputo</value>
+      </keywordList>
+      <srs>
+        <spatialrefsys>
+          <authid>EPSG:4326</authid>
+          <description>WGS 84</description>
+        </spatialrefsys>
+      </srs>
+    </maplayer>
+  </maplayers>
+</qlr>

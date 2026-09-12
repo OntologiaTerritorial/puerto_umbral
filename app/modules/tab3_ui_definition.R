@@ -80,7 +80,9 @@ get_tab3_ui <- function(input, output, session, lang) {
                       "Altitud F\u00edsica del Terreno" = "altitud",
                       "Asimetr\u00eda de Poder [X,Y] (Lie)" = "lie",
                       "Tensi\u00f3n Intr\u00ednseca (NTI)" = "nti",
-                      "Curvatura de Ricci" = "ricci"
+                      "Curvatura de Ricci" = "ricci",
+                      "Frecuencia de Latencia (Duelo)" = "latencia",
+                      "Paisaje de Lyapunov V(p)" = "lyapunov"
                     ), selected = "friccion"),
         
         conditionalPanel("input.dim_3d == 'lie'",
@@ -101,7 +103,9 @@ get_tab3_ui <- function(input, output, session, lang) {
                       "Experimento 5: M\u00e9trica de Moran" = "exp5",
                       "Experimento 6: Santuario Natural" = "exp6",
                       "Experimento 7: Refracci\u00f3n de Capital" = "exp7",
-                      "Experimento 8: MBHT 4D (SUBDERE)" = "exp8"
+                      "Experimento 8: MBHT 4D (SUBDERE)" = "exp8",
+                      "Experimento 9: Anillos de Einstein RMS" = "exp9",
+                      "Experimento 10: Escenarios SUT-2050" = "exp10"
                     ), selected = "base"),
         
         conditionalPanel("input.exp_mode == 'exp6'",

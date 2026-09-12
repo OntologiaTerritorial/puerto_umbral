@@ -1,0 +1,2604 @@
+{
+  "type": "FeatureCollection",
+  "name": "einstein_rings_rms",
+  "crs": {
+    "type": "name",
+    "properties": {
+      "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+    }
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.593305,
+          -33.501306
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_0_0",
+        "cobertura": "Campo Geodésico Asintótico",
+        "altitud_m": 550.0000000000022,
+        "friccion_relacional": 1200.0,
+        "anillo_einstein": "Fondo Asintótico",
+        "red_cuidado": "Media"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.591152,
+          -33.501333
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_0_1",
+        "cobertura": "Campo Geodésico Asintótico",
+        "altitud_m": 550.000000030641,
+        "friccion_relacional": 1200.0000000002879,
+        "anillo_einstein": "Fondo Asintótico",
+        "red_cuidado": "Media"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.589,
+          -33.501361
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_0_2",
+        "cobertura": "Campo Geodésico Asintótico",
+        "altitud_m": 550.000033673408,
+        "friccion_relacional": 1200.000004815761,
+        "anillo_einstein": "Fondo Asintótico",
+        "red_cuidado": "Media"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.586848,
+          -33.501389
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_0_3",
+        "cobertura": "Campo Geodésico Asintótico",
+        "altitud_m": 550.0040156229675,
+        "friccion_relacional": 1200.0036867635506,
+        "anillo_einstein": "Fondo Asintótico",
+        "red_cuidado": "Media"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.584695,
+          -33.501416
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_0_4",
+        "cobertura": "Campo Geodésico Asintótico",
+        "altitud_m": 550.0735565606543,
+        "friccion_relacional": 1200.2092325711417,
+        "anillo_einstein": "Fondo Asintótico",
+        "red_cuidado": "Media"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.582543,
+          -33.501444
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_0_5",
+        "cobertura": "Campo Geodésico Asintótico",
+        "altitud_m": 550.2850821174089,
+        "friccion_relacional": 1201.373346331176,
+        "anillo_einstein": "Fondo Asintótico",
+        "red_cuidado": "Media"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.58039,
+          -33.501471
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_0_6",
+        "cobertura": "Campo Geodésico Asintótico",
+        "altitud_m": 550.2850821174089,
+        "friccion_relacional": 1201.373346331176,
+        "anillo_einstein": "Fondo Asintótico",
+        "red_cuidado": "Media"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.578238,
+          -33.501499
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_0_7",
+        "cobertura": "Campo Geodésico Asintótico",
+        "altitud_m": 550.0735565606543,
+        "friccion_relacional": 1200.2092325711417,
+        "anillo_einstein": "Fondo Asintótico",
+        "red_cuidado": "Media"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.576086,
+          -33.501526
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_0_8",
+        "cobertura": "Campo Geodésico Asintótico",
+        "altitud_m": 550.0040156229675,
+        "friccion_relacional": 1200.0036867635506,
+        "anillo_einstein": "Fondo Asintótico",
+        "red_cuidado": "Media"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.573933,
+          -33.501553
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_0_9",
+        "cobertura": "Campo Geodésico Asintótico",
+        "altitud_m": 550.000033673408,
+        "friccion_relacional": 1200.000004815761,
+        "anillo_einstein": "Fondo Asintótico",
+        "red_cuidado": "Media"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.571781,
+          -33.501581
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_0_10",
+        "cobertura": "Campo Geodésico Asintótico",
+        "altitud_m": 550.000000030641,
+        "friccion_relacional": 1200.0000000002879,
+        "anillo_einstein": "Fondo Asintótico",
+        "red_cuidado": "Media"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.569628,
+          -33.501608
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_0_11",
+        "cobertura": "Campo Geodésico Asintótico",
+        "altitud_m": 550.0000000000022,
+        "friccion_relacional": 1200.0,
+        "anillo_einstein": "Fondo Asintótico",
+        "red_cuidado": "Media"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.593272,
+          -33.499503
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_1_0",
+        "cobertura": "Campo Geodésico Asintótico",
+        "altitud_m": 550.000000030641,
+        "friccion_relacional": 1200.0000000002879,
+        "anillo_einstein": "Fondo Asintótico",
+        "red_cuidado": "Media"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.591119,
+          -33.49953
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_1_1",
+        "cobertura": "Campo Geodésico Asintótico",
+        "altitud_m": 550.0001742806842,
+        "friccion_relacional": 1200.000047236648,
+        "anillo_einstein": "Fondo Asintótico",
+        "red_cuidado": "Media"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.588967,
+          -33.499558
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_1_2",
+        "cobertura": "Campo Geodésico Asintótico",
+        "altitud_m": 550.0735565606543,
+        "friccion_relacional": 1200.2092325711417,
+        "anillo_einstein": "Fondo Asintótico",
+        "red_cuidado": "Media"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.586815,
+          -33.499585
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_1_3",
+        "cobertura": "Campo Geodésico Asintótico",
+        "altitud_m": 553.3930101287322,
+        "friccion_relacional": 1242.824277468459,
+        "anillo_einstein": "Fondo Asintótico",
+        "red_cuidado": "Media"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.584662,
+          -33.499613
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_1_4",
+        "cobertura": "Campo Geodésico Asintótico",
+        "altitud_m": 577.8350316849121,
+        "friccion_relacional": 1996.4226546675875,
+        "anillo_einstein": "Fondo Asintótico",
+        "red_cuidado": "Media"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.58251,
+          -33.499641
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_1_5",
+        "cobertura": "Campo Geodésico Asintótico",
+        "altitud_m": 617.2336558347938,
+        "friccion_relacional": 3910.697870226921,
+        "anillo_einstein": "Fondo Asintótico",
+        "red_cuidado": "Media"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.580358,
+          -33.499668
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_1_6",
+        "cobertura": "Campo Geodésico Asintótico",
+        "altitud_m": 617.2336558347938,
+        "friccion_relacional": 3910.697870226921,
+        "anillo_einstein": "Fondo Asintótico",
+        "red_cuidado": "Media"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.578205,
+          -33.499695
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_1_7",
+        "cobertura": "Campo Geodésico Asintótico",
+        "altitud_m": 577.8350316849121,
+        "friccion_relacional": 1996.4226546675875,
+        "anillo_einstein": "Fondo Asintótico",
+        "red_cuidado": "Media"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.576053,
+          -33.499723
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_1_8",
+        "cobertura": "Campo Geodésico Asintótico",
+        "altitud_m": 553.3930101287322,
+        "friccion_relacional": 1242.824277468459,
+        "anillo_einstein": "Fondo Asintótico",
+        "red_cuidado": "Media"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.5739,
+          -33.49975
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_1_9",
+        "cobertura": "Campo Geodésico Asintótico",
+        "altitud_m": 550.0735565606543,
+        "friccion_relacional": 1200.2092325711417,
+        "anillo_einstein": "Fondo Asintótico",
+        "red_cuidado": "Media"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.571748,
+          -33.499778
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_1_10",
+        "cobertura": "Campo Geodésico Asintótico",
+        "altitud_m": 550.0001742806842,
+        "friccion_relacional": 1200.000047236648,
+        "anillo_einstein": "Fondo Asintótico",
+        "red_cuidado": "Media"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.569596,
+          -33.499805
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_1_11",
+        "cobertura": "Campo Geodésico Asintótico",
+        "altitud_m": 550.000000030641,
+        "friccion_relacional": 1200.0000000002879,
+        "anillo_einstein": "Fondo Asintótico",
+        "red_cuidado": "Media"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.593239,
+          -33.497699
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_2_0",
+        "cobertura": "Campo Geodésico Asintótico",
+        "altitud_m": 550.000033673408,
+        "friccion_relacional": 1200.000004815761,
+        "anillo_einstein": "Fondo Asintótico",
+        "red_cuidado": "Media"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.591086,
+          -33.497727
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_2_1",
+        "cobertura": "Campo Geodésico Asintótico",
+        "altitud_m": 550.0735565606543,
+        "friccion_relacional": 1200.2092325711417,
+        "anillo_einstein": "Fondo Asintótico",
+        "red_cuidado": "Media"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.588934,
+          -33.497755
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_2_2",
+        "cobertura": "Campo Geodésico Asintótico",
+        "altitud_m": 560.2375842983654,
+        "friccion_relacional": 1398.526408992377,
+        "anillo_einstein": "Fondo Asintótico",
+        "red_cuidado": "Media"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.586782,
+          -33.497782
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_2_3",
+        "cobertura": "Campo Geodésico Asintótico",
+        "altitud_m": 691.7261628474184,
+        "friccion_relacional": 8836.445500945341,
+        "anillo_einstein": "Fondo Asintótico",
+        "red_cuidado": "Media"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.584629,
+          -33.49781
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_2_4",
+        "cobertura": "Anillo de Einstein (Deflexión Crítica)",
+        "altitud_m": 929.410278922223,
+        "friccion_relacional": 31182.1089681418,
+        "anillo_einstein": "Macro-Anillo Vespucio",
+        "red_cuidado": "Baja"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.582477,
+          -33.497837
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_2_5",
+        "cobertura": "Anillo de Einstein (Deflexión Crítica)",
+        "altitud_m": 998.9784080079837,
+        "friccion_relacional": 39080.236570104775,
+        "anillo_einstein": "Macro-Anillo Vespucio",
+        "red_cuidado": "Baja"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.580325,
+          -33.497865
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_2_6",
+        "cobertura": "Anillo de Einstein (Deflexión Crítica)",
+        "altitud_m": 998.9784080079837,
+        "friccion_relacional": 39080.236570104775,
+        "anillo_einstein": "Macro-Anillo Vespucio",
+        "red_cuidado": "Baja"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.578172,
+          -33.497892
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_2_7",
+        "cobertura": "Anillo de Einstein (Deflexión Crítica)",
+        "altitud_m": 929.410278922223,
+        "friccion_relacional": 31182.1089681418,
+        "anillo_einstein": "Macro-Anillo Vespucio",
+        "red_cuidado": "Baja"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.57602,
+          -33.49792
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_2_8",
+        "cobertura": "Campo Geodésico Asintótico",
+        "altitud_m": 691.7261628474184,
+        "friccion_relacional": 8836.445500945341,
+        "anillo_einstein": "Fondo Asintótico",
+        "red_cuidado": "Media"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.573868,
+          -33.497947
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_2_9",
+        "cobertura": "Campo Geodésico Asintótico",
+        "altitud_m": 560.2375842983654,
+        "friccion_relacional": 1398.526408992377,
+        "anillo_einstein": "Fondo Asintótico",
+        "red_cuidado": "Media"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.571716,
+          -33.497974
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_2_10",
+        "cobertura": "Campo Geodésico Asintótico",
+        "altitud_m": 550.0735565606543,
+        "friccion_relacional": 1200.2092325711417,
+        "anillo_einstein": "Fondo Asintótico",
+        "red_cuidado": "Media"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.569563,
+          -33.498002
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_2_11",
+        "cobertura": "Campo Geodésico Asintótico",
+        "altitud_m": 550.000033673408,
+        "friccion_relacional": 1200.000004815761,
+        "anillo_einstein": "Fondo Asintótico",
+        "red_cuidado": "Media"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.593206,
+          -33.495896
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_3_0",
+        "cobertura": "Campo Geodésico Asintótico",
+        "altitud_m": 550.0040156229675,
+        "friccion_relacional": 1200.0036867635506,
+        "anillo_einstein": "Fondo Asintótico",
+        "red_cuidado": "Media"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.591053,
+          -33.495924
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_3_1",
+        "cobertura": "Campo Geodésico Asintótico",
+        "altitud_m": 553.3930101287322,
+        "friccion_relacional": 1242.824277468459,
+        "anillo_einstein": "Fondo Asintótico",
+        "red_cuidado": "Media"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.588901,
+          -33.495951
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_3_2",
+        "cobertura": "Campo Geodésico Asintótico",
+        "altitud_m": 691.7261628474184,
+        "friccion_relacional": 8836.445500945341,
+        "anillo_einstein": "Fondo Asintótico",
+        "red_cuidado": "Media"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.586749,
+          -33.495979
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_3_3",
+        "cobertura": "Anillo de Einstein (Deflexión Crítica)",
+        "altitud_m": 998.9784080079837,
+        "friccion_relacional": 39080.236570104775,
+        "anillo_einstein": "Macro-Anillo Vespucio",
+        "red_cuidado": "Baja"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.584597,
+          -33.496007
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_3_4",
+        "cobertura": "Anillo de Einstein (Deflexión Crítica)",
+        "altitud_m": 793.2876578257774,
+        "friccion_relacional": 17374.165379172802,
+        "anillo_einstein": "Macro-Anillo Vespucio",
+        "red_cuidado": "Baja"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.582444,
+          -33.496034
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_3_5",
+        "cobertura": "Campo Geodésico Asintótico",
+        "altitud_m": 638.5060152294891,
+        "friccion_relacional": 5170.9561267050085,
+        "anillo_einstein": "Fondo Asintótico",
+        "red_cuidado": "Media"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.580292,
+          -33.496062
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_3_6",
+        "cobertura": "Campo Geodésico Asintótico",
+        "altitud_m": 638.5060152294891,
+        "friccion_relacional": 5170.9561267050085,
+        "anillo_einstein": "Fondo Asintótico",
+        "red_cuidado": "Media"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.57814,
+          -33.496089
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_3_7",
+        "cobertura": "Anillo de Einstein (Deflexión Crítica)",
+        "altitud_m": 793.2876578257774,
+        "friccion_relacional": 17374.165379172802,
+        "anillo_einstein": "Macro-Anillo Vespucio",
+        "red_cuidado": "Baja"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.575987,
+          -33.496116
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_3_8",
+        "cobertura": "Anillo de Einstein (Deflexión Crítica)",
+        "altitud_m": 998.9784080079837,
+        "friccion_relacional": 39080.236570104775,
+        "anillo_einstein": "Macro-Anillo Vespucio",
+        "red_cuidado": "Baja"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.573835,
+          -33.496144
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_3_9",
+        "cobertura": "Campo Geodésico Asintótico",
+        "altitud_m": 691.7261628474184,
+        "friccion_relacional": 8836.445500945341,
+        "anillo_einstein": "Fondo Asintótico",
+        "red_cuidado": "Media"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.571683,
+          -33.496171
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_3_10",
+        "cobertura": "Campo Geodésico Asintótico",
+        "altitud_m": 553.3930101287322,
+        "friccion_relacional": 1242.824277468459,
+        "anillo_einstein": "Fondo Asintótico",
+        "red_cuidado": "Media"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.569531,
+          -33.496198
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_3_11",
+        "cobertura": "Campo Geodésico Asintótico",
+        "altitud_m": 550.0040156229675,
+        "friccion_relacional": 1200.0036867635506,
+        "anillo_einstein": "Fondo Asintótico",
+        "red_cuidado": "Media"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.593173,
+          -33.494093
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_4_0",
+        "cobertura": "Campo Geodésico Asintótico",
+        "altitud_m": 550.0735565606543,
+        "friccion_relacional": 1200.2092325711417,
+        "anillo_einstein": "Fondo Asintótico",
+        "red_cuidado": "Media"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.59102,
+          -33.494121
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_4_1",
+        "cobertura": "Campo Geodésico Asintótico",
+        "altitud_m": 577.8350316849121,
+        "friccion_relacional": 1996.4226546675875,
+        "anillo_einstein": "Fondo Asintótico",
+        "red_cuidado": "Media"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.588868,
+          -33.494148
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_4_2",
+        "cobertura": "Anillo de Einstein (Deflexión Crítica)",
+        "altitud_m": 929.410278922223,
+        "friccion_relacional": 31182.1089681418,
+        "anillo_einstein": "Macro-Anillo Vespucio",
+        "red_cuidado": "Baja"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.586716,
+          -33.494176
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_4_3",
+        "cobertura": "Anillo de Einstein (Deflexión Crítica)",
+        "altitud_m": 793.2876578257774,
+        "friccion_relacional": 17374.165379172802,
+        "anillo_einstein": "Macro-Anillo Vespucio",
+        "red_cuidado": "Baja"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.584564,
+          -33.494203
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_4_4",
+        "cobertura": "Núcleo Masivo de Curvatura",
+        "altitud_m": 564.7005353518663,
+        "friccion_relacional": 1528.1423312511931,
+        "anillo_einstein": "Fondo Asintótico",
+        "red_cuidado": "Ninguno"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.582412,
+          -33.494231
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_4_5",
+        "cobertura": "Núcleo Masivo de Curvatura",
+        "altitud_m": 550.5954706616359,
+        "friccion_relacional": 1203.820078473398,
+        "anillo_einstein": "Fondo Asintótico",
+        "red_cuidado": "Ninguno"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.580259,
+          -33.494258
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_4_6",
+        "cobertura": "Núcleo Masivo de Curvatura",
+        "altitud_m": 550.5954706616359,
+        "friccion_relacional": 1203.820078473398,
+        "anillo_einstein": "Fondo Asintótico",
+        "red_cuidado": "Ninguno"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.578107,
+          -33.494286
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_4_7",
+        "cobertura": "Núcleo Masivo de Curvatura",
+        "altitud_m": 564.7005353518663,
+        "friccion_relacional": 1528.1423312511931,
+        "anillo_einstein": "Fondo Asintótico",
+        "red_cuidado": "Ninguno"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.575955,
+          -33.494313
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_4_8",
+        "cobertura": "Anillo de Einstein (Deflexión Crítica)",
+        "altitud_m": 793.2876578257774,
+        "friccion_relacional": 17374.165379172802,
+        "anillo_einstein": "Macro-Anillo Vespucio",
+        "red_cuidado": "Baja"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.573803,
+          -33.49434
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_4_9",
+        "cobertura": "Anillo de Einstein (Deflexión Crítica)",
+        "altitud_m": 929.410278922223,
+        "friccion_relacional": 31182.1089681418,
+        "anillo_einstein": "Macro-Anillo Vespucio",
+        "red_cuidado": "Baja"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.57165,
+          -33.494368
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_4_10",
+        "cobertura": "Campo Geodésico Asintótico",
+        "altitud_m": 577.8350316849121,
+        "friccion_relacional": 1996.4226546675875,
+        "anillo_einstein": "Fondo Asintótico",
+        "red_cuidado": "Media"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.569498,
+          -33.494395
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_4_11",
+        "cobertura": "Campo Geodésico Asintótico",
+        "altitud_m": 550.0735565606543,
+        "friccion_relacional": 1200.2092325711417,
+        "anillo_einstein": "Fondo Asintótico",
+        "red_cuidado": "Media"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.59314,
+          -33.49229
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_5_0",
+        "cobertura": "Campo Geodésico Asintótico",
+        "altitud_m": 550.2850821174089,
+        "friccion_relacional": 1201.373346331176,
+        "anillo_einstein": "Fondo Asintótico",
+        "red_cuidado": "Media"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.590987,
+          -33.492317
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_5_1",
+        "cobertura": "Campo Geodésico Asintótico",
+        "altitud_m": 617.2336558347938,
+        "friccion_relacional": 3910.697870226921,
+        "anillo_einstein": "Fondo Asintótico",
+        "red_cuidado": "Media"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.588835,
+          -33.492345
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_5_2",
+        "cobertura": "Anillo de Einstein (Deflexión Crítica)",
+        "altitud_m": 998.9784080079837,
+        "friccion_relacional": 39080.236570104775,
+        "anillo_einstein": "Macro-Anillo Vespucio",
+        "red_cuidado": "Baja"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.586683,
+          -33.492373
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_5_3",
+        "cobertura": "Campo Geodésico Asintótico",
+        "altitud_m": 638.5060152294891,
+        "friccion_relacional": 5170.9561267050085,
+        "anillo_einstein": "Fondo Asintótico",
+        "red_cuidado": "Media"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.584531,
+          -33.4924
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_5_4",
+        "cobertura": "Núcleo Masivo de Curvatura",
+        "altitud_m": 550.5954706616359,
+        "friccion_relacional": 1203.820078473398,
+        "anillo_einstein": "Fondo Asintótico",
+        "red_cuidado": "Ninguno"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.582379,
+          -33.492428
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_5_5",
+        "cobertura": "Núcleo Masivo de Curvatura",
+        "altitud_m": 550.0003593524219,
+        "friccion_relacional": 1200.0001290526766,
+        "anillo_einstein": "Fondo Asintótico",
+        "red_cuidado": "Ninguno"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.580227,
+          -33.492455
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_5_6",
+        "cobertura": "Núcleo Masivo de Curvatura",
+        "altitud_m": 550.0003593524219,
+        "friccion_relacional": 1200.0001290526766,
+        "anillo_einstein": "Fondo Asintótico",
+        "red_cuidado": "Ninguno"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.578074,
+          -33.492482
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_5_7",
+        "cobertura": "Núcleo Masivo de Curvatura",
+        "altitud_m": 550.5954706616359,
+        "friccion_relacional": 1203.820078473398,
+        "anillo_einstein": "Fondo Asintótico",
+        "red_cuidado": "Ninguno"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.575922,
+          -33.49251
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_5_8",
+        "cobertura": "Campo Geodésico Asintótico",
+        "altitud_m": 638.5060152294891,
+        "friccion_relacional": 5170.9561267050085,
+        "anillo_einstein": "Fondo Asintótico",
+        "red_cuidado": "Media"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.57377,
+          -33.492537
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_5_9",
+        "cobertura": "Anillo de Einstein (Deflexión Crítica)",
+        "altitud_m": 998.9784080079837,
+        "friccion_relacional": 39080.236570104775,
+        "anillo_einstein": "Macro-Anillo Vespucio",
+        "red_cuidado": "Baja"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.571618,
+          -33.492565
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_5_10",
+        "cobertura": "Campo Geodésico Asintótico",
+        "altitud_m": 617.2336558347938,
+        "friccion_relacional": 3910.697870226921,
+        "anillo_einstein": "Fondo Asintótico",
+        "red_cuidado": "Media"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.569466,
+          -33.492592
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_5_11",
+        "cobertura": "Campo Geodésico Asintótico",
+        "altitud_m": 550.2850821174089,
+        "friccion_relacional": 1201.373346331176,
+        "anillo_einstein": "Fondo Asintótico",
+        "red_cuidado": "Media"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.593107,
+          -33.490486
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_6_0",
+        "cobertura": "Campo Geodésico Asintótico",
+        "altitud_m": 550.2850821174089,
+        "friccion_relacional": 1201.373346331176,
+        "anillo_einstein": "Fondo Asintótico",
+        "red_cuidado": "Media"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.590954,
+          -33.490514
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_6_1",
+        "cobertura": "Campo Geodésico Asintótico",
+        "altitud_m": 617.2336558347938,
+        "friccion_relacional": 3910.697870226921,
+        "anillo_einstein": "Fondo Asintótico",
+        "red_cuidado": "Media"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.588802,
+          -33.490542
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_6_2",
+        "cobertura": "Anillo de Einstein (Deflexión Crítica)",
+        "altitud_m": 998.9784080079837,
+        "friccion_relacional": 39080.236570104775,
+        "anillo_einstein": "Macro-Anillo Vespucio",
+        "red_cuidado": "Baja"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.58665,
+          -33.490569
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_6_3",
+        "cobertura": "Campo Geodésico Asintótico",
+        "altitud_m": 638.5060152294891,
+        "friccion_relacional": 5170.9561267050085,
+        "anillo_einstein": "Fondo Asintótico",
+        "red_cuidado": "Media"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.584498,
+          -33.490597
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_6_4",
+        "cobertura": "Núcleo Masivo de Curvatura",
+        "altitud_m": 550.5954706616359,
+        "friccion_relacional": 1203.820078473398,
+        "anillo_einstein": "Fondo Asintótico",
+        "red_cuidado": "Ninguno"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.582346,
+          -33.490624
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_6_5",
+        "cobertura": "Núcleo Masivo de Curvatura",
+        "altitud_m": 550.0003593524219,
+        "friccion_relacional": 1200.0001290526766,
+        "anillo_einstein": "Fondo Asintótico",
+        "red_cuidado": "Ninguno"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.580194,
+          -33.490652
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_6_6",
+        "cobertura": "Núcleo Masivo de Curvatura",
+        "altitud_m": 550.0003593524219,
+        "friccion_relacional": 1200.0001290526766,
+        "anillo_einstein": "Fondo Asintótico",
+        "red_cuidado": "Ninguno"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.578042,
+          -33.490679
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_6_7",
+        "cobertura": "Núcleo Masivo de Curvatura",
+        "altitud_m": 550.5954706616359,
+        "friccion_relacional": 1203.820078473398,
+        "anillo_einstein": "Fondo Asintótico",
+        "red_cuidado": "Ninguno"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.575889,
+          -33.490707
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_6_8",
+        "cobertura": "Campo Geodésico Asintótico",
+        "altitud_m": 638.5060152294891,
+        "friccion_relacional": 5170.9561267050085,
+        "anillo_einstein": "Fondo Asintótico",
+        "red_cuidado": "Media"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.573737,
+          -33.490734
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_6_9",
+        "cobertura": "Anillo de Einstein (Deflexión Crítica)",
+        "altitud_m": 998.9784080079837,
+        "friccion_relacional": 39080.236570104775,
+        "anillo_einstein": "Macro-Anillo Vespucio",
+        "red_cuidado": "Baja"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.571585,
+          -33.490761
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_6_10",
+        "cobertura": "Campo Geodésico Asintótico",
+        "altitud_m": 617.2336558347938,
+        "friccion_relacional": 3910.697870226921,
+        "anillo_einstein": "Fondo Asintótico",
+        "red_cuidado": "Media"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.569433,
+          -33.490789
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_6_11",
+        "cobertura": "Campo Geodésico Asintótico",
+        "altitud_m": 550.2850821174089,
+        "friccion_relacional": 1201.373346331176,
+        "anillo_einstein": "Fondo Asintótico",
+        "red_cuidado": "Media"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.593074,
+          -33.488683
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_7_0",
+        "cobertura": "Campo Geodésico Asintótico",
+        "altitud_m": 550.0735565606543,
+        "friccion_relacional": 1200.2092325711417,
+        "anillo_einstein": "Fondo Asintótico",
+        "red_cuidado": "Media"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.590921,
+          -33.488711
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_7_1",
+        "cobertura": "Campo Geodésico Asintótico",
+        "altitud_m": 577.8350316849121,
+        "friccion_relacional": 1996.4226546675875,
+        "anillo_einstein": "Fondo Asintótico",
+        "red_cuidado": "Media"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.588769,
+          -33.488738
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_7_2",
+        "cobertura": "Anillo de Einstein (Deflexión Crítica)",
+        "altitud_m": 929.410278922223,
+        "friccion_relacional": 31182.1089681418,
+        "anillo_einstein": "Macro-Anillo Vespucio",
+        "red_cuidado": "Baja"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.586617,
+          -33.488766
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_7_3",
+        "cobertura": "Anillo de Einstein (Deflexión Crítica)",
+        "altitud_m": 793.2876578257774,
+        "friccion_relacional": 17374.165379172802,
+        "anillo_einstein": "Macro-Anillo Vespucio",
+        "red_cuidado": "Baja"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.584465,
+          -33.488794
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_7_4",
+        "cobertura": "Núcleo Masivo de Curvatura",
+        "altitud_m": 564.7005353518663,
+        "friccion_relacional": 1528.1423312511931,
+        "anillo_einstein": "Fondo Asintótico",
+        "red_cuidado": "Ninguno"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.582313,
+          -33.488821
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_7_5",
+        "cobertura": "Núcleo Masivo de Curvatura",
+        "altitud_m": 550.5954706616359,
+        "friccion_relacional": 1203.820078473398,
+        "anillo_einstein": "Fondo Asintótico",
+        "red_cuidado": "Ninguno"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.580161,
+          -33.488849
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_7_6",
+        "cobertura": "Núcleo Masivo de Curvatura",
+        "altitud_m": 550.5954706616359,
+        "friccion_relacional": 1203.820078473398,
+        "anillo_einstein": "Fondo Asintótico",
+        "red_cuidado": "Ninguno"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.578009,
+          -33.488876
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_7_7",
+        "cobertura": "Núcleo Masivo de Curvatura",
+        "altitud_m": 564.7005353518663,
+        "friccion_relacional": 1528.1423312511931,
+        "anillo_einstein": "Fondo Asintótico",
+        "red_cuidado": "Ninguno"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.575857,
+          -33.488903
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_7_8",
+        "cobertura": "Anillo de Einstein (Deflexión Crítica)",
+        "altitud_m": 793.2876578257774,
+        "friccion_relacional": 17374.165379172802,
+        "anillo_einstein": "Macro-Anillo Vespucio",
+        "red_cuidado": "Baja"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.573705,
+          -33.488931
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_7_9",
+        "cobertura": "Anillo de Einstein (Deflexión Crítica)",
+        "altitud_m": 929.410278922223,
+        "friccion_relacional": 31182.1089681418,
+        "anillo_einstein": "Macro-Anillo Vespucio",
+        "red_cuidado": "Baja"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.571553,
+          -33.488958
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_7_10",
+        "cobertura": "Campo Geodésico Asintótico",
+        "altitud_m": 577.8350316849121,
+        "friccion_relacional": 1996.4226546675875,
+        "anillo_einstein": "Fondo Asintótico",
+        "red_cuidado": "Media"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.5694,
+          -33.488985
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_7_11",
+        "cobertura": "Campo Geodésico Asintótico",
+        "altitud_m": 550.0735565606543,
+        "friccion_relacional": 1200.2092325711417,
+        "anillo_einstein": "Fondo Asintótico",
+        "red_cuidado": "Media"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.59304,
+          -33.48688
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_8_0",
+        "cobertura": "Campo Geodésico Asintótico",
+        "altitud_m": 550.0040156229675,
+        "friccion_relacional": 1200.0036867635506,
+        "anillo_einstein": "Fondo Asintótico",
+        "red_cuidado": "Media"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.590888,
+          -33.486908
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_8_1",
+        "cobertura": "Campo Geodésico Asintótico",
+        "altitud_m": 553.3930101287322,
+        "friccion_relacional": 1242.824277468459,
+        "anillo_einstein": "Fondo Asintótico",
+        "red_cuidado": "Media"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.588736,
+          -33.486935
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_8_2",
+        "cobertura": "Campo Geodésico Asintótico",
+        "altitud_m": 691.7261628474184,
+        "friccion_relacional": 8836.445500945341,
+        "anillo_einstein": "Fondo Asintótico",
+        "red_cuidado": "Media"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.586584,
+          -33.486963
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_8_3",
+        "cobertura": "Anillo de Einstein (Deflexión Crítica)",
+        "altitud_m": 998.9784080079837,
+        "friccion_relacional": 39080.236570104775,
+        "anillo_einstein": "Macro-Anillo Vespucio",
+        "red_cuidado": "Baja"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.584432,
+          -33.48699
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_8_4",
+        "cobertura": "Anillo de Einstein (Deflexión Crítica)",
+        "altitud_m": 793.2876578257774,
+        "friccion_relacional": 17374.165379172802,
+        "anillo_einstein": "Macro-Anillo Vespucio",
+        "red_cuidado": "Baja"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.58228,
+          -33.487018
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_8_5",
+        "cobertura": "Campo Geodésico Asintótico",
+        "altitud_m": 638.5060152294891,
+        "friccion_relacional": 5170.9561267050085,
+        "anillo_einstein": "Fondo Asintótico",
+        "red_cuidado": "Media"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.580128,
+          -33.487045
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_8_6",
+        "cobertura": "Campo Geodésico Asintótico",
+        "altitud_m": 638.5060152294891,
+        "friccion_relacional": 5170.9561267050085,
+        "anillo_einstein": "Fondo Asintótico",
+        "red_cuidado": "Media"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.577976,
+          -33.487073
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_8_7",
+        "cobertura": "Anillo de Einstein (Deflexión Crítica)",
+        "altitud_m": 793.2876578257774,
+        "friccion_relacional": 17374.165379172802,
+        "anillo_einstein": "Macro-Anillo Vespucio",
+        "red_cuidado": "Baja"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.575824,
+          -33.4871
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_8_8",
+        "cobertura": "Anillo de Einstein (Deflexión Crítica)",
+        "altitud_m": 998.9784080079837,
+        "friccion_relacional": 39080.236570104775,
+        "anillo_einstein": "Macro-Anillo Vespucio",
+        "red_cuidado": "Baja"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.573672,
+          -33.487127
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_8_9",
+        "cobertura": "Campo Geodésico Asintótico",
+        "altitud_m": 691.7261628474184,
+        "friccion_relacional": 8836.445500945341,
+        "anillo_einstein": "Fondo Asintótico",
+        "red_cuidado": "Media"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.57152,
+          -33.487155
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_8_10",
+        "cobertura": "Campo Geodésico Asintótico",
+        "altitud_m": 553.3930101287322,
+        "friccion_relacional": 1242.824277468459,
+        "anillo_einstein": "Fondo Asintótico",
+        "red_cuidado": "Media"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.569368,
+          -33.487182
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_8_11",
+        "cobertura": "Campo Geodésico Asintótico",
+        "altitud_m": 550.0040156229675,
+        "friccion_relacional": 1200.0036867635506,
+        "anillo_einstein": "Fondo Asintótico",
+        "red_cuidado": "Media"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.593007,
+          -33.485077
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_9_0",
+        "cobertura": "Campo Geodésico Asintótico",
+        "altitud_m": 550.000033673408,
+        "friccion_relacional": 1200.000004815761,
+        "anillo_einstein": "Fondo Asintótico",
+        "red_cuidado": "Media"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.590855,
+          -33.485104
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_9_1",
+        "cobertura": "Campo Geodésico Asintótico",
+        "altitud_m": 550.0735565606543,
+        "friccion_relacional": 1200.2092325711417,
+        "anillo_einstein": "Fondo Asintótico",
+        "red_cuidado": "Media"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.588703,
+          -33.485132
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_9_2",
+        "cobertura": "Campo Geodésico Asintótico",
+        "altitud_m": 560.2375842983654,
+        "friccion_relacional": 1398.526408992377,
+        "anillo_einstein": "Fondo Asintótico",
+        "red_cuidado": "Media"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.586551,
+          -33.48516
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_9_3",
+        "cobertura": "Campo Geodésico Asintótico",
+        "altitud_m": 691.7261628474184,
+        "friccion_relacional": 8836.445500945341,
+        "anillo_einstein": "Fondo Asintótico",
+        "red_cuidado": "Media"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.584399,
+          -33.485187
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_9_4",
+        "cobertura": "Anillo de Einstein (Deflexión Crítica)",
+        "altitud_m": 929.410278922223,
+        "friccion_relacional": 31182.1089681418,
+        "anillo_einstein": "Macro-Anillo Vespucio",
+        "red_cuidado": "Baja"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.582247,
+          -33.485215
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_9_5",
+        "cobertura": "Anillo de Einstein (Deflexión Crítica)",
+        "altitud_m": 998.9784080079837,
+        "friccion_relacional": 39080.236570104775,
+        "anillo_einstein": "Macro-Anillo Vespucio",
+        "red_cuidado": "Baja"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.580095,
+          -33.485242
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_9_6",
+        "cobertura": "Anillo de Einstein (Deflexión Crítica)",
+        "altitud_m": 998.9784080079837,
+        "friccion_relacional": 39080.236570104775,
+        "anillo_einstein": "Macro-Anillo Vespucio",
+        "red_cuidado": "Baja"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.577943,
+          -33.485269
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_9_7",
+        "cobertura": "Anillo de Einstein (Deflexión Crítica)",
+        "altitud_m": 929.410278922223,
+        "friccion_relacional": 31182.1089681418,
+        "anillo_einstein": "Macro-Anillo Vespucio",
+        "red_cuidado": "Baja"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.575791,
+          -33.485297
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_9_8",
+        "cobertura": "Campo Geodésico Asintótico",
+        "altitud_m": 691.7261628474184,
+        "friccion_relacional": 8836.445500945341,
+        "anillo_einstein": "Fondo Asintótico",
+        "red_cuidado": "Media"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.573639,
+          -33.485324
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_9_9",
+        "cobertura": "Campo Geodésico Asintótico",
+        "altitud_m": 560.2375842983654,
+        "friccion_relacional": 1398.526408992377,
+        "anillo_einstein": "Fondo Asintótico",
+        "red_cuidado": "Media"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.571487,
+          -33.485352
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_9_10",
+        "cobertura": "Campo Geodésico Asintótico",
+        "altitud_m": 550.0735565606543,
+        "friccion_relacional": 1200.2092325711417,
+        "anillo_einstein": "Fondo Asintótico",
+        "red_cuidado": "Media"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.569335,
+          -33.485379
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_9_11",
+        "cobertura": "Campo Geodésico Asintótico",
+        "altitud_m": 550.000033673408,
+        "friccion_relacional": 1200.000004815761,
+        "anillo_einstein": "Fondo Asintótico",
+        "red_cuidado": "Media"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.592974,
+          -33.483273
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_10_0",
+        "cobertura": "Campo Geodésico Asintótico",
+        "altitud_m": 550.000000030641,
+        "friccion_relacional": 1200.0000000002879,
+        "anillo_einstein": "Fondo Asintótico",
+        "red_cuidado": "Media"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.590822,
+          -33.483301
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_10_1",
+        "cobertura": "Campo Geodésico Asintótico",
+        "altitud_m": 550.0001742806842,
+        "friccion_relacional": 1200.000047236648,
+        "anillo_einstein": "Fondo Asintótico",
+        "red_cuidado": "Media"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.588671,
+          -33.483329
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_10_2",
+        "cobertura": "Campo Geodésico Asintótico",
+        "altitud_m": 550.0735565606543,
+        "friccion_relacional": 1200.2092325711417,
+        "anillo_einstein": "Fondo Asintótico",
+        "red_cuidado": "Media"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.586519,
+          -33.483356
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_10_3",
+        "cobertura": "Campo Geodésico Asintótico",
+        "altitud_m": 553.3930101287322,
+        "friccion_relacional": 1242.824277468459,
+        "anillo_einstein": "Fondo Asintótico",
+        "red_cuidado": "Media"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.584367,
+          -33.483384
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_10_4",
+        "cobertura": "Campo Geodésico Asintótico",
+        "altitud_m": 577.8350316849121,
+        "friccion_relacional": 1996.4226546675875,
+        "anillo_einstein": "Fondo Asintótico",
+        "red_cuidado": "Media"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.582215,
+          -33.483411
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_10_5",
+        "cobertura": "Campo Geodésico Asintótico",
+        "altitud_m": 617.2336558347938,
+        "friccion_relacional": 3910.697870226921,
+        "anillo_einstein": "Fondo Asintótico",
+        "red_cuidado": "Media"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.580063,
+          -33.483439
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_10_6",
+        "cobertura": "Campo Geodésico Asintótico",
+        "altitud_m": 617.2336558347938,
+        "friccion_relacional": 3910.697870226921,
+        "anillo_einstein": "Fondo Asintótico",
+        "red_cuidado": "Media"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.577911,
+          -33.483466
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_10_7",
+        "cobertura": "Campo Geodésico Asintótico",
+        "altitud_m": 577.8350316849121,
+        "friccion_relacional": 1996.4226546675875,
+        "anillo_einstein": "Fondo Asintótico",
+        "red_cuidado": "Media"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.575759,
+          -33.483494
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_10_8",
+        "cobertura": "Campo Geodésico Asintótico",
+        "altitud_m": 553.3930101287322,
+        "friccion_relacional": 1242.824277468459,
+        "anillo_einstein": "Fondo Asintótico",
+        "red_cuidado": "Media"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.573607,
+          -33.483521
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_10_9",
+        "cobertura": "Campo Geodésico Asintótico",
+        "altitud_m": 550.0735565606543,
+        "friccion_relacional": 1200.2092325711417,
+        "anillo_einstein": "Fondo Asintótico",
+        "red_cuidado": "Media"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.571455,
+          -33.483548
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_10_10",
+        "cobertura": "Campo Geodésico Asintótico",
+        "altitud_m": 550.0001742806842,
+        "friccion_relacional": 1200.000047236648,
+        "anillo_einstein": "Fondo Asintótico",
+        "red_cuidado": "Media"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.569303,
+          -33.483576
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_10_11",
+        "cobertura": "Campo Geodésico Asintótico",
+        "altitud_m": 550.000000030641,
+        "friccion_relacional": 1200.0000000002879,
+        "anillo_einstein": "Fondo Asintótico",
+        "red_cuidado": "Media"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.592941,
+          -33.48147
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_11_0",
+        "cobertura": "Campo Geodésico Asintótico",
+        "altitud_m": 550.0000000000022,
+        "friccion_relacional": 1200.0,
+        "anillo_einstein": "Fondo Asintótico",
+        "red_cuidado": "Media"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.59079,
+          -33.481498
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_11_1",
+        "cobertura": "Campo Geodésico Asintótico",
+        "altitud_m": 550.000000030641,
+        "friccion_relacional": 1200.0000000002879,
+        "anillo_einstein": "Fondo Asintótico",
+        "red_cuidado": "Media"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.588638,
+          -33.481526
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_11_2",
+        "cobertura": "Campo Geodésico Asintótico",
+        "altitud_m": 550.000033673408,
+        "friccion_relacional": 1200.000004815761,
+        "anillo_einstein": "Fondo Asintótico",
+        "red_cuidado": "Media"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.586486,
+          -33.481553
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_11_3",
+        "cobertura": "Campo Geodésico Asintótico",
+        "altitud_m": 550.0040156229675,
+        "friccion_relacional": 1200.0036867635506,
+        "anillo_einstein": "Fondo Asintótico",
+        "red_cuidado": "Media"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.584334,
+          -33.481581
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_11_4",
+        "cobertura": "Campo Geodésico Asintótico",
+        "altitud_m": 550.0735565606543,
+        "friccion_relacional": 1200.2092325711417,
+        "anillo_einstein": "Fondo Asintótico",
+        "red_cuidado": "Media"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.582182,
+          -33.481608
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_11_5",
+        "cobertura": "Campo Geodésico Asintótico",
+        "altitud_m": 550.2850821174089,
+        "friccion_relacional": 1201.373346331176,
+        "anillo_einstein": "Fondo Asintótico",
+        "red_cuidado": "Media"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.58003,
+          -33.481636
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_11_6",
+        "cobertura": "Campo Geodésico Asintótico",
+        "altitud_m": 550.2850821174089,
+        "friccion_relacional": 1201.373346331176,
+        "anillo_einstein": "Fondo Asintótico",
+        "red_cuidado": "Media"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.577878,
+          -33.481663
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_11_7",
+        "cobertura": "Campo Geodésico Asintótico",
+        "altitud_m": 550.0735565606543,
+        "friccion_relacional": 1200.2092325711417,
+        "anillo_einstein": "Fondo Asintótico",
+        "red_cuidado": "Media"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.575726,
+          -33.48169
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_11_8",
+        "cobertura": "Campo Geodésico Asintótico",
+        "altitud_m": 550.0040156229675,
+        "friccion_relacional": 1200.0036867635506,
+        "anillo_einstein": "Fondo Asintótico",
+        "red_cuidado": "Media"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.573574,
+          -33.481718
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_11_9",
+        "cobertura": "Campo Geodésico Asintótico",
+        "altitud_m": 550.000033673408,
+        "friccion_relacional": 1200.000004815761,
+        "anillo_einstein": "Fondo Asintótico",
+        "red_cuidado": "Media"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.571422,
+          -33.481745
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_11_10",
+        "cobertura": "Campo Geodésico Asintótico",
+        "altitud_m": 550.000000030641,
+        "friccion_relacional": 1200.0000000002879,
+        "anillo_einstein": "Fondo Asintótico",
+        "red_cuidado": "Media"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.56927,
+          -33.481772
+        ]
+      },
+      "properties": {
+        "pixel_id": "exp9_synth_11_11",
+        "cobertura": "Campo Geodésico Asintótico",
+        "altitud_m": 550.0000000000022,
+        "friccion_relacional": 1200.0,
+        "anillo_einstein": "Fondo Asintótico",
+        "red_cuidado": "Media"
+      }
+    }
+  ]
+}

@@ -1,3 +1,14 @@
+---
+title: Puerto Umbral - Ontologia Territorial Tomo II
+emoji: 🧭
+colorFrom: blue
+colorTo: indigo
+sdk: docker
+app_port: 3838
+pinned: false
+license: cc-by-4.0
+---
+
 # Puerto Umbral: Zenodo Scientific Bundle  
 ## Plataforma base de Ontología Territorial y Geotensores — Tomo II
 
@@ -43,12 +54,32 @@ For structured, automated recovery, use any of these redundant paths depending o
 *   **Repository Manifest Inventory:** [./MANIFEST.md](./MANIFEST.md)
 *   **Sitemap XML:** [https://ontologiaterritorial.github.io/puerto_umbral/sitemap.xml](https://ontologiaterritorial.github.io/puerto_umbral/sitemap.xml)
 
-**Versión de la app:** Puerto Umbral v5.4  
-**Versión del bundle Zenodo:** v1.0  
+**Versión de la app:** Puerto Umbral Next v6.0 (Sovereign WebGL) & v5.4 (Shiny / OGC)  
+**Versión del bundle Zenodo:** v1.1 (ALOS PALSAR + Landsat 8 + IDE Chile)  
 
-## Versiones Disponibles / Available Versions
+## Arquitectura de la Plataforma / Platform Architecture
 
-La plataforma está diseñada bajo una arquitectura híbrida optimizada para dos flujos de trabajo científicos complementarios:
+La plataforma está diseñada bajo una arquitectura híbrida de soberanía digital con tres modalidades de acceso:
+
+### ⚡ 1. Puerto Umbral Next (Plataforma Soberana WebGL < 500 ms en GitHub Pages)
+* **Acceso Inmediato:** [https://ontologiaterritorial.github.io/puerto_umbral/](https://ontologiaterritorial.github.io/puerto_umbral/)
+* **Tecnología:** MapLibre GL v5 + Deck.gl v9 + KaTeX (compilación sincrónica de LaTeX en cliente < 5 ms).
+* **Física Intrínseca Integrada:**
+  * **DEM ALOS PALSAR (12.5m RTC):** Cotas ortorrectificadas ($z > 0$), pendiente espacial ($	heta^\circ$), índice de rugosidad (TRI) y velocidad pedestre de Tobler para las 70.096 manzanas de la RMS.
+  * **Landsat 8 Estival (Enero 2025):** Índice NDVI de vigor vegetal e Isla de Calor Urbana (LST Banda 10) acoplados al tensor de Riemann $g_{\mu
+u}$.
+  * **10 Líneas de Trabajo Empíricas:** Anillos de Einstein (Américo Vespucio $R_E = 10.75\text{ km}$), Escenarios SUT-2050 (97 hotspots de duelo $\Lambda \ge 0.70$), refracción de Snell, autopoiesis y memoria de Caputo.
+* **Ventaja Soberana:** Cero costo de servidor, cero tiempo de espera, inmortal en GitHub Pages y archivada con DOI en Zenodo.
+
+### 🏛️ 2. Interoperabilidad Estado de Chile (IDE Chile / SNIT / OGC / SEGPRES)
+* **OGC WMS 1.3.0:** Descriptor en `ogc/wms_capabilities.xml` en SIRGAS-Chile (EPSG:4674 / 32719).
+* **OGC WFS 2.0.0:** Descarga vectorial en `ogc/wfs_capabilities.xml` (GeoJSON y GML3).
+* **REST API OpenAPI 3.0:** Especificación viva en `ogc/openapi_geotensores.json` y endpoints `/api/einstein_rings_rms.geojson`, `/api/hotspots_latencia_rms.geojson` y `/api/comunas_rms_perfiles.json`.
+* **QGIS Layer Definition:** Archivo `ogc/puerto_umbral_qgis.qlr` para carga directa en 1 clic.
+
+### 📱 3. Herramientas de Terreno Desacopladas (PWA 100% Offline)
+* **App Terreno Pedestre (IEO):** `mobile.html` con trazador GPS continuo Wu Wei y semáforo de precisión geodésica.
+* **Ficha FIBE Terreno (GRD):** `fibe_terreno.html` para emergencias y catástrofes territoriales sin consumo de red.
 
 ### 🖥️ 1. Versión de Escritorio (Simulación y Modelamiento en R-WebAssembly)
 * **Propósito:** Trabajo analítico de gabinete, formulación de escenarios y experimentos territoriales complejos.

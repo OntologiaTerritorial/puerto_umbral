@@ -107,6 +107,7 @@ ui <- tagList(
           var tab3 = lang === 'EN' ? 'Simulation Center' : 'Centro de Simulaci\u00f3n';
           var tab4 = lang === 'EN' ? 'Mathematical Analysis' : 'An\u00e1lisis Matem\u00e1tico';
           var tab5 = lang === 'EN' ? 'Library & QA Agent' : 'Biblioteca y Agente';
+          var tab6 = lang === 'EN' ? 'Interoperability (IDE Chile)' : 'Interoperabilidad (IDE Chile)';
           
           // Tooltips del Men\u00fa Principal
           $('a[data-value=\"Inicio\"]').html(tab0).attr('title', lang === 'EN' ? 'Download books and view illustrated concepts' : 'Descarga de libros y conceptos clave ilustrados');
@@ -115,6 +116,7 @@ ui <- tagList(
           $('a[data-value=\"Centro de Simulaci\u00f3n\"]').html(tab3).attr('title', lang === 'EN' ? 'Interactive geodesic solver and potential fields' : 'Resolvedor geod\u00e9sico interactivo y campos de potencial');
           $('a[data-value=\"An\u00e1lisis Matem\u00e1tico\"]').html(tab4).attr('title', lang === 'EN' ? 'Lyapunov decay curves and Lie bracket analysis' : 'Decaimiento de Lyapunov y conmutadores de Lie');
           $('a[data-value=\"Biblioteca y Agente\"]').html(tab5).attr('title', lang === 'EN' ? 'Download books and chat with the local QA AI agent' : 'Descargas de tomos y chat con el agente local de consulta');
+          $('a[data-value=\"Interoperabilidad (IDE Chile)\"]').html(tab6).attr('title', lang === 'EN' ? 'OGC WMS, WFS, and REST API services for national spatial data' : 'Servicios OGC WMS, WFS y REST API para la Infraestructura de Datos Espaciales de Chile');
           
           // Tooltips de las Pesta\u00f1as de Gr\u00e1ficos de An\u00e1lisis Matem\u00e1tico
           $('a[data-value=\"Conmutador de Lie [X, Y]\"], a[data-value=\"Lie Commutator [X, Y]\"]').attr('title', lang === 'EN' ? 'Temporal order asymmetry analysis [X,Y]' : 'An\u00e1lisis de asimetr\u00eda del orden temporal [X,Y]');
@@ -154,17 +156,18 @@ ui <- tagList(
   # =====================================================================
   # Estructura de navegaci\u00f3n principal por pesta\u00f1as modularizadas
   withMathJax(
-    navbarPage("Puerto Umbral - Ontolog\u00eda Territorial",
+    navbarPage("Puerto Umbral - Ontología Territorial",
                id = "nav_active",
                theme = shinytheme("flatly"),
                
-               # UI de los subm\u00f3dulos cargados din\u00e1micamente:
+               # UI de los submódulos cargados dinámicamente:
                tab0_ui(),  # Inicio / Descargas
-               tab1_ui(),  # Pedagog\u00eda / Harmonizaci\u00f3n
+               tab1_ui(),  # Pedagogía / Harmonización
                tab2_ui(),  # Experimentos de Terreno
-               tab3_ui(),  # Centro de Simulaci\u00f3n (BVP/ODE)
-               tab4_ui(),  # An\u00e1lisis Matem\u00e1tico (Lyapunov/Lie)
-               tab5_ui()   # Biblioteca y Agente de Consulta (QA)
+               tab3_ui(),  # Centro de Simulación (BVP/ODE)
+               tab4_ui(),  # Análisis Matemático (Lyapunov/Lie)
+               tab5_ui(),  # Biblioteca y Agente de Consulta (QA)
+               tab6_ui()   # Interoperabilidad IDE Chile (WMS / WFS / REST API)
     )
   ),
   
@@ -179,7 +182,7 @@ ui <- tagList(
   )
 )
 
-# ---- L\u00d3GICA DEL SERVIDOR (SERVER) ----
+# ---- LÓGICA DEL SERVIDOR (SERVER) ----
 server <- function(input, output, session) {
   
   # ---- ESTADOS REACTIVOS COMPARTIDOS ----
@@ -192,12 +195,13 @@ server <- function(input, output, session) {
   chat_messages <- reactiveVal(list())
   run_sim_trigger <- reactiveVal(0)
   
-  # ---- ORQUESTACI\u00d3N DE SUBM\u00d3DULOS DE SERVIDOR ----
+  # ---- ORQUESTACIÓN DE SUBMÓDULOS DE SERVIDOR ----
   tab0_server(input, output, session, lang)
   tab1_server(input, output, session, lang, run_sim_trigger, active_exp_line)
   tab2_server(input, output, session, active_exp_line, lang, run_sim_trigger)
   tab4_server(input, output, session, lang)
   tab5_server(input, output, session, chat_messages, lang, tomo1_db, tomo2_db)
+  tab6_server(input, output, session, lang)
   ergo_server(input, output, session, ergo_open, lang)
   
   # ---- DYNAMIC HIGH-CONTRAST FIELD MODE STYLESHEET ----

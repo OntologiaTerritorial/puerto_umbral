@@ -121,6 +121,8 @@ sim_server <- function(input, output, session, lang, run_sim_trigger) {
                      "exp6" = 6,
                      "exp7" = 7,
                      "exp8" = 8,
+                     "exp9" = 9,
+                     "exp10" = 10,
                      6) # Default to 6 (Pe\u00f1alol\u00e9n / base)
     
     conn_act <- dbConnect(SQLite(), dbname = db_path)
@@ -2836,6 +2838,16 @@ sim_server <- function(input, output, session, lang, run_sim_trigger) {
         "Experiment 8 (MBHT 4D SUBDERE): The 4-dimensional territorial well-being tensor induces metric curvature from inter-dimensional variance, exposing structural inequity in everyday trajectories."
       } else {
         "Experimento 8 (MBHT 4D SUBDERE): El tensor tetradimensional de bienestar territorial induce curvatura m\u00e9trica a partir de la varianza interdimensional, exponiendo la desigualdad estructural en las trayectorias cotidianas."
+      },
+      "exp9" = if (is_en) {
+        "Experiment 9 (RMS Einstein Rings): Gravitational lensing in the Santiago Metropolitan Region. Massive socio-spatial concentration curves geodesics into Schwarzschild-like Einstein rings, magnifying stress along Americo Vespucio."
+      } else {
+        "Experimento 9 (Anillos de Einstein RMS): Lentes gravitacionales en la Regi\u00f3n Metropolitana. La masa ontol\u00f3gica curvada desv\u00eda trayectorias peatonales formando anillos cr\u00edticos de confinamiento alrededor del Macro-Anillo de Vespucio."
+      },
+      "exp10" = if (is_en) {
+        "Experiment 10 (SUT-RMS 2050 Scenarios): Long-term memory and prospective scenarios. 97 unresolved grief hotspots guide future geodesic evolution towards the 2050 Territorial Human Habitat master plan."
+      } else {
+        "Experimento 10 (Escenarios SUT-RMS 2050): Memoria no markoviana y escenarios prospectivos. 97 hotspots de duelo territorial gu\u00edan la evoluci\u00f3n geod\u00e9sica hacia los horizontes de planificaci\u00f3n 2050."
       }
     )
     
@@ -3083,6 +3095,8 @@ sim_server <- function(input, output, session, lang, run_sim_trigger) {
       "exp6" = if (is_en) "Pe\u00f1alol\u00e9n sanctuary active. The asymmetric boundary and Robin conditions channel the ecological walker's geodesic, protecting the natural corridor from slope erosion." else "Santuario de Pe\u00f1alol\u00e9n activo. La frontera asim\u00e9trica y las condiciones de Robin canalizan la geod\u00e9sica del peat\u00f3n ecol\u00f3gico, protegiendo el corredor natural del desgaste de la loma.",
       "exp7" = if (is_en) "Urban-rural limit and capital refraction active. The gradient of land rent and real estate speculation attracts or repels valuation paths, forcing phase transitions of financial flows." else "L\u00edmite urbano-rural y refracci\u00f3n de capital activa. El gradiente de plusval\u00eda y especulaci\u00f3n inmobiliaria atrae o repele las trayectorias de valorizaci\u00f3n, forzando transiciones de fase de flujo financiero.",
       "exp8" = if (is_en) "MBHT 4D deformation active. The 4-dimensional tensor integrates Environmental, Safety, Social, and Accessibility indicators from SUBDERE. Multi-criteria variance generates intrinsic geotensorial tension, curving trajectories towards zones of integral human well-being." else "Deformaci\u00f3n MBHT 4D activa. El tensor tetradimensional integra indicadores Ambientales, Seguridad, Social y Accesibilidad de SUBDERE. La varianza multidimensional genera tensi\u00f3n geotensorial intr\u00ednseca, curvando trayectorias hacia cuencas de bienestar humano integral.",
+      "exp9" = if (is_en) "Einstein Rings & Gravitational Lenses active. Metrological concentration warps geodesics, deflecting urban trajectories around Americo Vespucio." else "Anillos de Einstein y Lentes Gravitacionales activos. La concentraci\u00f3n de masa ontol\u00f3gica deforma geod\u00e9sicas, desviando flujos en el Macro-Anillo de Vespucio.",
+      "exp10" = if (is_en) "SUT-RMS 2050 prospective scenarios active. Non-Markovian Caputo latency models historical grief hotspots across 52 communes." else "Escenarios prospectivos SUT-RMS 2050 activos. La latencia no markoviana de Caputo modela 97 hotspots de duelo hist\u00f3rico comunal.",
       if (is_en) "Stable municipal communes and territorial manifolds. Geodesics track altitude contours and baseline friction in equilibrium." else "Comunas y variedades territoriales estables. Las geod\u00e9sicas siguen el contorno de la altitud y fricci\u00f3n base en equilibrio."
     )
     
@@ -3199,6 +3213,18 @@ sim_server <- function(input, output, session, lang, run_sim_trigger) {
         diag = "Tensor tetradimensional (Ambiental, Seguridad, Social, Accesibilidad) con deformaci\u00f3n geod\u00e9sica multiescalar.",
         poet = "El bienestar no es un promedio unidimensional; la tensi\u00f3n entre carencias deforma la geod\u00e9sica cotidiana, revelando las fracturas del suelo social.",
         policy = "Focalizar inversiones SUBDERE reduciendo la varianza interdimensional en comunas prioritarias del Gran Santiago."
+      ),
+      "exp9" = list(
+        name = "Consejero de Gravitaci\u00f3n Urbana (Lentes & Einstein Rings)",
+        diag = "Lente gravitacional territorial activo. Curvatura extrema concentra flujos geod\u00e9sicos en el anillo perimetral de Vespucio.",
+        poet = "La masa de poder y segregaci\u00f3n dobla la luz del caminar ciudadano, proyectando im\u00e1genes m\u00faltiples de la exclusi\u00f3n metropolitana.",
+        policy = "Apertura de pasajes y pasarelas de sutura geod\u00e9sica en los 6 anillos barriales para disipar la concentraci\u00f3n de fricci\u00f3n."
+      ),
+      "exp10" = list(
+        name = "Consejero Prospectivo SUT-RMS 2050 (Memoria y Latencia)",
+        diag = "Memoria fraccionaria de Caputo y 97 hotspots de duelo territorial activo en comunas cr\u00edticas.",
+        poet = "El territorio no olvida: el duelo no resuelto late en la frecuencia propia de la comunidad hasta que la voluntad organizada lo transmuta.",
+        policy = "Priorizar proyectos de reparaci\u00f3n territorial bajo el Escenario de Cohesi\u00f3n y Resiliencia SUT-2050 con auditor\u00eda CARE."
       ),
       list(
         name = "C\u00edrculo de Consejeros Territoriales (IA Local)",

@@ -150,18 +150,20 @@ def main():
         (5, "Métrica de Moran (Ledoit-Wolf)", "Comuna Geoestadística", "Malla con ruido espacial Gaussiano y matrices inestables listas para validación Moran y regularización Ledoit-Wolf.", "2026-06-26"),
         (6, "Santuario de Peñalolén (Robin Boundary)", "Peñalolén precordillera", "Caso real del Santuario Quebrada de Macul con límites ecológicos asimétricos y condiciones de Robin.", "2026-06-26"),
         (7, "Refracción de Capital (Urbano-Rural)", "Borde Urbano-Rural", "Transición y salto de plusvalía y especulación inmobiliaria en el límite periurbano.", "2026-06-26"),
-        (8, "Deformación MBHT 4D (SUBDERE)", "Gran Santiago / Nacional", "Modelo de Bienestar Humano Territorial (SUBDERE). Tensor 4D de dimensiones Ambiental, Seguridad, Social y Accesibilidad. La varianza multidimensional induce tensión geotensorial intrínseca.", "2026-09-11")
+        (8, "Deformación MBHT 4D (SUBDERE)", "Gran Santiago / Nacional", "Modelo de Bienestar Humano Territorial (SUBDERE). Tensor 4D de dimensiones Ambiental, Seguridad, Social y Accesibilidad. La varianza multidimensional induce tensión geotensorial intrínseca.", "2026-09-11"),
+        (9, "Anillos de Einstein y Curvatura Extrema RMS", "Macro-Anillo de Vespucio", "Lentes gravitacionales territoriales. Masa ontológica concentrada genera deflexión geodésica extrema y anillos de Einstein urbanos con radio de Schwarzschild.", "2026-09-11"),
+        (10, "Escenarios SUT-RMS 2050 y Latencia Territorial", "Región Metropolitana de Santiago", "97 hotspots de duelo histórico (frecuencia de latencia Lambda) y simulación prospectiva de los 4 Escenarios SUT-2050 (Inercial, Cohesión, Metropolización, Resiliencia).", "2026-09-11")
     ]
     cursor.executemany("INSERT INTO experimentos VALUES (?, ?, ?, ?, ?);", experimentos_list)
     
-    # 5. Populate Synthetic Experiments (1, 2, 3, 4, 5, 7, 8)
+    # 5. Populate Synthetic Experiments (1, 2, 3, 4, 5, 7, 8, 9, 10)
     grid_size = 12
     # UTM center offset for Santiago scale
     x_base = 352000
     y_base = 6292000
     spacing = 200 # 200 meters between pixels
     
-    for exp_id in [1, 2, 3, 4, 5, 7, 8]:
+    for exp_id in [1, 2, 3, 4, 5, 7, 8, 9, 10]:
         print(f"Generating synthetic grid for Experiment {exp_id}...")
         pixels_data = []
         relaciones_data = []
@@ -269,6 +271,38 @@ def main():
                     else:
                         cobertura = "MBHT Mixto Dinamico"
                         red_cuidado = "Media"
+                        
+                elif exp_id == 9:
+                    # Anillos de Einstein y Lentes Gravitacionales (Curvatura extrema anular)
+                    dist_to_center = math.sqrt((r - 5.5)**2 + (c - 5.5)**2)
+                    dist_to_ring = abs(dist_to_center - 3.5)
+                    alt = 550.0 + 450.0 * math.exp(-1.8 * (dist_to_ring**2))
+                    ndvi = max(0.1, 0.5 - 0.35 * math.exp(-1.8 * (dist_to_ring**2)))
+                    if dist_to_ring < 0.8:
+                        cobertura = "Anillo de Einstein (Deflexión Crítica)"
+                        red_cuidado = "Baja"
+                    elif dist_to_center < 2.5:
+                        cobertura = "Núcleo Masivo de Curvatura"
+                        red_cuidado = "Ninguno"
+                    else:
+                        cobertura = "Campo Geodésico Asintótico"
+                        red_cuidado = "Media"
+                        
+                elif exp_id == 10:
+                    # Escenarios SUT-RMS 2050 y Latencia Territorial
+                    dist_to_hotspot1 = math.sqrt((r - 2.5)**2 + (c - 2.5)**2)
+                    dist_to_hotspot2 = math.sqrt((r - 8.5)**2 + (c - 9.0)**2)
+                    alt = 520.0 + 200.0 * (r / 11.0)
+                    ndvi = 0.3 + 0.4 * (c / 11.0)
+                    if dist_to_hotspot1 < 1.5:
+                        cobertura = "Hotspot Duelo Territorial San Ramón"
+                        red_cuidado = "Alta"
+                    elif dist_to_hotspot2 < 1.5:
+                        cobertura = "Hotspot Latencia Lampa/Quilicura"
+                        red_cuidado = "Media"
+                    else:
+                        cobertura = "Escenario SUT-2050 Transición"
+                        red_cuidado = "Media"
                 
                 pixels_data.append((p_id, exp_id, None, x_coord, y_coord, alt, ndvi, cobertura, red_cuidado))
                 
@@ -355,6 +389,23 @@ def main():
                     m_mbht = (d_amb_l + d_seg_l + d_soc_l + d_acc_l) / 4.0
                     v_mbht = ((d_amb_l - m_mbht)**2 + (d_seg_l - m_mbht)**2 + (d_soc_l - m_mbht)**2 + (d_acc_l - m_mbht)**2) / 4.0
                     friction_val = 2000.0 + 35000.0 * v_mbht
+                    latencias_data.append((p_id, 2026.0, "gentrificacion_poder", friction_val))
+                elif exp_id == 9:
+                    # Fricción concentrada en el anillo de Einstein
+                    dist_to_center = math.sqrt((r - 5.5)**2 + (c - 5.5)**2)
+                    dist_to_ring = abs(dist_to_center - 3.5)
+                    friction_val = 1200.0 + 38000.0 * math.exp(-2.5 * (dist_to_ring**2))
+                    latencias_data.append((p_id, 2026.0, "barrera_limite", friction_val))
+                elif exp_id == 10:
+                    # Fricción y latencia histórica en los hotspots de duelo SUT-2050
+                    dist_to_hotspot1 = math.sqrt((r - 2.5)**2 + (c - 2.5)**2)
+                    dist_to_hotspot2 = math.sqrt((r - 8.5)**2 + (c - 9.0)**2)
+                    if dist_to_hotspot1 < 2.0:
+                        friction_val = 28000.0 * math.exp(-0.5 * (dist_to_hotspot1**2))
+                    elif dist_to_hotspot2 < 2.0:
+                        friction_val = 22000.0 * math.exp(-0.5 * (dist_to_hotspot2**2))
+                    else:
+                        friction_val = 1800.0
                     latencias_data.append((p_id, 2026.0, "gentrificacion_poder", friction_val))
                 else:
                     latencias_data.append((p_id, 2026.0, "barrera_limite", 1200.0))

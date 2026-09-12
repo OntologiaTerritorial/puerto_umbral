@@ -33,6 +33,17 @@ suppressPackageStartupMessages({
     addResourcePath("media", media_dir)
   }
   
+  # Registrar rutas de interoperabilidad OGC (WMS / WFS) y API REST (GeoJSON)
+  ogc_dir <- "www/ogc"
+  if (!dir.exists(ogc_dir) && dir.exists("app/www/ogc")) ogc_dir <- "app/www/ogc"
+  if (!dir.exists(ogc_dir) && dir.exists("puerto_umbral_zenodo_bundle/app/www/ogc")) ogc_dir <- "puerto_umbral_zenodo_bundle/app/www/ogc"
+  if (dir.exists(ogc_dir)) addResourcePath("ogc", ogc_dir)
+  
+  api_dir <- "www/data"
+  if (!dir.exists(api_dir) && dir.exists("app/www/data")) api_dir <- "app/www/data"
+  if (!dir.exists(api_dir) && dir.exists("puerto_umbral_zenodo_bundle/app/www/data")) api_dir <- "puerto_umbral_zenodo_bundle/app/www/data"
+  if (dir.exists(api_dir)) addResourcePath("api", api_dir)
+  
 UTM_CRS <- 32719 # Proyecci\u00f3n UTM por defecto (Santiago UTM 19S)
   library(leaflet)
   library(plotly)
@@ -1124,5 +1135,6 @@ source("modules/tab3_simulacion.R", encoding = "UTF-8")
 source("modules/tab3_ui_definition.R", encoding = "UTF-8")
 source("modules/tab4_matematica.R", encoding = "UTF-8")
 source("modules/tab5_biblioteca.R", encoding = "UTF-8")
+source("modules/tab6_interoperabilidad.R", encoding = "UTF-8")
 source("modules/ergo_drawer.R", encoding = "UTF-8")
 source("modules/sim_server.R", encoding = "UTF-8")

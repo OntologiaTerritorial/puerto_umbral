@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Puerto Umbral - Ontología Territorial y Física de Geotensores (Tomo II)</title>
+  <meta name="description" content="Plataforma de visualización 3D, física intrínseca de geotensores y modelamiento territorial de la Región Metropolitana de Santiago. Autor: John Treimun Ríos.">
+
+  <!-- MapLibre GL CSS & JS -->
+  <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@5.14.0/dist/maplibre-gl.css" />
+  <script src="https://unpkg.com/maplibre-gl@5.14.0/dist/maplibre-gl.js"></script>
+
+  <!-- Deck.gl Latest -->
+  <script src="https://unpkg.com/deck.gl@latest/dist.min.js"></script>
+
+  <!-- KaTeX Fast Math Rendering -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+
+  <!-- Bootstrap 5 CSS & FontAwesome 6 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="css/puerto_umbral.css">
+</head>
+<body>
+
+  <!-- NAVBAR SOBERANA -->
+  <header class="navbar-soberana d-flex justify-content-between align-items-center">
+    <div class="d-flex align-items-center gap-3">
+      <div>
+        <div class="navbar-brand-title">PUERTO UMBRAL</div>
+        <div class="navbar-brand-sub">Ontología Territorial &bull; Tomo II</div>
+      </div>
+    </div>
+    <nav class="d-flex gap-2 flex-wrap">
+      <a class="nav-link-custom active" id="nav-sec-mapa-3d" onclick="switchTab('sec-mapa-3d')">
+        <i class="fa-solid fa-mountain"></i> Visor 3D (ALOS + NDVI)
+      </a>
+      <a class="nav-link-custom" id="nav-sec-experimentos" onclick="switchTab('sec-experimentos')">
+        <i class="fa-solid fa-flask"></i> 10 Líneas Experimentales
+      </a>
+      <a class="nav-link-custom" id="nav-sec-campo" onclick="switchTab('sec-campo')">
+        <i class="fa-solid fa-mobile-screen"></i> Terreno PWA
+      </a>
+      <a class="nav-link-custom" id="nav-sec-interoperabilidad" onclick="switchTab('sec-interoperabilidad')">
+        <i class="fa-solid fa-globe"></i> IDE Chile / OGC
+      </a>
+      <a class="nav-link-custom" id="nav-sec-manifiesto" onclick="switchTab('sec-manifiesto')">
+        <i class="fa-solid fa-book"></i> La Obra
+      </a>
+    </nav>
+  </header>
+
+  <!-- SECCIÓN 1: VISOR 3D GEOTENSORIAL (ALOS PALSAR + LANDSAT 8 NDVI + GEOTENSORES) -->
+  <section id="sec-mapa-3d" class="tab-section active">
+    <div id="map-viewport-container">
+      <div id="deck-canvas-container"></div>
+
+      <!-- BOTÓN FLOTANTE MÓVIL TOGGLE -->
+      <button class="toggle-panel-btn d-md-none" id="toggle-panel-btn">⚙️ Controles</button>
+
+      <!-- PANEL LATERAL FLOTANTE -->
+      <div class="panel-flotante" id="panel-control">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h5 class="mb-0 fw-bold" style="color: var(--primary-dark);">
+            <i class="fa-solid fa-layer-group"></i> Deformación Geotensorial
+          </h5>
+          <span class="badge-tensor">70.096 POPs</span>
+        </div>
+
+        <p class="text-muted small mb-3">
+          Visualización 3D en tiempo real (WebGL/Deck.gl). Los datos orográficos de <b>ALOS PALSAR (12.5m)</b> y bioclimáticos de <b>Landsat 8 (Enero 2025)</b> se acoplan al tensor métrico de Riemann.
+        </p>
+
+        <!-- MÉTRICAS EN VIVO -->
+        <div class="row g-2 mb-3">
+          <div class="col-6">
+            <div class="stat-box">
+              <div class="stat-val" id="stat-total-pops">9,231</div>
+              <div class="stat-lbl">POPs Muestreados</div>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="stat-box">
+              <div class="stat-val">558 m</div>
+              <div class="stat-lbl">Cota Media ALOS</div>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="stat-box">
+              <div class="stat-val">0.11</div>
+              <div class="stat-lbl">NDVI Estival 2025</div>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="stat-box">
+              <div class="stat-val text-danger">1,768</div>
+              <div class="stat-lbl">Mzs Campamento &le;300m</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SELECTOR DE EXTROSIÓN (ALTURA Z) -->
+        <div class="mb-3">
+          <label class="form-label fw-bold small text-secondary">Extrusión Vertical (Eje Z):</label>
+          <div class="d-flex flex-column gap-1 small">
+            <label><input type="radio" name="height-metric" value="fric" checked> Fricción Geotensorial ($g_{	ext{total}}$)</label>
+            <label><input type="radio" name="height-metric" value="z"> Topografía Real ALOS PALSAR ($z$ msnm)</label>
+            <label><input type="radio" name="height-metric" value="trau"> Memoria de Trauma Histórico (Caputo)</label>
+            <label><input type="radio" name="height-metric" value="lyap"> Paisaje Disipativo de Lyapunov ($V$)</label>
+          </div>
+          <div class="mt-2">
+            <label class="form-label small text-muted d-flex justify-content-between">
+              <span>Factor de Escala:</span>
+            </label>
+            <input type="range" class="form-range" id="height-slider" min="0.2" max="3.0" step="0.1" value="1.0">
+          </div>
+        </div>
+
+        <!-- SELECTOR DE COLOR (GRADIENTE) -->
+        <div class="mb-3">
+          <label class="form-label fw-bold small text-secondary">Gradiente Cromático:</label>
+          <div class="d-flex flex-column gap-1 small">
+            <label><input type="radio" name="color-metric" value="ndvi" checked> Vigor Vegetal (Landsat 8 NDVI Estival)</label>
+            <label><input type="radio" name="color-metric" value="fric"> Magnitud de Fricción Relacional</label>
+            <label><input type="radio" name="color-metric" value="slp"> Pendiente ALOS PALSAR (Orografía)</label>
+            <label><input type="radio" name="color-metric" value="nti"> Norma Tensiva Intrínseca (NTI)</label>
+          </div>
+        </div>
+
+        <!-- CAPAS SINGULARES -->
+        <div class="mb-3 border-top pt-2">
+          <label class="form-label fw-bold small text-secondary">Capas Singulares:</label>
+          <div class="form-check form-switch small">
+            <input class="form-check-input" type="checkbox" id="chk-einstein" checked>
+            <label class="form-check-label" for="chk-einstein">Anillos de Einstein (Vespucio / Lentes)</label>
+          </div>
+          <div class="form-check form-switch small">
+            <input class="form-check-input" type="checkbox" id="chk-hotspots" checked>
+            <label class="form-check-label" for="chk-hotspots">Hotspots Duelo SUT-2050 ($\Lambda \ge 0.70$)</label>
+          </div>
+        </div>
+
+        <!-- PRESETS DE CÁMARA -->
+        <div class="border-top pt-2">
+          <label class="form-label fw-bold small text-secondary">Perspectiva:</label>
+          <div class="btn-group w-100 btn-group-sm">
+            <button class="btn btn-outline-primary" id="btn-cam-3d">3D Inclinado</button>
+            <button class="btn btn-outline-secondary" id="btn-cam-2d">2D Cenital</button>
+            <button class="btn btn-outline-dark" id="btn-cam-reset">Centrar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECCIÓN 2: 10 LÍNEAS EXPERIMENTALES -->
+  <section id="sec-experimentos" class="tab-section container py-5">
+    <div class="text-center mb-5">
+      <h2 class="fw-bold" style="color: var(--primary-dark);">Las 10 Líneas de Experimentación Empírica</h2>
+      <p class="text-secondary max-w-700 mx-auto">
+        Formalización matemática y validación en terreno de la Ontología Territorial desarrollada en el Tomo II. Cada línea traduce un fenómeno de exclusión o resistencia en física de tensores.
+      </p>
+    </div>
+
+    <div class="row g-4">
+      <!-- Línea 1 -->
+      <div class="col-md-6 col-lg-4">
+        <div class="card h-100 shadow-sm border-0 rounded-3 p-3">
+          <span class="badge bg-primary w-fit mb-2">Línea 1</span>
+          <h5 class="fw-bold text-dark">Refracción de Borde (Snell)</h5>
+          <p class="small text-muted">Desviación angular de trayectorias peatonales al cruzar límites segregados de fricción discontinua.</p>
+          <div class="bg-light p-2 rounded text-center font-monospace small mb-2">
+            $$rac{\sin 	heta_1}{\sin 	heta_2} = rac{v_1}{v_2} = \sqrt{rac{g_{22}^{(2)}}{g_{22}^{(1)}}}$$
+          </div>
+        </div>
+      </div>
+
+      <!-- Línea 2 -->
+      <div class="col-md-6 col-lg-4">
+        <div class="card h-100 shadow-sm border-0 rounded-3 p-3">
+          <span class="badge bg-primary w-fit mb-2">Línea 2</span>
+          <h5 class="fw-bold text-dark">Desviación Geodésica</h5>
+          <p class="small text-muted">Ecuación de Jacobi midiendo cómo barreras físicas y autopistas de peaje dispersan los flujos del habitar.</p>
+          <div class="bg-light p-2 rounded text-center font-monospace small mb-2">
+            $$rac{D^2 J^\mu}{ds^2} + R^\mu_{\ 
+uho\sigma} T^
+u J^ho T^\sigma = 0$$
+          </div>
+        </div>
+      </div>
+
+      <!-- Línea 3 -->
+      <div class="col-md-6 col-lg-4">
+        <div class="card h-100 shadow-sm border-0 rounded-3 p-3">
+          <span class="badge bg-primary w-fit mb-2">Línea 3</span>
+          <h5 class="fw-bold text-dark">Autopoiesis Colectiva</h5>
+          <p class="small text-muted">Inversión del Hessiano: la organización comunitaria invierte la curvatura del suelo, convirtiendo pozos de exclusión en atractores.</p>
+          <div class="bg-light p-2 rounded text-center font-monospace small mb-2">
+            $$\det(	ext{Hess}(\Phi)) < 0 \implies 	ext{Atractor Solidario}$$
+          </div>
+        </div>
+      </div>
+
+      <!-- Línea 4 -->
+      <div class="col-md-6 col-lg-4">
+        <div class="card h-100 shadow-sm border-0 rounded-3 p-3">
+          <span class="badge bg-danger w-fit mb-2">Línea 4</span>
+          <h5 class="fw-bold text-dark">Memoria del Trauma (Caputo)</h5>
+          <p class="small text-muted">Operador diferencial de orden fraccionario modelando cómo hitos de violencia territorial persisten de forma no markoviana.</p>
+          <div class="bg-light p-2 rounded text-center font-monospace small mb-2">
+            $$^C D_t^lpha f(t) = rac{1}{\Gamma(1-lpha)} \int_0^t rac{f'(	au)}{(t-	au)^lpha} d	au$$
+          </div>
+        </div>
+      </div>
+
+      <!-- Línea 5 -->
+      <div class="col-md-6 col-lg-4">
+        <div class="card h-100 shadow-sm border-0 rounded-3 p-3">
+          <span class="badge bg-primary w-fit mb-2">Línea 5</span>
+          <h5 class="fw-bold text-dark">Moran & Ledoit-Wolf</h5>
+          <p class="small text-muted">Regularización geoestadística de covarianza para evitar singularidades no físicas en datos censales con ruido.</p>
+          <div class="bg-light p-2 rounded text-center font-monospace small mb-2">
+            $$\Sigma^* = ho \mu I + (1-ho) \Sigma$$
+          </div>
+        </div>
+      </div>
+
+      <!-- Línea 6 -->
+      <div class="col-md-6 col-lg-4">
+        <div class="card h-100 shadow-sm border-0 rounded-3 p-3">
+          <span class="badge bg-success w-fit mb-2">Línea 6</span>
+          <h5 class="fw-bold text-dark">Fronteras de Robin (Macul)</h5>
+          <p class="small text-muted">Condiciones de frontera asimétricas en límites ecológicos y precordilleranos de Peñalolén.</p>
+          <div class="bg-light p-2 rounded text-center font-monospace small mb-2">
+            $$lpha u + eta rac{\partial u}{\partial n} = g$$
+          </div>
+        </div>
+      </div>
+
+      <!-- Línea 7 -->
+      <div class="col-md-6 col-lg-4">
+        <div class="card h-100 shadow-sm border-0 rounded-3 p-3">
+          <span class="badge bg-warning text-dark w-fit mb-2">Línea 7</span>
+          <h5 class="fw-bold text-dark">Refracción de Capital</h5>
+          <p class="small text-muted">Especulación del suelo y salto abrupto de plusvalía en el borde periurbano de la cuenca del Maipo.</p>
+          <div class="bg-light p-2 rounded text-center font-monospace small mb-2">
+            $$[X, Y] = 
+abla_X Y - 
+abla_Y X 
+eq 0$$
+          </div>
+        </div>
+      </div>
+
+      <!-- Línea 8 -->
+      <div class="col-md-6 col-lg-4">
+        <div class="card h-100 shadow-sm border-0 rounded-3 p-3">
+          <span class="badge bg-info text-dark w-fit mb-2">Línea 8</span>
+          <h5 class="fw-bold text-dark">Deformación MBHT 4D</h5>
+          <p class="small text-muted">Varianza multidimensional del modelo SUBDERE induciendo tensión geotensorial intrínseca en el suelo.</p>
+          <div class="bg-light p-2 rounded text-center font-monospace small mb-2">
+            $$lpha(x,y) = 	ext{Var}(D_{amb}, D_{seg}, D_{soc}, D_{acc})$$
+          </div>
+        </div>
+      </div>
+
+      <!-- Línea 9 -->
+      <div class="col-md-6 col-lg-4">
+        <div class="card h-100 shadow-sm border-0 rounded-3 p-3 border-start border-warning border-4">
+          <span class="badge bg-warning text-dark w-fit mb-2">Línea 9</span>
+          <h5 class="fw-bold text-dark">Anillos de Einstein RMS</h5>
+          <p class="small text-muted">Lentes gravitacionales urbanas. Macro-Anillo de Américo Vespucio ($R_E = 10.75	ext{ km}$) atrapando la energía vital.</p>
+          <div class="bg-light p-2 rounded text-center font-monospace small mb-2">
+            $$	heta_E = \sqrt{rac{4 G M}{c^2} rac{D_{ds}}{D_d D_s}}$$
+          </div>
+        </div>
+      </div>
+
+      <!-- Línea 10 -->
+      <div class="col-md-6 col-lg-4">
+        <div class="card h-100 shadow-sm border-0 rounded-3 p-3 border-start border-danger border-4">
+          <span class="badge bg-danger w-fit mb-2">Línea 10</span>
+          <h5 class="fw-bold text-dark">Escenarios SUT-2050</h5>
+          <p class="small text-muted">Prospectiva metropolitana al año 2050 y monitoreo de los 97 hotspots de duelo territorial no resuelto ($\Lambda \ge 0.70$).</p>
+          <div class="bg-light p-2 rounded text-center font-monospace small mb-2">
+            $$\Lambda(x, t) = \lim_{T 	o \infty} rac{1}{T} \int_0^T |
+abla \Phi(	au)| d	au$$
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECCIÓN 3: HERRAMIENTAS DE CAMPO PWA -->
+  <section id="sec-campo" class="tab-section container py-5">
+    <div class="text-center mb-5">
+      <h2 class="fw-bold" style="color: var(--primary-dark);">Herramientas de Terreno Desacopladas (PWA Offline)</h2>
+      <p class="text-secondary max-w-700 mx-auto">
+        Aplicaciones web progresivas que operan 100% desconectadas de internet en zonas rurales, campamentos o áreas de catástrofe mediante almacenamiento local (localStorage). Cero consumo de cuotas de servidor.
+      </p>
+    </div>
+
+    <div class="row g-4 justify-content-center">
+      <div class="col-md-5">
+        <div class="card h-100 p-4 border-0 shadow-sm text-center">
+          <div class="fs-1 text-primary mb-3"><i class="fa-solid fa-person-walking"></i></div>
+          <h4 class="fw-bold">App Levantamiento Pedestre (IEO)</h4>
+          <p class="text-muted small">
+            Rúbrica de 7 variables observables del habitar, trazador GPS continuo Wu Wei con semáforo de precisión geodésica y exportador CSV/GeoJSON.
+          </p>
+          <a href="mobile.html" target="_blank" class="btn btn-primary fw-bold mt-auto">
+            Abrir App Terreno Pedestre &rarr;
+          </a>
+        </div>
+      </div>
+
+      <div class="col-md-5">
+        <div class="card h-100 p-4 border-0 shadow-sm text-center">
+          <div class="fs-1 text-success mb-3"><i class="fa-solid fa-clipboard-check"></i></div>
+          <h4 class="fw-bold">Ficha FIBE Terreno (Emergencia GRD)</h4>
+          <p class="text-muted small">
+            Ficha Básica de Emergencia Territorial completa para censistas municipales y brigadas de gestión de riesgo de desastres (SENAPRED / MIDESO).
+          </p>
+          <a href="fibe_terreno.html" target="_blank" class="btn btn-success fw-bold mt-auto">
+            Abrir Ficha FIBE Terreno &rarr;
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECCIÓN 4: INTEROPERABILIDAD IDE CHILE / OGC -->
+  <section id="sec-interoperabilidad" class="tab-section container py-5">
+    <div class="text-center mb-5">
+      <h2 class="fw-bold" style="color: var(--teal);">Interoperabilidad del Estado de Chile (IDE Chile / SNIT / OGC)</h2>
+      <p class="text-secondary max-w-700 mx-auto">
+        Publicación de capas georreferenciadas bajo estándares OGC WMS 1.3.0, WFS 2.0.0 y especificación OpenAPI 3.0 para consumo directo en QGIS, ArcGIS y visores de ministerios (MINVU, MOP, MMA).
+      </p>
+    </div>
+
+    <div class="row g-4">
+      <div class="col-md-6">
+        <div class="card p-4 border-0 shadow-sm h-100">
+          <h5 class="fw-bold text-primary mb-3"><i class="fa-solid fa-map"></i> Servicios OGC WMS y WFS</h5>
+          <label class="form-label small fw-bold text-secondary">URL GetCapabilities WMS 1.3.0 (SIRGAS-Chile EPSG:4674):</label>
+          <div class="input-group input-group-sm mb-3">
+            <input type="text" class="form-control font-monospace" id="wms-url" readonly value="https://ontologiaterritorial.github.io/puerto_umbral/ogc/wms_capabilities.xml">
+            <button class="btn btn-outline-primary" onclick="navigator.clipboard.writeText(document.getElementById('wms-url').value); alert('Copiado');">Copiar</button>
+          </div>
+
+          <label class="form-label small fw-bold text-secondary">URL GetCapabilities WFS 2.0.0 (GeoJSON / GML3):</label>
+          <div class="input-group input-group-sm mb-3">
+            <input type="text" class="form-control font-monospace" id="wfs-url" readonly value="https://ontologiaterritorial.github.io/puerto_umbral/ogc/wfs_capabilities.xml">
+            <button class="btn btn-outline-success" onclick="navigator.clipboard.writeText(document.getElementById('wfs-url').value); alert('Copiado');">Copiar</button>
+          </div>
+
+          <a href="ogc/puerto_umbral_qgis.qlr" download class="btn btn-success fw-bold w-100 mt-2">
+            <i class="fa-solid fa-download"></i> Descargar Capa QGIS (.qlr) 1-Click
+          </a>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="card p-4 border-0 shadow-sm h-100">
+          <h5 class="fw-bold text-warning mb-3"><i class="fa-solid fa-code"></i> REST API GeoJSON & OpenAPI 3.0</h5>
+          <div class="list-group list-group-flush small mb-3">
+            <a href="data/einstein_rings_rms.geojson" target="_blank" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+              <div><span class="badge bg-primary me-2">GET</span> /api/einstein_rings_rms.geojson</div>
+              <i class="fa-solid fa-arrow-up-right-from-square text-muted"></i>
+            </a>
+            <a href="data/hotspots_latencia_rms.geojson" target="_blank" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+              <div><span class="badge bg-primary me-2">GET</span> /api/hotspots_latencia_rms.geojson</div>
+              <i class="fa-solid fa-arrow-up-right-from-square text-muted"></i>
+            </a>
+            <a href="data/comunas_rms_perfiles.json" target="_blank" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+              <div><span class="badge bg-primary me-2">GET</span> /api/comunas_rms_perfiles.json</div>
+              <i class="fa-solid fa-arrow-up-right-from-square text-muted"></i>
+            </a>
+          </div>
+          <a href="ogc/openapi_geotensores.json" target="_blank" class="btn btn-outline-dark fw-bold w-100">
+            <i class="fa-solid fa-file-code"></i> Ver Especificación OpenAPI 3.0 (JSON)
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECCIÓN 5: MANIFIESTO Y DESCARGAS DE LA OBRA -->
+  <section id="sec-manifiesto" class="tab-section container py-5">
+    <div class="text-center mb-5">
+      <h2 class="fw-bold" style="color: var(--primary-dark);">Ontología Territorial: La Obra Completa</h2>
+      <p class="text-secondary max-w-700 mx-auto">
+        Acceso y preservación permanente en repositorios científicos abiertos de acceso público con indexación de DOI en Zenodo y CERN.
+      </p>
+    </div>
+
+    <div class="row g-4 justify-content-center">
+      <div class="col-md-5">
+        <div class="card p-4 border-0 shadow-sm h-100">
+          <h4 class="fw-bold text-teal"><i class="fa-solid fa-book"></i> Tomo I: Ontología del Habitar</h4>
+          <p class="small text-muted">Fundamentos filosóficos, co-presencia, derivas pedestres Wu Wei y redes espontáneas de cuidado colectivo.</p>
+          <a href="https://zenodo.org/records/17444604" target="_blank" class="btn btn-outline-primary fw-bold mt-auto">
+            Zenodo DOI (Tomo I) &rarr;
+          </a>
+        </div>
+      </div>
+
+      <div class="col-md-5">
+        <div class="card p-4 border-0 shadow-sm h-100">
+          <h4 class="fw-bold text-teal"><i class="fa-solid fa-book-open"></i> Tomo II: Geotensores e Instrumentación</h4>
+          <p class="small text-muted">Formalización matemática de la métrica de Riemann, resolvedores BVP, deformación de Weyl y conmutadores de Lie.</p>
+          <a href="https://zenodo.org/records/21208216" target="_blank" class="btn btn-outline-primary fw-bold mt-auto">
+            Zenodo DOI (Tomo II) &rarr;
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Script de la aplicación -->
+  <script src="js/puerto_umbral_app.js"></script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+[
+  {
+    "comuna": "Peñalolén",
+    "codigo_cut": "13122",
+    "latitud_centroide": -33.483,
+    "longitud_centroide": -70.528,
+    "nti_promedio": 0.584,
+    "friccion_promedio": 3200.5,
+    "curvatura_promedio": 0.124,
+    "latencia_promedio": 0.412,
+    "experimento_asociado": "Exp 6: Santuario Peñalolén Robin Boundary"
+  },
+  {
+    "comuna": "Santiago Centro",
+    "codigo_cut": "13101",
+    "latitud_centroide": -33.437,
+    "longitud_centroide": -70.65,
+    "nti_promedio": 0.82,
+    "friccion_promedio": 1450.0,
+    "curvatura_promedio": -0.045,
+    "latencia_promedio": 0.89,
+    "experimento_asociado": "Exp 4: Memoria Histórica del Trauma (Caputo)"
+  },
+  {
+    "comuna": "Maipú",
+    "codigo_cut": "13119",
+    "latitud_centroide": -33.51,
+    "longitud_centroide": -70.758,
+    "nti_promedio": 0.46,
+    "friccion_promedio": 6800.0,
+    "curvatura_promedio": 0.28,
+    "latencia_promedio": 0.74,
+    "experimento_asociado": "Exp 9: Anillo Einstein Maipú / Vespucio Sur"
+  },
+  {
+    "comuna": "La Pintana",
+    "codigo_cut": "13112",
+    "latitud_centroide": -33.583,
+    "longitud_centroide": -70.634,
+    "nti_promedio": 0.31,
+    "friccion_promedio": 8900.0,
+    "curvatura_promedio": 0.39,
+    "latencia_promedio": 0.82,
+    "experimento_asociado": "Exp 10: Hotspots Duelo SUT-RMS 2050"
+  },
+  {
+    "comuna": "Providencia",
+    "codigo_cut": "13123",
+    "latitud_centroide": -33.431,
+    "longitud_centroide": -70.612,
+    "nti_promedio": 0.91,
+    "friccion_promedio": 1100.0,
+    "curvatura_promedio": -0.08,
+    "latencia_promedio": 0.25,
+    "experimento_asociado": "Exp 8: Deformación MBHT 4D SUBDERE"
+  }
+]

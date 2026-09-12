@@ -43,7 +43,7 @@ tab2_server <- function(input, output, session, active_exp_line, lang, run_sim_t
     is_en <- identical(lang(), "EN")
     sel_line <- as.character(active_exp_line())
     
-    # 8 Experiments Configuration
+    # 10 Experiments Configuration
     titles <- list(
       "1" = trans("1. Refracci\u00f3n de Borde (Snell)", "1. Edge Refraction (Snell)"),
       "2" = trans("2. Desviaci\u00f3n Geod\u00e9sica (Exclusi\u00f3n)", "2. Geodesic Deviation (Exclusion)"),
@@ -52,7 +52,9 @@ tab2_server <- function(input, output, session, active_exp_line, lang, run_sim_t
       "5" = trans("5. Regularizaci\u00f3n de Moran (Ledoit-Wolf)", "5. Moran Regularization (Ledoit-Wolf)"),
       "6" = trans("6. Fronteras Ecol\u00f3gicas (Robin)", "6. Ecological Boundaries (Robin)"),
       "7" = trans("7. Refracci\u00f3n de Capital (Harvey)", "7. Capital Refraction (Harvey)"),
-      "8" = trans("8. Deformaci\u00f3n MBHT 4D (SUBDERE)", "8. MBHT 4D Deformation (SUBDERE)")
+      "8" = trans("8. Deformaci\u00f3n MBHT 4D (SUBDERE)", "8. MBHT 4D Deformation (SUBDERE)"),
+      "9" = trans("9. Anillos de Einstein RMS", "9. RMS Einstein Rings"),
+      "10" = trans("10. Escenarios SUT-2050", "10. SUT-2050 Scenarios")
     )
     
     # Create the horizontal selector cards (4 columns per row for 8 items)
@@ -134,6 +136,22 @@ tab2_server <- function(input, output, session, active_exp_line, lang, run_sim_t
         formula = "$$T_{\\mu\\nu} = \\text{diag}(D_{\\text{amb}}, D_{\\text{seg}}, D_{\\text{soc}}, D_{\\text{acc}}), \\quad R \\propto \\text{Var}(D_i)$$",
         img = "images/refraction_didactic.png",
         exp_mode_val = "exp8"
+      ),
+      "9" = list(
+        title = titles[9],
+        desc = trans("Lentes gravitacionales territoriales en la RMS. La concentraci\u00f3n masiva de fricci\u00f3n y poder socio-espacial curva el espacio geod\u00e9sico circundante produciendo deflexi\u00f3n de trayectorias, magnificaci\u00f3n tensiva y zonas anulares cr\u00edticas (Macro-Anillo de Am\u00e9rico Vespucio y 6 anillos locales).",
+                     "Territorial gravitational lenses in the RMS. Massive concentration of friction and socio-spatial power bends the surrounding geodesic space, producing path deflection, tensorial magnification, and critical annular zones (Americo Vespucio Macro-Ring and 6 local rings)."),
+        formula = "$$\\theta_E = \\sqrt{\\frac{4 G M_{\\text{onto}}}{c^2} \\frac{D_{ls}}{D_s}}, \\quad \\mu = \\frac{1}{|(1-\\kappa)^2 - \\gamma^2|}$$",
+        img = "images/hessian_didactic.png",
+        exp_mode_val = "exp9"
+      ),
+      "10" = list(
+        title = titles[10],
+        desc = trans("Latencia hist\u00f3rica de duelo territorial y simulaci\u00f3n prospectiva SUT-RMS 2050. Mapeo de 97 hotspots cr\u00edticos de dolor no resuelto (Caputo no-markoviano) y proyecci\u00f3n de trayectorias bajo 4 escenarios: Inercial, Cohesi\u00f3n Social, Metropolizaci\u00f3n y Resiliencia.",
+                     "Historical territorial grief latency and prospective SUT-RMS 2050 simulation. Mapping 97 critical unresolved trauma hotspots (non-Markovian Caputo) and path projection under 4 scenarios: Inertial, Social Cohesion, Metropolization, and Resilience."),
+        formula = "$$\\Lambda(p) = \\int_0^T K(t-\\tau) \\lVert \\nabla \\Phi(\\tau) \\rVert d\\tau, \\quad \\mathbf{T}^{\\text{scen}} = \\mathbf{T}^{(0)} + \\Delta \\mathbf{T}_{\\text{proy}}$$",
+        img = "images/memory_didactic.png",
+        exp_mode_val = "exp10"
       )
     )
     
